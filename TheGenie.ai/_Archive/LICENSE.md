@@ -1,21 +1,28 @@
-The MIT License (MIT)
+Software License Agreement
+==========================
 
-Copyright (c) 2012-2015 Kevin Brown, Igor Vaynberg, and Select2 contributors
+**CKEditor SCAYT Plugin**
+Copyright &copy; 2012, [CKSource](http://cksource.com) - Frederico Knabben. All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Licensed under the terms of any of the following licenses at your choice:
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+*   GNU General Public License Version 2 or later (the "GPL"):
+    http://www.gnu.org/licenses/gpl.html
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+*   GNU Lesser General Public License Version 2.1 or later (the "LGPL"):
+    http://www.gnu.org/licenses/lgpl.html
+
+*   Mozilla Public License Version 1.1 or later (the "MPL"):
+    http://www.mozilla.org/MPL/MPL-1.1.html
+
+You are not required to, but if you want to explicitly declare the license you have chosen to be bound to when using, reproducing, modifying and distributing this software, just include a text file titled "legal.txt" in your version of this software, indicating your license choice.
+
+Sources of Intellectual Property Included in this plugin
+--------------------------------------------------------
+
+Where not otherwise indicated, all plugin content is authored by CKSource engineers and consists of CKSource-owned intellectual property. In some specific instances, the plugin will incorporate work done by developers outside of CKSource with their express permission.
+
+Trademarks
+----------
+
+CKEditor is a trademark of CKSource - Frederico Knabben. All other brand and product names are trademarks, registered trademarks or service marks of their respective holders.
