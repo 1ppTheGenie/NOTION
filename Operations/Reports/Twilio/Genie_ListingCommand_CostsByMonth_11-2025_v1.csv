@@ -1,0 +1,20 @@
+Month,Customer_Name,Area_Name,MLS_Number,Property_Id,Batches,SMS_Sent,Delivered,Success%,First_Send,Last_Send,Twilio_Cost,Cost_Method
+November 2025,Adam Schechter,Newbury Park,SR25223448,22133312,3,200,195,97.5%,2025-11-06,2025-11-06,$3.41,Invoice
+November 2025,Colleen Gamble,Wildflower | Wildwood | Wildwood Park |,V1-33169,22176677,3,200,197,98.5%,2025-11-08,2025-11-08,$3.41,Invoice
+November 2025,David Higgins,Crocker Highlands - Trestle Glen-2,41116549,9636502,3,150,145,96.7%,2025-11-18,2025-11-18,$2.56,Invoice
+November 2025,Emilio Plascencia,RESEDA | CENTRAL WEST,SR25238011,12059807,3,200,196,98.0%,2025-11-01,2025-11-01,$3.41,Invoice
+November 2025,Gracee Lybbert,92064,250043061,18676850,2,150,149,99.3%,2025-11-07,2025-11-07,$2.56,Invoice
+November 2025,Javier Mendez,89129,2691402,159825947,1,150,150,100.0%,2025-11-22,2025-11-22,$2.56,Invoice
+November 2025,Javier Mendez,Desert Hills,2721731,158061503,2,150,149,99.3%,2025-11-21,2025-11-21,$2.56,Invoice
+November 2025,Mark Smith,Wildflower | Wildwood | Wildwood Park |,V1-33169,22176677,3,200,197,98.5%,2025-11-08,2025-11-08,$3.41,Invoice
+November 2025,Michelle Price,91307,225002624,11950266,3,200,198,99.0%,2025-11-25,2025-11-25,$3.41,Invoice
+November 2025,Michelle Price,91360,225004611,22102463,3,200,187,93.5%,2025-11-25,2025-11-25,$3.41,Invoice
+November 2025,Michelle Price,91361,225004817,22125839,3,200,174,87.0%,2025-11-25,2025-11-25,$3.41,Invoice
+November 2025,Michelle Price,91361,225000910,22126528,3,100,98,98.0%,2025-11-25,2025-11-25,$1.70,Invoice
+November 2025,Mike Chiesl,San Luis Rey Heights,250044151,18415924,1,100,100,100.0%,2025-11-18,2025-11-18,$1.70,Invoice
+November 2025,Oscar Tortola,Horsethief Canyon LG,IG25234571,158147120,3,350,348,99.4%,2025-11-30,2025-11-30,$5.96,Invoice
+November 2025,Rob Alvidrez,Newbury Park,225005581,22097988,3,200,197,98.5%,2025-11-19,2025-11-19,$3.41,Invoice
+November 2025,Sean Corritori,Peach Hill Community,225005117,22076386,2,150,145,96.7%,2025-11-08,2025-11-08,$2.56,Invoice
+November 2025,Shirese Spaniol,91361,225005754,22130077,3,150,146,97.3%,2025-11-29,2025-11-29,$2.56,Invoice
+November 2025,Stephen Patronete,East Simi Valley,225005494,22162086,3,200,194,97.0%,2025-11-06,2025-11-06,$3.41,Invoice
+November 2025,TOTAL,,,,47,3250,3165,97.4%,,,$55.37,Invoice
