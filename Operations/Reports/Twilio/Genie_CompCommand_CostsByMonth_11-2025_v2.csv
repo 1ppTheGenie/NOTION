@@ -1,0 +1,14 @@
+Month,Customer_Name,Area_Name,Campaign_Count,Messages_Sent,Messages_Delivered,Success_Rate_Pct,Initial_Click_Count,CTR_Pct,CTA_Clicked_Submitted,CTA_Verified,Agent_SMS_Notify_Count,Agent_Notify_Twilio_Cost,Opt_Outs,Opt_Out_Pct,Total_Twilio_Cost
+November 2025,Javier Mendez,Summerlin 89135,28,1931,371,19.20%,29,1.50%,10,2,0,$0.00,0,0.00%,$7.25
+November 2025,Javier Mendez,Centennial Hills 89149,21,1473,208,14.10%,32,2.17%,2,1,0,$0.00,0,0.00%,$4.02
+November 2025,Mike Chiesl,Fallbrook 92028,14,1006,237,23.60%,47,4.67%,6,2,0,$0.00,0,0.00%,$4.96
+November 2025,Susan Featherly,Northridge 91325,17,1258,198,15.70%,10,0.79%,0,0,0,$0.00,0,0.00%,$4.93
+November 2025,Debbie Gates,Simi Valley 93065,24,1673,180,10.80%,40,2.39%,7,0,0,$0.00,50,2.99%,$4.73
+November 2025,Debbie Gates,Thousand Oaks 91360,21,1405,205,14.60%,15,1.07%,10,0,0,$0.00,0,0.00%,$4.58
+November 2025,Debbie Gates,Moorpark 93021,21,1553,91,5.90%,22,1.42%,9,0,0,$0.00,0,0.00%,$2.39
+November 2025,David Higgins,Piedmont 94611,27,1740,203,11.70%,17,0.98%,4,1,0,$0.00,8,0.46%,$4.12
+November 2025,David Higgins,Oakland 94602,14,931,63,6.80%,8,0.86%,3,1,0,$0.00,0,0.00%,$1.23
+November 2025,David Higgins,Montclair 94609,9,637,60,9.40%,5,0.78%,2,0,0,$0.00,0,0.00%,$1.25
+November 2025,Martin Navasartian,Tujunga 91042,20,1389,174,12.50%,28,2.02%,2,0,0,$0.00,51,3.67%,$4.05
+November 2025,Martin Navasartian,La Crescenta 91214,16,1118,161,14.40%,13,1.16%,0,0,0,$0.00,0,0.00%,$3.64
+November 2025,Ed Kaminsky,Manhattan Beach 90266,24,1442,142,9.80%,8,0.55%,20,0,0,$0.00,14,0.97%,$3.69
