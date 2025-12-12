@@ -1,41 +1,39 @@
-# TableTools
+# ColReorder
 
-TableTools is a plug-in for the DataTables HTML table enhancer, which adds a highly customisable button toolbar to a DataTable. Key features include:
+ColReorder adds the ability for the end user to click and drag column headers to reorder a table as they see fit, to DataTables. Key features include:
 
-* Copy to clipboard
-* Save table data as CSV, XLS or PDF files
-* Print view for clean printing
-* Row selection options
-* Easy use predefined buttons
-* Simple customisation of buttons
-* Well defined API for advanced control
+* Very easy integration with DataTables
+* Tight integration with all other DataTables plug-ins
+* The ability to exclude the first (or more) column from being movable
+* Predefine a column order
+* Save staving integration with DataTables
 
 
 # Installation
 
-To use TableTools, first download DataTables ( http://datatables.net/download ) and place the unzipped TableTools package into a `extensions` directory in the DataTables package (in DataTables 1.9- use the `extras` directory). This will allow the pages in the examples to operate correctly. To see the examples running, open the `examples` directory in your web-browser.
+To use ColReorder, first download DataTables ( http://datatables.net/download ) and place the unzipped ColReorder package into a `extensions` directory in the DataTables package. This will allow the pages in the examples to operate correctly. To see the examples running, open the `examples` directory in your web-browser.
 
 
 # Basic usage
 
-TableTools is initialised using the `T` option that it adds to DataTables' `dom` option. For example:
+ColReorder is initialised using the `$.fn.dataTable.ColReorder` constructor. For example:
 
 ```js
 $(document).ready( function () {
-	$('#example').DataTable( {
-		dom: 'T<"clear">lfrtip'
-	} );
+    $('#example').DataTable();
+
+    new $.fn.dataTable.ColReorder( table );
 } );
 ```
 
 
 # Documentation / support
 
-* Documentation: http://datatables.net/extensions/tabletools/
+* Documentation: http://datatables.net/extensions/colreorder/
 * DataTables support forums: http://datatables.net/forums
 
 
 # GitHub
 
-If you fancy getting involved with the development of TableTools and help make it better, please refer to its GitHub repo: https://github.com/DataTables/TableTools
+If you fancy getting involved with the development of ColReorder and help make it better, please refer to its GitHub repo: https://github.com/DataTables/ColReorder
 
