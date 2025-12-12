@@ -1,0 +1,138 @@
+UserOwnedAreaId,AreaId,AreaName,AspNetUserId,UserName,Email,FirstName,LastName,OwnershipStartDate,OwnershipEndDate,LastCampaignDate,TotalCampaigns,OwnershipStatus,PropertyTypeId,PropertyTypeName,AreaOwnershipTypeId,AreaOwnershipTypeName,DaysSinceLastCampaign
+209.0,8844,92003,04f46ae2-bff8-4d4f-adc8-a1492f1930d2,mchiesl,caleb@chieslmarelly.com,Mike,Chiesl,2025-11-21 13:16:59.543,,2025-11-24 10:11:07.183,3,Active,0.0,SFR,1.0,FarmCaster,16.0
+205.0,8859,92028 | Fallbrook,04f46ae2-bff8-4d4f-adc8-a1492f1930d2,mchiesl,caleb@chieslmarelly.com,Mike,Chiesl,2025-09-10 09:11:49.500,,2025-11-25 10:21:00.097,29,Active,0.0,SFR,1.0,FarmCaster,15.0
+95.0,16560,Boerne | 78006,09f54157-919b-47b3-b127-94e69a69c85a,Dcg1249,david@realtyevoke.com,David,Garcia,2024-08-31 08:37:03.297,,2024-10-11 10:11:55.700,37,Active,0.0,SFR,1.0,FarmCaster,425.0
+96.0,16560,Boerne | 78006,09f54157-919b-47b3-b127-94e69a69c85a,Dcg1249,david@realtyevoke.com,David,Garcia,2024-08-31 08:37:32.143,,2024-10-11 10:11:55.700,37,Active,1.0,Condo,1.0,FarmCaster,425.0
+99.0,16694,78248,09f54157-919b-47b3-b127-94e69a69c85a,Dcg1249,david@realtyevoke.com,David,Garcia,2024-08-31 08:40:09.940,,2024-10-08 10:10:38.853,14,Active,0.0,SFR,1.0,FarmCaster,428.0
+100.0,16701,78255,09f54157-919b-47b3-b127-94e69a69c85a,Dcg1249,david@realtyevoke.com,David,Garcia,2024-08-31 08:40:31.487,,2024-10-11 10:12:17.557,26,Active,0.0,SFR,1.0,FarmCaster,425.0
+97.0,16703,78257,09f54157-919b-47b3-b127-94e69a69c85a,Dcg1249,david@realtyevoke.com,David,Garcia,2024-08-31 08:39:03.983,,2024-10-11 10:12:29.007,9,Active,0.0,SFR,1.0,FarmCaster,425.0
+98.0,16704,78258,09f54157-919b-47b3-b127-94e69a69c85a,Dcg1249,david@realtyevoke.com,David,Garcia,2024-08-31 08:39:43.467,,2024-10-11 10:12:54.810,29,Active,0.0,SFR,1.0,FarmCaster,425.0
+42.0,8871,92064,0ba892f5-c93e-42e3-b8d1-f8ca01b750d4,Hundleyexp,stephen.hundley@exprealty.com,Steve,Hundley,2022-05-17 14:04:18.397,,,0,Active,0.0,SFR,1.0,FarmCaster,
+130.0,62658,Ft Pierce | 34951,0e093004-5915-468e-aa85-0f6796eb3256,JimRFisher,jim@welcometovero.com,Jim,Fisher,2024-09-12 13:53:46.757,,2025-11-22 10:04:34.510,1,Active,0.0,SFR,1.0,FarmCaster,18.0
+131.0,62658,Ft Pierce | 34951,0e093004-5915-468e-aa85-0f6796eb3256,JimRFisher,jim@welcometovero.com,Jim,Fisher,2024-09-12 13:54:03.293,,2025-11-22 10:04:34.510,1,Active,1.0,Condo,1.0,FarmCaster,18.0
+,8913,92128,1cd9cd52-4a4b-4df7-ae9c-5a44803e855d,SummerToth,summerraetoth@gmail.com,Summer,Toth,,2025-08-31 10:08:32.360,2025-08-31 10:08:32.360,16,Ended,,,,,101.0
+,9170,Ventura | 93003,1cd9cd52-4a4b-4df7-ae9c-5a44803e855d,SummerToth,summerraetoth@gmail.com,Summer,Toth,,2025-09-28 10:07:50.000,2025-09-28 10:07:50.000,20,Ended,,,,,73.0
+208.0,62649,Windermere | 34786,22b312d2-8897-452f-b67c-1ed8a0def9a8,simonsimaan1,simon@simonsimaan.com,Simon,Simaan,2025-11-21 12:39:39.267,,,0,Active,0.0,SFR,1.0,FarmCaster,
+164.0,9602,94602,23d254fe-792f-44b2-b40f-9b1d7a12189d,DHiggins,david@cushrealestate.com,David,Higgins,2024-11-18 16:44:29.053,,2025-12-07 10:10:45.093,180,Active,0.0,SFR,1.0,FarmCaster,3.0
+165.0,9602,94602,23d254fe-792f-44b2-b40f-9b1d7a12189d,DHiggins,david@cushrealestate.com,David,Higgins,2024-11-18 16:44:57.103,,2025-12-07 10:10:45.093,180,Active,1.0,Condo,1.0,FarmCaster,3.0
+40.0,9609,94610,23d254fe-792f-44b2-b40f-9b1d7a12189d,DHiggins,david@cushrealestate.com,David,Higgins,2022-03-03 21:33:03.363,,2025-12-08 10:10:32.610,265,Active,0.0,SFR,1.0,FarmCaster,2.0
+166.0,9610,Piedmont | 94611,23d254fe-792f-44b2-b40f-9b1d7a12189d,DHiggins,david@cushrealestate.com,David,Higgins,2024-11-18 16:45:15.747,,2025-12-09 10:13:55.870,336,Active,0.0,SFR,1.0,FarmCaster,1.0
+167.0,9610,Piedmont | 94611,23d254fe-792f-44b2-b40f-9b1d7a12189d,DHiggins,david@cushrealestate.com,David,Higgins,2024-11-18 16:45:34.467,,2025-12-09 10:13:55.870,336,Active,1.0,Condo,1.0,FarmCaster,1.0
+77.0,8826,91914,24a9d010-35b7-4feb-8d80-82b43e1932d5,Mblair,mike@mikeblairrealty.com,Mike,Blair,2024-08-13 10:12:06.950,,2025-01-18 10:17:45.470,86,Active,0.0,SFR,1.0,FarmCaster,326.0
+78.0,8826,91914,24a9d010-35b7-4feb-8d80-82b43e1932d5,Mblair,mike@mikeblairrealty.com,Mike,Blair,2024-08-13 10:12:18.963,,2025-01-18 10:17:45.470,86,Active,1.0,Condo,1.0,FarmCaster,326.0
+161.0,8888,92101,24a9d010-35b7-4feb-8d80-82b43e1932d5,Mblair,mike@mikeblairrealty.com,Mike,Blair,2024-11-07 13:47:16.790,,2025-01-21 10:14:03.153,69,Active,1.0,Condo,1.0,FarmCaster,323.0
+162.0,8895,92108,24a9d010-35b7-4feb-8d80-82b43e1932d5,Mblair,mike@mikeblairrealty.com,Mike,Blair,2024-11-07 14:01:27.320,,,0,Active,0.0,SFR,1.0,FarmCaster,
+163.0,8895,92108,24a9d010-35b7-4feb-8d80-82b43e1932d5,Mblair,mike@mikeblairrealty.com,Mike,Blair,2024-11-07 14:01:41.610,,,0,Active,1.0,Condo,1.0,FarmCaster,
+114.0,8898,92111,24a9d010-35b7-4feb-8d80-82b43e1932d5,Mblair,mike@mikeblairrealty.com,Mike,Blair,2024-09-08 13:51:47.463,,2025-01-20 10:15:21.277,77,Active,0.0,SFR,1.0,FarmCaster,324.0
+115.0,8903,92117,24a9d010-35b7-4feb-8d80-82b43e1932d5,Mblair,mike@mikeblairrealty.com,Mike,Blair,2024-09-08 13:52:04.500,,2025-01-21 10:14:26.023,110,Active,0.0,SFR,1.0,FarmCaster,323.0
+67.0,8862,La Jolla | 92037,2a8bc8df-d2ff-41a3-803d-a39bb02e07ee,AndreaFulop,andrea@middletonteam.com,Pete,Middleton Team,2024-07-12 14:40:01.123,,2025-02-21 10:15:38.990,367,Active,0.0,SFR,1.0,FarmCaster,292.0
+68.0,8862,La Jolla | 92037,2a8bc8df-d2ff-41a3-803d-a39bb02e07ee,AndreaFulop,andrea@middletonteam.com,Pete,Middleton Team,2024-07-12 14:40:15.317,,2025-02-21 10:15:38.990,367,Active,1.0,Condo,1.0,FarmCaster,292.0
+,8544,Brentwood | 90049,2b4501ce-56f3-4fbd-9fc0-9b6396488338,garygold,gary@soldbygold.net,Gary,Gold,,2025-02-27 10:14:50.800,2025-02-27 10:14:50.800,128,Ended,,,,,286.0
+108.0,8558,West Hollywood | 90069,2b4501ce-56f3-4fbd-9fc0-9b6396488338,garygold,gary@soldbygold.net,Gary,Gold,2024-08-31 13:33:26.100,,2025-02-27 10:15:23.250,255,Active,0.0,SFR,1.0,FarmCaster,286.0
+109.0,8558,West Hollywood | 90069,2b4501ce-56f3-4fbd-9fc0-9b6396488338,garygold,gary@soldbygold.net,Gary,Gold,2024-08-31 13:33:39.937,,2025-02-27 10:15:23.250,255,Active,1.0,Condo,1.0,FarmCaster,286.0
+107.0,8560,Bel Air | 90077,2b4501ce-56f3-4fbd-9fc0-9b6396488338,garygold,gary@soldbygold.net,Gary,Gold,2024-08-31 13:16:51.373,,2025-02-27 10:15:35.810,100,Active,0.0,SFR,1.0,FarmCaster,286.0
+81.0,8566,90210 | Beverly Hills,2b4501ce-56f3-4fbd-9fc0-9b6396488338,garygold,gary@soldbygold.net,Gary,Gold,2024-08-19 23:30:26.767,,2025-02-27 10:15:50.987,150,Active,0.0,SFR,1.0,FarmCaster,286.0
+,8905,San Carlos | 92119,37b2fa86-8ab3-41ce-a4f7-3a1e087182ab,AFlores1,sthorne0710@gmail.com,Angel,Flores,,2025-01-21 10:16:46.973,2025-01-21 10:16:46.973,155,Ended,,,,,323.0
+,8906,Del Cerro | 92120,37b2fa86-8ab3-41ce-a4f7-3a1e087182ab,AFlores1,sthorne0710@gmail.com,Angel,Flores,,2025-01-19 10:27:09.133,2025-01-19 10:27:09.133,181,Ended,,,,,325.0
+61.0,8878,92075,3e28771f-1f68-40d5-807c-d12c7e384dea,CFerry1,carly@cayandcarlyhomes.com,Carly,Ferry,2024-04-26 17:35:27.257,,2024-07-11 10:19:35.370,27,Active,0.0,SFR,1.0,FarmCaster,517.0
+159.0,8595,90278,442ad2bf-8bef-4633-8bbf-e705d4e0375c,jackieistan,jackie@klappergroup.com,Aaron,Klapper,2024-10-03 11:04:43.370,,,0,Active,0.0,SFR,1.0,FarmCaster,
+69.0,8855,Encinitas | 92024,4680babc-7223-4974-8315-01e6b461e6c2,gmassa,Gary@MassaRealEstateGroup.com,Gary,Massa,2024-07-12 14:48:48.047,,2025-01-21 10:17:25.447,187,Active,0.0,SFR,1.0,FarmCaster,323.0
+70.0,8855,Encinitas | 92024,4680babc-7223-4974-8315-01e6b461e6c2,gmassa,Gary@MassaRealEstateGroup.com,Gary,Massa,2024-07-12 14:48:57.563,,2025-01-21 10:17:25.447,187,Active,1.0,Condo,1.0,FarmCaster,323.0
+,8711,West Hills | 91307,4711fffb-efaf-49e3-a1b6-7abc08ff9cd7,JoanneL,joanne@thatgirlsellsre.com,Joanne,Littman,,2025-06-16 10:10:37.330,2025-06-16 10:10:37.330,125,Ended,,,,,177.0
+202.0,8714,Newbury Park | 91320,47d1d1b6-5f5e-4f8d-8250-aa84bd2eb8e3,MaxWalter1019,max@494dave.com,The,Dave Walter Team,2025-08-18 10:59:31.597,,,0,Active,0.0,SFR,1.0,FarmCaster,
+203.0,8714,Newbury Park | 91320,47d1d1b6-5f5e-4f8d-8250-aa84bd2eb8e3,MaxWalter1019,max@494dave.com,The,Dave Walter Team,2025-08-18 11:00:02.503,,,0,Active,1.0,Condo,1.0,FarmCaster,
+204.0,8735,91362,47d1d1b6-5f5e-4f8d-8250-aa84bd2eb8e3,MaxWalter1019,max@494dave.com,The,Dave Walter Team,2025-08-18 11:53:16.547,,,0,Active,0.0,SFR,1.0,FarmCaster,
+104.0,8577,El Segundo | 90245,4865455f-29a0-4c8f-9938-8c4bab261ef6,itzsold,ek@itzsold.com,Ed,Kaminsky,2024-08-31 13:11:53.557,,2025-02-22 10:12:48.790,60,Active,0.0,SFR,1.0,FarmCaster,291.0
+105.0,8577,El Segundo | 90245,4865455f-29a0-4c8f-9938-8c4bab261ef6,itzsold,ek@itzsold.com,Ed,Kaminsky,2024-08-31 13:12:04.370,,2025-02-22 10:12:48.790,60,Active,1.0,Condo,1.0,FarmCaster,291.0
+101.0,8582,Hermosa Beach,4865455f-29a0-4c8f-9938-8c4bab261ef6,itzsold,ek@itzsold.com,Ed,Kaminsky,2024-08-31 13:06:34.960,,2025-02-27 10:16:24.403,106,Active,0.0,SFR,1.0,FarmCaster,286.0
+102.0,8582,Hermosa Beach,4865455f-29a0-4c8f-9938-8c4bab261ef6,itzsold,ek@itzsold.com,Ed,Kaminsky,2024-08-31 13:06:49.047,,2025-02-27 10:16:24.403,106,Active,1.0,Condo,1.0,FarmCaster,286.0
+79.0,8589,Manhattan Beach - 90266,4865455f-29a0-4c8f-9938-8c4bab261ef6,itzsold,ek@itzsold.com,Ed,Kaminsky,2024-08-17 11:23:46.927,,2025-12-09 10:14:21.673,358,Active,0.0,SFR,1.0,FarmCaster,1.0
+80.0,8589,Manhattan Beach - 90266,4865455f-29a0-4c8f-9938-8c4bab261ef6,itzsold,ek@itzsold.com,Ed,Kaminsky,2024-08-17 11:24:11.140,,2025-12-09 10:14:21.673,358,Active,1.0,Condo,1.0,FarmCaster,1.0
+,8598,90291,4865455f-29a0-4c8f-9938-8c4bab261ef6,itzsold,ek@itzsold.com,Ed,Kaminsky,,2025-02-27 10:16:57.477,2025-02-27 10:16:57.477,137,Ended,,,,,286.0
+51.0,8707,Calabasas | 91302,5243e850-fc83-4d0a-b9ca-05dc0cb7e374,Danaolmes,danaandjeff@frontgaterealestate.com,Dana and Jeff,Frontgate,2024-03-08 07:35:28.350,,2025-02-21 10:18:57.557,248,Active,0.0,SFR,1.0,FarmCaster,292.0
+,8714,Newbury Park | 91320,568d32a2-bb06-4d55-9774-787cdcb9d9c3,LisaOsborn123,Lisa@your805realtor.com,Lisa,Osborn,,2025-06-11 10:14:23.000,2025-06-11 10:14:23.000,68,Ended,,,,,182.0
+52.0,8891,92104,58e9a764-dd1e-4ef6-b713-66af6e871612,Kwhissel,bryan@whisselrealty.com,Kyle,Whissel,2024-03-21 08:51:17.497,,2024-07-17 10:24:01.543,79,Active,0.0,SFR,1.0,FarmCaster,511.0
+53.0,8891,92104,58e9a764-dd1e-4ef6-b713-66af6e871612,Kwhissel,bryan@whisselrealty.com,Kyle,Whissel,2024-03-21 09:08:15.263,,2024-07-17 10:24:01.543,79,Active,1.0,Condo,1.0,FarmCaster,511.0
+57.0,8591,90272,5ca4f9d0-34c8-40e6-9575-79a40b386d77,aMarguleas,anthony@amalfiestates.com,Anthony,Marguleas,2024-03-27 10:44:10.623,,2024-04-16 10:21:56.067,18,Active,0.0,SFR,1.0,FarmCaster,603.0
+58.0,8591,90272,5ca4f9d0-34c8-40e6-9575-79a40b386d77,aMarguleas,anthony@amalfiestates.com,Anthony,Marguleas,2024-03-27 10:44:20.480,,2024-04-16 10:21:56.067,18,Active,1.0,Condo,1.0,FarmCaster,603.0
+,8706,Agoura Hills | 91301,5f409ae6-b442-4308-b351-7923dae0f100,Kewing66,theprimakimteam@gmail.com,Kim,Ewing,,2024-09-21 10:14:47.323,2024-09-21 10:14:47.323,5,Ended,,,,,445.0
+,8733,Thousand Oaks | 91360,5f409ae6-b442-4308-b351-7923dae0f100,Kewing66,theprimakimteam@gmail.com,Kim,Ewing,,2024-09-23 10:13:11.807,2024-09-23 10:13:11.807,7,Ended,,,,,443.0
+,8735,Thousand Oaks | 91362,5f409ae6-b442-4308-b351-7923dae0f100,Kewing66,theprimakimteam@gmail.com,Kim,Ewing,,2024-09-23 10:13:35.940,2024-09-23 10:13:35.940,9,Ended,,,,,443.0
+,9188,Simi Valley | 93063,5f409ae6-b442-4308-b351-7923dae0f100,Kewing66,theprimakimteam@gmail.com,Kim,Ewing,,2025-04-25 10:21:54.230,2025-04-25 10:21:54.230,111,Ended,,,,,229.0
+,9190,Simi Valley | 93065,5f409ae6-b442-4308-b351-7923dae0f100,Kewing66,theprimakimteam@gmail.com,Kim,Ewing,,2025-04-27 10:15:03.613,2025-04-27 10:15:03.613,137,Ended,,,,,227.0
+66.0,8851,Del Mar | 92014,5fbb1f14-8688-466e-9192-6fbf468df6f7,JBarry1,jason@barryestates.com,Jason,Barry,2024-05-31 15:40:33.920,,2025-01-21 10:18:49.363,114,Active,0.0,SFR,1.0,FarmCaster,323.0
+91.0,8851,Del Mar | 92014,5fbb1f14-8688-466e-9192-6fbf468df6f7,JBarry1,jason@barryestates.com,Jason,Barry,2024-08-31 07:44:37.480,,2025-01-21 10:18:49.363,114,Active,1.0,Condo,1.0,FarmCaster,323.0
+65.0,8874,Rancho Santa Fe | 92067,5fbb1f14-8688-466e-9192-6fbf468df6f7,JBarry1,jason@barryestates.com,Jason,Barry,2024-05-31 15:40:14.480,,2025-01-20 10:20:14.067,78,Active,0.0,SFR,1.0,FarmCaster,324.0
+64.0,8912,92127,5fbb1f14-8688-466e-9192-6fbf468df6f7,JBarry1,jason@barryestates.com,Jason,Barry,2024-05-31 15:40:00.317,,2025-01-21 10:19:11.643,198,Active,0.0,SFR,1.0,FarmCaster,323.0
+90.0,8912,92127,5fbb1f14-8688-466e-9192-6fbf468df6f7,JBarry1,jason@barryestates.com,Jason,Barry,2024-08-31 07:44:19.743,,2025-01-21 10:19:11.643,198,Active,1.0,Condo,1.0,FarmCaster,323.0
+184.0,8763,North Hollywood | 91605,63951803-a6cc-4f78-84d2-64ac18572a0b,oclinger,oliver@forwardone.com,Oliver,Clinger,2025-04-28 15:27:10.887,,2025-05-07 10:16:43.780,9,Active,0.0,SFR,1.0,FarmCaster,217.0
+207.0,9166,92886,63e182a6-917a-41f0-a1ab-ff9719698920,thegeronsins,Marketing@TheGeronsins.com,Carole,Geronsin,2025-11-21 10:50:35.147,,2025-12-09 10:15:18.130,11,Active,0.0,SFR,1.0,FarmCaster,1.0
+46.0,61856,32413,64ed9cef-d30e-49db-900a-2b2200944829,aridinginstructor,aridinginstructor@gmail.com,Allison,Richards,2023-11-10 15:56:28.670,,,0,Active,0.0,SFR,1.0,FarmCaster,
+45.0,61856,32413,64ed9cef-d30e-49db-900a-2b2200944829,aridinginstructor,aridinginstructor@gmail.com,Allison,Richards,2023-11-10 15:56:12.680,,,0,Active,1.0,Condo,1.0,FarmCaster,
+47.0,61884,Santa Rosa Beach | 32459,64ed9cef-d30e-49db-900a-2b2200944829,aridinginstructor,aridinginstructor@gmail.com,Allison,Richards,2023-11-10 15:57:42.087,,2025-01-21 10:19:43.937,452,Active,0.0,SFR,1.0,FarmCaster,323.0
+48.0,61884,Santa Rosa Beach | 32459,64ed9cef-d30e-49db-900a-2b2200944829,aridinginstructor,aridinginstructor@gmail.com,Allison,Richards,2023-11-10 15:57:52.790,,2025-01-21 10:19:43.937,452,Active,1.0,Condo,1.0,FarmCaster,323.0
+43.0,61915,32550,64ed9cef-d30e-49db-900a-2b2200944829,aridinginstructor,aridinginstructor@gmail.com,Allison,Richards,2023-11-10 15:55:14.990,,2023-12-28 10:09:39.760,15,Active,0.0,SFR,1.0,FarmCaster,713.0
+44.0,61915,32550,64ed9cef-d30e-49db-900a-2b2200944829,aridinginstructor,aridinginstructor@gmail.com,Allison,Richards,2023-11-10 15:55:56.487,,2023-12-28 10:09:39.760,15,Active,1.0,Condo,1.0,FarmCaster,713.0
+49.0,398023,Inlet Beach | 32461,64ed9cef-d30e-49db-900a-2b2200944829,aridinginstructor,aridinginstructor@gmail.com,Allison,Richards,2023-12-06 12:19:59.780,,2024-02-05 10:10:28.083,47,Active,0.0,SFR,1.0,FarmCaster,674.0
+50.0,398023,Inlet Beach | 32461,64ed9cef-d30e-49db-900a-2b2200944829,aridinginstructor,aridinginstructor@gmail.com,Allison,Richards,2023-12-06 12:20:12.913,,2024-02-05 10:10:28.083,47,Active,1.0,Condo,1.0,FarmCaster,674.0
+92.0,16898,Austin | 78701,69276bdc-4702-44ec-b60b-2719c4bd97d0,spyglassrealty,ryan@spyglassrealty.com,Ryan,Rodenbeck,2024-08-31 07:52:40.053,,2025-01-27 10:16:03.893,104,Active,1.0,Condo,1.0,FarmCaster,317.0
+94.0,16901,78704,69276bdc-4702-44ec-b60b-2719c4bd97d0,spyglassrealty,ryan@spyglassrealty.com,Ryan,Rodenbeck,2024-08-31 07:53:14.360,,2025-01-27 10:16:34.780,231,Active,0.0,SFR,1.0,FarmCaster,317.0
+93.0,16901,78704,69276bdc-4702-44ec-b60b-2719c4bd97d0,spyglassrealty,ryan@spyglassrealty.com,Ryan,Rodenbeck,2024-08-31 07:53:00.927,,2025-01-27 10:16:34.780,231,Active,1.0,Condo,1.0,FarmCaster,317.0
+56.0,8750,91423,6ae65b0c-0e2e-4f4e-a8ba-66673e99d81f,morgannej,morganne.juarez@exprealty.com,Morganne,Juarez,2024-03-22 13:54:11.983,,2024-07-16 10:11:14.273,64,Active,0.0,SFR,1.0,FarmCaster,512.0
+86.0,8848,Carlsbad | 92009,7b8ab6a9-4e5b-41a1-aaf6-00a467c6f1b3,Cheller,chris.heller@hellerthehomeseller.com,Chris,Heller,2024-08-31 01:51:13.387,,2025-01-27 10:17:13.860,209,Active,0.0,SFR,1.0,FarmCaster,317.0
+87.0,8848,Carlsbad | 92009,7b8ab6a9-4e5b-41a1-aaf6-00a467c6f1b3,Cheller,chris.heller@hellerthehomeseller.com,Chris,Heller,2024-08-31 01:51:27.383,,2025-01-27 10:17:13.860,209,Active,1.0,Condo,1.0,FarmCaster,317.0
+84.0,8850,Carlsbad | 92011,7b8ab6a9-4e5b-41a1-aaf6-00a467c6f1b3,Cheller,chris.heller@hellerthehomeseller.com,Chris,Heller,2024-08-31 01:50:16.757,,2025-01-27 10:18:03.330,111,Active,0.0,SFR,1.0,FarmCaster,317.0
+85.0,8850,Carlsbad | 92011,7b8ab6a9-4e5b-41a1-aaf6-00a467c6f1b3,Cheller,chris.heller@hellerthehomeseller.com,Chris,Heller,2024-08-31 01:50:34.527,,2025-01-27 10:18:03.330,111,Active,1.0,Condo,1.0,FarmCaster,317.0
+,8855,92024,7b8ab6a9-4e5b-41a1-aaf6-00a467c6f1b3,Cheller,chris.heller@hellerthehomeseller.com,Chris,Heller,,2024-07-12 10:22:48.627,2024-07-12 10:22:48.627,108,Ended,,,,,516.0
+89.0,8864,Oceanside | 92054,7b8ab6a9-4e5b-41a1-aaf6-00a467c6f1b3,Cheller,chris.heller@hellerthehomeseller.com,Chris,Heller,2024-08-31 01:52:28.443,,2025-01-27 10:18:16.810,183,Active,0.0,SFR,1.0,FarmCaster,317.0
+88.0,8864,Oceanside | 92054,7b8ab6a9-4e5b-41a1-aaf6-00a467c6f1b3,Cheller,chris.heller@hellerthehomeseller.com,Chris,Heller,2024-08-31 01:52:05.183,,2025-01-27 10:18:16.810,183,Active,1.0,Condo,1.0,FarmCaster,317.0
+75.0,9100,Huntington Beach | 92648,824e2259-35de-422a-91c7-a00f60ad44c7,jrussell,info@russellrealtygrp.com,Jeff,Russell,2024-08-01 14:42:18.363,,2025-02-21 10:19:55.823,215,Active,0.0,SFR,1.0,FarmCaster,292.0
+76.0,9100,Huntington Beach | 92648,824e2259-35de-422a-91c7-a00f60ad44c7,jrussell,info@russellrealtygrp.com,Jeff,Russell,2024-08-01 14:42:29.223,,2025-02-21 10:19:55.823,215,Active,1.0,Condo,1.0,FarmCaster,292.0
+132.0,9101,92649,824e2259-35de-422a-91c7-a00f60ad44c7,jrussell,info@russellrealtygrp.com,Jeff,Russell,2024-09-13 17:46:32.600,,2025-02-21 10:20:22.703,188,Active,0.0,SFR,1.0,FarmCaster,292.0
+133.0,9101,92649,824e2259-35de-422a-91c7-a00f60ad44c7,jrussell,info@russellrealtygrp.com,Jeff,Russell,2024-09-13 17:46:46.187,,2025-02-21 10:20:22.703,188,Active,1.0,Condo,1.0,FarmCaster,292.0
+60.0,8592,90274,88d2c076-981a-47ff-ae0f-ef401d62285a,jkuo523,justin.kuo@exprealty.com,Justin,Kuo,2024-04-17 09:21:56.423,,2024-07-17 10:24:26.253,69,Active,0.0,SFR,1.0,FarmCaster,511.0
+134.0,9131,Tustin | 92780,92395286-1c84-4025-80e2-2caa200c933f,JMatsumoto1,jennifer@matsumotorealestate.com,Jennifer,Matsumoto,2024-09-16 16:40:33.450,,2025-03-20 10:16:28.990,132,Active,0.0,SFR,1.0,FarmCaster,265.0
+135.0,9131,Tustin | 92780,92395286-1c84-4025-80e2-2caa200c933f,JMatsumoto1,jennifer@matsumotorealestate.com,Jennifer,Matsumoto,2024-09-16 16:40:43.607,,2025-03-20 10:16:28.990,132,Active,1.0,Condo,1.0,FarmCaster,265.0
+172.0,8718,Porter Ranch | 91326,9e98457b-deb9-41c1-86fc-ffcdf56ecd41,MelineK,info@mkrealtyla.com,Meline,Khacheryan,2025-02-06 12:48:12.550,,2025-10-30 10:13:46.390,230,Active,0.0,SFR,1.0,FarmCaster,41.0
+173.0,8718,Porter Ranch | 91326,9e98457b-deb9-41c1-86fc-ffcdf56ecd41,MelineK,info@mkrealtyla.com,Meline,Khacheryan,2025-02-06 12:48:27.713,,2025-10-30 10:13:46.390,230,Active,1.0,Condo,1.0,FarmCaster,41.0
+,8736,Woodland Hills | 91364,a2355873-7a23-4b62-b774-0acfbfd38677,EPlascencia,emilio.plascencia@kw.com,Emilio,Plascencia,,2025-04-18 10:22:24.510,2025-04-18 10:22:24.510,73,Ended,,,,,236.0
+,8737,Woodland Hills | 91367,b0f595f8-3961-4f06-ab60-8b090a46894d,Ktrussell,kellytrussell@equityunion.com,Kelly,Trussell,,2025-03-24 10:22:42.517,2025-03-24 10:22:42.517,69,Ended,,,,,261.0
+120.0,9139,Anaheim Hills | 92807,b24c4892-2577-4c29-bbf4-8a10beadd6b5,JustinTye,jt@activerealty.com,Justin,Tye,2024-09-10 16:59:12.480,,2025-02-21 10:23:07.367,115,Active,0.0,SFR,1.0,FarmCaster,292.0
+121.0,9139,Anaheim Hills | 92807,b24c4892-2577-4c29-bbf4-8a10beadd6b5,JustinTye,jt@activerealty.com,Justin,Tye,2024-09-10 16:59:29.673,,2025-02-21 10:23:07.367,115,Active,1.0,Condo,1.0,FarmCaster,292.0
+122.0,9140,Anaheim Hills | 92808,b24c4892-2577-4c29-bbf4-8a10beadd6b5,JustinTye,jt@activerealty.com,Justin,Tye,2024-09-10 16:59:45.553,,2025-02-21 10:23:24.980,78,Active,0.0,SFR,1.0,FarmCaster,292.0
+123.0,9140,Anaheim Hills | 92808,b24c4892-2577-4c29-bbf4-8a10beadd6b5,JustinTye,jt@activerealty.com,Justin,Tye,2024-09-10 17:00:03.993,,2025-02-21 10:23:24.980,78,Active,1.0,Condo,1.0,FarmCaster,292.0
+126.0,9162,Eastvale | 92880,b24c4892-2577-4c29-bbf4-8a10beadd6b5,JustinTye,jt@activerealty.com,Justin,Tye,2024-09-10 17:17:43.817,,2025-02-21 10:23:55.497,144,Active,0.0,SFR,1.0,FarmCaster,292.0
+129.0,9162,Eastvale | 92880,b24c4892-2577-4c29-bbf4-8a10beadd6b5,JustinTye,jt@activerealty.com,Justin,Tye,2024-09-10 17:18:50.807,,2025-02-21 10:23:55.497,144,Active,1.0,Condo,1.0,FarmCaster,292.0
+59.0,9163,Corona | 92881,b24c4892-2577-4c29-bbf4-8a10beadd6b5,JustinTye,jt@activerealty.com,Justin,Tye,2024-04-17 08:59:17.277,,2025-02-21 10:24:14.293,160,Active,0.0,SFR,1.0,FarmCaster,292.0
+128.0,9164,Corona | 92882,b24c4892-2577-4c29-bbf4-8a10beadd6b5,JustinTye,jt@activerealty.com,Justin,Tye,2024-09-10 17:18:19.387,,2025-02-21 10:24:43.030,141,Active,0.0,SFR,1.0,FarmCaster,292.0
+127.0,9164,Corona | 92882,b24c4892-2577-4c29-bbf4-8a10beadd6b5,JustinTye,jt@activerealty.com,Justin,Tye,2024-09-10 17:17:56.470,,2025-02-21 10:24:43.030,141,Active,1.0,Condo,1.0,FarmCaster,292.0
+124.0,9165,Corona | 92883,b24c4892-2577-4c29-bbf4-8a10beadd6b5,JustinTye,jt@activerealty.com,Justin,Tye,2024-09-10 17:15:29.123,,2025-02-21 10:25:08.053,146,Active,0.0,SFR,1.0,FarmCaster,292.0
+125.0,9165,Corona | 92883,b24c4892-2577-4c29-bbf4-8a10beadd6b5,JustinTye,jt@activerealty.com,Justin,Tye,2024-09-10 17:16:27.063,,2025-02-21 10:25:08.053,146,Active,1.0,Condo,1.0,FarmCaster,292.0
+118.0,9167,Yorba Linda | 92887,b24c4892-2577-4c29-bbf4-8a10beadd6b5,JustinTye,jt@activerealty.com,Justin,Tye,2024-09-10 16:58:28.750,,2025-02-21 10:25:25.900,79,Active,0.0,SFR,1.0,FarmCaster,292.0
+119.0,9167,Yorba Linda | 92887,b24c4892-2577-4c29-bbf4-8a10beadd6b5,JustinTye,jt@activerealty.com,Justin,Tye,2024-09-10 16:58:52.060,,2025-02-21 10:25:25.900,79,Active,1.0,Condo,1.0,FarmCaster,292.0
+187.0,8543,90048 | Los Angeles,c9204746-6939-4dae-9640-59d700ee2863,mkollo,merse@forwardone.com,Merse,Kollo,2025-04-29 18:51:40.083,,,0,Active,0.0,SFR,1.0,FarmCaster,
+185.0,8543,90048 | Los Angeles,c9204746-6939-4dae-9640-59d700ee2863,mkollo,merse@forwardone.com,Merse,Kollo,2025-04-29 17:49:03.607,,,0,Active,1.0,Condo,1.0,FarmCaster,
+186.0,8544,90049 | Los Angeles,c9204746-6939-4dae-9640-59d700ee2863,mkollo,merse@forwardone.com,Merse,Kollo,2025-04-29 18:51:10.600,,,0,Active,0.0,SFR,1.0,FarmCaster,
+181.0,8598,Venice | 90291,cafef15e-7ba0-423f-933a-b71f225e2f0c,KSullivan,kerryann@pardeeproperties.com,Kerry Ann,Sullivan,2025-04-21 14:35:01.863,,2025-07-16 10:20:22.873,107,Active,0.0,SFR,1.0,FarmCaster,147.0
+182.0,8598,Venice | 90291,cafef15e-7ba0-423f-933a-b71f225e2f0c,KSullivan,kerryann@pardeeproperties.com,Kerry Ann,Sullivan,2025-04-21 14:35:19.837,,2025-07-16 10:20:22.873,107,Active,1.0,Condo,1.0,FarmCaster,147.0
+,8725,GRANADA HILLS | 91344,d3821dc0-6b67-48d0-9e64-6f0c40f19f68,Armines,amysoulakhian@kw.com,Amy,Soulakhian,,2025-09-06 10:17:41.467,2025-09-06 10:17:41.467,107,Ended,,,,,95.0
+116.0,8734,Westlake Village | 91361,d4a52ac8-18eb-491b-b033-3bb94ec7952e,LGgroup,sue@lydiaGable.com,Lydia,Gable Realty Group,2024-09-10 12:06:24.837,,,0,Active,0.0,SFR,1.0,FarmCaster,
+117.0,8734,Westlake Village | 91361,d4a52ac8-18eb-491b-b033-3bb94ec7952e,LGgroup,sue@lydiaGable.com,Lydia,Gable Realty Group,2024-09-10 12:06:39.343,,,0,Active,1.0,Condo,1.0,FarmCaster,
+,8677,La Canada Flintridge | 91011,d786cd57-b62c-480c-9834-18db549754f2,SimaHoldings,martinnavasartian@gmail.com,Martin,Navasartian,,2025-09-01 10:10:47.443,2025-09-01 10:10:47.443,39,Ended,,,,,100.0
+206.0,8682,Sunland | Shadow Hills | 91040,d786cd57-b62c-480c-9834-18db549754f2,SimaHoldings,martinnavasartian@gmail.com,Martin,Navasartian,2025-09-10 13:38:45.643,,,0,Active,0.0,SFR,1.0,FarmCaster,
+196.0,8683,Tujunga | 91042,d786cd57-b62c-480c-9834-18db549754f2,SimaHoldings,martinnavasartian@gmail.com,Martin,Navasartian,2025-06-19 12:53:40.147,,2025-12-07 10:12:16.730,41,Active,0.0,SFR,1.0,FarmCaster,3.0
+194.0,8703,Glendale | 91208,d786cd57-b62c-480c-9834-18db549754f2,SimaHoldings,martinnavasartian@gmail.com,Martin,Navasartian,2025-06-19 12:50:52.733,,,0,Active,0.0,SFR,1.0,FarmCaster,
+193.0,8705,La Crescenta | 91214,d786cd57-b62c-480c-9834-18db549754f2,SimaHoldings,martinnavasartian@gmail.com,Martin,Navasartian,2025-06-19 12:49:41.890,,2025-12-09 10:16:00.683,78,Active,0.0,SFR,1.0,FarmCaster,1.0
+,9173,Camarillo | 93010,da5712ef-2c00-42f4-91f8-36fa7c699fce,KevinRyan,KevinRyanEstates@gmail.com,Kevin,Ryan,,2025-04-28 10:19:38.933,2025-04-28 10:19:38.933,122,Ended,,,,,226.0
+112.0,8948,La Quinta | 92253,dae6958a-8f73-4dbc-ad3a-79f6e51e7992,Tjhawley1,tyson.hawley@sothebysrealty.com,Tyson,Hawley,2024-09-05 11:05:36.853,,2024-09-26 10:30:10.273,25,Active,0.0,SFR,1.0,FarmCaster,440.0
+113.0,8948,La Quinta | 92253,dae6958a-8f73-4dbc-ad3a-79f6e51e7992,Tjhawley1,tyson.hawley@sothebysrealty.com,Tyson,Hawley,2024-09-05 11:05:51.310,,2024-09-26 10:30:10.273,25,Active,1.0,Condo,1.0,FarmCaster,440.0
+,8717,Northridge | 91325,e48d2a8e-c991-44f4-b751-e170fc8df131,SFeatherly,homesbypeter.susan@gmail.com,Susan,Featherly,,2025-12-09 10:16:21.097,2025-12-09 10:16:21.097,212,Ended,,,,,1.0
+153.0,8733,Thousand Oaks | 91360,e85be9a6-7e82-47bf-9dc6-24802aa6b13f,DebbieGates,homeswithdebbie@yahoo.com,Debbie,Gates,2024-10-02 07:58:57.510,,2025-12-09 10:16:48.087,313,Active,0.0,SFR,1.0,FarmCaster,1.0
+156.0,9177,Moorpark | 93021,e85be9a6-7e82-47bf-9dc6-24802aa6b13f,DebbieGates,homeswithdebbie@yahoo.com,Debbie,Gates,2024-10-02 08:00:41.863,,2025-12-09 10:17:13.633,295,Active,0.0,SFR,1.0,FarmCaster,1.0
+198.0,9190,SIMI VALLEY | 93065,e85be9a6-7e82-47bf-9dc6-24802aa6b13f,DebbieGates,homeswithdebbie@yahoo.com,Debbie,Gates,2025-07-08 10:04:38.107,,2025-12-09 10:17:51.597,131,Active,0.0,SFR,1.0,FarmCaster,1.0
+139.0,10347,Summerlin | 89135,ed7d4d1f-74e8-467a-95a7-116fd1a4adb7,JavierMendez,javier@clocktie.com,Javier,Mendez,2024-09-18 12:18:11.600,,2025-12-10 10:38:08.723,648,Active,0.0,SFR,1.0,FarmCaster,0.0
+140.0,10347,Summerlin | 89135,ed7d4d1f-74e8-467a-95a7-116fd1a4adb7,JavierMendez,javier@clocktie.com,Javier,Mendez,2024-09-18 12:18:28.963,,2025-12-10 10:38:08.723,648,Active,1.0,Condo,1.0,FarmCaster,0.0
+141.0,10357,Centennial Hills | 89149,ed7d4d1f-74e8-467a-95a7-116fd1a4adb7,JavierMendez,javier@clocktie.com,Javier,Mendez,2024-09-18 12:18:50.010,,2025-12-10 10:38:57.163,425,Active,0.0,SFR,1.0,FarmCaster,0.0
+151.0,10357,Centennial Hills | 89149,ed7d4d1f-74e8-467a-95a7-116fd1a4adb7,JavierMendez,javier@clocktie.com,Javier,Mendez,2024-09-18 14:20:54.240,,2025-12-10 10:38:57.163,425,Active,1.0,Condo,1.0,FarmCaster,0.0
+62.0,8785,Glendora 91741,fe8ba019-371e-4294-9fed-82bbb66ae51f,maureen755,maureen@maureenhaney.com,Maureen,Haney,2024-05-23 11:13:31.550,,,0,Active,0.0,SFR,1.0,FarmCaster,
+63.0,8785,Glendora 91741,fe8ba019-371e-4294-9fed-82bbb66ae51f,maureen755,maureen@maureenhaney.com,Maureen,Haney,2024-05-23 11:13:47.010,,,0,Active,1.0,Condo,1.0,FarmCaster,
