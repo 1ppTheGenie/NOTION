@@ -1,0 +1,23 @@
+Customer_Name,MlsNumber,Property_Address,ListingStatus,Order_Date,Campaign_Executed,Channels_Ordered,Msgs_Sent,Revenue_Charged,Twilio_Cost,Profit
+Adam Schechter,SR25223448,"637 Cayo Grande Court, Newbury Park, CA 91320",Sold,09-24-2025,11-06-2025,SMS:200,200,100.0,3.64,96.36
+Colleen Gamble,V1-33169,"485 Raindance Street, Thousand Oaks, CA 91360",Pending,11-07-2025,11-08-2025,SMS:200,200,100.0,3.64,96.36
+David Higgins,41116549,"786 Trestle Glen Road, Oakland, CA 94610",Active,11-18-2025,11-18-2025,SMS:150,150,75.0,2.73,72.27
+Emilio Plascencia,SR25238011,"7428 Bothwell Rd, Reseda, CA 91335",Pending,10-15-2025,11-01-2025,SMS:200,200,100.0,3.64,96.36
+Emilio Plascencia,SR25214340,"23001 Yodel Dr, Tehachapi, CA 93561",Sold,09-24-2025,11-14-2025,SMS:250,250,125.0,4.55,120.45
+Emilio Plascencia,SR25214340,"23001 Yodel Dr, Tehachapi, CA 93561",Sold,09-24-2025,11-14-2025,SMS:250,250,125.0,4.55,120.45
+Gracee Lybbert,250043061,"14224 Harrow Place, Poway, CA 92064",Active,11-06-2025,11-07-2025,SMS:150,150,75.0,2.73,72.27
+Javier Mendez,2721731,"10325 Jade Point Drive, Las Vegas, NV 89135",Pending,11-21-2025,11-21-2025,SMS:150,150,75.0,2.73,72.27
+Javier Mendez,2721731,"10113 15th, Greeley, CO 80634",Pending,11-21-2025,11-21-2025,SMS:150,150,75.0,2.73,72.27
+Javier Mendez,2691402,"4317 Velvet Ridge Court, Las Vegas, NV 89129",Active,11-21-2025,11-22-2025,SMS:150,150,75.0,2.73,72.27
+Mark Smith,V1-33169,"485 Raindance Street, Thousand Oaks, CA 91360",Pending,11-19-2025,11-19-2025,SMS:150,150,75.0,2.73,72.27
+Michelle Price,225004817,"1596 Castleview Court, Westlake Village, CA 91361",Sold,11-24-2025,11-25-2025,SMS:200,200,100.0,3.64,96.36
+Michelle Price,225004611,"1076 Calle Contento, Thousand Oaks, CA 91360",Sold,11-24-2025,11-25-2025,SMS:200,200,100.0,3.64,96.36
+Michelle Price,225002624,"26386 Clarkston, Bonita Springs, FL 34135",Sold,11-24-2025,11-25-2025,SMS:200,200,100.0,3.64,96.36
+Michelle Price,225002624,"6919 Castle Peak Drive, West Hills, CA 91307",Sold,11-24-2025,11-25-2025,SMS:200,200,100.0,3.64,96.36
+Michelle Price,225000910,"2069 Channelford Road, Westlake Village, CA 91361",Sold,11-24-2025,11-25-2025,SMS:100,100,50.0,1.82,48.18
+Mike Chiesl,250044151,"4141 Palomar Drive, Fallbrook, CA 92028",Active,11-18-2025,11-18-2025,SMS:100,100,50.0,1.82,48.18
+Oscar Tortola,IG25234571,"27089 Adelanto Drive, Corona, CA 92883",Sold,11-29-2025,11-30-2025,SMS:350 | FB:600,350,325.0,6.37,318.63
+Rob Alvidrez,225005581,"3305 Henry Drive, Newbury Park, CA 91320",Active,11-18-2025,11-19-2025,SMS:200,200,100.0,3.64,96.36
+Sean Corritori,225005117,"4506 N Canyonlands Road, Moorpark, CA 93021",Sold,10-22-2025,11-08-2025,SMS:150,150,75.0,2.73,72.27
+Shirese Spaniol,225005754,"2190 Westshore Lane, Westlake Village, CA 91361",Active,11-29-2025,11-29-2025,SMS:150,150,75.0,2.73,72.27
+Stephen Patronete,225005494,"3037 Klamath Avenue, Simi Valley, CA 93063",Active,11-06-2025,11-06-2025,SMS:200,200,100.0,3.64,96.36
