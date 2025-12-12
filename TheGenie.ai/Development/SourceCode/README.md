@@ -1,121 +1,140 @@
-Select2
-=======
-[![Build Status][travis-ci-image]][travis-ci-status]
+# FastClick #
 
-Select2 is a jQuery-based replacement for select boxes. It supports searching,
-remote data sets, and pagination of results.
+FastClick is a simple, easy-to-use library for eliminating the 300ms delay between a physical tap and the firing of a `click` event on mobile browsers. The aim is to make your application feel less laggy and more responsive while avoiding any interference with your current logic.
 
-To get started, checkout examples and documentation at
-https://select2.github.io/
+FastClick is developed by [FT Labs](http://labs.ft.com/), part of the Financial Times.
 
-Use cases
----------
-* Enhancing native selects with search.
-* Enhancing native selects with a better multi-select interface.
-* Loading data from JavaScript: easily load items via AJAX and have them
-  searchable.
-* Nesting optgroups: native selects only support one level of nesting. Select2
-  does not have this restriction.
-* Tagging: ability to add new items on the fly.
-* Working with large, remote datasets: ability to partially load a dataset based
-  on the search term.
-* Paging of large datasets: easy support for loading more pages when the results
-  are scrolled to the end.
-* Templating: support for custom rendering of results and selections.
+[Explication en français](http://maxime.sh/2013/02/supprimer-le-lag-des-clics-sur-mobile-avec-fastclick/).
 
-Browser compatibility
----------------------
-* IE 8+
-* Chrome 8+
-* Firefox 10+
-* Safari 3+
-* Opera 10.6+
+[日本語で説明](https://developer.mozilla.org/ja/docs/Mozilla/Firefox_OS/Apps/Tips_and_techniques#Make_events_immediate)。
 
-Select2 is automatically tested on the following browsers.
+## Why does the delay exist? ##
 
-[![Sauce Labs Test Status][saucelabs-matrix]][saucelabs-status]
+According to [Google](https://developers.google.com/mobile/articles/fast_buttons):
 
-Usage
------
-You can source Select2 directly from a CDN like [JSDliver][jsdelivr] or
-[CDNJS][cdnjs], [download it from this GitHub repo][releases], or use one of
-the integrations below.
+> ...mobile browsers will wait approximately 300ms from the time that you tap the button to fire the click event. The reason for this is that the browser is waiting to see if you are actually performing a double tap.
 
-Integrations
-------------
-Third party developers have create plugins for platforms which allow Select2 to be integrated more natively and quickly. For many platforms, additional plugins are not required because Select2 acts as a standard `<select>` box.
+## Compatibility ##
 
-Plugins
+The library has been deployed as part of the [FT Web App](http://app.ft.com/) and is tried and tested on the following mobile browsers:
 
-* [Django]
-  - [django-easy-select2]
-  - [django-select2]
-* [Meteor] - [meteor-select2]
-* [Ruby on Rails][ruby-on-rails] - [select2-rails]
-* [Wicket] - [wicketstuff-select2]
-* [Yii 2][yii2] - [yii2-widget-select2]
+* Mobile Safari on iOS 3 and upwards
+* Chrome on iOS 5 and upwards
+* Chrome on Android (ICS)
+* Opera Mobile 11.5 and upwards
+* Android Browser since Android 2
+* PlayBook OS 1 and upwards
 
-Themes
+## When it isn't needed ##
 
-- [Bootstrap 3][bootstrap3] - [select2-bootstrap-theme]
-- [Flat UI][flat-ui] - [select2-flat-theme]
-- [Metro UI][metro-ui] - [select2-metro]
+FastClick doesn't attach any listeners on desktop browsers.
 
-Missing an integration? Modify this `README` and make a pull request back here to Select2 on GitHub.
+Chrome 32+ on Android with `width=device-width` in the [viewport meta tag](https://developer.mozilla.org/en-US/docs/Mobile/Viewport_meta_tag) doesn't have a 300ms delay, therefore listeners aren't attached.
 
-Internationalization (i18n)
----------------------------
-Select2 supports multiple languages by simply including the right language JS
-file (`dist/js/i18n/it.js`, `dist/js/i18n/nl.js`, etc.) after
-`dist/js/select2.js`.
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1">
+```
 
-Missing a language? Just copy `src/js/select2/i18n/en.js`, translate it, and
-make a pull request back to Select2 here on GitHub.
+Same goes for Chrome on Android (all versions) with `user-scalable=no` in the viewport meta tag. But be aware that `user-scalable=no` also disables pinch zooming, which may be an accessibility concern.
 
-Documentation
--------------
-The documentation for Select2 is available
-[through GitHub Pages][documentation] and is located within this repository
-in the [`docs` folder][documentation-folder].
+For IE11+, you can use `touch-action: manipulation;` to disable double-tap-to-zoom on certain elements (like links and buttons).  For IE10 use `-ms-touch-action: manipulation`.
 
-Community
----------
-You can find out about the different ways to get in touch with the Select2
-community at the [Select2 community page][community].
+## Usage ##
 
-Copyright and license
----------------------
-The license is available within the repository in the [LICENSE][license] file.
+Include fastclick.js in your JavaScript bundle or add it to your HTML page like this:
 
-[cdnjs]: http://www.cdnjs.com/libraries/select2
-[community]: https://select2.github.io/community.html
-[documentation]: https://select2.github.io/
-[documentation-folder]: https://github.com/select2/select2/tree/master/docs
-[freenode]: https://freenode.net/
-[jsdelivr]: http://www.jsdelivr.com/#!select2
-[license]: LICENSE.md
-[releases]: https://github.com/select2/select2/releases
-[saucelabs-matrix]: https://saucelabs.com/browser-matrix/select2.svg
-[saucelabs-status]: https://saucelabs.com/u/select2
-[travis-ci-image]: https://img.shields.io/travis/select2/select2/master.svg
-[travis-ci-status]: https://travis-ci.org/select2/select2
+```html
+<script type='application/javascript' src='/path/to/fastclick.js'></script>
+```
 
-[bootstrap3]: https://getbootstrap.com/
-[django]: https://www.djangoproject.com/
-[django-easy-select2]: https://github.com/asyncee/django-easy-select2
-[django-select2]: https://github.com/applegrew/django-select2
-[flat-ui]: http://designmodo.github.io/Flat-UI/
-[meteor]: https://www.meteor.com/
-[meteor-select2]: https://github.com/nate-strauser/meteor-select2
-[metro-ui]: http://metroui.org.ua/
-[select2-metro]: http://metroui.org.ua/select2.html
-[ruby-on-rails]: http://rubyonrails.org/
-[select2-bootstrap-theme]: https://github.com/select2/select2-bootstrap-theme
-[select2-flat-theme]: https://github.com/techhysahil/select2-Flat_Theme
-[select2-rails]: https://github.com/argerim/select2-rails
-[vue.js]: http://vuejs.org/
-[select2-vue]: http://vuejs.org/examples/select2.html
-[wicket]: https://wicket.apache.org/
-[wicketstuff-select2]: https://github.com/wicketstuff/core/tree/master/select2-parent
-[yii2]: http://www.yiiframework.com/
-[yii2-widget-select2]: https://github.com/kartik-v/yii2-widget-select2
+The script must be loaded prior to instantiating FastClick on any element of the page.
+
+To instantiate FastClick on the `body`, which is the recommended method of use:
+
+```js
+if ('addEventListener' in document) {
+	document.addEventListener('DOMContentLoaded', function() {
+		FastClick.attach(document.body);
+	}, false);
+}
+```
+
+Or, if you're using jQuery:
+
+```js
+$(function() {
+	FastClick.attach(document.body);
+});
+```
+
+If you're using Browserify or another CommonJS-style module system, the `FastClick.attach` function will be returned when you call `require('fastclick')`. As a result, the easiest way to use FastClick with these loaders is as follows:
+
+```js
+var attachFastClick = require('fastclick');
+attachFastClick(document.body);
+```
+
+### Minified ###
+
+Run `make` to build a minified version of FastClick using the Closure Compiler REST API. The minified file is saved to `build/fastclick.min.js` or you can [download a pre-minified version](http://build.origami.ft.com/bundles/js?modules=fastclick).
+
+Note: the pre-minified version is built using [our build service](http://origami.ft.com/docs/developer-guide/build-service/) which exposes the `FastClick` object through `Origami.fastclick` and will have the Browserify/CommonJS API (see above).
+
+```js
+var attachFastClick = Origami.fastclick;
+attachFastClick(document.body);
+```
+
+### AMD ###
+
+FastClick has AMD (Asynchronous Module Definition) support. This allows it to be lazy-loaded with an AMD loader, such as [RequireJS](http://requirejs.org/). Note that when using the AMD style require, the full `FastClick` object will be returned, _not_ `FastClick.attach`
+
+```js
+var FastClick = require('fastclick');
+FastClick.attach(document.body, options);
+```
+
+### Package managers ###
+
+You can install FastClick using [Component](https://github.com/component/component), [npm](https://npmjs.org/package/fastclick) or [Bower](http://bower.io/).
+
+For Ruby, there's a third-party gem called [fastclick-rails](http://rubygems.org/gems/fastclick-rails). For .NET there's a [NuGet package](http://nuget.org/packages/FastClick).
+
+## Advanced ##
+
+### Ignore certain elements with `needsclick` ###
+
+Sometimes you need FastClick to ignore certain elements. You can do this easily by adding the `needsclick` class.
+```html
+<a class="needsclick">Ignored by FastClick</a>
+```
+
+#### Use case 1: non-synthetic click required ####
+
+Internally, FastClick uses `document.createEvent` to fire a synthetic `click` event as soon as `touchend` is fired by the browser. It then suppresses the additional `click` event created by the browser after that. In some cases, the non-synthetic `click` event created by the browser is required, as described in the [triggering focus example](http://ftlabs.github.com/fastclick/examples/focus.html).
+
+This is where the `needsclick` class comes in. Add the class to any element that requires a non-synthetic click.
+
+#### Use case 2: Twitter Bootstrap 2.2.2 dropdowns ####
+
+Another example of when to use the `needsclick` class is with dropdowns in Twitter Bootstrap 2.2.2. Bootstrap add its own `touchstart` listener for dropdowns, so you want to tell FastClick to ignore those. If you don't, touch devices will automatically close the dropdown as soon as it is clicked, because both FastClick and Bootstrap execute the synthetic click, one opens the dropdown, the second closes it immediately after.
+
+```html
+<a class="dropdown-toggle needsclick" data-toggle="dropdown">Dropdown</a>
+```
+
+## Examples ##
+
+FastClick is designed to cope with many different browser oddities. Here are some examples to illustrate this:
+
+* [basic use](http://ftlabs.github.com/fastclick/examples/layer.html) showing the increase in perceived responsiveness
+* [triggering focus](http://ftlabs.github.com/fastclick/examples/focus.html) on an input element from a `click` handler
+* [input element](http://ftlabs.github.com/fastclick/examples/input.html) which never receives clicks but gets fast focus
+
+## Tests ##
+
+There are no automated tests. The files in `tests/` are manual reduced test cases. We've had a think about how best to test these cases, but they tend to be very browser/device specific and sometimes subjective which means it's not so trivial to test.
+
+## Credits and collaboration ##
+
+FastClick is maintained by [Rowan Beentje](http://twitter.com/rowanbeentje), [Matthew Caruana Galizia](http://twitter.com/mcaruanagalizia) and [Matthew Andrews](http://twitter.com/andrewsmatt) at [FT Labs](http://labs.ft.com). All open source code released by FT Labs is licenced under the MIT licence. We welcome comments, feedback and suggestions.  Please feel free to raise an issue or pull request.
