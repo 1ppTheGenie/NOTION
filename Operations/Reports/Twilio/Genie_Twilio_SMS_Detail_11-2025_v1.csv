@@ -1,0 +1,28 @@
+NotificationTypeId,Description,MessageCount,Service
+35,FarmCastListingActive1,3452,Competition Command
+36,FarmCastListingActive2,3425,Competition Command
+37,FarmCastListingActive3,3413,Competition Command
+39,FarmCastListingSold2,2651,Competition Command
+38,FarmCastListingSold1,2565,Competition Command
+40,FarmCastListingSold3,2558,Competition Command
+24,NewLead,575,Lead Notifications
+50,LeadListingCommandSoldSplit3,281,Listing Command
+42,LeadListingCommandActiveSplit2,280,Listing Command
+49,LeadListingCommandSoldSplit2,277,Listing Command
+43,LeadListingCommandActiveSplit3,272,Listing Command
+55,LeadListingCommandActiveSplit1,272,Listing Command
+52,LeadListingCommandSoldSplit5,270,Listing Command
+51,LeadListingCommandSoldSplit4,267,Listing Command
+53,LeadListingCommandActiveSplit4,266,Listing Command
+48,LeadListingCommandSoldSplit1,259,Listing Command
+70,LeadNeighborhoodCommandSplit6,154,Neighborhood Command
+69,LeadNeighborhoodCommandSplit5,147,Neighborhood Command
+68,LeadNeighborhoodCommandSplit4,139,Neighborhood Command
+45,LeadListingCommandPendingSplit2,118,Listing Command
+46,LeadListingCommandPendingSplit3,111,Listing Command
+44,LeadListingCommandPendingSplit1,111,Listing Command
+54,LeadListingCommandPendingSplit5,110,Listing Command
+47,LeadListingCommandPendingSplit4,97,Listing Command
+32,LeadUpdate,41,Lead Notifications
+18,FileRefreshReminder,27,Other
+14,InvitationAccepted,2,Other
