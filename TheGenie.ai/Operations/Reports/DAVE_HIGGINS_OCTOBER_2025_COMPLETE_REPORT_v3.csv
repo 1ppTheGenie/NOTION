@@ -1,0 +1,27 @@
+CampaignDate,CampaignType,SubjectProperty,PropertyType,ListingStatus,PropertyCollectionCount,MessagesSent,SuccessRatePct,OptOuts,OptOutPct,InitialClickCount,InitialClickPct,CtaClicked,CtaVerified,AgentNotifyCount,AgentNotifyTwilioCost,TotalTwilioCost,TextMessageId,TextMessage,CtaIdPresented,CtaUrl,PropertyCollectionDetailId,CampaignName
+2025-10-04,Competition Command,35 Randwick Ave,SFR,Listing Sold,75,0,NULL,0,NULL,0,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,16819,35 Randwick Ave - Sold - SMS
+2025-10-07,Competition Command,3032 22nd Ave,SFR,Listing Sold,75,0,NULL,0,NULL,1,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,16833,3032 22nd Ave - Sold - SMS
+2025-10-07,Competition Command,103 Diablo Dr,SFR,Listing Sold,75,0,NULL,0,NULL,0,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,16834,103 Diablo Dr - Sold - SMS
+2025-10-08,Competition Command,2785 Butters Dr,SFR,Listing Sold,75,0,NULL,0,NULL,0,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,16843,2785 Butters Dr - Sold - SMS
+2025-10-10,Competition Command,3280 Pleitner Ave,SFR,Listing Sold,75,0,NULL,0,NULL,3,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,16849,3280 Pleitner Ave - Sold - SMS
+2025-10-11,Competition Command,6951 Chambers Dr,SFR,Listing Sold,75,0,NULL,0,NULL,0,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,16854,6951 Chambers Dr - Sold - SMS
+2025-10-18,Competition Command,3036 23rd Avenue,SFR,Listing Sold,75,0,NULL,0,NULL,1,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,16876,3036 23rd Avenue - Sold - SMS
+2025-10-18,Competition Command,580 Chetwood St.,SFR,Listing Sold,75,0,NULL,0,NULL,1,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,16877,580 Chetwood St. - Sold - SMS
+2025-10-19,Competition Command,4051 Rhoda Ave,SFR,Listing Sold,75,0,NULL,0,NULL,2,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,16889,4051 Rhoda Ave - Sold - SMS
+2025-10-19,Competition Command,3877 Howe St,Condo,Listing Sold,75,0,NULL,0,NULL,1,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,16892,3877 Howe St - Sold - SMS
+2025-10-20,Competition Command,3327 Victor Ave,SFR,Listing Sold,75,0,NULL,0,NULL,0,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,16904,3327 Victor Ave - Sold - SMS
+2025-10-21,Competition Command,4008 Woodruff Ave,SFR,Listing Sold,75,0,NULL,0,NULL,1,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,16919,4008 Woodruff Ave - Sold - SMS
+2025-10-21,Competition Command,408 Euclid Ave,SFR,Listing Sold,75,0,NULL,0,NULL,1,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,16920,408 Euclid Ave - Sold - SMS
+2025-10-21,Competition Command,3750 Harrison St,Condo,Listing Sold,75,0,NULL,0,NULL,1,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,16922,3750 Harrison St - Sold - SMS
+2025-10-22,Competition Command,2839 Bartlett St,SFR,Listing Sold,75,0,NULL,0,NULL,1,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,16936,2839 Bartlett St - Sold - SMS
+2025-10-22,Competition Command,2840 11th Ave,SFR,Listing Sold,75,0,NULL,0,NULL,0,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,16937,2840 11th Ave - Sold - SMS
+2025-10-23,Competition Command,541 Boulevard Way,SFR,Listing Sold,75,0,NULL,0,NULL,0,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,16949,541 Boulevard Way - Sold - SMS
+2025-10-23,Competition Command,124 Arbor Drive,SFR,Listing Sold,75,0,NULL,0,NULL,1,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,16950,124 Arbor Drive - Sold - SMS
+2025-10-24,Competition Command,3920 Coolidge Ave,SFR,Listing Sold,75,0,NULL,0,NULL,0,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,16963,3920 Coolidge Ave - Sold - SMS
+2025-10-25,Competition Command,4606 San Sebastian Ave,SFR,Listing Sold,75,0,NULL,0,NULL,0,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,16978,4606 San Sebastian Ave - Sold - SMS
+2025-10-25,Competition Command,1 Kelton Court,Condo,Listing Sold,75,0,NULL,0,NULL,1,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,16981,1 Kelton Court - Sold - SMS
+2025-10-26,Competition Command,121 Nova Dr,SFR,Listing Sold,75,0,NULL,0,NULL,1,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,16993,121 Nova Dr - Sold - SMS
+2025-10-28,Competition Command,690 Mandana Blvd,SFR,Listing Sold,75,0,NULL,0,NULL,1,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,17017,690 Mandana Blvd - Sold - SMS
+2025-10-29,Competition Command,711 Arimo Ave,SFR,Listing Sold,75,0,NULL,0,NULL,0,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,17030,711 Arimo Ave - Sold - SMS
+2025-10-30,Competition Command,73 Fairview Ave,SFR,Listing Sold,75,0,NULL,0,NULL,2,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,17043,73 Fairview Ave - Sold - SMS
+2025-10-31,Competition Command,1462 Trestle Glen Rd,SFR,Listing Sold,75,0,NULL,0,NULL,1,NULL,0,0,0,0.0000,0.0000,NULL,NULL,NULL,NULL,17059,1462 Trestle Glen Rd - Sold - SMS
