@@ -1,0 +1,57 @@
+Month,Customer_Name,Email,Area_Name,Property_Type,Campaign_Count,Messages_Sent,Messages_Delivered,Success_Rate_Pct,Opt_Outs,Opt_Out_Pct,Initial_Click_Count,CTR_Pct,CTA_Clicked_Submitted,CTA_Verified,Agent_SMS_Notify_Count,Agent_Notify_Twilio_Cost,Total_Twilio_Cost,Cost_Per_Message
+November 2025,Javier Mendez,javier@clocktie.com,Summerlin | 89135,Condo,28,1931,371,19.2%,0,0.0%,29,1.50%,0,0,0,$0.00,$7.2542,$0.0038
+November 2025,Javier Mendez,javier@clocktie.com,Summerlin | 89135,SFR,28,1931,371,19.2%,0,0.0%,29,1.50%,0,0,0,$0.00,$7.2542,$0.0038
+November 2025,Mike Chiesl,caleb@chieslmarelly.com,92028 | Fallbrook,SFR,14,1006,237,23.6%,0,0.0%,47,4.67%,0,0,0,$0.00,$4.9634,$0.0049
+November 2025,Susan Featherly,homesbypeter.susan@gmail.com,Northridge | 91325,SFR,17,1258,198,15.7%,0,0.0%,10,0.79%,0,0,0,$0.00,$4.9302,$0.0039
+November 2025,Susan Featherly,homesbypeter.susan@gmail.com,Northridge | 91325,Condo,17,1258,198,15.7%,0,0.0%,10,0.79%,0,0,0,$0.00,$4.9302,$0.0039
+November 2025,Debbie Gates,homeswithdebbie@yahoo.com,SIMI VALLEY | 93065,SFR,24,1673,180,10.8%,0,0.0%,40,2.39%,0,0,0,$0.00,$4.7310,$0.0028
+November 2025,Debbie Gates,homeswithdebbie@yahoo.com,Thousand Oaks | 91360,SFR,21,1405,205,14.6%,0,0.0%,15,1.07%,0,0,0,$0.00,$4.5816,$0.0033
+November 2025,David Higgins,david@cushrealestate.com,Piedmont | 94611,Condo,27,1740,203,11.7%,0,0.0%,17,0.98%,0,0,0,$0.00,$4.1168,$0.0024
+November 2025,David Higgins,david@cushrealestate.com,Piedmont | 94611,SFR,27,1740,203,11.7%,0,0.0%,17,0.98%,0,0,0,$0.00,$4.1168,$0.0024
+November 2025,Martin Navasartian,martinnavasartian@gmail.com,Tujunga | 91042,SFR,20,1389,174,12.5%,0,0.0%,28,2.02%,0,0,0,$0.00,$4.0504,$0.0029
+November 2025,Javier Mendez,javier@clocktie.com,Centennial Hills | 89149,SFR,21,1473,208,14.1%,0,0.0%,32,2.17%,0,0,0,$0.00,$4.0172,$0.0027
+November 2025,Javier Mendez,javier@clocktie.com,Centennial Hills | 89149,Condo,21,1473,208,14.1%,0,0.0%,32,2.17%,0,0,0,$0.00,$4.0172,$0.0027
+November 2025,Ed Kaminsky,ek@itzsold.com,Manhattan Beach - 90266,Condo,24,1442,142,9.8%,0,0.0%,8,0.55%,0,0,0,$0.00,$3.6852,$0.0026
+November 2025,Ed Kaminsky,ek@itzsold.com,Manhattan Beach - 90266,SFR,24,1442,142,9.8%,0,0.0%,8,0.55%,0,0,0,$0.00,$3.6852,$0.0026
+November 2025,Martin Navasartian,martinnavasartian@gmail.com,La Crescenta | 91214,SFR,16,1118,161,14.4%,0,0.0%,13,1.16%,0,0,0,$0.00,$3.6354,$0.0033
+November 2025,Debbie Gates,homeswithdebbie@yahoo.com,Moorpark | 93021,SFR,21,1553,91,5.9%,0,0.0%,22,1.42%,0,0,0,$0.00,$2.3904,$0.0015
+November 2025,David Higgins,david@cushrealestate.com,Area 9609,SFR,9,637,60,9.4%,0,0.0%,5,0.78%,0,0,0,$0.00,$1.2450,$0.0020
+November 2025,David Higgins,david@cushrealestate.com,Area 9602,Condo,14,931,63,6.8%,0,0.0%,8,0.86%,0,0,0,$0.00,$1.2284,$0.0013
+November 2025,David Higgins,david@cushrealestate.com,Area 9602,SFR,14,931,63,6.8%,0,0.0%,8,0.86%,0,0,0,$0.00,$1.2284,$0.0013
+November 2025,Kerry Ann Sullivan,kerryann@pardeeproperties.com,Venice | 90291,SFR,3,3,2,66.7%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0332,$0.0111
+November 2025,Kerry Ann Sullivan,kerryann@pardeeproperties.com,Venice | 90291,Condo,3,3,2,66.7%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0332,$0.0111
+November 2025,Ed Kaminsky,ek@itzsold.com,Hermosa Beach,SFR,1,1,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0166,$0.0166
+November 2025,Jason Barry,jason@barryestates.com,Del Mar | 92014,SFR,3,3,1,33.3%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0166,$0.0055
+November 2025,Ed Kaminsky,ek@itzsold.com,Hermosa Beach,Condo,1,1,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0166,$0.0166
+November 2025,Ed Kaminsky,ek@itzsold.com,El Segundo | 90245,SFR,1,1,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0166,$0.0166
+November 2025,Ed Kaminsky,ek@itzsold.com,El Segundo | 90245,Condo,1,1,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0166,$0.0166
+November 2025,Jason Barry,jason@barryestates.com,Del Mar | 92014,Condo,3,3,1,33.3%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0166,$0.0055
+November 2025,Pete Middleton Team,andrea@middletonteam.com,La Jolla | 92037,Condo,3,3,1,33.3%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0166,$0.0055
+November 2025,Pete Middleton Team,andrea@middletonteam.com,La Jolla | 92037,SFR,3,3,1,33.3%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0166,$0.0055
+November 2025,Morganne Juarez,morganne.juarez@exprealty.com,Area 8750,SFR,1,1,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Mike Chiesl,caleb@chieslmarelly.com,Area 8844,SFR,3,221,0,0.0%,0,0.0%,6,2.71%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Ryan Rodenbeck,ryan@spyglassrealty.com,Area 16901,Condo,1,1,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Ryan Rodenbeck,ryan@spyglassrealty.com,Austin | 78701,Condo,2,2,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Mike Blair,mike@mikeblairrealty.com,Area 8898,SFR,3,3,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Mike Blair,mike@mikeblairrealty.com,Area 8826,SFR,2,2,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Mike Blair,mike@mikeblairrealty.com,Area 8826,Condo,2,2,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Meline Khacheryan,info@mkrealtyla.com,Porter Ranch | 91326,SFR,1,1,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Meline Khacheryan,info@mkrealtyla.com,Porter Ranch | 91326,Condo,1,1,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Ryan Rodenbeck,ryan@spyglassrealty.com,Area 16901,SFR,1,1,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Anthony Marguleas,anthony@amalfiestates.com,Area 8591,Condo,1,1,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Jim Fisher,jim@welcometovero.com,Ft Pierce | 34951,SFR,1,72,0,0.0%,0,0.0%,1,1.39%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Jim Fisher,jim@welcometovero.com,Ft Pierce | 34951,Condo,1,72,0,0.0%,0,0.0%,1,1.39%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Jeff Russell,info@russellrealtygrp.com,Huntington Beach | 92648,SFR,1,1,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Jeff Russell,info@russellrealtygrp.com,Huntington Beach | 92648,Condo,1,1,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Jeff Russell,info@russellrealtygrp.com,Area 9101,SFR,1,1,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Jeff Russell,info@russellrealtygrp.com,Area 9101,Condo,1,1,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Anthony Marguleas,anthony@amalfiestates.com,Area 8591,SFR,1,1,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Jason Barry,jason@barryestates.com,Area 8912,SFR,2,2,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Jason Barry,jason@barryestates.com,Area 8912,Condo,2,2,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Gary Massa,Gary@MassaRealEstateGroup.com,Encinitas | 92024,SFR,1,1,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Gary Massa,Gary@MassaRealEstateGroup.com,Encinitas | 92024,Condo,1,1,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Dana and Jeff Frontgate,danaandjeff@frontgaterealestate.com,Calabasas | 91302,SFR,1,1,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Chris Heller,chris.heller@hellerthehomeseller.com,Oceanside | 92054,SFR,2,2,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Chris Heller,chris.heller@hellerthehomeseller.com,Oceanside | 92054,Condo,2,2,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,Carole Geronsin,Marketing@TheGeronsins.com,Area 9166,SFR,3,225,0,0.0%,0,0.0%,7,3.11%,0,0,0,$0.00,$0.0000,$0.0000
+November 2025,The Dave Walter Team,max@494dave.com,Area 8735,SFR,1,1,0,0.0%,0,0.0%,0,0.00%,0,0,0,$0.00,$0.0000,$0.0000
