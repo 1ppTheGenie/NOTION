@@ -1,0 +1,16 @@
+Month,Customer_Name,Area_Name,Campaigns,Msgs_Sent,Delivered,Success%,Clicks,CTR%,CTA_Submitted,CTA_Verified,Agent_Notify,Agent_Notify_Cost,Opt_Outs,Opt_Out%,Twilio_Cost,Cost_Method
+October 2025,David Higgins,94602,42,1500,1444,96.3%,0,0.0%,0,0,0,$0.00,0,0.0%,$18.09,Invoice
+October 2025,David Higgins,94610,28,975,917,94.1%,0,0.0%,0,0,0,$0.00,0,0.0%,$11.76,Invoice
+October 2025,David Higgins,94611,84,3000,2846,94.9%,0,0.0%,0,0,0,$0.00,0,0.0%,$36.18,Invoice
+October 2025,Debbie Gates,91360,31,1125,1087,96.6%,0,0.0%,0,0,0,$0.00,0,0.0%,$13.57,Invoice
+October 2025,Debbie Gates,93021,34,1200,1111,92.6%,0,0.0%,0,0,0,$0.00,0,0.0%,$14.47,Invoice
+October 2025,Debbie Gates,93065,50,1875,1778,94.8%,0,0.0%,0,0,0,$0.00,0,0.0%,$22.61,Invoice
+October 2025,Ed Kaminsky,90266,78,2700,2282,84.5%,0,0.0%,0,0,0,$0.00,0,0.0%,$32.56,Invoice
+October 2025,Javier Mendez,89135,128,4950,4392,88.7%,0,0.0%,0,0,0,$0.00,0,0.0%,$59.70,Invoice
+October 2025,Javier Mendez,89149,52,2850,2834,99.4%,0,0.0%,0,0,0,$0.00,0,0.0%,$34.37,Invoice
+October 2025,Martin Navasartian,91042,19,900,872,96.9%,0,0.0%,0,0,0,$0.00,0,0.0%,$10.85,Invoice
+October 2025,Martin Navasartian,91214,28,1050,1011,96.3%,0,0.0%,0,0,0,$0.00,0,0.0%,$12.66,Invoice
+October 2025,Meline Khacheryan,91326,66,2400,2306,96.1%,0,0.0%,0,0,0,$0.00,0,0.0%,$28.95,Invoice
+October 2025,Mike Chiesl,92028,22,900,871,96.8%,0,0.0%,0,0,0,$0.00,0,0.0%,$10.85,Invoice
+October 2025,Susan Featherly,91325,30,1125,1073,95.4%,0,0.0%,0,0,0,$0.00,0,0.0%,$13.57,Invoice
+October 2025,TOTAL,,692,26550,24824,93.5%,0,0.0%,0,0,0,$0.00,0,0.0%,$320.22,Invoice
