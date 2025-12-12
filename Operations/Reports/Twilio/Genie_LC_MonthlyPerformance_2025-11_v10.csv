@@ -1,0 +1,22 @@
+Order_ID,Customer_Name,MLS_Number,Property_Address,Order_Status_Count,Execution_Status,Order_Date,Execution_Date,Channel,Channel_Target,Msgs_Sent,Clicks,CTR_Pct,CTA_Submitted,CTA_Verified,Opt_Outs,Opt_Out_Pct,Revenue_Charged,Twilio_Cost,Profit,Profit_Pct
+1162,Adam Schechter,SR25223448,"637 Cayo Grande Court, Newbury Park, CA 91320",3,Sold,09-24-2025,11-06-2025,SMS,200,200,6,3.0%,0,0,0,0.00%,$100.00,$3.64,$96.36,96.4%
+1214,Colleen Gamble,V1-33169,"485 Raindance Street, Thousand Oaks, CA 91360",2,Pending,11-07-2025,11-08-2025,SMS,200,200,5,2.5%,3,2,1,0.50%,$100.00,$3.64,$96.36,96.4%
+1220,David Higgins,41116549,"786 Trestle Glen Road, Oakland, CA 94610",1,Active,11-18-2025,11-18-2025,SMS,150,150,2,1.3%,0,0,0,0.00%,$75.00,$2.73,$72.27,96.4%
+1201,Emilio Plascencia,SR25238011,"7428 Bothwell Rd, Reseda, CA 91335",3,Pending,10-15-2025,11-01-2025,SMS,200,200,0,0.0%,0,0,0,0.00%,$100.00,$3.64,$96.36,96.4%
+1155,Emilio Plascencia,SR25214340,"23001 Yodel Dr, Tehachapi, CA 93561",3,Sold,09-24-2025,11-14-2025,SMS,250,0,0,0.0%,0,0,0,0.00%,$125.00,$0.00,$125.00,100.0%
+1158,Emilio Plascencia,SR25214340,"23001 Yodel Dr, Tehachapi, CA 93561",3,Sold,09-24-2025,11-14-2025,SMS,250,0,0,0.0%,0,0,0,0.00%,$125.00,$0.00,$125.00,100.0%
+1213,Gracee Lybbert,250043061,"14224 Harrow Place, Poway, CA 92064",1,Active,11-06-2025,11-07-2025,SMS,150,150,4,2.7%,0,0,0,0.00%,$75.00,$2.73,$72.27,96.4%
+1224,Javier Mendez,2721731,"10113 15th, Greeley, CO 80634",1,Pending,11-21-2025,11-21-2025,SMS,150,150,3,2.0%,0,0,0,0.00%,$75.00,$2.73,$72.27,96.4%
+1225,Javier Mendez,2691402,"4317 Velvet Ridge Court, Las Vegas, NV 89129",1,Active,11-21-2025,11-22-2025,SMS,150,150,7,4.7%,0,0,0,0.00%,$75.00,$2.73,$72.27,96.4%
+1222,Mark Smith,V1-33169,"485 Raindance Street, Thousand Oaks, CA 91360",1,Pending,11-19-2025,11-19-2025,SMS,150,200,5,2.5%,3,2,1,0.50%,$75.00,$3.64,$71.36,95.1%
+1226,Michelle Price,225004817,"1596 Castleview Court, Westlake Village, CA 91361",1,Sold,11-24-2025,11-25-2025,SMS,200,200,1,0.5%,0,0,0,0.00%,$100.00,$3.64,$96.36,96.4%
+1227,Michelle Price,225004611,"1076 Calle Contento, Thousand Oaks, CA 91360",1,Sold,11-24-2025,11-25-2025,SMS,200,200,1,0.5%,0,0,0,0.00%,$100.00,$3.64,$96.36,96.4%
+1228,Michelle Price,225002624,"6919 Castle Peak Drive, West Hills, CA 91307",1,Sold,11-24-2025,11-25-2025,SMS,200,200,4,2.0%,1,0,0,0.00%,$100.00,$3.64,$96.36,96.4%
+1229,Michelle Price,225000910,"2069 Channelford Road, Westlake Village, CA 91361",1,Sold,11-24-2025,11-25-2025,SMS,100,100,1,1.0%,0,0,0,0.00%,$50.00,$1.82,$48.18,96.4%
+1219,Mike Chiesl,250044151,"4141 Palomar Drive, Fallbrook, CA 92028",1,Active,11-18-2025,11-18-2025,SMS,100,100,4,4.0%,0,0,0,0.00%,$50.00,$1.82,$48.18,96.4%
+1234,Oscar Tortola,IG25234571,"27089 Adelanto Drive, Corona, CA 92883",1,Sold,11-29-2025,11-30-2025,Facebook,600,0,0,0.0%,0,0,0,0.00%,$150.00,$0.00,$150.00,100.0%
+1234,Oscar Tortola,IG25234571,"27089 Adelanto Drive, Corona, CA 92883",1,Sold,11-29-2025,11-30-2025,SMS,350,350,9,2.6%,1,1,0,0.00%,$175.00,$6.37,$168.63,96.4%
+1221,Rob Alvidrez,225005581,"3305 Henry Drive, Newbury Park, CA 91320",1,Active,11-18-2025,11-19-2025,SMS,200,200,13,6.5%,0,0,0,0.00%,$100.00,$3.64,$96.36,96.4%
+1208,Sean Corritori,225005117,"4506 N Canyonlands Road, Moorpark, CA 93021",2,Sold,10-22-2025,11-08-2025,SMS,150,150,3,2.0%,1,1,0,0.00%,$75.00,$2.73,$72.27,96.4%
+1231,Shirese Spaniol,225005754,"2190 Westshore Lane, Westlake Village, CA 91361",3,Active,11-29-2025,11-29-2025,SMS,150,150,2,1.3%,0,0,0,0.00%,$75.00,$2.73,$72.27,96.4%
+1212,Stephen Patronete,225005494,"3037 Klamath Avenue, Simi Valley, CA 93063",1,Active,11-06-2025,11-06-2025,SMS,200,200,7,3.5%,1,0,0,0.00%,$100.00,$3.64,$96.36,96.4%
