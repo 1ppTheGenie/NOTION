@@ -1,0 +1,16 @@
+Category,Description,Messages,Rate,Est_Cost
+TWILIO INVOICE RECONCILIATION - November 2025,,,,
+Invoice Total: $722.88,,,,
+,,,,
+PHONE NUMBERS,22 numbers @ $1.15/mo,22,1.15,25.299999999999997
+OUTBOUND SMS,,,,
+  Competition Command,FarmCast notifications,18064,0.0166,449.79359999999997
+  Listing Command,LC notifications,2991,0.0166,74.4759
+  Neighborhood Command,NC notifications,440,0.0166,10.956
+  Lead Notifications,NewLead alerts,616,0.0166,10.2256
+  Other SMS,Misc notifications,29,0.0166,0.4814
+INBOUND SMS,Received replies,84,0.0075,0.63
+,,,,
+TOTAL ESTIMATED,Segment multiplier: 1.50x,22140,,571.8625
+INVOICE TOTAL,,,,722.88
+GAP (Unexplained),20.9% of invoice,,,151.01750000000004
