@@ -1,19 +1,19 @@
-CKEditor SCAYT Plugin
-=====================
+CKEditor WebSpellChecker Plugin
+===============================
 
-This plugin brings Spell Check As You Type (SCAYT) into up to CKEditor 4+.
+This plugin brings Web Spell Checker (WSC) into CKEditor.
 
-SCAYT is a "installation-less", using the web-services of [WebSpellChecker.net](http://www.webspellchecker.net/). It's an out of the box solution.
+WSC is "installation-less", using the web-services of [WebSpellChecker.net](http://www.webspellchecker.net/). It's an out of the box solution.
 
 Installation
 ------------
 
-1. Clone/copy this repository contents in a new "plugins/scayt" folder in your CKEditor installation.
-2. Enable the "scayt" plugin in the CKEditor configuration file (config.js):
+1. Clone/copy this repository contents in a new "plugins/wsc" folder in your CKEditor installation.
+2. Enable the "wsc" plugin in the CKEditor configuration file (config.js):
 
-        config.extraPlugins = 'scayt';
+        config.extraPlugins = 'wsc';
 
-That's all. SCAYT will appear on the editor toolbar and will be ready to use.
+That's all. WSC will appear on the editor toolbar and will be ready to use.
 
 License
 -------
