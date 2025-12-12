@@ -1,0 +1,15 @@
+Month,Customer_Name,Area_Name,Campaigns,Msgs_Sent,Delivered,Success%,Clicks,CTR%,CTA_Submitted,CTA_Verified,Agent_Notify,Agent_Notify_Cost,Opt_Outs,Opt_Out%,Twilio_Cost
+October 2025,David Higgins,Montclair 94609,13,975,195,20.0%,11,1.13%,3,1,0,$0.00,4,0.41%,$3.25
+October 2025,David Higgins,Oakland 94602,10,750,150,20.0%,9,1.20%,0,0,0,$0.00,1,0.13%,$2.50
+October 2025,David Higgins,Piedmont   94611,20,1500,300,20.0%,19,1.27%,0,0,0,$0.00,2,0.13%,$5.00
+October 2025,Debbie Gates,93065   Simi Valley,25,1875,375,20.0%,40,2.13%,3,1,0,$0.00,2,0.11%,$6.25
+October 2025,Debbie Gates,Moorpark All,16,1200,240,20.0%,16,1.33%,2,1,0,$0.00,1,0.08%,$4.00
+October 2025,Debbie Gates,Thousand Oaks   91360,15,1125,225,20.0%,18,1.60%,1,0,0,$0.00,1,0.09%,$3.75
+October 2025,Ed Kaminsky,Manhattan Beach,18,1350,270,20.0%,7,0.52%,0,0,0,$0.00,2,0.15%,$4.50
+October 2025,Javier Mendez,Centennial Hills   89149,19,1425,285,20.0%,21,1.47%,4,2,0,$0.00,2,0.14%,$4.75
+October 2025,Javier Mendez,Summerlin   89135,33,2475,495,20.0%,39,1.58%,8,1,0,$0.00,5,0.20%,$8.25
+October 2025,Martin Navasartian,La Crescenta   91214,14,1050,210,20.0%,12,1.14%,1,1,0,$0.00,1,0.10%,$3.50
+October 2025,Martin Navasartian,Tujunga   91042,12,900,180,20.0%,25,2.78%,1,1,0,$0.00,0,0.00%,$3.00
+October 2025,Meline Khacheryan,91326   Porter Ranch,16,1200,240,20.0%,13,1.08%,2,1,0,$0.00,2,0.17%,$4.00
+October 2025,Mike Chiesl,92028   Fallbrook,12,900,180,20.0%,36,4.00%,0,0,0,$0.00,0,0.00%,$3.00
+October 2025,Susan Featherly,91325   Northridge,15,1125,225,20.0%,15,1.33%,2,1,0,$0.00,3,0.27%,$3.75
