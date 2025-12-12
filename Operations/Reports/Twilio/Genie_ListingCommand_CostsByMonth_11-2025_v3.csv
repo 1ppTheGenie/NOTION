@@ -1,0 +1,20 @@
+Month,Customer_Name,Property_Address,MLS_Number,Channel,Date_Campaign_Sent,SMS_Sent,Delivered,Success%,Clicks,CTR%,CTA_Submitted,CTA_Verified,Opt_Outs,Opt_Out%,Revenue_Charged,Twilio_Cost,Profit
+November 2025,Adam Schechter,"637 Cayo Grande Court, Newbury Park, CA 91320",SR25223448,SMS(200),2025-11-06,200,195,97.5%,42,21.00%,0,0,0,0.00%,$100.00,$3.41,$96.59
+November 2025,Colleen Gamble,"485 Raindance Street, Thousand Oaks, CA 91360",V1-33169,SMS(150),2025-11-08,200,197,98.5%,47,23.50%,3,2,1,0.50%,$75.00,$3.41,$71.59
+November 2025,David Higgins,"786 Trestle Glen Road, Oakland, CA 94610",41116549,SMS(150),2025-11-18,150,145,96.7%,18,12.00%,0,0,0,0.00%,$75.00,$2.56,$72.44
+November 2025,Emilio Plascencia,"7428 Bothwell Rd, Reseda, CA 91335",SR25238011,SMS(200),2025-11-01,200,196,98.0%,21,10.50%,0,0,0,0.00%,$100.00,$3.41,$96.59
+November 2025,Gracee Lybbert,"14224 Harrow Place, Poway, CA 92064",250043061,SMS(150),2025-11-07,150,149,99.3%,27,18.00%,0,0,0,0.00%,$75.00,$2.56,$72.44
+November 2025,Javier Mendez,"10325 Jade Point Drive, Las Vegas, NV 89135",2721731,SMS(150),2025-11-21,150,149,99.3%,20,13.33%,0,0,0,0.00%,$75.00,$2.56,$72.44
+November 2025,Javier Mendez,"4317 Velvet Ridge Court, Las Vegas, NV 89129",2691402,SMS(150),2025-11-22,150,150,100.0%,40,26.67%,0,0,0,0.00%,$75.00,$2.56,$72.44
+November 2025,Mark Smith,"485 Raindance Street, Thousand Oaks, CA 91360",V1-33169,SMS(150),2025-11-08,200,197,98.5%,47,23.50%,3,2,1,0.50%,$75.00,$3.41,$71.59
+November 2025,Michelle Price,"2069 Channelford Road, Westlake Village, CA 91361",225000910,SMS(100),2025-11-25,100,98,98.0%,16,16.00%,0,0,0,0.00%,$50.00,$1.70,$48.30
+November 2025,Michelle Price,"6919 Castle Peak Drive, West Hills, CA 91307",225002624,SMS(200),2025-11-25,200,198,99.0%,46,23.00%,1,0,0,0.00%,$100.00,$3.41,$96.59
+November 2025,Michelle Price,"1076 Calle Contento, Thousand Oaks, CA 91360",225004611,SMS(200),2025-11-25,200,187,93.5%,19,9.50%,0,0,0,0.00%,$100.00,$3.41,$96.59
+November 2025,Michelle Price,"1596 Castleview Court, Westlake Village, CA 91361",225004817,SMS(200),2025-11-25,200,174,87.0%,25,12.50%,0,0,0,0.00%,$100.00,$3.41,$96.59
+November 2025,Mike Chiesl,"4141 Palomar Drive, Fallbrook, CA 92028",250044151,SMS(100),2025-11-18,100,100,100.0%,25,25.00%,0,0,0,0.00%,$50.00,$1.70,$48.30
+November 2025,Oscar Tortola,"27089 Adelanto Drive, Corona, CA 92883",IG25234571,SMS(350) + FB(600),2025-11-30,350,348,99.4%,86,24.57%,1,1,0,0.00%,$325.00,$5.96,$319.04
+November 2025,Rob Alvidrez,"3305 Henry Drive, Newbury Park, CA 91320",225005581,SMS(200),2025-11-19,200,197,98.5%,62,31.00%,0,0,0,0.00%,$100.00,$3.41,$96.59
+November 2025,Sean Corritori,"4506 N Canyonlands Road, Moorpark, CA 93021",225005117,SMS(150),2025-11-08,150,145,96.7%,23,15.33%,1,1,0,0.00%,$75.00,$2.56,$72.44
+November 2025,Shirese Spaniol,"2190 Westshore Lane, Westlake Village, CA 91361",225005754,SMS(150),2025-11-29,150,146,97.3%,22,14.67%,0,0,0,0.00%,$75.00,$2.56,$72.44
+November 2025,Stephen Patronete,"3037 Klamath Avenue, Simi Valley, CA 93063",225005494,SMS(200),2025-11-06,200,194,97.0%,40,20.00%,1,0,0,0.00%,$100.00,$3.41,$96.59
+November 2025,TOTAL,,,ALL,,3250,3165,97.4%,626,19.26%,10,6,2,0.06%,$1725.00,$55.37,$1669.63
