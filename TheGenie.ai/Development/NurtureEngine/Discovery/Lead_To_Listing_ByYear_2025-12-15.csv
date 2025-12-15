@@ -1,0 +1,2 @@
+Msg 8115, Level 16, State 2, Server SERVER-MSSQL1, Line 5
+Arithmetic overflow error converting expression to data type int.

@@ -1,0 +1,14 @@
+ListingYear,LeadSource,CTAStage,CTAType,GenieAgent,City,WON,LOST,Total
+-----------,----------,--------,-------,----------,----,---,----,-----
+2025,ExternalApiSMS,CTA_VIEWED,Cta5Display,Jason Barry,RANCHO SANTA FE,4,62,66
+2025,ExternalApiSMS,CTA_VIEWED,Cta8Display,David Higgins,OAKLAND,3,132,135
+2025,ExternalApiSMS,CTA_SUBMITTED,Cta8Accept,David Higgins,OAKLAND,3,40,43
+2025,ExternalApiSMS,CTA_VIEWED,Cta4Display,David Higgins,OAKLAND,3,156,159
+2025,ExternalApiSMS,CTA_SUBMITTED,Cta10Accept,Nicole Dibble,LA QUINTA,2,2,4
+2025,ExternalApiSMS,CTA_SUBMITTED,Cta9Accept,Chris Heller,CARLSBAD,2,0,2
+2025,ExternalApiSMS,CTA_VERIFIED,CtaContactVerfied,Nicole Dibble,LA QUINTA,2,2,4
+2025,ExternalApiSMS,CTA_VIEWED,Cta10Display,Nicole Dibble,LA QUINTA,2,2,4
+2025,ExternalApiSMS,CTA_VIEWED,Cta9Display,Chris Heller,CARLSBAD,2,44,46
+2025,ExternalApiSMS,CTA_VIEWED,Cta7Display,Guillermo Altamirano,LAKE ELSINORE,2,3,5
+2024,ExternalApiSMS,CTA_VIEWED,Cta6Display,Guillermo Altamirano,LAKE ELSINORE,12,0,12
+2024,ExternalApiSMS,CTA_VIEWED,Cta9Display,David Higgins,OAKLAND,3,0,3
