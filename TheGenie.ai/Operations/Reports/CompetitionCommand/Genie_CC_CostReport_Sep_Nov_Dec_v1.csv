@@ -1,0 +1,2 @@
+Msg 207, Level 16, State 1, Server SERVER-MSSQL1, Line 43
+Invalid column name 'AspNetUserId'.

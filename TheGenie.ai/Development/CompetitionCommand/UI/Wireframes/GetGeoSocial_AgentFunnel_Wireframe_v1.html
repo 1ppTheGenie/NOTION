@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GetGeoSocial - Dominate Your Market</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        :root {
+            --gold: #d4af37;
+            --gold-light: #f4e4bc;
+            --black: #0a0a0a;
+            --dark: #1a1a1a;
+            --white: #ffffff;
+            --gray: #888888;
+            --success: #22c55e;
+            --danger: #ef4444;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .header {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .logo {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo span { color: var(--white); }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover { color: var(--gold); }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 80px;
+            background: 
+                radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
+                linear-gradient(180deg, var(--black) 0%, var(--dark) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L35 25H55L39 37L45 57L30 45L15 57L21 37L5 25H25L30 5Z' fill='%23d4af37' fill-opacity='0.03'/%3E%3C/svg%3E");
+        }
+        
+        .hero-content {
+            position: relative;
+            max-width: 900px;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5em;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, var(--white) 0%, var(--gold-light) 50%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.3em;
+            color: #aaa;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 40px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+        }
+        
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold) 0%, #b8962e 100%);
+            color: var(--black);
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.3);
+        }
+        
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(212, 175, 55, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+        }
+        
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+        
+        /* Wireframe Note */
+        .wireframe-note {
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px dashed var(--gold);
+            border-radius: 12px;
+            padding: 15px 25px;
+            margin: 20px auto;
+            max-width: 900px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .wireframe-note strong { color: var(--gold); }
+        
+        /* Video Section */
+        .video-section {
+            padding: 80px 20px;
+            background: var(--dark);
+            text-align: center;
+        }
+        
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .video-placeholder {
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            margin-bottom: 30px;
+        }
+        
+        .play-btn {
+            width: 80px;
+            height: 80px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            cursor: pointer;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.4);
+            margin-bottom: 20px;
+        }
+        
+        .video-section p {
+            color: #888;
+            font-size: 1.1em;
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 100px 20px;
+            background: var(--black);
+        }
+        
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: var(--gold);
+        }
+        
+        .section-header p {
+            color: #888;
+            font-size: 1.1em;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background: var(--dark);
+            border-radius: 16px;
+            padding: 35px;
+            border: 1px solid #333;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: var(--white);
+        }
+        
+        .feature-card p {
+            color: #888;
+            font-size: 0.95em;
+        }
+        
+        /* Exclusivity Section */
+        .exclusivity-section {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, var(--dark) 100%);
+            text-align: center;
+        }
+        
+        .exclusivity-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .exclusivity-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--black);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9em;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+        
+        .exclusivity-section h2 {
+            font-size: 2.8em;
+            margin-bottom: 20px;
+        }
+        
+        .exclusivity-section p {
+            color: #aaa;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        
+        .lock-feature {
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-align: left;
+        }
+        
+        .lock-icon {
+            font-size: 3em;
+        }
+        
+        .lock-feature h3 {
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+        
+        /* Multi-Step Form Section */
+        .form-section {
+            padding: 100px 20px;
+            background: var(--black);
+        }
+        
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--dark);
+            border-radius: 20px;
+            padding: 50px;
+            border: 1px solid #333;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .form-header h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .form-header p {
+            color: #888;
+        }
+        
+        /* Progress Steps */
+        .progress-steps {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .step-number {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9em;
+        }
+        
+        .step.active .step-number {
+            background: var(--gold);
+            color: var(--black);
+        }
+        
+        .step.completed .step-number {
+            background: var(--success);
+            color: var(--white);
+        }
+        
+        .step.inactive .step-number {
+            background: #333;
+            color: #666;
+        }
+        
+        .step-label {
+            font-size: 0.85em;
+            color: #888;
+        }
+        
+        .step.active .step-label { color: var(--gold); }
+        
+        .step-connector {
+            width: 40px;
+            height: 2px;
+            background: #333;
+        }
+        
+        /* Form Steps Content */
+        .form-step { display: none; }
+        .form-step.active { display: block; }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #ccc;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 16px 20px;
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 10px;
+            color: var(--white);
+            font-size: 1.1em;
+            transition: border-color 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        
+        .form-input::placeholder {
+            color: #555;
+        }
+        
+        .zip-inputs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .btn-form {
+            width: 100%;
+            padding: 18px;
+            font-size: 1.1em;
+        }
+        
+        /* Availability Result */
+        .availability-result {
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .availability-result.available {
+            display: block;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid var(--success);
+        }
+        
+        .availability-result.unavailable {
+            display: block;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--danger);
+        }
+        
+        .availability-result h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .availability-result.available h3 { color: var(--success); }
+        .availability-result.unavailable h3 { color: var(--danger); }
+        
+        /* Zoom Scheduler */
+        .scheduler-section {
+            padding: 100px 20px;
+            background: var(--dark);
+            text-align: center;
+        }
+        
+        .scheduler-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .scheduler-header {
+            margin-bottom: 40px;
+        }
+        
+        .scheduler-header h2 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            color: var(--gold);
+        }
+        
+        .calendar-placeholder {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid #333;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .calendar-day {
+            padding: 15px 10px;
+            background: #222;
+            border-radius: 8px;
+            font-size: 0.9em;
+        }
+        
+        .calendar-day.available {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold);
+            cursor: pointer;
+        }
+        
+        .calendar-day.available:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+        
+        .calendar-day.header {
+            background: transparent;
+            color: #888;
+            font-weight: 600;
+        }
+        
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        
+        .time-slot {
+            padding: 12px;
+            background: #222;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        
+        .time-slot:hover {
+            border-color: var(--gold);
+        }
+        
+        /* Testimonials */
+        .testimonials-section {
+            padding: 100px 20px;
+            background: var(--black);
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            background: var(--dark);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid #333;
+        }
+        
+        .testimonial-quote {
+            font-style: italic;
+            color: #ccc;
+            margin-bottom: 20px;
+            font-size: 1.05em;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-photo {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--gold) 0%, #b8962e 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--black);
+        }
+        
+        .author-name {
+            font-weight: 600;
+        }
+        
+        .author-title {
+            color: #888;
+            font-size: 0.85em;
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 40px 20px;
+            background: #0a0a0a;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+        
+        .footer-logo {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+        
+        .footer p {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+        
+        .footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            🧞 Get<span>GeoSocial</span>
+        </div>
+        <nav class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#check">Check Availability</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">🔒 EXCLUSIVE • LIMITED AVAILABILITY</div>
+            <h1>Dominate Your Market with GeoSocial Targeting</h1>
+            <p>Revolutionary technology to engage and build trust with homeowners by neighborhood. Only ONE agent per zip code.</p>
+            <a href="#check" class="btn btn-gold">
+                🔍 Check Your Zip Code Availability
+            </a>
+        </div>
+    </section>
+
+    <!-- Wireframe Note -->
+    <div class="wireframe-note">
+        <span style="font-size:1.5em;">📐</span>
+        <div>
+            <strong>GETGEOSOCIAL AGENT FUNNEL WIREFRAME v1</strong> - 
+            Based on your original blueprint. This is the B2B funnel to acquire real estate agents. 
+            Multi-step form → Check zip → Lock for 48hrs → Book Zoom.
+        </div>
+    </div>
+
+    <!-- Video Section -->
+    <section class="video-section">
+        <div class="video-container">
+            <div class="video-placeholder">
+                <div class="play-btn">▶</div>
+                <span style="color:#888;">Animation Walkthrough</span>
+            </div>
+            <p>Watch how our innovative technology brings your message directly to homeowners' devices.</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="section-header">
+            <h2>GeoSocial Audience Technology</h2>
+            <p>Unlock the Power of Neighborhood-Level Engagement</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Targeted Reach</h3>
+                <p>Engage homeowners directly on Facebook & Instagram with pinpoint accuracy by neighborhood.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>Advanced AI Algorithms</h3>
+                <p>Leveraging TheGenie.ai and ListMiner for precise targeting and optimized audiences.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3>Comprehensive Audience</h3>
+                <p>Reach all titleholders in each household, not just random demographics.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💎</div>
+                <h3>Exclusive Territory</h3>
+                <p>Only ONE agent per zip code. Lock your territory before competitors do.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exclusivity Section -->
+    <section class="exclusivity-section">
+        <div class="exclusivity-content">
+            <div class="exclusivity-badge">⚡ LIMITED AVAILABILITY</div>
+            <h2>Lock Your Zip Code for 48 Hours</h2>
+            <p>As we introduce this breakthrough solution, we're releasing a limited number of zip codes where only one agent will have access. Claim yours before they're gone.</p>
+            
+            <div class="lock-feature">
+                <div class="lock-icon">🔐</div>
+                <div>
+                    <h3>No Obligation Lock</h3>
+                    <p>Book a Zoom call and lock your zip code for 48 hours. Decide during the meeting if you want to move forward.</p>
+                </div>
+            </div>
+            
+            <a href="#check" class="btn btn-gold">Secure Your Zip Code →</a>
+        </div>
+    </section>
+
+    <!-- Multi-Step Form Section -->
+    <section id="check" class="form-section">
+        <div class="form-container">
+            <div class="form-header">
+                <h2>Check Availability</h2>
+                <p>Enter your zip code(s) to see if they're available</p>
+            </div>
+
+            <!-- Progress Steps -->
+            <div class="progress-steps">
+                <div class="step active" id="progress-1">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Zip Code</div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step inactive" id="progress-2">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Your Info</div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step inactive" id="progress-3">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Schedule</div>
+                </div>
+            </div>
+
+            <!-- Step 1: Zip Code Check -->
+            <div class="form-step active" id="step-1">
+                <div class="form-group">
+                    <label class="form-label">Enter up to 3 Zip Codes</label>
+                    <div class="zip-inputs">
+                        <input type="text" class="form-input" placeholder="Zip 1" maxlength="5" value="34786">
+                        <input type="text" class="form-input" placeholder="Zip 2" maxlength="5">
+                        <input type="text" class="form-input" placeholder="Zip 3" maxlength="5">
+                    </div>
+                </div>
+                
+                <button class="btn btn-gold btn-form" onclick="checkAvailability()">
+                    Check Availability →
+                </button>
+
+                <!-- Availability Results -->
+                <div class="availability-result available" id="result-available">
+                    <h3>✅ Great News! 34786 is AVAILABLE</h3>
+                    <p>This zip code is open for exclusive ownership. Continue to lock it for 48 hours.</p>
+                </div>
+
+                <div class="availability-result unavailable" id="result-unavailable" style="display:none;">
+                    <h3>❌ Sorry, 90210 is TAKEN</h3>
+                    <p>Another agent owns this territory. Would you like to join the waitlist?</p>
+                    <button class="btn btn-outline" style="margin-top:15px;">Join Waitlist</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Personal Information -->
+            <div class="form-step" id="step-2">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">First Name</label>
+                        <input type="text" class="form-input" placeholder="John">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Last Name</label>
+                        <input type="text" class="form-input" placeholder="Smith">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" placeholder="john@realty.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" class="form-input" placeholder="(555) 123-4567">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Brokerage / Agency</label>
+                    <input type="text" class="form-input" placeholder="ABC Realty">
+                </div>
+                
+                <button class="btn btn-gold btn-form" onclick="goToStep(3)">
+                    Continue to Scheduling →
+                </button>
+            </div>
+
+            <!-- Step 3: Zoom Scheduler -->
+            <div class="form-step" id="step-3">
+                <div style="text-align:center; margin-bottom:30px;">
+                    <h3 style="color:var(--gold); margin-bottom:10px;">🔐 34786 Locked for 48 Hours!</h3>
+                    <p style="color:#888;">Choose a time for your personal consultation</p>
+                </div>
+
+                <div class="calendar-placeholder">
+                    <div style="margin-bottom:20px; text-align:left;">
+                        <strong style="color:var(--gold);">December 2025</strong>
+                    </div>
+                    <div class="calendar-grid">
+                        <div class="calendar-day header">Sun</div>
+                        <div class="calendar-day header">Mon</div>
+                        <div class="calendar-day header">Tue</div>
+                        <div class="calendar-day header">Wed</div>
+                        <div class="calendar-day header">Thu</div>
+                        <div class="calendar-day header">Fri</div>
+                        <div class="calendar-day header">Sat</div>
+                        <div class="calendar-day">14</div>
+                        <div class="calendar-day">15</div>
+                        <div class="calendar-day available">16</div>
+                        <div class="calendar-day available">17</div>
+                        <div class="calendar-day available">18</div>
+                        <div class="calendar-day available">19</div>
+                        <div class="calendar-day">20</div>
+                    </div>
+                    
+                    <div style="margin-bottom:15px; text-align:left;">
+                        <strong style="color:#888;">Available Times for Dec 17</strong>
+                    </div>
+                    <div class="time-slots">
+                        <div class="time-slot">9:00 AM</div>
+                        <div class="time-slot">10:00 AM</div>
+                        <div class="time-slot">11:00 AM</div>
+                        <div class="time-slot">1:00 PM</div>
+                        <div class="time-slot">2:00 PM</div>
+                        <div class="time-slot">3:00 PM</div>
+                    </div>
+                </div>
+
+                <button class="btn btn-gold btn-form" style="margin-top:30px;" onclick="bookZoom()">
+                    📅 Confirm Zoom Meeting
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="section-header">
+            <h2>What Our Clients Say</h2>
+            <p>Real results from top real estate professionals</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-quote">"GeoSocial targeting changed my business. I'm now the go-to agent in my zip code."</p>
+                <div class="testimonial-author">
+                    <div class="author-photo">GG</div>
+                    <div>
+                        <div class="author-name">Gary Gold</div>
+                        <div class="author-title">Luxury Real Estate Specialist</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-quote">"The exclusivity model means I don't compete with other agents using the same tools."</p>
+                <div class="testimonial-author">
+                    <div class="author-photo">SS</div>
+                    <div>
+                        <div class="author-name">Simon Simaan</div>
+                        <div class="author-title">Ocoee Market Expert</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-quote">"Paisley AI helps me create content that resonates with homeowners in my territory."</p>
+                <div class="testimonial-author">
+                    <div class="author-photo">EK</div>
+                    <div>
+                        <div class="author-name">Ed Kaminsky</div>
+                        <div class="author-title">Beach Cities Agent</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section style="padding:100px 20px; background:linear-gradient(135deg, var(--gold) 0%, #b8962e 100%); text-align:center;">
+        <h2 style="font-size:2.5em; margin-bottom:20px; color:var(--black);">Ready to Dominate Your Market?</h2>
+        <p style="font-size:1.2em; color:rgba(0,0,0,0.7); margin-bottom:30px; max-width:600px; margin-left:auto; margin-right:auto;">
+            Lock your zip code today before a competitor does. Limited territories available.
+        </p>
+        <a href="#check" class="btn" style="background:var(--black); color:var(--gold); font-size:1.2em;">
+            🔒 Lock My Zip Code Now
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">🧞 TheGenie.ai</div>
+        <p>Copyright © 2024 1parkplace, Inc. All rights reserved.</p>
+        <p><a href="https://thegenie.ai">TheGenie.ai</a> | Made with Love in San Diego</p>
+        <p>US Patent #: 10,713,325</p>
+        <p><a href="#">Privacy Policy</a></p>
+    </footer>
+
+    <script>
+        function checkAvailability() {
+            document.getElementById('result-available').style.display = 'block';
+            setTimeout(() => {
+                goToStep(2);
+            }, 2000);
+        }
+
+        function goToStep(step) {
+            // Hide all steps
+            document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.step').forEach(s => {
+                s.classList.remove('active');
+                s.classList.add('inactive');
+            });
+            
+            // Show current step
+            document.getElementById('step-' + step).classList.add('active');
+            
+            // Update progress
+            for (let i = 1; i <= step; i++) {
+                const progressStep = document.getElementById('progress-' + i);
+                progressStep.classList.remove('inactive');
+                if (i < step) {
+                    progressStep.classList.add('completed');
+                } else {
+                    progressStep.classList.add('active');
+                }
+            }
+        }
+
+        function bookZoom() {
+            alert('🎉 Zoom Meeting Booked!\n\nYour zip code 34786 is locked for 48 hours.\n\nCheck your email for the meeting details.');
+        }
+    </script>
+
+</body>
+</html>
+

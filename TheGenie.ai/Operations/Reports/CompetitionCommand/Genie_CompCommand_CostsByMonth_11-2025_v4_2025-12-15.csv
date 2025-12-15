@@ -1,0 +1,25 @@
+Month,Customer_Name,Area_Name,Campaigns,Msgs_Sent,Delivered,Success%,Clicks,CTR%,CTA_Submitted,CTA_Verified,Agent_Notify,Agent_Notify_Cost,Opt_Outs,Opt_Out%,Twilio_Cost,Cost_Method
+November 2025,Carole Geronsin,92886,3,225,225,100.0%,7,3.11%,0,0,7,$0.0000,0,0.00%,$2.71,Invoice
+November 2025,David Higgins,94611,57,1950,1712,87.8%,17,0.87%,0,0,34,$0.0996,0,0.00%,$23.45,Invoice
+November 2025,David Higgins,94610,17,675,630,93.3%,5,0.74%,1,0,10,$0.0332,0,0.00%,$8.12,Invoice
+November 2025,David Higgins,94611,57,1950,1712,87.8%,17,0.87%,0,0,34,$0.0996,0,0.00%,$23.45,Invoice
+November 2025,David Higgins,94602,27,1050,919,87.5%,8,0.76%,2,1,16,$0.0664,0,0.00%,$12.63,Invoice
+November 2025,David Higgins,94602,27,1050,919,87.5%,8,0.76%,2,1,16,$0.0664,0,0.00%,$12.63,Invoice
+November 2025,Debbie Gates,93065,50,1800,1647,91.5%,49,2.72%,1,0,95,$0.2324,0,0.00%,$21.65,Invoice
+November 2025,Debbie Gates,91360,42,1575,1391,88.3%,22,1.40%,0,0,43,$0.2656,0,0.00%,$18.94,Invoice
+November 2025,Debbie Gates,93021,44,1650,1534,93.0%,24,1.45%,1,0,48,$0.0830,0,0.00%,$19.84,Invoice
+November 2025,Ed Kaminsky,90266,40,1650,1428,86.5%,9,0.55%,0,0,9,$0.0166,0,0.00%,$19.84,Invoice
+November 2025,Ed Kaminsky,90266,40,1650,1428,86.5%,9,0.55%,0,0,9,$0.0166,0,0.00%,$19.84,Invoice
+November 2025,Javier Mendez,89135,48,2175,1921,88.3%,30,1.38%,2,0,30,$0.0996,0,0.00%,$26.16,Invoice
+November 2025,Javier Mendez,89149,35,1650,1466,88.8%,32,1.94%,0,0,32,$0.0664,0,0.00%,$19.84,Invoice
+November 2025,Javier Mendez,89149,35,1650,1466,88.8%,32,1.94%,0,0,32,$0.0664,0,0.00%,$19.84,Invoice
+November 2025,Javier Mendez,89135,48,2175,1921,88.3%,30,1.38%,2,0,30,$0.0996,0,0.00%,$26.16,Invoice
+November 2025,Jim Fisher,34951,2,75,72,96.0%,1,1.33%,0,0,1,$0.0000,0,0.00%,$0.90,Invoice
+November 2025,Jim Fisher,34951,2,75,72,96.0%,1,1.33%,0,0,1,$0.0000,0,0.00%,$0.90,Invoice
+November 2025,Kim Ewing,91360,42,1575,1391,88.3%,22,1.40%,0,0,43,$0.2656,0,0.00%,$18.94,Invoice
+November 2025,Martin Navasartian,91042,46,1500,1378,91.9%,29,1.93%,1,0,58,$0.1992,1,0.07%,$18.04,Invoice
+November 2025,Martin Navasartian,91214,29,1200,1107,92.2%,14,1.17%,0,0,28,$0.0664,0,0.00%,$14.43,Invoice
+November 2025,Mike Chiesl,92003,7,225,219,97.3%,6,2.67%,4,2,0,$0.0000,0,0.00%,$2.71,Invoice
+November 2025,Mike Chiesl,92028,20,1125,1005,89.3%,64,5.69%,4,1,0,$0.0000,0,0.00%,$13.53,Invoice
+November 2025,Susan Featherly,91325,30,1350,1245,92.2%,12,0.89%,0,0,0,$0.0000,0,0.00%,$16.24,Invoice
+November 2025,TOTAL,,748,30000,26808,89.4%,448,1.49%,20,5,576,$1.8426,1,0.00%,$360.78,Invoice

@@ -1,0 +1,19 @@
+Month,Customer_Name,Email,Area_Name,Property_Types,Campaigns,Msgs_Sent,Delivered,Success%,Clicks,CTR%,CTA_Submitted,CTA_Verified,Agent_Notify,Agent_Notify_Cost,Opt_Outs,Opt_Out%,Twilio_Cost,Cost_Method
+November 2025,Carole Geronsin,Marketing@TheGeronsins.com,92886,SFR,3,225,225,100.0%,7,3.11%,0,0,7,$0.0000,0,0.00%,$3.78,Invoice
+November 2025,David Higgins,david@cushrealestate.com,94611,SFR + Condo,57,1950,1712,87.8%,17,0.87%,0,0,34,$0.0996,0,0.00%,$32.80,Invoice
+November 2025,David Higgins,david@cushrealestate.com,94602,SFR + Condo,27,1050,919,87.5%,8,0.76%,2,1,16,$0.0664,0,0.00%,$17.66,Invoice
+November 2025,David Higgins,david@cushrealestate.com,94610,SFR,17,675,630,93.3%,5,0.74%,1,0,10,$0.0332,0,0.00%,$11.35,Invoice
+November 2025,Debbie Gates,homeswithdebbie@yahoo.com,93065,SFR,50,1800,1647,91.5%,49,2.72%,1,0,95,$0.2324,0,0.00%,$30.28,Invoice
+November 2025,Debbie Gates,homeswithdebbie@yahoo.com,91360,SFR + Condo,42,1575,1391,88.3%,22,1.40%,0,0,43,$0.2656,0,0.00%,$26.49,Invoice
+November 2025,Debbie Gates,homeswithdebbie@yahoo.com,93021,SFR,44,1650,1534,93.0%,24,1.45%,1,0,48,$0.0830,0,0.00%,$27.75,Invoice
+November 2025,Ed Kaminsky,ek@itzsold.com,90266,SFR + Condo,40,1650,1428,86.5%,9,0.55%,0,0,9,$0.0166,0,0.00%,$27.75,Invoice
+November 2025,Javier Mendez,javier@clocktie.com,89135,SFR + Condo,48,2175,1921,88.3%,30,1.38%,2,0,30,$0.0996,0,0.00%,$36.58,Invoice
+November 2025,Javier Mendez,javier@clocktie.com,89149,SFR + Condo,35,1650,1466,88.8%,32,1.94%,0,0,32,$0.0664,0,0.00%,$27.75,Invoice
+November 2025,Jim Fisher,jim@welcometovero.com,34951,SFR + Condo,2,75,72,96.0%,1,1.33%,0,0,1,$0.0000,0,0.00%,$1.26,Invoice
+November 2025,Kim Ewing,theprimakimteam@gmail.com,91360,SFR + Condo,42,1575,1391,88.3%,22,1.40%,0,0,43,$0.2656,0,0.00%,$26.49,Invoice
+November 2025,Martin Navasartian,martinnavasartian@gmail.com,91214,SFR,29,1200,1107,92.2%,14,1.17%,0,0,28,$0.0664,0,0.00%,$20.18,Invoice
+November 2025,Martin Navasartian,martinnavasartian@gmail.com,91042,SFR,46,1500,1378,91.9%,29,1.93%,1,0,58,$0.1992,1,0.07%,$25.23,Invoice
+November 2025,Mike Chiesl,caleb@chieslmarelly.com,92003,SFR,7,225,219,97.3%,6,2.67%,4,2,0,$0.0000,0,0.00%,$3.78,Invoice
+November 2025,Mike Chiesl,caleb@chieslmarelly.com,92028,SFR,20,1125,1005,89.3%,64,5.69%,4,1,0,$0.0000,0,0.00%,$18.92,Invoice
+November 2025,Susan Featherly,homesbypeter.susan@gmail.com,91325,SFR + Condo,30,1350,1245,92.2%,12,0.89%,0,0,0,$0.0000,0,0.00%,$22.71,Invoice
+November 2025,TOTAL,,,,539,21450,19290,89.9%,351,1.64%,16,4,454,$1.4940,1,0.00%,$360.78,Invoice

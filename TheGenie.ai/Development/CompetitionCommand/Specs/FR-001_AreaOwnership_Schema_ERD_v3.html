@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competition Command - Area Ownership Schema ERD v3</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f8f9fa; padding: 20px; }
+        
+        .header { text-align: center; margin-bottom: 20px; padding: 20px; background: #fff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; font-size: 1.8em; margin-bottom: 5px; }
+        .subtitle { color: #7f8c8d; font-size: 1em; }
+        .status { display: inline-block; background: #f39c12; color: #fff; padding: 4px 12px; border-radius: 15px; font-size: 0.8em; margin-top: 10px; }
+        
+        .erd-canvas { position: relative; width: 100%; min-height: 1600px; background: #fff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); overflow: visible; }
+        
+        .table-entity { position: absolute; background: #fff; border: 2px solid #34495e; border-radius: 5px; min-width: 200px; box-shadow: 0 3px 10px rgba(0,0,0,0.15); z-index: 1; }
+        .table-entity.new { border-color: #27ae60; }
+        .table-entity.existing { border-color: #7f8c8d; }
+        .table-entity.lookup { border-color: #9b59b6; }
+        
+        .table-name { padding: 10px 15px; font-weight: bold; font-size: 0.9em; border-bottom: 2px solid; }
+        .table-entity.new .table-name { background: #27ae60; color: #fff; border-color: #27ae60; }
+        .table-entity.existing .table-name { background: #95a5a6; color: #fff; border-color: #95a5a6; }
+        .table-entity.lookup .table-name { background: #9b59b6; color: #fff; border-color: #9b59b6; }
+        
+        .table-columns { padding: 8px 0; }
+        .column { display: flex; padding: 4px 12px; font-size: 0.75em; align-items: center; }
+        .column:hover { background: #f8f9fa; }
+        .column.fk-row { background: #ebf5fb; }
+        
+        .col-key { width: 28px; font-weight: bold; font-size: 0.75em; }
+        .col-key.pk { color: #f39c12; }
+        .col-key.fk { color: #3498db; }
+        .col-name { flex: 1; font-family: 'Consolas', monospace; }
+        .col-type { color: #7f8c8d; font-size: 0.85em; font-family: 'Consolas', monospace; }
+        
+        .tag { font-size: 0.65em; padding: 2px 6px; border-radius: 3px; margin-left: 5px; }
+        .tag.new { background: #27ae60; color: #fff; }
+        .tag.existing { background: #95a5a6; color: #fff; }
+        .tag.lookup { background: #9b59b6; color: #fff; }
+        
+        .relationships-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .rel-line { stroke: #34495e; stroke-width: 1.5; fill: none; }
+        .rel-line.self-ref { stroke: #e74c3c; stroke-dasharray: 5,3; }
+        
+        .legend { position: absolute; bottom: 20px; right: 20px; background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 15px; font-size: 0.8em; z-index: 10; }
+        .legend h4 { margin-bottom: 10px; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .legend-item { display: flex; align-items: center; gap: 10px; margin: 6px 0; }
+        .legend-symbol { width: 50px; height: 16px; }
+        
+        .note-box { position: absolute; background: #fffbe6; border: 1px solid #f1c40f; border-radius: 5px; padding: 10px; font-size: 0.75em; max-width: 250px; z-index: 5; }
+        .note-box h5 { color: #d35400; margin-bottom: 5px; }
+        
+        .section { background: #fff; border-radius: 10px; padding: 20px; margin-top: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .section h2 { color: #2c3e50; margin-bottom: 15px; font-size: 1.2em; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        
+        table.data-table { width: 100%; border-collapse: collapse; font-size: 0.85em; margin-top: 15px; }
+        table.data-table th { background: #f8f9fa; padding: 10px; text-align: left; border-bottom: 2px solid #ddd; }
+        table.data-table td { padding: 8px 10px; border-bottom: 1px solid #eee; }
+        table.data-table tr:hover { background: #f8f9fa; }
+        
+        .picklist { background: #e8f6f3; border: 1px solid #1abc9c; border-radius: 5px; padding: 10px; margin: 10px 0; }
+        .picklist h4 { color: #16a085; margin-bottom: 8px; }
+        .picklist-item { display: inline-block; background: #fff; border: 1px solid #1abc9c; border-radius: 15px; padding: 4px 12px; margin: 3px; font-size: 0.85em; }
+        
+        @media print { body { background: #fff; padding: 0; } .erd-canvas, .section { box-shadow: none; border: 1px solid #ccc; } }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Competition Command - Area Ownership Schema</h1>
+        <p class="subtitle">Entity Relationship Diagram v3 - With Lookup Tables & Self-References</p>
+        <span class="status">PENDING APPROVAL</span>
+        <p style="color: #95a5a6; font-size: 0.8em; margin-top: 10px;">Version 3.0 | 12/15/2025</p>
+    </div>
+    
+    <div class="erd-canvas">
+        <!-- SVG for relationship lines -->
+        <svg class="relationships-svg" viewBox="0 0 1400 1600" preserveAspectRatio="xMidYMid meet">
+            <defs>
+                <marker id="one-one" markerWidth="16" markerHeight="12" refX="14" refY="6" orient="auto">
+                    <line x1="4" y1="2" x2="4" y2="10" stroke="#34495e" stroke-width="2"/>
+                    <line x1="10" y1="2" x2="10" y2="10" stroke="#34495e" stroke-width="2"/>
+                </marker>
+                <marker id="one-many" markerWidth="20" markerHeight="16" refX="0" refY="8" orient="auto">
+                    <line x1="16" y1="3" x2="16" y2="13" stroke="#34495e" stroke-width="2"/>
+                    <path d="M 0 8 L 12 2 M 0 8 L 12 8 M 0 8 L 12 14" stroke="#34495e" stroke-width="1.5" fill="none"/>
+                </marker>
+            </defs>
+            
+            <!-- AspNetUsers → AreaOwnership (Owner) -->
+            <path class="rel-line" d="M 130 180 L 130 320" marker-start="url(#one-one)" marker-end="url(#one-many)"/>
+            
+            <!-- AspNetUsers → AreaOwnership (ApprovedBy) - Self Reference -->
+            <path class="rel-line self-ref" d="M 250 100 L 400 100 L 400 350 L 360 350" marker-start="url(#one-one)" marker-end="url(#one-many)"/>
+            
+            <!-- ViewArea → AreaOwnership -->
+            <path class="rel-line" d="M 550 180 L 300 320" marker-start="url(#one-one)" marker-end="url(#one-many)"/>
+            
+            <!-- PolygonNameOverride → ViewArea -->
+            <path class="rel-line" d="M 750 140 L 670 140" marker-start="url(#one-many)" marker-end="url(#one-one)"/>
+            
+            <!-- AreaOwnershipStatusType → AreaOwnership -->
+            <path class="rel-line" d="M 1050 180 L 1050 350 L 360 410" marker-start="url(#one-one)" marker-end="url(#one-many)"/>
+            
+            <!-- EndReasonType → AreaOwnership -->
+            <path class="rel-line" d="M 1200 180 L 1200 380 L 360 480" marker-start="url(#one-one)" marker-end="url(#one-many)"/>
+            
+            <!-- AspNetUsers → AreaWaitlist -->
+            <path class="rel-line" d="M 130 180 L 130 250 L 550 250 L 550 750" marker-start="url(#one-one)" marker-end="url(#one-many)"/>
+            
+            <!-- AreaOwnership → AreaOwnershipHistory -->
+            <path class="rel-line" d="M 180 700 L 180 850" marker-start="url(#one-one)" marker-end="url(#one-many)"/>
+            
+            <!-- AreaOwnership → AreaCampaignHistory -->
+            <path class="rel-line" d="M 280 700 L 480 850" marker-start="url(#one-one)" marker-end="url(#one-many)"/>
+            
+            <!-- PropertyCast → AreaCampaignHistory -->
+            <path class="rel-line" d="M 980 500 L 700 850" marker-start="url(#one-one)" marker-end="url(#one-many)"/>
+        </svg>
+        
+        <!-- ========== EXISTING TABLES (Row 1) ========== -->
+        
+        <!-- AspNetUsers -->
+        <div class="table-entity existing" style="left: 30px; top: 40px; min-width: 220px;">
+            <div class="table-name">AspNetUsers <span class="tag existing">EXISTING</span></div>
+            <div class="table-columns">
+                <div class="column"><span class="col-key pk">PK</span><span class="col-name">Id</span><span class="col-type">NVARCHAR(128)</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">UserName</span><span class="col-type">NVARCHAR(256)</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">Email</span><span class="col-type">NVARCHAR(256)</span></div>
+            </div>
+        </div>
+        
+        <!-- ViewArea -->
+        <div class="table-entity existing" style="left: 450px; top: 40px; min-width: 220px;">
+            <div class="table-name">ViewArea <span class="tag existing">EXISTING</span></div>
+            <div class="table-columns">
+                <div class="column"><span class="col-key pk">PK</span><span class="col-name">AreaId</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">Name</span><span class="col-type">NVARCHAR(100)</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">PolygonId</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">ZipCode</span><span class="col-type">NVARCHAR(10)</span></div>
+            </div>
+        </div>
+        
+        <!-- PolygonNameOverride (Area Override Name) -->
+        <div class="table-entity existing" style="left: 720px; top: 40px; min-width: 240px;">
+            <div class="table-name">PolygonNameOverride <span class="tag existing">EXISTING</span></div>
+            <div class="table-columns">
+                <div class="column"><span class="col-key pk">PK</span><span class="col-name">PolygonNameOverrideId</span><span class="col-type">INT</span></div>
+                <div class="column" style="background:#ebf5fb;"><span class="col-key fk">FK</span><span class="col-name">PolygonId</span><span class="col-type">INT</span></div>
+                <div class="column" style="background:#ebf5fb;"><span class="col-key fk">FK</span><span class="col-name">AspNetUserId</span><span class="col-type">NVARCHAR(128)</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">FriendlyName</span><span class="col-type">NVARCHAR(100)</span></div>
+            </div>
+        </div>
+        
+        <!-- ========== LOOKUP TABLES (Row 1 - Right Side) ========== -->
+        
+        <!-- AreaOwnershipStatusType (NEW LOOKUP) -->
+        <div class="table-entity lookup" style="left: 1000px; top: 40px; min-width: 220px;">
+            <div class="table-name">AreaOwnershipStatusType <span class="tag lookup">NEW LOOKUP</span></div>
+            <div class="table-columns">
+                <div class="column"><span class="col-key pk">PK</span><span class="col-name">StatusTypeId</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">StatusName</span><span class="col-type">NVARCHAR(20)</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">Description</span><span class="col-type">NVARCHAR(100)</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">SortOrder</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">IsActive</span><span class="col-type">BIT</span></div>
+            </div>
+        </div>
+        
+        <!-- EndReasonType (NEW LOOKUP) -->
+        <div class="table-entity lookup" style="left: 1250px; top: 40px; min-width: 200px;">
+            <div class="table-name">EndReasonType <span class="tag lookup">NEW LOOKUP</span></div>
+            <div class="table-columns">
+                <div class="column"><span class="col-key pk">PK</span><span class="col-name">EndReasonTypeId</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">ReasonName</span><span class="col-type">NVARCHAR(30)</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">Description</span><span class="col-type">NVARCHAR(100)</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">RequiresNote</span><span class="col-type">BIT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">SortOrder</span><span class="col-type">INT</span></div>
+            </div>
+        </div>
+        
+        <!-- ========== MAIN TABLES (Row 2) ========== -->
+        
+        <!-- AreaOwnership (MAIN) -->
+        <div class="table-entity new" style="left: 30px; top: 320px; min-width: 330px;">
+            <div class="table-name">AreaOwnership <span class="tag new">NEW - MAIN</span></div>
+            <div class="table-columns">
+                <div class="column"><span class="col-key pk">PK</span><span class="col-name">AreaOwnershipId</span><span class="col-type">INT IDENTITY</span></div>
+                <div class="column fk-row"><span class="col-key fk">FK</span><span class="col-name">AspNetUserId</span><span class="col-type">NVARCHAR(128)</span></div>
+                <div class="column fk-row"><span class="col-key fk">FK</span><span class="col-name">AreaId</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">PropertyTypeId</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">AreaOwnershipTypeId</span><span class="col-type">INT</span></div>
+                <div class="column fk-row"><span class="col-key fk">FK</span><span class="col-name">StatusTypeId</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">RequestDate</span><span class="col-type">DATETIME2</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">ApprovalDate</span><span class="col-type">DATETIME2</span></div>
+                <div class="column fk-row" style="background:#fdeaea;"><span class="col-key fk" style="color:#e74c3c;">FK*</span><span class="col-name">ApprovedByUserId</span><span class="col-type">NVARCHAR(128)</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">StartDate</span><span class="col-type">DATETIME2</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">EndDate</span><span class="col-type">DATETIME2</span></div>
+                <div class="column fk-row"><span class="col-key fk">FK</span><span class="col-name">EndReasonTypeId</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">EndReasonNote</span><span class="col-type">NVARCHAR(200)</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">Notes</span><span class="col-type">NVARCHAR(500)</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">CreatedDate</span><span class="col-type">DATETIME2</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">ModifiedDate</span><span class="col-type">DATETIME2</span></div>
+            </div>
+        </div>
+        
+        <!-- AreaWaitlist -->
+        <div class="table-entity new" style="left: 450px; top: 750px; min-width: 280px;">
+            <div class="table-name">AreaWaitlist <span class="tag new">NEW</span></div>
+            <div class="table-columns">
+                <div class="column"><span class="col-key pk">PK</span><span class="col-name">AreaWaitlistId</span><span class="col-type">INT IDENTITY</span></div>
+                <div class="column fk-row"><span class="col-key fk">FK</span><span class="col-name">AspNetUserId</span><span class="col-type">NVARCHAR(128)</span></div>
+                <div class="column fk-row"><span class="col-key fk">FK</span><span class="col-name">AreaId</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">PropertyTypeId</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">AreaOwnershipTypeId</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">QueuePosition</span><span class="col-type">INT</span></div>
+                <div class="column fk-row"><span class="col-key fk">FK</span><span class="col-name">WaitlistStatusTypeId</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">RequestDate</span><span class="col-type">DATETIME2</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">NotifiedDate</span><span class="col-type">DATETIME2</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">ExpirationDate</span><span class="col-type">DATETIME2</span></div>
+            </div>
+        </div>
+        
+        <!-- PropertyCast (Existing) -->
+        <div class="table-entity existing" style="left: 850px; top: 320px; min-width: 240px;">
+            <div class="table-name">PropertyCast <span class="tag existing">EXISTING</span></div>
+            <div class="table-columns">
+                <div class="column"><span class="col-key pk">PK</span><span class="col-name">PropertyCastId</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">PropertyCastTypeId</span><span class="col-type">INT</span></div>
+                <div class="column fk-row"><span class="col-key fk">FK</span><span class="col-name">AspNetUserId</span><span class="col-type">NVARCHAR(128)</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">AreaId</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">PropertyTypeId</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">TriggerTypeId</span><span class="col-type">INT</span></div>
+            </div>
+        </div>
+        
+        <!-- ========== CHILD TABLES (Row 3) ========== -->
+        
+        <!-- AreaOwnershipHistory -->
+        <div class="table-entity new" style="left: 30px; top: 850px; min-width: 280px;">
+            <div class="table-name">AreaOwnershipHistory <span class="tag new">NEW</span></div>
+            <div class="table-columns">
+                <div class="column"><span class="col-key pk">PK</span><span class="col-name">AreaOwnershipHistoryId</span><span class="col-type">INT IDENTITY</span></div>
+                <div class="column fk-row"><span class="col-key fk">FK</span><span class="col-name">AreaOwnershipId</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">Action</span><span class="col-type">NVARCHAR(30)</span></div>
+                <div class="column fk-row"><span class="col-key fk">FK</span><span class="col-name">PreviousStatusTypeId</span><span class="col-type">INT</span></div>
+                <div class="column fk-row"><span class="col-key fk">FK</span><span class="col-name">NewStatusTypeId</span><span class="col-type">INT</span></div>
+                <div class="column fk-row"><span class="col-key fk">FK</span><span class="col-name">ActionByUserId</span><span class="col-type">NVARCHAR(128)</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">ActionDate</span><span class="col-type">DATETIME2</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">Notes</span><span class="col-type">NVARCHAR(500)</span></div>
+            </div>
+        </div>
+        
+        <!-- AreaCampaignHistory -->
+        <div class="table-entity new" style="left: 400px; top: 1100px; min-width: 300px;">
+            <div class="table-name">AreaCampaignHistory <span class="tag new">NEW</span></div>
+            <div class="table-columns">
+                <div class="column"><span class="col-key pk">PK</span><span class="col-name">AreaCampaignHistoryId</span><span class="col-type">INT IDENTITY</span></div>
+                <div class="column fk-row"><span class="col-key fk">FK</span><span class="col-name">AreaOwnershipId</span><span class="col-type">INT</span></div>
+                <div class="column fk-row"><span class="col-key fk">FK</span><span class="col-name">PropertyCastId</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">CampaignDate</span><span class="col-type">DATETIME2</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">PropertyTypeId</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">MessagesSent</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">MessagesDelivered</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">Clicks</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">CTASubmitted</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">TwilioCost</span><span class="col-type">DECIMAL(10,4)</span></div>
+                <div class="column"><span class="col-key"></span><span class="col-name">TotalCost</span><span class="col-type">COMPUTED</span></div>
+            </div>
+        </div>
+        
+        <!-- ========== EXPLANATION NOTES ========== -->
+        
+        <!-- ApprovedByUserId Note -->
+        <div class="note-box" style="left: 410px; top: 320px;">
+            <h5>🔁 Self-Reference: ApprovedByUserId</h5>
+            <p>Points back to <b>AspNetUsers.Id</b></p>
+            <p style="margin-top:5px;">This is the <b>admin user</b> who approved the ownership request. Different from the owner (AspNetUserId).</p>
+            <p style="margin-top:5px;color:#e74c3c;">Red dashed line = self-referencing FK</p>
+        </div>
+        
+        <!-- Legend -->
+        <div class="legend">
+            <h4>Legend</h4>
+            <div class="legend-item">
+                <svg class="legend-symbol" viewBox="0 0 50 16">
+                    <line x1="5" y1="8" x2="35" y2="8" stroke="#34495e" stroke-width="1.5"/>
+                    <line x1="5" y1="4" x2="5" y2="12" stroke="#34495e" stroke-width="2"/>
+                    <line x1="10" y1="4" x2="10" y2="12" stroke="#34495e" stroke-width="2"/>
+                    <path d="M 35 8 L 45 3 M 35 8 L 45 8 M 35 8 L 45 13" stroke="#34495e" stroke-width="1.5" fill="none"/>
+                </svg>
+                <span>One-to-Many</span>
+            </div>
+            <div class="legend-item">
+                <svg class="legend-symbol" viewBox="0 0 50 16">
+                    <line x1="5" y1="8" x2="45" y2="8" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="4,2"/>
+                </svg>
+                <span>Self-Reference</span>
+            </div>
+            <div class="legend-item"><span style="color:#f39c12;font-weight:bold;width:50px;">PK</span><span>Primary Key</span></div>
+            <div class="legend-item"><span style="color:#3498db;font-weight:bold;width:50px;">FK</span><span>Foreign Key</span></div>
+            <div class="legend-item"><span style="color:#e74c3c;font-weight:bold;width:50px;">FK*</span><span>Self-Reference FK</span></div>
+            <div class="legend-item"><span style="background:#27ae60;color:#fff;padding:2px 6px;border-radius:3px;">NEW</span><span>New Table</span></div>
+            <div class="legend-item"><span style="background:#9b59b6;color:#fff;padding:2px 6px;border-radius:3px;">LOOKUP</span><span>Lookup Table</span></div>
+            <div class="legend-item"><span style="background:#95a5a6;color:#fff;padding:2px 6px;border-radius:3px;">EXIST</span><span>Existing Table</span></div>
+        </div>
+        
+        <!-- Relationship Labels -->
+        <div style="position:absolute;left:140px;top:245px;font-size:0.7em;color:#7f8c8d;background:#fff;padding:2px 5px;">owns</div>
+        <div style="position:absolute;left:380px;top:245px;font-size:0.7em;color:#7f8c8d;background:#fff;padding:2px 5px;">located in</div>
+        <div style="position:absolute;left:350px;top:180px;font-size:0.7em;color:#e74c3c;background:#fff;padding:2px 5px;">approved by</div>
+        <div style="position:absolute;left:700px;top:115px;font-size:0.7em;color:#7f8c8d;background:#fff;padding:2px 5px;">custom name</div>
+        <div style="position:absolute;left:700px;top:360px;font-size:0.7em;color:#7f8c8d;background:#fff;padding:2px 5px;">has status</div>
+        <div style="position:absolute;left:780px;top:420px;font-size:0.7em;color:#7f8c8d;background:#fff;padding:2px 5px;">ended with reason</div>
+    </div>
+    
+    <!-- ========== PICKLIST DATA SECTION ========== -->
+    
+    <div class="section">
+        <h2>📋 Lookup Table Data (Picklists)</h2>
+        
+        <h3 style="color:#9b59b6;margin:20px 0 10px 0;">AreaOwnershipStatusType</h3>
+        <p style="color:#7f8c8d;margin-bottom:10px;">Resolves StatusTypeId → StatusName. Controls the ownership lifecycle.</p>
+        <table class="data-table">
+            <tr><th>StatusTypeId</th><th>StatusName</th><th>Description</th><th>SortOrder</th></tr>
+            <tr><td>1</td><td><b>Pending</b></td><td>Ownership requested, awaiting approval</td><td>1</td></tr>
+            <tr><td>2</td><td><b>Active</b></td><td>Currently owning the area, campaigns running</td><td>2</td></tr>
+            <tr><td>3</td><td><b>Suspended</b></td><td>Temporarily paused (payment issue, etc.)</td><td>3</td></tr>
+            <tr><td>4</td><td><b>Ended</b></td><td>Ownership terminated (see EndReasonTypeId)</td><td>4</td></tr>
+        </table>
+        
+        <h3 style="color:#9b59b6;margin:30px 0 10px 0;">EndReasonType</h3>
+        <p style="color:#7f8c8d;margin-bottom:10px;">Defined picklist for why ownership ended. "Other" requires a note.</p>
+        <table class="data-table">
+            <tr><th>EndReasonTypeId</th><th>ReasonName</th><th>Description</th><th>RequiresNote</th></tr>
+            <tr><td>1</td><td><b>Canceled</b></td><td>Customer voluntarily canceled</td><td>No</td></tr>
+            <tr><td>2</td><td><b>Expired</b></td><td>Subscription period ended, not renewed</td><td>No</td></tr>
+            <tr><td>3</td><td><b>NonPayment</b></td><td>Ended due to failed payment</td><td>No</td></tr>
+            <tr><td>4</td><td><b>Transferred</b></td><td>Ownership transferred to another user</td><td>Yes</td></tr>
+            <tr><td>5</td><td><b>AdminRemoved</b></td><td>Removed by admin action</td><td>Yes</td></tr>
+            <tr><td>6</td><td><b>Upgraded</b></td><td>Moved to different product/tier</td><td>No</td></tr>
+            <tr><td>7</td><td><b>Downgraded</b></td><td>Reduced coverage/features</td><td>No</td></tr>
+            <tr style="background:#fff3cd;"><td>99</td><td><b>Other</b></td><td>Other reason - REQUIRES EndReasonNote</td><td><b>Yes</b></td></tr>
+        </table>
+        
+        <div class="picklist" style="margin-top:20px;">
+            <h4>💡 EndReason Implementation</h4>
+            <p style="margin-bottom:10px;">Changed from NVARCHAR(50) to <b>EndReasonTypeId INT</b> with FK to lookup table.</p>
+            <p>Added <b>EndReasonNote NVARCHAR(200)</b> for when RequiresNote = Yes (especially "Other")</p>
+            <p style="margin-top:10px;"><b>Picklist Values:</b></p>
+            <span class="picklist-item">Canceled</span>
+            <span class="picklist-item">Expired</span>
+            <span class="picklist-item">NonPayment</span>
+            <span class="picklist-item">Transferred</span>
+            <span class="picklist-item">AdminRemoved</span>
+            <span class="picklist-item">Upgraded</span>
+            <span class="picklist-item">Downgraded</span>
+            <span class="picklist-item" style="background:#fff3cd;border-color:#f39c12;">Other*</span>
+        </div>
+    </div>
+    
+    <!-- ========== EXPLANATION SECTION ========== -->
+    
+    <div class="section">
+        <h2>🔍 Key Schema Explanations</h2>
+        
+        <h3 style="margin:20px 0 10px 0;color:#2c3e50;">1. ApprovedByUserId (Self-Referencing FK)</h3>
+        <div style="background:#fdeaea;border-left:4px solid #e74c3c;padding:15px;margin:10px 0;">
+            <p><b>What it is:</b> A foreign key that points back to <code>AspNetUsers.Id</code></p>
+            <p style="margin-top:10px;"><b>Purpose:</b> Records WHICH ADMIN USER approved the ownership request.</p>
+            <p style="margin-top:10px;"><b>How it works:</b></p>
+            <ul style="margin-left:20px;margin-top:5px;">
+                <li><code>AspNetUserId</code> = The OWNER (customer who owns the area)</li>
+                <li><code>ApprovedByUserId</code> = The ADMIN (staff who approved the request)</li>
+            </ul>
+            <p style="margin-top:10px;"><b>Example:</b> Customer "Simon Simaan" (AspNetUserId: abc123) requests zip 34786. Admin "Steve Hundley" (ApprovedByUserId: xyz789) approves it.</p>
+        </div>
+        
+        <h3 style="margin:30px 0 10px 0;color:#2c3e50;">2. PolygonNameOverride (Area Override Name)</h3>
+        <div style="background:#e8f6f3;border-left:4px solid #1abc9c;padding:15px;margin:10px 0;">
+            <p><b>What it is:</b> Existing table that stores custom "friendly names" for areas.</p>
+            <p style="margin-top:10px;"><b>How it relates:</b></p>
+            <ul style="margin-left:20px;margin-top:5px;">
+                <li><code>ViewArea.Name</code> = System name (e.g., "34786 - Oviedo, FL")</li>
+                <li><code>PolygonNameOverride.FriendlyName</code> = Custom name (e.g., "Oviedo Downtown")</li>
+            </ul>
+            <p style="margin-top:10px;"><b>Join Logic:</b> <code>PolygonNameOverride.PolygonId = ViewArea.AreaId AND PolygonNameOverride.AspNetUserId = AreaOwnership.AspNetUserId</code></p>
+            <p style="margin-top:10px;"><b>Display Priority:</b> COALESCE(PolygonNameOverride.FriendlyName, ViewArea.Name)</p>
+        </div>
+        
+        <h3 style="margin:30px 0 10px 0;color:#2c3e50;">3. Status Resolution via Lookup Table</h3>
+        <div style="background:#f5eef8;border-left:4px solid #9b59b6;padding:15px;margin:10px 0;">
+            <p><b>Old approach:</b> <code>Status NVARCHAR(20)</code> with CHECK constraint</p>
+            <p style="margin-top:10px;"><b>New approach:</b> <code>StatusTypeId INT</code> FK to <code>AreaOwnershipStatusType</code></p>
+            <p style="margin-top:10px;"><b>Benefits:</b></p>
+            <ul style="margin-left:20px;margin-top:5px;">
+                <li>No typos (can't enter "Actve" instead of "Active")</li>
+                <li>Can add new statuses without schema change</li>
+                <li>Can add metadata (Description, SortOrder, IsActive)</li>
+                <li>Smaller storage (INT vs NVARCHAR)</li>
+                <li>Better indexing performance</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div style="text-align:center;padding:20px;color:#95a5a6;font-size:0.8em;">
+        FR-001: Area Ownership & Waitlist System | Version 3.0 | 12/15/2025 | PENDING APPROVAL
+    </div>
+</body>
+</html>
+

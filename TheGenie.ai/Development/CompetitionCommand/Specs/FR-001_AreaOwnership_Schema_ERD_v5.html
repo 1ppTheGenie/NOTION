@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FR-001: AreaOwnership Schema ERD v5 - With Lead Custody Integration</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #eee; 
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .header h1 { color: #00d4ff; margin-bottom: 10px; }
+        .header .version { color: #ffd700; font-size: 1.2em; }
+        .header .date { color: #888; margin-top: 5px; }
+        
+        .executive-summary {
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid #00d4ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .executive-summary h2 { color: #00d4ff; margin-bottom: 15px; }
+        .executive-summary table { width: 100%; border-collapse: collapse; }
+        .executive-summary td { padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .executive-summary td:first-child { font-weight: bold; color: #ffd700; width: 200px; }
+        
+        .diagram-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .section-title {
+            width: 100%;
+            text-align: center;
+            font-size: 1.5em;
+            color: #ffd700;
+            margin: 30px 0 20px 0;
+            padding: 10px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 5px;
+        }
+        
+        .table-box {
+            background: rgba(255,255,255,0.08);
+            border-radius: 8px;
+            padding: 15px;
+            min-width: 280px;
+            max-width: 320px;
+            border: 2px solid #444;
+            position: relative;
+        }
+        .table-box.primary { border-color: #00d4ff; }
+        .table-box.lookup { border-color: #9b59b6; }
+        .table-box.history { border-color: #f39c12; }
+        .table-box.lead { border-color: #e74c3c; }
+        .table-box.new { border-color: #2ecc71; box-shadow: 0 0 15px rgba(46, 204, 113, 0.3); }
+        
+        .table-name {
+            font-weight: bold;
+            font-size: 1.1em;
+            padding: 8px;
+            margin: -15px -15px 10px -15px;
+            border-radius: 6px 6px 0 0;
+            text-align: center;
+        }
+        .primary .table-name { background: #00d4ff; color: #000; }
+        .lookup .table-name { background: #9b59b6; color: #fff; }
+        .history .table-name { background: #f39c12; color: #000; }
+        .lead .table-name { background: #e74c3c; color: #fff; }
+        .new .table-name { background: #2ecc71; color: #000; }
+        
+        .new-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #2ecc71;
+            color: #000;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+        
+        .columns { font-size: 0.85em; }
+        .column { 
+            padding: 4px 8px; 
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+        }
+        .column:last-child { border-bottom: none; }
+        .column.pk { background: rgba(255, 215, 0, 0.2); }
+        .column.fk { background: rgba(0, 212, 255, 0.15); }
+        .col-name { font-weight: 500; }
+        .col-type { color: #888; font-size: 0.9em; }
+        .key-indicator { 
+            font-size: 0.7em; 
+            padding: 1px 4px; 
+            border-radius: 3px; 
+            margin-left: 5px;
+        }
+        .pk-badge { background: #ffd700; color: #000; }
+        .fk-badge { background: #00d4ff; color: #000; }
+        
+        .relationship-section {
+            width: 100%;
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+        .relationship-section h3 { color: #00d4ff; margin-bottom: 15px; }
+        .rel-table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+        .rel-table th { background: rgba(0,212,255,0.2); padding: 10px; text-align: left; }
+        .rel-table td { padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .rel-table .cardinality { font-family: monospace; color: #ffd700; }
+        
+        .legend {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 2px solid;
+        }
+        
+        .flow-diagram {
+            width: 100%;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            font-family: monospace;
+            white-space: pre;
+            overflow-x: auto;
+            line-height: 1.4;
+        }
+        
+        @media print {
+            body { background: white; color: black; }
+            .table-box { border: 2px solid #333; background: #f9f9f9; }
+            .header { background: #f0f0f0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏗️ FR-001: AreaOwnership Schema ERD</h1>
+        <div class="version">Version 5.0 - With Lead Custody Integration</div>
+        <div class="date">Created: 12/15/2025 | Author: Cursor AI</div>
+    </div>
+    
+    <div class="executive-summary">
+        <h2>📋 Executive Summary</h2>
+        <table>
+            <tr><td>Purpose</td><td>Define database schema for Competition Command area ownership, waitlist management, and lead custody tracking</td></tr>
+            <tr><td>Current State</td><td>90% Complete - Schema design finalized, awaiting approval before implementation</td></tr>
+            <tr><td>Key Outputs</td><td>15 tables (8 core + 7 lookup), views for availability and custody, stored procedures for transitions</td></tr>
+            <tr><td>New in v5</td><td>Lead Custody integration - ensures 1PP retains ownership of leads even when agents cancel</td></tr>
+            <tr><td>Last Validated</td><td>12/15/2025 - Schema design reviewed with stakeholder</td></tr>
+        </table>
+    </div>
+    
+    <div class="legend">
+        <div class="legend-item"><div class="legend-color" style="border-color: #00d4ff; background: rgba(0,212,255,0.2);"></div> Primary Tables</div>
+        <div class="legend-item"><div class="legend-color" style="border-color: #9b59b6; background: rgba(155,89,182,0.2);"></div> Lookup Tables</div>
+        <div class="legend-item"><div class="legend-color" style="border-color: #f39c12; background: rgba(243,156,18,0.2);"></div> History Tables</div>
+        <div class="legend-item"><div class="legend-color" style="border-color: #e74c3c; background: rgba(231,76,60,0.2);"></div> Lead Custody Tables</div>
+        <div class="legend-item"><div class="legend-color" style="border-color: #2ecc71; background: rgba(46,204,113,0.2);"></div> NEW in v5</div>
+    </div>
+
+    <!-- SECTION: Core Ownership Tables -->
+    <div class="section-title">🏠 CORE OWNERSHIP TABLES</div>
+    <div class="diagram-container">
+        
+        <div class="table-box primary">
+            <div class="table-name">AreaOwnership</div>
+            <div class="columns">
+                <div class="column pk"><span class="col-name">AreaOwnershipId</span><span><span class="col-type">INT</span><span class="key-indicator pk-badge">PK</span></span></div>
+                <div class="column fk"><span class="col-name">AreaId</span><span><span class="col-type">INT</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column fk"><span class="col-name">PropertyTypeId</span><span><span class="col-type">INT</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column fk"><span class="col-name">UserId</span><span><span class="col-type">NVARCHAR(128)</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column fk"><span class="col-name">OwnershipTypeId</span><span><span class="col-type">INT</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column fk"><span class="col-name">OwnershipStatusTypeId</span><span><span class="col-type">INT</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column"><span class="col-name">StartDate</span><span class="col-type">DATETIME</span></div>
+                <div class="column"><span class="col-name">EndDate</span><span class="col-type">DATETIME NULL</span></div>
+                <div class="column fk"><span class="col-name">EndReasonTypeId</span><span><span class="col-type">INT NULL</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column fk"><span class="col-name">ApprovedByUserId</span><span><span class="col-type">NVARCHAR(128)</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column fk"><span class="col-name">ReferredByUserId</span><span><span class="col-type">NVARCHAR(128) NULL</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column fk"><span class="col-name">ReferralSourceTypeId</span><span><span class="col-type">INT NULL</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column fk"><span class="col-name">SourceWaitlistId</span><span><span class="col-type">INT NULL</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column"><span class="col-name">LegacyUserOwnedAreaId</span><span class="col-type">INT NULL</span></div>
+                <div class="column"><span class="col-name">LeadCustodyEnabled</span><span class="col-type">BIT DEFAULT 1</span></div>
+                <div class="column"><span class="col-name">DefaultSplitPercentage</span><span class="col-type">DECIMAL(5,2)</span></div>
+                <div class="column"><span class="col-name">CreateDate</span><span class="col-type">DATETIME</span></div>
+                <div class="column"><span class="col-name">LastUpdateDate</span><span class="col-type">DATETIME</span></div>
+                <div class="column"><span class="col-name">IsDeleted</span><span class="col-type">BIT DEFAULT 0</span></div>
+            </div>
+        </div>
+        
+        <div class="table-box primary">
+            <div class="table-name">AreaWaitlist</div>
+            <div class="columns">
+                <div class="column pk"><span class="col-name">AreaWaitlistId</span><span><span class="col-type">INT</span><span class="key-indicator pk-badge">PK</span></span></div>
+                <div class="column fk"><span class="col-name">AreaId</span><span><span class="col-type">INT</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column fk"><span class="col-name">PropertyTypeId</span><span><span class="col-type">INT</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column fk"><span class="col-name">UserId</span><span><span class="col-type">NVARCHAR(128)</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column"><span class="col-name">QueuePosition</span><span class="col-type">INT</span></div>
+                <div class="column fk"><span class="col-name">WaitlistStatusTypeId</span><span><span class="col-type">INT</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column"><span class="col-name">RequestDate</span><span class="col-type">DATETIME</span></div>
+                <div class="column"><span class="col-name">NotifiedDate</span><span class="col-type">DATETIME NULL</span></div>
+                <div class="column"><span class="col-name">ResponseDate</span><span class="col-type">DATETIME NULL</span></div>
+                <div class="column"><span class="col-name">ExpirationDate</span><span class="col-type">DATETIME NULL</span></div>
+                <div class="column"><span class="col-name">Notes</span><span class="col-type">NVARCHAR(500)</span></div>
+                <div class="column"><span class="col-name">CreateDate</span><span class="col-type">DATETIME</span></div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- SECTION: Lead Custody Tables (NEW) -->
+    <div class="section-title">🔐 LEAD CUSTODY TABLES (NEW in v5)</div>
+    <div class="diagram-container">
+        
+        <div class="table-box lead new">
+            <span class="new-badge">NEW</span>
+            <div class="table-name">LeadCustody</div>
+            <div class="columns">
+                <div class="column pk"><span class="col-name">LeadCustodyId</span><span><span class="col-type">BIGINT</span><span class="key-indicator pk-badge">PK</span></span></div>
+                <div class="column fk"><span class="col-name">GenieLeadId</span><span><span class="col-type">BIGINT</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column fk"><span class="col-name">CustodyStatusTypeId</span><span><span class="col-type">INT</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column fk"><span class="col-name">CurrentLicenseeUserId</span><span><span class="col-type">NVARCHAR(128) NULL</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column fk"><span class="col-name">SourceAreaOwnershipId</span><span><span class="col-type">INT NULL</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column"><span class="col-name">SplitPercentage</span><span class="col-type">DECIMAL(5,2)</span></div>
+                <div class="column"><span class="col-name">GracePeriodEndDate</span><span class="col-type">DATETIME NULL</span></div>
+                <div class="column"><span class="col-name">CreateDate</span><span class="col-type">DATETIME</span></div>
+                <div class="column"><span class="col-name">LastUpdateDate</span><span class="col-type">DATETIME</span></div>
+            </div>
+        </div>
+        
+        <div class="table-box lead new">
+            <span class="new-badge">NEW</span>
+            <div class="table-name">LeadCustodyHistory</div>
+            <div class="columns">
+                <div class="column pk"><span class="col-name">LeadCustodyHistoryId</span><span><span class="col-type">BIGINT</span><span class="key-indicator pk-badge">PK</span></span></div>
+                <div class="column fk"><span class="col-name">LeadCustodyId</span><span><span class="col-type">BIGINT</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column fk"><span class="col-name">FromUserId</span><span><span class="col-type">NVARCHAR(128) NULL</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column fk"><span class="col-name">ToUserId</span><span><span class="col-type">NVARCHAR(128) NULL</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column fk"><span class="col-name">CustodyTransferReasonId</span><span><span class="col-type">INT</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column fk"><span class="col-name">TransferredByUserId</span><span><span class="col-type">NVARCHAR(128)</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column"><span class="col-name">TransferDate</span><span class="col-type">DATETIME</span></div>
+                <div class="column"><span class="col-name">Notes</span><span class="col-type">NVARCHAR(500)</span></div>
+            </div>
+        </div>
+        
+        <div class="table-box lead new">
+            <span class="new-badge">NEW</span>
+            <div class="table-name">LeadTransaction</div>
+            <div class="columns">
+                <div class="column pk"><span class="col-name">LeadTransactionId</span><span><span class="col-type">BIGINT</span><span class="key-indicator pk-badge">PK</span></span></div>
+                <div class="column fk"><span class="col-name">LeadCustodyId</span><span><span class="col-type">BIGINT</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column fk"><span class="col-name">GenieLeadId</span><span><span class="col-type">BIGINT</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column"><span class="col-name">TransactionDate</span><span class="col-type">DATE</span></div>
+                <div class="column"><span class="col-name">TransactionAmount</span><span class="col-type">MONEY</span></div>
+                <div class="column"><span class="col-name">CommissionTotal</span><span class="col-type">MONEY</span></div>
+                <div class="column"><span class="col-name">SplitTo1PP</span><span class="col-type">MONEY</span></div>
+                <div class="column"><span class="col-name">SplitToAgent</span><span class="col-type">MONEY</span></div>
+                <div class="column fk"><span class="col-name">AgentUserIdAtClose</span><span><span class="col-type">NVARCHAR(128)</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column"><span class="col-name">VerifiedDate</span><span class="col-type">DATETIME NULL</span></div>
+                <div class="column fk"><span class="col-name">VerifiedByUserId</span><span><span class="col-type">NVARCHAR(128) NULL</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column"><span class="col-name">CreateDate</span><span class="col-type">DATETIME</span></div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- SECTION: History Tables -->
+    <div class="section-title">📜 HISTORY TABLES</div>
+    <div class="diagram-container">
+        
+        <div class="table-box history">
+            <div class="table-name">AreaOwnershipHistory</div>
+            <div class="columns">
+                <div class="column pk"><span class="col-name">AreaOwnershipHistoryId</span><span><span class="col-type">BIGINT</span><span class="key-indicator pk-badge">PK</span></span></div>
+                <div class="column fk"><span class="col-name">AreaOwnershipId</span><span><span class="col-type">INT</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column fk"><span class="col-name">ActionTypeId</span><span><span class="col-type">INT</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column"><span class="col-name">OldValue</span><span class="col-type">NVARCHAR(MAX)</span></div>
+                <div class="column"><span class="col-name">NewValue</span><span class="col-type">NVARCHAR(MAX)</span></div>
+                <div class="column fk"><span class="col-name">ChangedByUserId</span><span><span class="col-type">NVARCHAR(128)</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column"><span class="col-name">ChangeDate</span><span class="col-type">DATETIME</span></div>
+                <div class="column"><span class="col-name">Reason</span><span class="col-type">NVARCHAR(500)</span></div>
+            </div>
+        </div>
+        
+        <div class="table-box history">
+            <div class="table-name">AreaCampaignHistory</div>
+            <div class="columns">
+                <div class="column pk"><span class="col-name">AreaCampaignHistoryId</span><span><span class="col-type">BIGINT</span><span class="key-indicator pk-badge">PK</span></span></div>
+                <div class="column fk"><span class="col-name">AreaOwnershipId</span><span><span class="col-type">INT</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column fk"><span class="col-name">PropertyCastId</span><span><span class="col-type">INT</span><span class="key-indicator fk-badge">FK</span></span></div>
+                <div class="column"><span class="col-name">CampaignMonth</span><span class="col-type">DATE</span></div>
+                <div class="column"><span class="col-name">TextsSent</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-name">LeadsGenerated</span><span class="col-type">INT</span></div>
+                <div class="column"><span class="col-name">TwilioCost</span><span class="col-type">DECIMAL(10,4)</span></div>
+                <div class="column"><span class="col-name">VersiumCost</span><span class="col-type">DECIMAL(10,4)</span></div>
+                <div class="column"><span class="col-name">CreateDate</span><span class="col-type">DATETIME</span></div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- SECTION: Lookup Tables -->
+    <div class="section-title">📚 LOOKUP TABLES</div>
+    <div class="diagram-container">
+        
+        <div class="table-box lookup">
+            <div class="table-name">PropertyType</div>
+            <div class="columns">
+                <div class="column pk"><span class="col-name">PropertyTypeId</span><span><span class="col-type">INT</span><span class="key-indicator pk-badge">PK</span></span></div>
+                <div class="column"><span class="col-name">PropertyTypeName</span><span class="col-type">NVARCHAR(50)</span></div>
+                <div class="column"><span class="col-name">Description</span><span class="col-type">NVARCHAR(200)</span></div>
+            </div>
+            <div style="margin-top:10px; font-size:0.8em; color:#888;">
+                Values: 0=SFR, 1=Condo
+            </div>
+        </div>
+        
+        <div class="table-box lookup">
+            <div class="table-name">OwnershipType</div>
+            <div class="columns">
+                <div class="column pk"><span class="col-name">OwnershipTypeId</span><span><span class="col-type">INT</span><span class="key-indicator pk-badge">PK</span></span></div>
+                <div class="column"><span class="col-name">OwnershipTypeName</span><span class="col-type">NVARCHAR(50)</span></div>
+                <div class="column"><span class="col-name">Description</span><span class="col-type">NVARCHAR(200)</span></div>
+            </div>
+            <div style="margin-top:10px; font-size:0.8em; color:#888;">
+                Values: Purchase, WaitlistConversion, AdminAssignment, Partnership, Promotion, Migration
+            </div>
+        </div>
+        
+        <div class="table-box lookup">
+            <div class="table-name">OwnershipStatusType</div>
+            <div class="columns">
+                <div class="column pk"><span class="col-name">OwnershipStatusTypeId</span><span><span class="col-type">INT</span><span class="key-indicator pk-badge">PK</span></span></div>
+                <div class="column"><span class="col-name">StatusName</span><span class="col-type">NVARCHAR(50)</span></div>
+                <div class="column"><span class="col-name">StatusCategory</span><span class="col-type">NVARCHAR(20)</span></div>
+                <div class="column"><span class="col-name">IsFinal</span><span class="col-type">BIT</span></div>
+                <div class="column"><span class="col-name">AllowsCampaigns</span><span class="col-type">BIT</span></div>
+            </div>
+            <div style="margin-top:10px; font-size:0.8em; color:#888;">
+                Categories: WAITLIST, OWNERSHIP, HISTORICAL
+            </div>
+        </div>
+        
+        <div class="table-box lookup">
+            <div class="table-name">EndReasonType</div>
+            <div class="columns">
+                <div class="column pk"><span class="col-name">EndReasonTypeId</span><span><span class="col-type">INT</span><span class="key-indicator pk-badge">PK</span></span></div>
+                <div class="column"><span class="col-name">EndReasonName</span><span class="col-type">NVARCHAR(50)</span></div>
+                <div class="column"><span class="col-name">Description</span><span class="col-type">NVARCHAR(200)</span></div>
+            </div>
+            <div style="margin-top:10px; font-size:0.8em; color:#888;">
+                Values: Cancelled, NonPayment, Violation, Upgraded, Transferred, AdminAction
+            </div>
+        </div>
+        
+        <div class="table-box lookup">
+            <div class="table-name">ActionType</div>
+            <div class="columns">
+                <div class="column pk"><span class="col-name">ActionTypeId</span><span><span class="col-type">INT</span><span class="key-indicator pk-badge">PK</span></span></div>
+                <div class="column"><span class="col-name">ActionTypeName</span><span class="col-type">NVARCHAR(50)</span></div>
+            </div>
+            <div style="margin-top:10px; font-size:0.8em; color:#888;">
+                Values: Created, StatusChanged, Transferred, Suspended, Reactivated, Ended
+            </div>
+        </div>
+        
+        <div class="table-box lookup">
+            <div class="table-name">ReferralSourceType</div>
+            <div class="columns">
+                <div class="column pk"><span class="col-name">ReferralSourceTypeId</span><span><span class="col-type">INT</span><span class="key-indicator pk-badge">PK</span></span></div>
+                <div class="column"><span class="col-name">SourceTypeName</span><span class="col-type">NVARCHAR(50)</span></div>
+            </div>
+            <div style="margin-top:10px; font-size:0.8em; color:#888;">
+                Values: GenieUser, TitleRep, Affiliate, Direct, Marketing
+            </div>
+        </div>
+        
+        <div class="table-box lookup new">
+            <span class="new-badge">NEW</span>
+            <div class="table-name">CustodyStatusType</div>
+            <div class="columns">
+                <div class="column pk"><span class="col-name">CustodyStatusTypeId</span><span><span class="col-type">INT</span><span class="key-indicator pk-badge">PK</span></span></div>
+                <div class="column"><span class="col-name">StatusName</span><span class="col-type">NVARCHAR(50)</span></div>
+                <div class="column"><span class="col-name">Description</span><span class="col-type">NVARCHAR(200)</span></div>
+            </div>
+            <div style="margin-top:10px; font-size:0.8em; color:#888;">
+                Values: 1PPCustody, AgentLicensed, AgentSuspended, Reclaimed, Converted
+            </div>
+        </div>
+        
+        <div class="table-box lookup new">
+            <span class="new-badge">NEW</span>
+            <div class="table-name">CustodyTransferReason</div>
+            <div class="columns">
+                <div class="column pk"><span class="col-name">CustodyTransferReasonId</span><span><span class="col-type">INT</span><span class="key-indicator pk-badge">PK</span></span></div>
+                <div class="column"><span class="col-name">ReasonName</span><span class="col-type">NVARCHAR(50)</span></div>
+            </div>
+            <div style="margin-top:10px; font-size:0.8em; color:#888;">
+                Values: InitialAssignment, AgentCancelled, NonPayment, Reclaimed, AreaTransfer, Manual
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Relationship Section -->
+    <div class="relationship-section">
+        <h3>🔗 Key Relationships (Crow's Foot Notation)</h3>
+        <table class="rel-table">
+            <tr>
+                <th>Parent Table</th>
+                <th>Relationship</th>
+                <th>Child Table</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>ViewArea</td>
+                <td class="cardinality">1 ──────&lt; N</td>
+                <td>AreaOwnership</td>
+                <td>One area can have multiple ownership records (history)</td>
+            </tr>
+            <tr>
+                <td>AreaOwnership</td>
+                <td class="cardinality">1 ──────&lt; N</td>
+                <td>AreaOwnershipHistory</td>
+                <td>Track all changes to ownership</td>
+            </tr>
+            <tr>
+                <td>AreaOwnership</td>
+                <td class="cardinality">1 ──────&lt; N</td>
+                <td>AreaCampaignHistory</td>
+                <td>Campaign metrics per ownership</td>
+            </tr>
+            <tr>
+                <td>AreaWaitlist</td>
+                <td class="cardinality">1 ──────&lt; 0..1</td>
+                <td>AreaOwnership (SourceWaitlistId)</td>
+                <td>Waitlist can convert to ownership</td>
+            </tr>
+            <tr style="background: rgba(231,76,60,0.1);">
+                <td>AreaOwnership</td>
+                <td class="cardinality">1 ──────&lt; N</td>
+                <td>LeadCustody</td>
+                <td><strong>NEW:</strong> Leads tied to area ownership</td>
+            </tr>
+            <tr style="background: rgba(231,76,60,0.1);">
+                <td>LeadCustody</td>
+                <td class="cardinality">1 ──────&lt; N</td>
+                <td>LeadCustodyHistory</td>
+                <td><strong>NEW:</strong> Track all custody transfers</td>
+            </tr>
+            <tr style="background: rgba(231,76,60,0.1);">
+                <td>LeadCustody</td>
+                <td class="cardinality">1 ──────&lt; 0..1</td>
+                <td>LeadTransaction</td>
+                <td><strong>NEW:</strong> Track when lead converts to deal</td>
+            </tr>
+            <tr style="background: rgba(231,76,60,0.1);">
+                <td>GenieLead (existing)</td>
+                <td class="cardinality">1 ──────&lt; 1</td>
+                <td>LeadCustody</td>
+                <td><strong>NEW:</strong> Each lead has custody record</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Lead Custody Flow Diagram -->
+    <div class="section-title">🔄 LEAD CUSTODY LIFECYCLE</div>
+    <div class="flow-diagram">
+                                    ┌────────────────────────────────────────┐
+                                    │         LEAD CREATED BY CAMPAIGN       │
+                                    │         (GenieLead record)             │
+                                    └────────────────────┬───────────────────┘
+                                                         │
+                                                         ▼
+                                    ┌────────────────────────────────────────┐
+                                    │        LeadCustody CREATED             │
+                                    │   CustodyStatus = "AgentLicensed"      │
+                                    │   CurrentLicenseeUserId = Agent        │
+                                    │   SourceAreaOwnershipId = Link         │
+                                    │   SplitPercentage = from AreaOwnership │
+                                    └────────────────────┬───────────────────┘
+                                                         │
+                          ┌──────────────────────────────┼──────────────────────────────┐
+                          │                              │                              │
+                          ▼                              ▼                              ▼
+            ┌─────────────────────────┐    ┌─────────────────────────┐    ┌─────────────────────────┐
+            │    AGENT CONVERTS       │    │    AGENT CANCELS        │    │    NON-PERFORMER        │
+            │    (Deal closes)        │    │    (Stops paying)       │    │    (No activity)        │
+            └───────────┬─────────────┘    └───────────┬─────────────┘    └───────────┬─────────────┘
+                        │                              │                              │
+                        ▼                              ▼                              ▼
+            ┌─────────────────────────┐    ┌─────────────────────────┐    ┌─────────────────────────┐
+            │  LeadTransaction        │    │  30-Day Grace Period    │    │  Admin Review           │
+            │  Created                │    │  CustodyStatus =        │    │  CustodyStatus =        │
+            │  SplitTo1PP calculated  │    │  "AgentSuspended"       │    │  "Reclaimed"            │
+            │  CustodyStatus =        │    └───────────┬─────────────┘    └───────────┬─────────────┘
+            │  "Converted"            │                │                              │
+            └─────────────────────────┘                │                              │
+                                                       ▼                              │
+                                          ┌─────────────────────────┐                 │
+                                          │  Grace Period Expires   │                 │
+                                          │  CustodyStatus =        │◄────────────────┘
+                                          │  "1PPCustody"           │
+                                          │  CurrentLicenseeUserId  │
+                                          │  = NULL                 │
+                                          └───────────┬─────────────┘
+                                                      │
+                                                      ▼
+                                          ┌─────────────────────────┐
+                                          │   AVAILABLE FOR         │
+                                          │   REASSIGNMENT          │
+                                          │   to new area owner     │
+                                          └─────────────────────────┘
+    </div>
+
+    <div class="relationship-section">
+        <h3>📊 Data Migration Impact</h3>
+        <table class="rel-table">
+            <tr><th>Metric</th><th>Current</th><th>After Migration</th></tr>
+            <tr><td>Total Leads</td><td>85,554</td><td>85,554 (with LeadCustody records)</td></tr>
+            <tr><td>Orphaned Leads</td><td style="color:#e74c3c;">56,876 (66.5%)</td><td style="color:#2ecc71;">0 (all in 1PP Custody)</td></tr>
+            <tr><td>Mismatched Leads</td><td style="color:#f39c12;">6,235 (7.3%)</td><td style="color:#2ecc71;">Audit trail preserved</td></tr>
+            <tr><td>Trackable for Commission</td><td style="color:#e74c3c;">0%</td><td style="color:#2ecc71;">100%</td></tr>
+        </table>
+    </div>
+
+</body>
+</html>
+

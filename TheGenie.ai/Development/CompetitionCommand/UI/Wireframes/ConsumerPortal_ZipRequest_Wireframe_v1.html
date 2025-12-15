@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheGenie - Find a Real Estate Expert in Your Area</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --secondary: #f59e0b;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --light: #f0fdf4;
+            --white: #ffffff;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+            color: var(--white);
+            padding: 60px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30Z' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        
+        .hero-content {
+            position: relative;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .hero h1 {
+            font-size: 2.8em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            margin-bottom: 40px;
+        }
+        
+        /* Search Box */
+        .search-container {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 8px;
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            padding: 18px 25px;
+            font-size: 1.1em;
+            border-radius: 15px;
+            outline: none;
+        }
+        
+        .search-input::placeholder {
+            color: #94a3b8;
+        }
+        
+        .search-btn {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            color: white;
+            border: none;
+            padding: 18px 35px;
+            border-radius: 15px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .search-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(5, 150, 105, 0.4);
+        }
+        
+        /* Wireframe Note */
+        .wireframe-note {
+            background: #fef3c7;
+            border: 2px dashed #f59e0b;
+            padding: 15px 20px;
+            margin: 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            max-width: 900px;
+            margin: 20px auto;
+        }
+        
+        /* Results Section */
+        .results-section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray);
+            margin-bottom: 40px;
+        }
+        
+        /* Scenario Cards */
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+        
+        @media (max-width: 900px) {
+            .scenario-grid { grid-template-columns: 1fr; }
+        }
+        
+        .scenario-card {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        .scenario-header {
+            padding: 25px;
+            color: white;
+        }
+        
+        .scenario-header.covered { background: linear-gradient(135deg, #059669 0%, #10b981 100%); }
+        .scenario-header.not-covered { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); }
+        
+        .scenario-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .scenario-body {
+            padding: 25px;
+        }
+        
+        /* Agent Card */
+        .agent-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .agent-photo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+        }
+        
+        .agent-info h3 {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+        
+        .agent-info p {
+            color: var(--gray);
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        
+        .agent-stats {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .agent-stat {
+            font-size: 0.85em;
+        }
+        
+        .agent-stat strong {
+            color: var(--primary);
+        }
+        
+        /* Button */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(5, 150, 105, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+            color: white;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-block { width: 100%; }
+        
+        /* Waitlist Form */
+        .waitlist-form {
+            background: #fffbeb;
+            border-radius: 15px;
+            padding: 25px;
+        }
+        
+        .form-title {
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: border-color 0.2s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        /* Benefits */
+        .benefits {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        
+        .benefit-icon {
+            color: var(--primary);
+            font-size: 1.2em;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            background: #f8fafc;
+            padding: 60px 20px;
+        }
+        
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 700px) {
+            .steps-grid { grid-template-columns: 1fr; }
+        }
+        
+        .step-card {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+        
+        .step-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .step-desc {
+            color: var(--gray);
+            font-size: 0.95em;
+        }
+        
+        /* Referral CTA */
+        .referral-section {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .referral-section h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+        
+        .referral-section p {
+            opacity: 0.9;
+            max-width: 500px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--gray);
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="logo">🧞 TheGenie</div>
+            <h1>Find a Real Estate Expert in Your Area</h1>
+            <p>Enter your zip code to connect with a local agent who specializes in your neighborhood.</p>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Enter your zip code..." value="34786">
+                <button class="search-btn">Search 🔍</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wireframe Note -->
+    <div class="wireframe-note">
+        <span style="font-size:1.5em;">📐</span>
+        <div>
+            <strong style="color:#92400e;">CONSUMER PORTAL WIREFRAME v1</strong> - 
+            This is what CONSUMERS see. They search their zip code to find an agent OR request coverage if no agent exists.
+        </div>
+    </div>
+
+    <!-- Results Section -->
+    <section class="results-section">
+        <h2 class="section-title">Search Results for 34786</h2>
+        <p class="section-subtitle">Here's what we found for your area</p>
+
+        <div class="scenario-grid">
+            
+            <!-- Scenario 1: Area is Covered -->
+            <div class="scenario-card">
+                <div class="scenario-header covered">
+                    <div class="scenario-title">✅ Great News! Your Area is Covered</div>
+                    <div>A local expert is ready to help you</div>
+                </div>
+                <div class="scenario-body">
+                    <div class="agent-card">
+                        <div class="agent-photo">👨‍💼</div>
+                        <div class="agent-info">
+                            <h3>Simon Simaan</h3>
+                            <p>Ocoee & Winter Garden Specialist</p>
+                            <div class="agent-stats">
+                                <span class="agent-stat"><strong>342</strong> homes sold</span>
+                                <span class="agent-stat"><strong>4.9</strong> ⭐ rating</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary btn-block">📞 Contact Simon Now</button>
+                    
+                    <div class="benefits">
+                        <div class="benefit-item">
+                            <span class="benefit-icon">✓</span>
+                            <span>Free home valuation</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">✓</span>
+                            <span>Local market expertise</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">✓</span>
+                            <span>No obligation consultation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scenario 2: Area NOT Covered -->
+            <div class="scenario-card">
+                <div class="scenario-header not-covered">
+                    <div class="scenario-title">🔔 No Agent Yet in This Area</div>
+                    <div>But we can notify you when one joins!</div>
+                </div>
+                <div class="scenario-body">
+                    <div class="waitlist-form">
+                        <div class="form-title">📋 Join the Waitlist</div>
+                        <p style="font-size:0.9em;color:#64748b;margin-bottom:15px;">
+                            We're actively recruiting agents for your area. Be the first to know!
+                        </p>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-input" placeholder="John">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-input" placeholder="Smith">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" placeholder="john@email.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Phone (optional)</label>
+                            <input type="tel" class="form-input" placeholder="(555) 123-4567">
+                        </div>
+                        
+                        <button class="btn btn-secondary btn-block">🔔 Notify Me When Available</button>
+                    </div>
+                    
+                    <div style="margin-top:20px;text-align:center;">
+                        <p style="color:#64748b;font-size:0.9em;margin-bottom:10px;">
+                            Know an agent who serves this area?
+                        </p>
+                        <button class="btn btn-outline">Refer an Agent →</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-subtitle">Simple, fast, and effective</p>
+        
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-title">Enter Your Zip Code</div>
+                <div class="step-desc">Search to see if an expert agent is available in your neighborhood</div>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-title">Connect with Your Agent</div>
+                <div class="step-desc">If covered, get connected instantly with a local specialist</div>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-title">Get Expert Help</div>
+                <div class="step-desc">Receive personalized guidance for buying or selling your home</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Referral CTA -->
+    <section class="referral-section">
+        <h2>Are You a Real Estate Agent?</h2>
+        <p>Claim your territory and get exclusive leads in your area. Join TheGenie network today.</p>
+        <button class="btn" style="background:white;color:#1e293b;font-size:1.1em;padding:16px 35px;">
+            🧞 Become a Genie Agent →
+        </button>
+    </section>
+
+    <footer class="footer">
+        <p>TheGenie Consumer Portal • Wireframe v1 • Created 12/15/2025</p>
+    </footer>
+
+</body>
+</html>
+

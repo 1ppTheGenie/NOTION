@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competition Command - Area Ownership Schema ERD v2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1em;
+        }
+        
+        .status {
+            display: inline-block;
+            background: #f39c12;
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin-top: 10px;
+        }
+        
+        .erd-canvas {
+            position: relative;
+            width: 100%;
+            min-height: 1400px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: visible;
+        }
+        
+        .table-entity {
+            position: absolute;
+            background: #fff;
+            border: 2px solid #34495e;
+            border-radius: 5px;
+            min-width: 220px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+        
+        .table-entity.new {
+            border-color: #27ae60;
+        }
+        
+        .table-entity.existing {
+            border-color: #7f8c8d;
+        }
+        
+        .table-name {
+            padding: 10px 15px;
+            font-weight: bold;
+            font-size: 0.95em;
+            border-bottom: 2px solid;
+        }
+        
+        .table-entity.new .table-name {
+            background: #27ae60;
+            color: #fff;
+            border-color: #27ae60;
+        }
+        
+        .table-entity.existing .table-name {
+            background: #95a5a6;
+            color: #fff;
+            border-color: #95a5a6;
+        }
+        
+        .table-columns {
+            padding: 8px 0;
+        }
+        
+        .column {
+            display: flex;
+            padding: 4px 12px;
+            font-size: 0.8em;
+            align-items: center;
+        }
+        
+        .column:hover {
+            background: #f8f9fa;
+        }
+        
+        .col-key {
+            width: 30px;
+            font-weight: bold;
+            font-size: 0.75em;
+        }
+        
+        .col-key.pk {
+            color: #f39c12;
+        }
+        
+        .col-key.fk {
+            color: #3498db;
+        }
+        
+        .col-key.pfk {
+            color: #9b59b6;
+        }
+        
+        .col-name {
+            flex: 1;
+            font-family: 'Consolas', monospace;
+        }
+        
+        .col-type {
+            color: #7f8c8d;
+            font-size: 0.85em;
+            font-family: 'Consolas', monospace;
+        }
+        
+        .col-null {
+            width: 30px;
+            text-align: center;
+            font-size: 0.7em;
+            color: #bdc3c7;
+        }
+        
+        /* SVG for relationship lines */
+        .relationships-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .table-entity {
+            z-index: 1;
+        }
+        
+        .rel-line {
+            stroke: #34495e;
+            stroke-width: 1.5;
+            fill: none;
+        }
+        
+        .legend {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 0.85em;
+            z-index: 10;
+        }
+        
+        .legend h4 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 8px 0;
+        }
+        
+        .legend-symbol {
+            width: 60px;
+            height: 20px;
+        }
+        
+        .tag {
+            font-size: 0.7em;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-left: 5px;
+        }
+        
+        .tag.new {
+            background: #27ae60;
+            color: #fff;
+        }
+        
+        .tag.existing {
+            background: #95a5a6;
+            color: #fff;
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+            .erd-canvas {
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+            .header {
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Competition Command - Area Ownership Schema</h1>
+        <p class="subtitle">Entity Relationship Diagram with Crow's Foot Notation</p>
+        <span class="status">PENDING APPROVAL</span>
+        <p style="color: #95a5a6; font-size: 0.8em; margin-top: 10px;">Version 2.0 | 12/15/2025</p>
+    </div>
+    
+    <div class="erd-canvas">
+        <!-- SVG for relationship lines -->
+        <svg class="relationships-svg" viewBox="0 0 1200 1400" preserveAspectRatio="xMidYMid meet">
+            <!-- Definitions for crow's foot markers -->
+            <defs>
+                <!-- One (single line) marker -->
+                <marker id="one" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto">
+                    <line x1="6" y1="2" x2="6" y2="10" stroke="#34495e" stroke-width="2"/>
+                </marker>
+                
+                <!-- Many (crow's foot) marker -->
+                <marker id="many" markerWidth="16" markerHeight="16" refX="0" refY="8" orient="auto">
+                    <path d="M 0 8 L 12 2 M 0 8 L 12 8 M 0 8 L 12 14" stroke="#34495e" stroke-width="1.5" fill="none"/>
+                </marker>
+                
+                <!-- Zero or One (circle + line) -->
+                <marker id="zero-one" markerWidth="20" markerHeight="12" refX="18" refY="6" orient="auto">
+                    <circle cx="6" cy="6" r="4" stroke="#34495e" stroke-width="1.5" fill="white"/>
+                    <line x1="12" y1="2" x2="12" y2="10" stroke="#34495e" stroke-width="2"/>
+                </marker>
+                
+                <!-- Zero or Many (circle + crow's foot) -->
+                <marker id="zero-many" markerWidth="24" markerHeight="16" refX="0" refY="8" orient="auto">
+                    <circle cx="20" cy="8" r="4" stroke="#34495e" stroke-width="1.5" fill="white"/>
+                    <path d="M 0 8 L 12 2 M 0 8 L 12 8 M 0 8 L 12 14" stroke="#34495e" stroke-width="1.5" fill="none"/>
+                </marker>
+                
+                <!-- One and only one -->
+                <marker id="one-one" markerWidth="16" markerHeight="12" refX="14" refY="6" orient="auto">
+                    <line x1="4" y1="2" x2="4" y2="10" stroke="#34495e" stroke-width="2"/>
+                    <line x1="10" y1="2" x2="10" y2="10" stroke="#34495e" stroke-width="2"/>
+                </marker>
+                
+                <!-- One or Many -->
+                <marker id="one-many" markerWidth="20" markerHeight="16" refX="0" refY="8" orient="auto">
+                    <line x1="16" y1="3" x2="16" y2="13" stroke="#34495e" stroke-width="2"/>
+                    <path d="M 0 8 L 12 2 M 0 8 L 12 8 M 0 8 L 12 14" stroke="#34495e" stroke-width="1.5" fill="none"/>
+                </marker>
+            </defs>
+            
+            <!-- AspNetUsers (1) --> AreaOwnership (N) -->
+            <path class="rel-line" d="M 160 200 L 160 310" marker-start="url(#one-one)" marker-end="url(#one-many)"/>
+            
+            <!-- ViewArea (1) --> AreaOwnership (N) -->
+            <path class="rel-line" d="M 430 200 L 280 310" marker-start="url(#one-one)" marker-end="url(#one-many)"/>
+            
+            <!-- AspNetUsers (1) --> AreaWaitlist (N) -->
+            <path class="rel-line" d="M 160 200 L 160 250 L 600 250 L 600 310" marker-start="url(#one-one)" marker-end="url(#one-many)"/>
+            
+            <!-- AreaOwnership (1) --> AreaOwnershipHistory (N) -->
+            <path class="rel-line" d="M 160 620 L 160 720" marker-start="url(#one-one)" marker-end="url(#one-many)"/>
+            
+            <!-- AreaOwnership (1) --> AreaCampaignHistory (N) -->
+            <path class="rel-line" d="M 280 620 L 500 720" marker-start="url(#one-one)" marker-end="url(#one-many)"/>
+            
+            <!-- PropertyCast (1) --> AreaCampaignHistory (N) -->
+            <path class="rel-line" d="M 900 200 L 900 400 L 700 720" marker-start="url(#one-one)" marker-end="url(#zero-many)"/>
+            
+            <!-- ViewArea (1) --> AreaWaitlist (N) -->
+            <path class="rel-line" d="M 500 200 L 500 250 L 700 250 L 700 310" marker-start="url(#one-one)" marker-end="url(#one-many)"/>
+        </svg>
+        
+        <!-- EXISTING TABLES (Top Row) -->
+        
+        <!-- AspNetUsers -->
+        <div class="table-entity existing" style="left: 50px; top: 50px;">
+            <div class="table-name">AspNetUsers <span class="tag existing">EXISTING</span></div>
+            <div class="table-columns">
+                <div class="column">
+                    <span class="col-key pk">PK</span>
+                    <span class="col-name">Id</span>
+                    <span class="col-type">NVARCHAR(128)</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">UserName</span>
+                    <span class="col-type">NVARCHAR(256)</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">Email</span>
+                    <span class="col-type">NVARCHAR(256)</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ViewArea -->
+        <div class="table-entity existing" style="left: 350px; top: 50px;">
+            <div class="table-name">ViewArea <span class="tag existing">EXISTING</span></div>
+            <div class="table-columns">
+                <div class="column">
+                    <span class="col-key pk">PK</span>
+                    <span class="col-name">AreaId</span>
+                    <span class="col-type">INT</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">Name</span>
+                    <span class="col-type">NVARCHAR(100)</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">PolygonId</span>
+                    <span class="col-type">INT</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PropertyCast -->
+        <div class="table-entity existing" style="left: 800px; top: 50px;">
+            <div class="table-name">PropertyCast <span class="tag existing">EXISTING</span></div>
+            <div class="table-columns">
+                <div class="column">
+                    <span class="col-key pk">PK</span>
+                    <span class="col-name">PropertyCastId</span>
+                    <span class="col-type">INT</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">PropertyCastTypeId</span>
+                    <span class="col-type">INT</span>
+                </div>
+                <div class="column">
+                    <span class="col-key fk">FK</span>
+                    <span class="col-name">AspNetUserId</span>
+                    <span class="col-type">NVARCHAR(128)</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">AreaId</span>
+                    <span class="col-type">INT</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">PropertyTypeId</span>
+                    <span class="col-type">INT</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- NEW TABLES (Middle Row) -->
+        
+        <!-- AreaOwnership (MAIN) -->
+        <div class="table-entity new" style="left: 50px; top: 310px; min-width: 280px;">
+            <div class="table-name">AreaOwnership <span class="tag new">NEW</span></div>
+            <div class="table-columns">
+                <div class="column">
+                    <span class="col-key pk">PK</span>
+                    <span class="col-name">AreaOwnershipId</span>
+                    <span class="col-type">INT IDENTITY</span>
+                </div>
+                <div class="column" style="background: #ebf5fb;">
+                    <span class="col-key fk">FK</span>
+                    <span class="col-name">AspNetUserId</span>
+                    <span class="col-type">NVARCHAR(128)</span>
+                </div>
+                <div class="column" style="background: #ebf5fb;">
+                    <span class="col-key fk">FK</span>
+                    <span class="col-name">AreaId</span>
+                    <span class="col-type">INT</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">PropertyTypeId</span>
+                    <span class="col-type">INT</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">AreaOwnershipTypeId</span>
+                    <span class="col-type">INT</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">Status</span>
+                    <span class="col-type">NVARCHAR(20)</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">RequestDate</span>
+                    <span class="col-type">DATETIME2</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">ApprovalDate</span>
+                    <span class="col-type">DATETIME2</span>
+                </div>
+                <div class="column" style="background: #ebf5fb;">
+                    <span class="col-key fk">FK</span>
+                    <span class="col-name">ApprovedByUserId</span>
+                    <span class="col-type">NVARCHAR(128)</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">StartDate</span>
+                    <span class="col-type">DATETIME2</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">EndDate</span>
+                    <span class="col-type">DATETIME2</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">EndReason</span>
+                    <span class="col-type">NVARCHAR(50)</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">Notes</span>
+                    <span class="col-type">NVARCHAR(500)</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">CreatedDate</span>
+                    <span class="col-type">DATETIME2</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">ModifiedDate</span>
+                    <span class="col-type">DATETIME2</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- AreaWaitlist -->
+        <div class="table-entity new" style="left: 500px; top: 310px; min-width: 260px;">
+            <div class="table-name">AreaWaitlist <span class="tag new">NEW</span></div>
+            <div class="table-columns">
+                <div class="column">
+                    <span class="col-key pk">PK</span>
+                    <span class="col-name">AreaWaitlistId</span>
+                    <span class="col-type">INT IDENTITY</span>
+                </div>
+                <div class="column" style="background: #ebf5fb;">
+                    <span class="col-key fk">FK</span>
+                    <span class="col-name">AspNetUserId</span>
+                    <span class="col-type">NVARCHAR(128)</span>
+                </div>
+                <div class="column" style="background: #ebf5fb;">
+                    <span class="col-key fk">FK</span>
+                    <span class="col-name">AreaId</span>
+                    <span class="col-type">INT</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">PropertyTypeId</span>
+                    <span class="col-type">INT</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">AreaOwnershipTypeId</span>
+                    <span class="col-type">INT</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">QueuePosition</span>
+                    <span class="col-type">INT</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">Status</span>
+                    <span class="col-type">NVARCHAR(20)</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">RequestDate</span>
+                    <span class="col-type">DATETIME2</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">NotifiedDate</span>
+                    <span class="col-type">DATETIME2</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">ExpirationDate</span>
+                    <span class="col-type">DATETIME2</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">ResolvedDate</span>
+                    <span class="col-type">DATETIME2</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">Notes</span>
+                    <span class="col-type">NVARCHAR(500)</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CHILD TABLES (Bottom Row) -->
+        
+        <!-- AreaOwnershipHistory -->
+        <div class="table-entity new" style="left: 50px; top: 720px; min-width: 260px;">
+            <div class="table-name">AreaOwnershipHistory <span class="tag new">NEW</span></div>
+            <div class="table-columns">
+                <div class="column">
+                    <span class="col-key pk">PK</span>
+                    <span class="col-name">AreaOwnershipHistoryId</span>
+                    <span class="col-type">INT IDENTITY</span>
+                </div>
+                <div class="column" style="background: #ebf5fb;">
+                    <span class="col-key fk">FK</span>
+                    <span class="col-name">AreaOwnershipId</span>
+                    <span class="col-type">INT</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">Action</span>
+                    <span class="col-type">NVARCHAR(30)</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">PreviousStatus</span>
+                    <span class="col-type">NVARCHAR(20)</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">NewStatus</span>
+                    <span class="col-type">NVARCHAR(20)</span>
+                </div>
+                <div class="column" style="background: #ebf5fb;">
+                    <span class="col-key fk">FK</span>
+                    <span class="col-name">ActionByUserId</span>
+                    <span class="col-type">NVARCHAR(128)</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">ActionDate</span>
+                    <span class="col-type">DATETIME2</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">Notes</span>
+                    <span class="col-type">NVARCHAR(500)</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">AdditionalData</span>
+                    <span class="col-type">NVARCHAR(MAX)</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- AreaCampaignHistory -->
+        <div class="table-entity new" style="left: 400px; top: 720px; min-width: 280px;">
+            <div class="table-name">AreaCampaignHistory <span class="tag new">NEW</span></div>
+            <div class="table-columns">
+                <div class="column">
+                    <span class="col-key pk">PK</span>
+                    <span class="col-name">AreaCampaignHistoryId</span>
+                    <span class="col-type">INT IDENTITY</span>
+                </div>
+                <div class="column" style="background: #ebf5fb;">
+                    <span class="col-key fk">FK</span>
+                    <span class="col-name">AreaOwnershipId</span>
+                    <span class="col-type">INT</span>
+                </div>
+                <div class="column" style="background: #ebf5fb;">
+                    <span class="col-key fk">FK</span>
+                    <span class="col-name">PropertyCastId</span>
+                    <span class="col-type">INT</span>
+                </div>
+                <div class="column" style="background: #ebf5fb;">
+                    <span class="col-key fk">FK</span>
+                    <span class="col-name">PropertyCollectionDetailId</span>
+                    <span class="col-type">INT</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">CampaignDate</span>
+                    <span class="col-type">DATETIME2</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">PropertyTypeId</span>
+                    <span class="col-type">INT</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">MessagesSent</span>
+                    <span class="col-type">INT</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">MessagesDelivered</span>
+                    <span class="col-type">INT</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">Clicks</span>
+                    <span class="col-type">INT</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">CTASubmitted</span>
+                    <span class="col-type">INT</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">CTAVerified</span>
+                    <span class="col-type">INT</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">AgentNotifications</span>
+                    <span class="col-type">INT</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">OptOuts</span>
+                    <span class="col-type">INT</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">TwilioCost</span>
+                    <span class="col-type">DECIMAL(10,4)</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">AgentNotifyCost</span>
+                    <span class="col-type">DECIMAL(10,4)</span>
+                </div>
+                <div class="column">
+                    <span class="col-key"></span>
+                    <span class="col-name">TotalCost</span>
+                    <span class="col-type">COMPUTED</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Legend -->
+        <div class="legend">
+            <h4>Legend</h4>
+            <div class="legend-item">
+                <svg class="legend-symbol" viewBox="0 0 60 20">
+                    <line x1="5" y1="10" x2="40" y2="10" stroke="#34495e" stroke-width="1.5"/>
+                    <line x1="5" y1="5" x2="5" y2="15" stroke="#34495e" stroke-width="2"/>
+                    <line x1="10" y1="5" x2="10" y2="15" stroke="#34495e" stroke-width="2"/>
+                    <path d="M 40 10 L 52 5 M 40 10 L 52 10 M 40 10 L 52 15" stroke="#34495e" stroke-width="1.5" fill="none"/>
+                </svg>
+                <span>One-to-Many (1:N)</span>
+            </div>
+            <div class="legend-item">
+                <svg class="legend-symbol" viewBox="0 0 60 20">
+                    <line x1="5" y1="10" x2="40" y2="10" stroke="#34495e" stroke-width="1.5"/>
+                    <line x1="5" y1="5" x2="5" y2="15" stroke="#34495e" stroke-width="2"/>
+                    <line x1="10" y1="5" x2="10" y2="15" stroke="#34495e" stroke-width="2"/>
+                    <circle cx="48" cy="10" r="4" stroke="#34495e" stroke-width="1.5" fill="white"/>
+                    <path d="M 32 10 L 42 5 M 32 10 L 42 10 M 32 10 L 42 15" stroke="#34495e" stroke-width="1.5" fill="none"/>
+                </svg>
+                <span>One-to-Zero/Many (1:0..N)</span>
+            </div>
+            <div class="legend-item">
+                <span style="color: #f39c12; font-weight: bold; width: 60px;">PK</span>
+                <span>Primary Key</span>
+            </div>
+            <div class="legend-item">
+                <span style="color: #3498db; font-weight: bold; width: 60px;">FK</span>
+                <span>Foreign Key</span>
+            </div>
+            <div class="legend-item">
+                <span style="background: #27ae60; color: #fff; padding: 2px 8px; border-radius: 3px; width: 60px; text-align: center;">NEW</span>
+                <span>New Table</span>
+            </div>
+            <div class="legend-item">
+                <span style="background: #95a5a6; color: #fff; padding: 2px 8px; border-radius: 3px; width: 60px; text-align: center;">EXIST</span>
+                <span>Existing Table</span>
+            </div>
+        </div>
+        
+        <!-- Relationship Labels -->
+        <div style="position: absolute; left: 170px; top: 255px; font-size: 0.75em; color: #7f8c8d; background: #fff; padding: 2px 5px;">owns</div>
+        <div style="position: absolute; left: 350px; top: 255px; font-size: 0.75em; color: #7f8c8d; background: #fff; padding: 2px 5px;">located in</div>
+        <div style="position: absolute; left: 500px; top: 230px; font-size: 0.75em; color: #7f8c8d; background: #fff; padding: 2px 5px;">waits for</div>
+        <div style="position: absolute; left: 60px; top: 670px; font-size: 0.75em; color: #7f8c8d; background: #fff; padding: 2px 5px;">has history</div>
+        <div style="position: absolute; left: 380px; top: 670px; font-size: 0.75em; color: #7f8c8d; background: #fff; padding: 2px 5px;">has campaigns</div>
+        <div style="position: absolute; left: 820px; top: 400px; font-size: 0.75em; color: #7f8c8d; background: #fff; padding: 2px 5px;">executed by</div>
+        
+    </div>
+    
+    <!-- Constraints Section -->
+    <div style="background: #fff; border-radius: 10px; padding: 20px; margin-top: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <h2 style="color: #2c3e50; margin-bottom: 15px; font-size: 1.3em;">Key Constraints & Indexes</h2>
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.9em;">
+            <tr style="background: #f8f9fa;">
+                <th style="padding: 10px; text-align: left; border-bottom: 2px solid #ddd;">Table</th>
+                <th style="padding: 10px; text-align: left; border-bottom: 2px solid #ddd;">Constraint/Index</th>
+                <th style="padding: 10px; text-align: left; border-bottom: 2px solid #ddd;">Type</th>
+                <th style="padding: 10px; text-align: left; border-bottom: 2px solid #ddd;">Description</th>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;">AreaOwnership</td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee; font-family: Consolas;">IX_AreaOwnership_UniqueActive</td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;">Unique Filtered</td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;">Only 1 active owner per Area+PropertyType (WHERE Status='Active')</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;">AreaOwnership</td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee; font-family: Consolas;">CK_AreaOwnership_Status</td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;">Check</td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;">Status IN ('Pending','Active','Suspended','Ended')</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;">AreaWaitlist</td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee; font-family: Consolas;">IX_AreaWaitlist_UniqueWaiting</td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;">Unique Filtered</td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;">Only 1 waitlist entry per User+Area (WHERE Status IN ('Waiting','Notified'))</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;">AreaCampaignHistory</td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee; font-family: Consolas;">TotalCost</td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;">Computed Column</td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;">AS (TwilioCost + AgentNotifyCost) PERSISTED</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
+

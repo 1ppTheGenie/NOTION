@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competition Command - Area Ownership Schema ERD</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #fff;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            background: #f39c12;
+            color: #000;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        .erd-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            align-items: flex-start;
+            margin-top: 30px;
+        }
+        
+        .table-card {
+            background: linear-gradient(145deg, #1e3a5f, #152238);
+            border-radius: 15px;
+            padding: 0;
+            min-width: 320px;
+            max-width: 380px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+            overflow: hidden;
+        }
+        
+        .table-header {
+            padding: 15px 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .table-header.new {
+            background: linear-gradient(90deg, #00b894, #00cec9);
+            color: #000;
+        }
+        
+        .table-header.existing {
+            background: linear-gradient(90deg, #636e72, #2d3436);
+            color: #fff;
+        }
+        
+        .table-header .badge {
+            font-size: 0.7em;
+            padding: 3px 8px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+        }
+        
+        .table-body {
+            padding: 15px;
+        }
+        
+        .column-row {
+            display: flex;
+            padding: 8px 10px;
+            border-radius: 8px;
+            margin-bottom: 4px;
+            font-size: 0.85em;
+            align-items: center;
+        }
+        
+        .column-row:hover {
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .column-row.pk {
+            background: linear-gradient(90deg, rgba(255,193,7,0.2), transparent);
+            border-left: 3px solid #ffc107;
+        }
+        
+        .column-row.fk {
+            background: linear-gradient(90deg, rgba(0,123,255,0.2), transparent);
+            border-left: 3px solid #007bff;
+        }
+        
+        .col-name {
+            flex: 1;
+            font-weight: 500;
+        }
+        
+        .col-type {
+            color: #00d4ff;
+            font-family: 'Consolas', monospace;
+            font-size: 0.85em;
+        }
+        
+        .key-badge {
+            font-size: 0.7em;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+            font-weight: bold;
+        }
+        
+        .key-badge.pk {
+            background: #ffc107;
+            color: #000;
+        }
+        
+        .key-badge.fk {
+            background: #007bff;
+            color: #fff;
+        }
+        
+        .relationship-line {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .relationship-arrow {
+            font-size: 2em;
+            color: #00d4ff;
+        }
+        
+        .legend {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9em;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        .legend-color.new { background: linear-gradient(90deg, #00b894, #00cec9); }
+        .legend-color.existing { background: linear-gradient(90deg, #636e72, #2d3436); }
+        .legend-color.pk { background: #ffc107; }
+        .legend-color.fk { background: #007bff; }
+        
+        .section {
+            margin-top: 50px;
+        }
+        
+        .section h2 {
+            color: #00d4ff;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(0,212,255,0.3);
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .info-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .info-card h3 {
+            color: #00cec9;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .info-card p {
+            color: #aaa;
+            line-height: 1.6;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .comparison-table th, .comparison-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .comparison-table th {
+            background: rgba(0,212,255,0.1);
+            color: #00d4ff;
+        }
+        
+        .comparison-table tr:hover {
+            background: rgba(255,255,255,0.02);
+        }
+        
+        .check { color: #00b894; }
+        .cross { color: #e74c3c; }
+        
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+            }
+            .table-card {
+                background: #f5f5f5;
+                border: 2px solid #333;
+                box-shadow: none;
+            }
+            .table-header.new {
+                background: #00b894;
+            }
+            .col-type {
+                color: #0066cc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Competition Command Schema ERD</h1>
+        <p class="subtitle">
+            Area Ownership, History & Waitlist System
+            <span class="status-badge">PENDING APPROVAL</span>
+        </p>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color new"></div>
+                <span>NEW Table</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color existing"></div>
+                <span>EXISTING Table</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color pk"></div>
+                <span>Primary Key</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color fk"></div>
+                <span>Foreign Key</span>
+            </div>
+        </div>
+        
+        <div class="erd-container">
+            <!-- AspNetUsers (Existing) -->
+            <div class="table-card">
+                <div class="table-header existing">
+                    AspNetUsers
+                    <span class="badge">EXISTING</span>
+                </div>
+                <div class="table-body">
+                    <div class="column-row pk">
+                        <span class="col-name">Id</span>
+                        <span class="col-type">NVARCHAR(128)</span>
+                        <span class="key-badge pk">PK</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">UserName</span>
+                        <span class="col-type">NVARCHAR(256)</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">Email</span>
+                        <span class="col-type">NVARCHAR(256)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ViewArea (Existing) -->
+            <div class="table-card">
+                <div class="table-header existing">
+                    ViewArea
+                    <span class="badge">EXISTING</span>
+                </div>
+                <div class="table-body">
+                    <div class="column-row pk">
+                        <span class="col-name">AreaId</span>
+                        <span class="col-type">INT</span>
+                        <span class="key-badge pk">PK</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">Name</span>
+                        <span class="col-type">NVARCHAR(100)</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">...</span>
+                        <span class="col-type"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PropertyCast (Existing) -->
+            <div class="table-card">
+                <div class="table-header existing">
+                    PropertyCast
+                    <span class="badge">EXISTING</span>
+                </div>
+                <div class="table-body">
+                    <div class="column-row pk">
+                        <span class="col-name">PropertyCastId</span>
+                        <span class="col-type">INT</span>
+                        <span class="key-badge pk">PK</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">PropertyCastTypeId</span>
+                        <span class="col-type">INT</span>
+                    </div>
+                    <div class="column-row fk">
+                        <span class="col-name">AspNetUserId</span>
+                        <span class="col-type">NVARCHAR(128)</span>
+                        <span class="key-badge fk">FK</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">AreaId</span>
+                        <span class="col-type">INT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="relationship-line">
+            <span class="relationship-arrow">⬇️ 1:N Relationships ⬇️</span>
+        </div>
+        
+        <div class="erd-container">
+            <!-- AreaOwnership (NEW - Main Table) -->
+            <div class="table-card">
+                <div class="table-header new">
+                    AreaOwnership
+                    <span class="badge">NEW - MAIN</span>
+                </div>
+                <div class="table-body">
+                    <div class="column-row pk">
+                        <span class="col-name">AreaOwnershipId</span>
+                        <span class="col-type">INT IDENTITY</span>
+                        <span class="key-badge pk">PK</span>
+                    </div>
+                    <div class="column-row fk">
+                        <span class="col-name">AspNetUserId</span>
+                        <span class="col-type">NVARCHAR(128)</span>
+                        <span class="key-badge fk">FK</span>
+                    </div>
+                    <div class="column-row fk">
+                        <span class="col-name">AreaId</span>
+                        <span class="col-type">INT</span>
+                        <span class="key-badge fk">FK</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">PropertyTypeId</span>
+                        <span class="col-type">INT</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">AreaOwnershipTypeId</span>
+                        <span class="col-type">INT</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">Status</span>
+                        <span class="col-type">NVARCHAR(20)</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">RequestDate</span>
+                        <span class="col-type">DATETIME2</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">ApprovalDate</span>
+                        <span class="col-type">DATETIME2</span>
+                    </div>
+                    <div class="column-row fk">
+                        <span class="col-name">ApprovedByUserId</span>
+                        <span class="col-type">NVARCHAR(128)</span>
+                        <span class="key-badge fk">FK</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">StartDate</span>
+                        <span class="col-type">DATETIME2</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">EndDate</span>
+                        <span class="col-type">DATETIME2</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">EndReason</span>
+                        <span class="col-type">NVARCHAR(50)</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">Notes</span>
+                        <span class="col-type">NVARCHAR(500)</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">CreatedDate</span>
+                        <span class="col-type">DATETIME2</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">ModifiedDate</span>
+                        <span class="col-type">DATETIME2</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AreaWaitlist (NEW) -->
+            <div class="table-card">
+                <div class="table-header new">
+                    AreaWaitlist
+                    <span class="badge">NEW</span>
+                </div>
+                <div class="table-body">
+                    <div class="column-row pk">
+                        <span class="col-name">AreaWaitlistId</span>
+                        <span class="col-type">INT IDENTITY</span>
+                        <span class="key-badge pk">PK</span>
+                    </div>
+                    <div class="column-row fk">
+                        <span class="col-name">AspNetUserId</span>
+                        <span class="col-type">NVARCHAR(128)</span>
+                        <span class="key-badge fk">FK</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">AreaId</span>
+                        <span class="col-type">INT</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">PropertyTypeId</span>
+                        <span class="col-type">INT</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">QueuePosition</span>
+                        <span class="col-type">INT</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">Status</span>
+                        <span class="col-type">NVARCHAR(20)</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">RequestDate</span>
+                        <span class="col-type">DATETIME2</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">NotifiedDate</span>
+                        <span class="col-type">DATETIME2</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">ExpirationDate</span>
+                        <span class="col-type">DATETIME2</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="relationship-line">
+            <span class="relationship-arrow">⬇️ Child Tables ⬇️</span>
+        </div>
+        
+        <div class="erd-container">
+            <!-- AreaOwnershipHistory (NEW) -->
+            <div class="table-card">
+                <div class="table-header new">
+                    AreaOwnershipHistory
+                    <span class="badge">NEW - AUDIT</span>
+                </div>
+                <div class="table-body">
+                    <div class="column-row pk">
+                        <span class="col-name">AreaOwnershipHistoryId</span>
+                        <span class="col-type">INT IDENTITY</span>
+                        <span class="key-badge pk">PK</span>
+                    </div>
+                    <div class="column-row fk">
+                        <span class="col-name">AreaOwnershipId</span>
+                        <span class="col-type">INT</span>
+                        <span class="key-badge fk">FK</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">Action</span>
+                        <span class="col-type">NVARCHAR(30)</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">PreviousStatus</span>
+                        <span class="col-type">NVARCHAR(20)</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">NewStatus</span>
+                        <span class="col-type">NVARCHAR(20)</span>
+                    </div>
+                    <div class="column-row fk">
+                        <span class="col-name">ActionByUserId</span>
+                        <span class="col-type">NVARCHAR(128)</span>
+                        <span class="key-badge fk">FK</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">ActionDate</span>
+                        <span class="col-type">DATETIME2</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">Notes</span>
+                        <span class="col-type">NVARCHAR(500)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AreaCampaignHistory (NEW) -->
+            <div class="table-card">
+                <div class="table-header new">
+                    AreaCampaignHistory
+                    <span class="badge">NEW - METRICS</span>
+                </div>
+                <div class="table-body">
+                    <div class="column-row pk">
+                        <span class="col-name">AreaCampaignHistoryId</span>
+                        <span class="col-type">INT IDENTITY</span>
+                        <span class="key-badge pk">PK</span>
+                    </div>
+                    <div class="column-row fk">
+                        <span class="col-name">AreaOwnershipId</span>
+                        <span class="col-type">INT</span>
+                        <span class="key-badge fk">FK</span>
+                    </div>
+                    <div class="column-row fk">
+                        <span class="col-name">PropertyCastId</span>
+                        <span class="col-type">INT</span>
+                        <span class="key-badge fk">FK</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">CampaignDate</span>
+                        <span class="col-type">DATETIME2</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">MessagesSent</span>
+                        <span class="col-type">INT</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">MessagesDelivered</span>
+                        <span class="col-type">INT</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">Clicks</span>
+                        <span class="col-type">INT</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">CTASubmitted</span>
+                        <span class="col-type">INT</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">CTAVerified</span>
+                        <span class="col-type">INT</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">AgentNotifications</span>
+                        <span class="col-type">INT</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">TwilioCost</span>
+                        <span class="col-type">DECIMAL(10,4)</span>
+                    </div>
+                    <div class="column-row">
+                        <span class="col-name">TotalCost</span>
+                        <span class="col-type">COMPUTED</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Key Design Decisions</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>🔄 Soft Deletes</h3>
+                    <p>Records are never deleted. Status changes to "Ended" with EndDate and EndReason preserved. Full audit trail maintained.</p>
+                </div>
+                <div class="info-card">
+                    <h3>🔐 Unique Active Constraint</h3>
+                    <p>Only ONE active owner per Area + PropertyType + OwnershipType. Filtered unique index allows historical records.</p>
+                </div>
+                <div class="info-card">
+                    <h3>🏠 PropertyTypeId</h3>
+                    <p>SFR (0) and Condo (1) are SEPARATE ORDERS. Same zip can have different owners for each property type.</p>
+                </div>
+                <div class="info-card">
+                    <h3>📊 Campaign Metrics</h3>
+                    <p>Every campaign tracked with SMS counts, clicks, CTA events, notifications, and costs. Links to AreaOwnership.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Old vs New Comparison</h2>
+            <table class="comparison-table">
+                <tr>
+                    <th>Feature</th>
+                    <th>UserOwnedArea (Current)</th>
+                    <th>AreaOwnership (Proposed)</th>
+                </tr>
+                <tr>
+                    <td>Soft Delete</td>
+                    <td><span class="cross">❌ No</span></td>
+                    <td><span class="check">✅ Yes (Status + EndDate)</span></td>
+                </tr>
+                <tr>
+                    <td>History Tracking</td>
+                    <td><span class="cross">❌ None</span></td>
+                    <td><span class="check">✅ Full (AreaOwnershipHistory)</span></td>
+                </tr>
+                <tr>
+                    <td>Campaign Tracking</td>
+                    <td><span class="cross">❌ None</span></td>
+                    <td><span class="check">✅ Full (AreaCampaignHistory)</span></td>
+                </tr>
+                <tr>
+                    <td>Waitlist</td>
+                    <td><span class="cross">❌ None</span></td>
+                    <td><span class="check">✅ Yes (AreaWaitlist)</span></td>
+                </tr>
+                <tr>
+                    <td>Status Lifecycle</td>
+                    <td><span class="cross">❌ Binary</span></td>
+                    <td><span class="check">✅ Pending→Active→Suspended→Ended</span></td>
+                </tr>
+                <tr>
+                    <td>Approval Workflow</td>
+                    <td><span class="cross">❌ None</span></td>
+                    <td><span class="check">✅ Request/Approval/ApprovedBy</span></td>
+                </tr>
+                <tr>
+                    <td>End Reason</td>
+                    <td><span class="cross">❌ Lost</span></td>
+                    <td><span class="check">✅ Stored</span></td>
+                </tr>
+                <tr>
+                    <td>Cost Tracking</td>
+                    <td><span class="cross">❌ None</span></td>
+                    <td><span class="check">✅ Per Campaign</span></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="section" style="text-align: center; padding: 30px; background: rgba(255,255,255,0.05); border-radius: 15px; margin-top: 40px;">
+            <p style="color: #888; font-size: 0.9em;">
+                Document Version: 1.0 | Created: 12/15/2025 | Status: PENDING APPROVAL
+            </p>
+            <p style="color: #666; font-size: 0.8em; margin-top: 10px;">
+                FR-001: Area Ownership & Waitlist System - Competition Command Enhancement
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+

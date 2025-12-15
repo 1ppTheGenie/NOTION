@@ -1,0 +1,44 @@
+SELECT DISTINCT gl.[GenieLeadId]
+                , gl.[CreateDate] As 'LeadCreated'
+                , glt.Description
+                , la.MlsNumber
+                , ad.SitusStdFullStreetAddress
+                , ad.SitusStdCity
+                , ad.SitusStdState
+                --, CONCAT(l.StreetNumber, ' ', l.StreetName) As 'Listing-Address'
+                , l.ListDate
+                ,CONCAT( gl.FirstName, ' ', gl.LastName) As 'Lead-Name'
+                --, ad.OwnerStdNAME1FULL As 'Assessor-Owner-1'
+                , gl.email
+                , gl.Phone
+                , l.ListingAgentName
+                , l.ListingBrokerName
+                , CONCAT(anup.FirstName, ' ', anup.LastName) As 'GenieAgent'
+                , anu.Email
+                , anup.AspNetUserId
+                , anu.PhoneNumber
+                ,CASE
+                when l.ListingAgentName = CONCAT(anup.FirstName, ' ', anup.LastName) then 'Yes'
+                else 'Unknown'
+                END AS 'AgentNameMatch'
+                , l.PriceLow 
+            FROM [FarmGenie].[dbo].[LeadPropertyMatch] lpm
+            left join FarmGenie.dbo.GenieLead gl
+                on gl.GenieLeadId = lpm.GenieLeadId
+            left join farmgenie.dbo.GenieLeadType glt
+                on glt.GenieLeadTypeId = gl.LeadTypeId
+            left join TitleData.dbo.AssessorData_dt_v3 ad
+                on ad.PropertyID = lpm.PropertyId
+            left join MlsListing.dbo.ListingAssessor la
+                on la.FIPS = ad.FIPS and la.FormattedAPN = ad.FormattedAPN
+            left join MlsListing.dbo.Listing l
+                on l.MlsID = la.MlsID and l.MlsNumber = la.MlsNumber
+            left join FarmGenie.dbo.AspNetUserProfiles anup
+                on anup.AspNetUserId = gl.AspNetUserId
+            join FarmGenie.dbo.AspNetUserRoles anur
+                on anur.UserId = anup.AspNetUserId
+            join FarmGenie.dbo.AspNetUsers anu 
+                on anu.Id = anup.AspNetUserId
+            where gl.CreateDate < l.ListDate
+                and anur.RoleId not in (17, 23, 20, 5, 21, 11)
+        order by agentnamematch DESC, l.ListDate desc
