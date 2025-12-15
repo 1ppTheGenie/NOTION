@@ -1,0 +1,145 @@
+ListingYear,GenieAgent,LeadSource,City,WON,LOST,Total,WinRate,WonValue_M,AgentCommission_M
+-----------,----------,----------,----,---,----,-----,-------,----------,-----------------
+2025,David Higgins,ExternalApiSMS,OAKLAND,13,170,183,7.10,25.96,.6489
+2025,Chelsea Roger,DirectMail,HUNTINGTON BEACH,5,15,20,25.00,9.60,.2400
+2025,Mike Blair,ExternalApiSMS,SAN DIEGO,5,193,198,2.53,5.85,.1464
+2025,Nicole Dibble,DirectMail,PALM DESERT,4,42,46,8.70,2.34,.0585
+2025,Kathryn Samuel,ExternalApiSMS,DANA POINT,4,84,88,4.55,.03,.0009
+2025,Jason Barry,ExternalApiSMS,RANCHO SANTA FE,4,90,94,4.26,23.98,.5995
+2025,Chelsea Roger,Facebook,HUNTINGTON BEACH,3,11,14,21.43,7.40,.1849
+2025,Chris Heller,ExternalApiSMS,CARLSBAD,2,184,186,1.08,3.76,.0940
+2025,Jim Watson,Facebook,IRVINE,2,0,2,100.00,.02,.0005
+2025,Greg Cummings,ExternalApi,LA JOLLA,2,0,2,100.00,7.00,.1750
+2025,Guillermo Altamirano,ExternalApiSMS,LAKE ELSINORE,2,18,20,10.00,1.23,.0308
+2025,Laura Rose,Facebook,WESTMINSTER,2,0,2,100.00,.01,.0002
+2025,Mark Gallandt,ExternalApiSMS,LOS ANGELES,2,15,17,11.76,2.40,.0600
+2025,Michelle Wilson,DirectMail,SAN CLEMENTE,2,15,17,11.76,3.70,.0925
+2025,Tim Morissette,Facebook,FOOTHILL RANCH,2,0,2,100.00,2.87,.0717
+2025,Nicole Dibble,ExternalApi,LA QUINTA,2,2,4,50.00,2.79,.0698
+2025,Nicole Dibble,ExternalApiSMS,LA QUINTA,2,36,38,5.26,1.95,.0488
+2025,Oscar Tortola,DirectMail,CORONA,2,4,6,33.33,2.30,.0575
+2025,Sam Powell,ExternalApiSMS,EL CAJON,2,0,2,100.00,2.60,.0650
+2025,Seth Chalnick,DirectMail,ENCINITAS,2,4,6,33.33,6.80,.1700
+2025,Andy Tse,Facebook,SARATOGA,2,0,2,100.00,10.00,.2499
+2025,Angel Flores,ExternalApiSMS,SAN DIEGO,2,159,161,1.24,2.35,.0588
+2025,Carole Geronsin,ExternalApi,YORBA LINDA,2,1,3,66.67,3.35,.0838
+2025,Carole Geronsin,Facebook,YORBA LINDA,2,3,5,40.00,3.35,.0838
+2025,Ashley Cooper,Facebook,TEMECULA,1,2,3,33.33,1.08,.0270
+2025,Allison Van Wig,Facebook,LAKEWOOD,1,2,3,33.33,.84,.0209
+2025,The Dave Walter Team,ExternalApi,THOUSAND OAKS,1,0,1,100.00,1.60,.0400
+2025,Hiram Aviles,Facebook,IRVINE,1,1,2,50.00,2.60,.0650
+2025,Jackie Dorbritz,Facebook,PLANO,1,6,7,14.29,.60,.0149
+2025,Kathryn Samuel,DirectMail,DANA POINT,1,49,50,2.00,.01,.0001
+2025,Jennifer Tackney,ExternalApi,GARDEN GROVE,1,0,1,100.00,1.25,.0312
+2025,Cora Berkery,Facebook,DANA POINT,1,0,1,100.00,.00,.0001
+2025,David Higgins,Facebook,OAKLAND,1,20,21,4.76,1.35,.0337
+2025,David Israeli,ExternalApi,LOS ANGELES,1,0,1,100.00,1.69,.0423
+2025,Dennis Hartley,Facebook,REDONDO BEACH,1,4,5,20.00,1.80,.0450
+2024,Rachael Hughel,ExternalApiSMS,OCEANSIDE,21,0,21,100.00,39.90,.9974
+2024,David Higgins,ExternalApiSMS,OAKLAND,17,31,48,35.42,21.75,.5438
+2024,Kathryn Samuel,Facebook,DANA POINT,7,42,49,14.29,18.61,.4652
+2024,Oscar Tortola,ExternalApiSMS,CORONA,6,17,23,26.09,5.48,.1370
+2024,Guillermo Altamirano,ExternalApiSMS,LAKE ELSINORE,6,6,12,50.00,3.42,.0855
+2024,Eric Matz,DirectMail,POWAY,4,20,24,16.67,8.49,.2122
+2024,Chelsea Roger,DirectMail,HUNTINGTON BEACH,4,6,10,40.00,5.63,.1407
+2024,Kathryn Samuel,ExternalApiSMS,DANA POINT,4,93,97,4.12,.03,.0007
+2024,Sean Zanganeh,ZapierTest,INDIO,4,0,4,100.00,3.00,.0749
+2024,Chelsea Roger,ExternalApiSMS,HUNTINGTON BEACH,3,30,33,9.09,.02,.0005
+2024,Eric Matz,ExternalApiSMS,POWAY,3,33,36,8.33,7.94,.1984
+2024,Allison Van Wig,DirectMail,LAKEWOOD,2,0,2,100.00,1.95,.0488
+2024,Andy Tse,Facebook,SARATOGA,2,4,6,33.33,7.98,.1995
+2024,Sam Powell,ExternalApiSMS,EL CAJON,2,0,2,100.00,2.69,.0673
+2024,Derek Hirano,ExternalApiSMS,GARDENA,2,0,2,100.00,1.55,.0388
+2024,Jackie Dorbritz,DirectMail,PLANO,2,17,19,10.53,2.15,.0538
+2024,Laura Rose,Facebook,WESTMINSTER,2,4,6,33.33,1.20,.0300
+2024,Kathryn Samuel,ZapierTest,DANA POINT,1,0,1,100.00,2.85,.0713
+2024,Jim Watson,ExternalApi,IRVINE,1,0,1,100.00,2.77,.0693
+2024,Kathryn Samuel,DirectMail,DANA POINT,1,79,80,1.25,.01,.0001
+2024,Charles Fisher,Facebook,PLAYA VISTA,1,12,13,7.69,1.20,.0300
+2024,Gary Massa,ZapierTest,ENCINITAS,1,1,2,50.00,.02,.0004
+2024,Guy Arnone,Facebook,VALENCIA,1,0,1,100.00,1.27,.0319
+2024,Hiram Aviles,Facebook,IRVINE,1,0,1,100.00,.01,.0002
+2024,Colleen Fitzpatrick,ExternalApi,KENTFIELD,1,0,1,100.00,5.60,.1400
+2024,David Higgins,Facebook,OAKLAND,1,25,26,3.85,1.65,.0412
+2024,Dena Davis,Facebook,AUSTIN,1,1,2,50.00,.68,.0169
+2023,Charles Fisher,Facebook,EL SEGUNDO,14,20,34,41.18,25.19,.6297
+2023,Laura Rose,ExternalApi,WESTMINSTER,5,0,5,100.00,.02,.0004
+2023,Pam Euker,ExternalApi,RIVERSIDE,5,0,5,100.00,.02,.0005
+2023,Pam Euker,Facebook,RIVERSIDE,4,0,4,100.00,.01,.0004
+2023,Oscar Tortola,ExternalApiSMS,CORONA,4,15,19,21.05,2.20,.0550
+2023,Jim Watson,Facebook,IRVINE,4,1,5,80.00,.04,.0010
+2023,Laura Rose,Facebook,WESTMINSTER,3,6,9,33.33,.01,.0002
+2023,Michelle Wilson,DirectMail,SAN CLEMENTE,2,4,6,33.33,3.00,.0750
+2023,Nicole Dibble,DirectMail,PALM DESERT,2,49,51,3.92,.94,.0235
+2023,Dennis Hartley,Facebook,REDONDO BEACH,2,2,4,50.00,3.04,.0760
+2023,Carole Geronsin,Facebook,YORBA LINDA,2,8,10,20.00,8.60,.2150
+2023,Charles Fisher,ExternalApiSMS,REDONDO BEACH,2,4,6,33.33,1.80,.0450
+2023,Jian Gong,ExternalApi,IRVINE,1,1,2,50.00,3.38,.0845
+2023,David Higgins,Facebook,OAKLAND,1,5,6,16.67,1.45,.0362
+2023,Laura Rose,ZapierTest,WESTMINSTER,1,0,1,100.00,.00,.0001
+2023,Joshua Hammond,Facebook,TORRANCE,1,0,1,100.00,1.35,.0337
+2023,Kathryn Samuel,Facebook,DANA POINT,1,18,19,5.26,2.15,.0538
+2023,Kellie Wheeler,ExternalApi,MOUNT DORA,1,1,2,50.00,.45,.0113
+2023,Kellie Wheeler,Facebook,MOUNT DORA,1,4,5,20.00,.45,.0113
+2023,Rob Roham,ZapierTest,SAN JOSE,1,0,1,100.00,2.80,.0700
+2023,Scott Ange,Facebook,THOUSAND OAKS,1,1,2,50.00,.90,.0225
+2023,Steve Henneberry,Facebook,THOUSAND OAKS,1,2,3,33.33,1.60,.0400
+2022,Kathryn Samuel,Facebook,DANA POINT,7,28,35,20.00,8.43,.2108
+2022,Michelle Wilson,DirectMail,SAN CLEMENTE,6,10,16,37.50,7.26,.1815
+2022,Eric Matz,DirectMail,POWAY,6,56,62,9.68,7.90,.1974
+2022,Pam Euker,ExternalApi,RIVERSIDE,5,0,5,100.00,.02,.0005
+2022,Kathryn Samuel,ExternalApiSMS,DANA POINT,4,83,87,4.60,7.32,.1830
+2022,Chelsea Roger,DirectMail,HUNTINGTON BEACH,4,10,14,28.57,9.90,.2474
+2022,Pam Euker,Facebook,RIVERSIDE,3,1,4,75.00,.01,.0003
+2022,Sandra Marquez,ExternalApi,SAN CLEMENTE,2,0,2,100.00,6.40,.1600
+2022,Sandra Marquez,Facebook,SAN CLEMENTE,2,1,3,66.67,6.40,.1600
+2022,Jackie Dorbritz,DirectMail,PLANO,2,23,25,8.00,3.85,.0963
+2022,Jennifer Matsumoto,Facebook,TUSTIN,2,3,5,40.00,2.35,.0587
+2022,Jennifer Tackney,Facebook,GARDEN GROVE,2,0,2,100.00,2.09,.0522
+2022,Jim Watson,Facebook,IRVINE,2,0,2,100.00,.02,.0005
+2022,Michelle Wilson,Facebook,SAN CLEMENTE,2,10,12,16.67,1.84,.0460
+2022,Chelsea Roger,ExternalApiSMS,HUNTINGTON BEACH,2,34,36,5.56,.01,.0003
+2022,Chelsea Roger,Facebook,HUNTINGTON BEACH,2,5,7,28.57,3.86,.0965
+2022,Dana Cappiello,ExternalApi,ATHERTON,2,0,2,100.00,21.60,.5400
+2022,Tammy Davis,ExternalApi,HOLLISTER,2,0,2,100.00,1.60,.0400
+2022,Erika Kauzlarich-Bird,ExternalApi,SANTA CLARITA,1,0,1,100.00,.95,.0237
+2022,Ernest Berghof,ExternalApi,SANTA ROSA,1,0,1,100.00,1.32,.0331
+2022,Hiram Aviles,Facebook,IRVINE,1,0,1,100.00,.01,.0002
+2022,Joshua Hammond,ExternalApi,TORRANCE,1,0,1,100.00,.01,.0001
+2022,Justin Tye,ZapierTest,CORONA,1,0,1,100.00,1.25,.0312
+2022,Kathryn Samuel,DirectMail,DANA POINT,1,40,41,2.44,.01,.0001
+2022,Jade Talbot,Facebook,SAN LEANDRO,1,1,2,50.00,.93,.0232
+2022,Allison Van Wig,Facebook,LAKEWOOD,1,5,6,16.67,.79,.0196
+2022,Sarah Spacek,Facebook,CEDAR PARK,1,0,1,100.00,.36,.0090
+2022,Kellie Wheeler,Facebook,MOUNT DORA,1,7,8,12.50,.55,.0137
+2022,Malakai Sparks,ExternalApi,HUNTINGTON BEACH,1,0,1,100.00,1.10,.0274
+2022,Malakai Sparks,Facebook,HUNTINGTON BEACH,1,2,3,33.33,1.10,.0274
+2021,David Higgins,Facebook,OAKLAND,5,15,20,25.00,6.05,.1511
+2021,Michael Durkin,Facebook,PACIFICA,4,1,5,80.00,4.92,.1231
+2021,Michelle Wilson,DirectMail,SAN CLEMENTE,4,5,9,44.44,4.80,.1199
+2021,Sandra Marquez,Facebook,SAN CLEMENTE,3,0,3,100.00,4.07,.1019
+2021,Meital Taub,Facebook,LAGUNA BEACH,3,1,4,75.00,8.99,.2246
+2021,Michael Durkin,ExternalApi,PACIFICA,2,0,2,100.00,2.46,.0615
+2021,Tim Morissette,Facebook,FOOTHILL RANCH,2,0,2,100.00,2.07,.0517
+2021,Zeeshan Shaikh,Facebook,DUBLIN,2,8,10,20.00,1.89,.0474
+2021,Andy Tse,Facebook,SARATOGA,2,0,2,100.00,7.98,.1995
+2021,Bobby Nijjar,Facebook,FREMONT,2,1,3,66.67,3.30,.0825
+2021,Cora Berkery,Facebook,DANA POINT,2,2,4,50.00,.01,.0002
+2021,Jim Klinge,ExternalApi,SANTA MONICA,2,0,2,100.00,13.90,.3475
+2021,Kristi Richards,Facebook,AUSTIN,2,3,5,40.00,.85,.0213
+2021,Laura Rose,ExternalApi,WESTMINSTER,1,1,2,50.00,1.13,.0281
+2021,Laura Rose,Facebook,WESTMINSTER,1,0,1,100.00,1.03,.0256
+2021,Meital Taub,ExternalApi,LAGUNA BEACH,1,1,2,50.00,3.00,.0749
+2021,Jim Watson,Facebook,IRVINE,1,0,1,100.00,.01,.0002
+2021,Kip Boatcher,ExternalApi,SAN DIEGO,1,0,1,100.00,3.60,.0900
+2021,Kip Boatcher,Facebook,SAN DIEGO,1,6,7,14.29,1.80,.0450
+2021,Alexis Balner Hsu,Facebook,REDONDO BEACH,1,0,1,100.00,1.74,.0435
+2021,Dennis Hartley,Facebook,REDONDO BEACH,1,13,14,7.14,.96,.0240
+2021,Eric Iantorno,ExternalApi,DEL MAR,1,0,1,100.00,8.25,.2063
+2021,Holly Brown,ExternalApi,AUSTIN,1,1,2,50.00,.73,.0181
+2021,Holly Brown,Facebook,AUSTIN,1,8,9,11.11,.73,.0181
+2021,Jeanette Nelson,Facebook,HUNTINGTON BEACH,1,1,2,50.00,1.30,.0325
+2021,Rica Ruiz,ExternalApi,BELMONT,1,0,1,100.00,1.55,.0387
+2021,Rj Burke,Facebook,HUNTINGTON BEACH,1,0,1,100.00,.60,.0150
+2021,Michael Milano,ExternalApi,NOVATO,1,0,1,100.00,1.40,.0349
+2020,Kip Boatcher,ExternalApi,SAN DIEGO,1,0,1,100.00,1.90,.0474
