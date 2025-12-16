@@ -106,10 +106,20 @@ When Hot → Agent Handoff
 
 ## 🔗 RELATED INITIATIVES
 
-- **GetGeoSocial** - Original product vision
+- **GetGeoSocial** - Original product vision (see `GEOSOCIAL_PAISLEY_CONTENT_GTM_COMPILATION_v1.md`)
 - **Paisley Engagement** - Consumer-facing brand
 - **Competition Command Enhancement** - Area ownership system
 - **Nurture Engine** - Marketing automation system
+
+## 📚 CONTENT & GTM RESEARCH
+
+**NEW:** `GEOSOCIAL_PAISLEY_CONTENT_GTM_COMPILATION_v1.md` contains:
+- 143 content headlines (7-day themed cycle)
+- 30-day campaign templates
+- Niche strategies (Empty Nester, Improve the Move)
+- Agent acquisition tactics
+- Go-to-market strategies
+- All insights from GetGeoSocial2.zip research
 
 ---
 
@@ -118,6 +128,7 @@ When Hot → Agent Handoff
 ### Strategy Documents
 - `TURNING_POINT_CTA_IMPROVEMENT_v1.md` - Main strategy document
 - `CTA_STRATEGY_BLUEPRINT_v1.md` - Complete architecture
+- `GEOSOCIAL_PAISLEY_CONTENT_GTM_COMPILATION_v1.md` - **NEW:** Complete content ideas & GTM strategies from GetGeoSocial/Paisley research
 
 ### Technical Documents
 - `CTA_IMPLEMENTATION_RECOMMENDATIONS_v1.md` - Implementation guide
