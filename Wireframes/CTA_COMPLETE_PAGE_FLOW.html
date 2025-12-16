@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete CTA Flow - Follow + SMS + Download</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+
+        .flow-section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .flow-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+
+        .page-mockup {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 0;
+            margin: 20px 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .page-header h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .page-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .page-body {
+            padding: 25px;
+        }
+
+        .property-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+        }
+
+        .property-details {
+            margin-bottom: 25px;
+        }
+
+        .property-address {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .property-info {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .cta-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .cta-popup.active {
+            display: flex;
+        }
+
+        .cta-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .cta-header {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cta-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cta-body {
+            padding: 25px;
+        }
+
+        .cta-image {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+        }
+
+        .cta-subtitle {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .cta-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .cta-features li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+        }
+
+        .cta-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .cta-button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #1877f2 0%, #0d5fbf 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(24, 119, 242, 0.4);
+        }
+
+        .cta-button span {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-weight: bold;
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        .cta-social-proof {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .cta-disclaimer {
+            text-align: center;
+            color: #95a5a6;
+            font-size: 12px;
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        .success-state {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .success-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .success-message {
+            font-size: 24px;
+            font-weight: 600;
+            color: #27ae60;
+            margin-bottom: 15px;
+        }
+
+        .success-description {
+            color: #555;
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+
+        .sms-checkbox-container {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: left;
+            border: 2px solid #4caf50;
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
+        }
+
+        .sms-checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            cursor: pointer;
+        }
+
+        .sms-checkbox {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            margin-top: 2px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .sms-checkbox-text {
+            flex: 1;
+        }
+
+        .sms-checkbox-title {
+            font-weight: 600;
+            color: #2e7d32;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .sms-checkbox-disclosure {
+            font-size: 12px;
+            color: #7f8c8d;
+            line-height: 1.5;
+        }
+
+        .download-button {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        }
+
+        .download-button:hover {
+            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
+        }
+
+        .continue-button {
+            background: #95a5a6;
+            font-size: 14px;
+            padding: 10px;
+        }
+
+        .flow-arrow {
+            text-align: center;
+            font-size: 48px;
+            color: #3498db;
+            margin: 20px 0;
+        }
+
+        .flow-description {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+        }
+
+        .flow-description strong {
+            color: #2c3e50;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .nav-button:hover {
+            background: #2980b9;
+        }
+
+        .nav-button:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 768px) {
+            .page-mockup {
+                max-width: 100%;
+            }
+            
+            .cta-content {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Complete CTA Flow: Follow + SMS + Download</h1>
+
+        <!-- STEP 1: Landing Page -->
+        <div class="flow-section" id="step1">
+            <h2><span class="step-number">1</span> Landing Page (User Arrives from SMS)</h2>
+            <div class="flow-description">
+                <strong>What happens:</strong> User clicks SMS link → Lands on property landing page → CTA popup appears after 3 seconds or 50% scroll
+            </div>
+            
+            <div class="page-mockup">
+                <div class="page-header">
+                    <h3>🏘️ Your Neighborhood</h3>
+                    <p>Community-focused real estate insights</p>
+                </div>
+                <div class="page-body">
+                    <div class="property-image">🏠</div>
+                    <div class="property-details">
+                        <div class="property-address">123 Main Street</div>
+                        <div class="property-info">La Jolla, CA 92037</div>
+                        <div class="property-info">3 Bed • 2 Bath • 1,800 sq ft</div>
+                        <div class="property-info">Listed: $899,000</div>
+                    </div>
+                    <div style="color: #555; line-height: 1.8;">
+                        <p>Welcome to your neighborhood! This beautiful home is just one of many properties in your area. Get weekly insights about market trends, local events, and community news.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="nav-button" onclick="showStep(2)">Next: CTA Popup Appears →</button>
+            </div>
+        </div>
+
+        <!-- STEP 2: CTA Popup -->
+        <div class="flow-section" id="step2" style="display: none;">
+            <h2><span class="step-number">2</span> CTA Popup Appears</h2>
+            <div class="flow-description">
+                <strong>What happens:</strong> After 3 seconds or 50% scroll, CTA popup appears with "Follow Us on Facebook" offer
+            </div>
+            
+            <div class="page-mockup">
+                <div class="cta-popup active">
+                    <div class="cta-content">
+                        <div class="cta-header">
+                            <h3>🏘️ Your Neighborhood Updates</h3>
+                            <button class="close-btn" onclick="closePopup()">×</button>
+                        </div>
+                        <div class="cta-body">
+                            <div class="cta-image">🏘️</div>
+                            <div class="cta-subtitle">Get weekly insights about your area</div>
+                            <ul class="cta-features">
+                                <li>Market trends & home values</li>
+                                <li>Local events & community news</li>
+                                <li>Home improvement tips</li>
+                                <li>Neighborhood spotlights</li>
+                            </ul>
+                            <button class="cta-button" onclick="handleFollowClick()">
+                                <span>f</span>
+                                Follow Us on Facebook
+                            </button>
+                            <div class="cta-social-proof">Join 1,247 neighbors already following</div>
+                            <div class="cta-disclaimer">Get a free market report when you follow!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="nav-button" onclick="showStep(1)">← Previous</button>
+                <button class="nav-button" onclick="showStep(3)">Next: User Clicks Follow →</button>
+            </div>
+        </div>
+
+        <!-- STEP 3: Success State with SMS Permission -->
+        <div class="flow-section" id="step3" style="display: none;">
+            <h2><span class="step-number">3</span> Success State: SMS Permission + Download Offer</h2>
+            <div class="flow-description">
+                <strong>What happens:</strong> User clicks "Follow" → Engagement tracked → Success message shown → User downloads report + opts in for SMS → <strong style="color: #1877f2;">THEN Facebook page opens in NEW TAB</strong> (after download)
+            </div>
+            
+            <div class="page-mockup">
+                <div class="cta-popup active">
+                    <div class="cta-content">
+                        <div class="cta-header">
+                            <h3>✓ Thanks for Following!</h3>
+                            <button class="close-btn" onclick="closePopup()">×</button>
+                        </div>
+                        <div class="cta-body">
+                            <div class="success-state" style="padding: 20px 0;">
+                                <div class="success-icon">✓</div>
+                                <div class="success-message">Thanks for Following!</div>
+                                <div style="background: #fff3cd; padding: 12px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #f39c12;">
+                                    <div style="font-size: 14px; color: #856404; font-weight: 600; margin-bottom: 5px;">
+                                        ⚠️ Important: Get SMS permission BEFORE redirecting
+                                    </div>
+                                    <div style="font-size: 12px; color: #555;">
+                                        User downloads report first → SMS consent saved → THEN Facebook page opens
+                                    </div>
+                                </div>
+                                <div class="success-description" style="text-align: left; margin-bottom: 20px;">
+                                    Get your free neighborhood market report and stay updated:
+                                </div>
+                                
+                                <!-- SMS Permission Checkbox - ENHANCED -->
+                                <div class="sms-checkbox-container" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border: 2px solid #4caf50; margin-bottom: 20px;">
+                                    <label class="sms-checkbox-label">
+                                        <input type="checkbox" class="sms-checkbox" id="smsPermission" checked style="width: 24px; height: 24px; margin-top: 0;">
+                                        <div class="sms-checkbox-text">
+                                            <div class="sms-checkbox-title" style="font-size: 18px; color: #2e7d32; margin-bottom: 8px;">
+                                                📱 <strong>Get weekly updates via text message</strong>
+                                            </div>
+                                            <div style="background: white; padding: 10px; border-radius: 6px; margin-top: 8px;">
+                                                <div class="sms-checkbox-disclosure" style="color: #555; line-height: 1.6;">
+                                                    <strong>What you'll get:</strong> Weekly neighborhood insights, market trends, local events, and home tips delivered to your phone.<br><br>
+                                                    <strong>By checking this box,</strong> you agree to receive text messages with neighborhood updates. Message and data rates may apply. Reply <strong>STOP</strong> to opt out anytime.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                                
+                                <!-- Download Button -->
+                                <button class="cta-button download-button" onclick="handleDownloadClick()">
+                                    📊 Get Your Insider Report Now
+                                </button>
+                                <div style="font-size: 14px; color: #7f8c8d; margin-bottom: 15px;">
+                                    Instant download • No email required
+                                </div>
+                                
+                                <button class="cta-button continue-button" onclick="closePopup()">
+                                    Continue Browsing
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="nav-button" onclick="showStep(2)">← Previous</button>
+                <button class="nav-button" onclick="showStep(4)">Next: User Downloads Report →</button>
+            </div>
+        </div>
+
+        <!-- STEP 4: Download Confirmation -->
+        <div class="flow-section" id="step4" style="display: none;">
+            <h2><span class="step-number">4</span> Download Confirmation</h2>
+            <div class="flow-description">
+                <strong>What happens:</strong> User clicks download → PDF downloads → SMS opt-in saved (if checked) → Confirmation message shown
+            </div>
+            
+            <div class="page-mockup">
+                <div class="cta-popup active">
+                    <div class="cta-content">
+                        <div class="cta-header">
+                            <h3>📊 Report Downloaded!</h3>
+                            <button class="close-btn" onclick="closePopup()">×</button>
+                        </div>
+                        <div class="cta-body">
+                            <div class="success-state">
+                                <div class="success-icon">📊</div>
+                                <div class="success-message">Report Downloaded!</div>
+                                <div class="success-description" id="downloadMessage">
+                                    Your neighborhood market report is ready.<br>
+                                    You'll also receive weekly text updates!<br><br>
+                                    Check your downloads folder.
+                                </div>
+                                <button class="cta-button continue-button" onclick="showStep(5)">
+                                    Continue Browsing
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="nav-button" onclick="showStep(3)">← Previous</button>
+                <button class="nav-button" onclick="showStep(5)">Next: What Happens Next →</button>
+            </div>
+        </div>
+
+        <!-- STEP 5: What Happens Next -->
+        <div class="flow-section" id="step5" style="display: none;">
+            <h2><span class="step-number">5</span> What Happens Next (Behind the Scenes)</h2>
+            <div class="flow-description">
+                <strong>What happens:</strong> System tracks all engagements, saves SMS consent, enters user into nurture sequence
+            </div>
+            
+            <div class="page-mockup">
+                <div class="page-body" style="padding: 30px;">
+                    <h3 style="color: #2c3e50; margin-bottom: 20px; text-align: center;">System Actions</h3>
+                    
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                        <strong>✅ Engagement Tracked:</strong>
+                        <ul style="margin-top: 10px; margin-left: 20px; color: #555;">
+                            <li>Follow click: <code>SoftOptIn, FollowNeighborhood, FacebookFollow</code></li>
+                            <li>Download click: <code>MarketReportDownload</code></li>
+                            <li>SMS opt-in: <code>SmsOptIn, Tcpacompliant</code> (if checked)</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                        <strong>💾 Database Records Created:</strong>
+                        <ul style="margin-top: 10px; margin-left: 20px; color: #555;">
+                            <li>GenieLead record (updated with new tags)</li>
+                            <li>SmsOptIn record (if SMS checked)</li>
+                            <li>CtaEvent records (follow, download)</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: #d1ecf1; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                        <strong>📱 Nurture Sequence Started:</strong>
+                        <ul style="margin-top: 10px; margin-left: 20px; color: #555;">
+                            <li>Week 1: Market Monday SMS</li>
+                            <li>Week 2: Tip Tuesday SMS</li>
+                            <li>Week 3: Community Spotlight SMS</li>
+                            <li>Week 4: Soft opt-in ask (if no email yet)</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: #d4edda; padding: 15px; border-radius: 8px;">
+                        <strong>🎯 User Journey:</strong>
+                        <div style="margin-top: 10px; color: #555; line-height: 1.8;">
+                            Follow → Download → Nurture → Trust Building → Conversion
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="nav-button" onclick="showStep(4)">← Previous</button>
+                <button class="nav-button" onclick="showStep(1)">Start Over</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function showStep(stepNumber) {
+            // Hide all steps
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById(`step${i}`).style.display = 'none';
+            }
+            
+            // Show selected step
+            document.getElementById(`step${stepNumber}`).style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function closePopup() {
+            // In real implementation, this would close the popup
+            alert('Popup would close here. In real implementation, user can continue browsing the landing page.');
+        }
+
+        // Handle Follow button click
+        function handleFollowClick() {
+            // Track engagement
+            console.log('Tracking: Follow clicked - SoftOptIn, FollowNeighborhood, FacebookFollow');
+            
+            // Show success state (NO redirect yet - get SMS permission first)
+            showStep(3);
+        }
+        
+        // Handle Download button click (redirects to Facebook AFTER download)
+        function handleDownloadClick() {
+            // Get SMS permission
+            const smsCheckbox = document.getElementById('smsPermission');
+            const smsOptIn = smsCheckbox ? smsCheckbox.checked : false;
+            
+            if (smsOptIn) {
+                console.log('Tracking: SMS opt-in saved - SmsOptIn, Tcpacompliant');
+            }
+            
+            console.log('Downloading report...');
+            
+            // Show download confirmation
+            showStep(4);
+            
+            // THEN redirect to Facebook (after download)
+            setTimeout(() => {
+                const facebookPageUrl = 'https://facebook.com/YourNeighborhoodPage';
+                const shouldRedirect = confirm('Report downloaded! Redirect to Facebook page in a new tab?\n\n(In real implementation, this opens automatically after download)');
+                
+                if (shouldRedirect) {
+                    window.open(facebookPageUrl, '_blank');
+                }
+            }, 2000); // 2 second delay after download
+        }
+        
+        // Auto-advance simulation (optional)
+        let currentStep = 1;
+        
+        // Initialize - show step 1
+        showStep(1);
+    </script>
+</body>
+</html>
+

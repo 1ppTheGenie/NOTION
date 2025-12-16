@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTA Mockups - Soft Engagement Options</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .comparison-section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .comparison-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .cta-mockup {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 0;
+            margin: 20px 0;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .cta-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cta-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cta-body {
+            padding: 25px;
+        }
+
+        .cta-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+        }
+
+        .cta-subtitle {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .cta-description {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .cta-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .cta-features li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+        }
+
+        .cta-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .cta-button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-bottom: 15px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .facebook-button {
+            background: linear-gradient(135deg, #1877f2 0%, #0d5fbf 100%) !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .facebook-button span {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-weight: bold;
+            color: white;
+        }
+
+        .cta-social-proof {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .cta-disclaimer {
+            text-align: center;
+            color: #95a5a6;
+            font-size: 12px;
+            font-style: italic;
+        }
+
+        .old-cta {
+            border-color: #e74c3c;
+        }
+
+        .old-cta .cta-header {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+
+        .old-cta .cta-button {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+
+        .new-cta {
+            border-color: #27ae60;
+        }
+
+        .new-cta .cta-header {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        }
+
+        .new-cta .cta-button {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option-label {
+            text-align: center;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .success-state {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .success-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .success-message {
+            font-size: 24px;
+            font-weight: 600;
+            color: #27ae60;
+            margin-bottom: 15px;
+        }
+
+        .success-description {
+            color: #555;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 CTA Mockups: Soft Engagement Options</h1>
+
+        <!-- CURRENT vs NEW COMPARISON -->
+        <div class="comparison-section">
+            <h2>📊 Current vs. New CTA Comparison</h2>
+            <div class="comparison-grid">
+                <div>
+                    <div class="option-label">❌ CURRENT (High Friction)</div>
+                    <div class="cta-mockup old-cta">
+                        <div class="cta-header">
+                            <h3>Personalized Home Value Estimate</h3>
+                            <button class="close-btn">×</button>
+                        </div>
+                        <div class="cta-body">
+                            <div class="cta-image">🏠</div>
+                            <div class="cta-subtitle">Discover Your Home's True Worth</div>
+                            <div class="cta-description">
+                                Interested in a personalized valuation of your home?
+                            </div>
+                            <button class="cta-button">Absolutely!</button>
+                            <div class="cta-disclaimer">
+                                By continuing, you consent to receive communications... [Long legal text]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="option-label">✅ NEW (Low Friction)</div>
+                    <div class="cta-mockup new-cta">
+                        <div class="cta-header">
+                            <h3>Your Neighborhood Updates</h3>
+                            <button class="close-btn">×</button>
+                        </div>
+                        <div class="cta-body">
+                            <div class="cta-image">🏘️</div>
+                            <div class="cta-subtitle">Get weekly insights about your area</div>
+                            <ul class="cta-features">
+                                <li>Market trends & home values</li>
+                                <li>Local events & community news</li>
+                                <li>Home improvement tips</li>
+                                <li>Neighborhood spotlights</li>
+                            </ul>
+                            <button class="cta-button">✓ Follow for Updates</button>
+                            <div class="cta-social-proof">Join 1,247 neighbors already following</div>
+                            <div class="cta-disclaimer">No form required • Unsubscribe anytime</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OPTION 1: Follow Us -->
+        <div class="comparison-section">
+            <h2>Option 1: "Follow Us on Facebook" CTA (RECOMMENDED)</h2>
+            <div class="cta-mockup new-cta">
+                <div class="cta-header">
+                    <h3>🏘️ Your Neighborhood Updates</h3>
+                    <button class="close-btn">×</button>
+                </div>
+                <div class="cta-body">
+                    <div class="cta-image">🏘️</div>
+                    <div class="cta-subtitle">Get weekly insights about your area</div>
+                    <ul class="cta-features">
+                        <li>Market trends & home values</li>
+                        <li>Local events & community news</li>
+                        <li>Home improvement tips</li>
+                        <li>Neighborhood spotlights</li>
+                    </ul>
+                            <button class="cta-button facebook-button" onclick="showSuccess(this)">
+                        <span style="font-size: 24px; margin-right: 10px;">f</span>
+                        Follow Us on Facebook
+                    </button>
+                    <div style="text-align: center; margin-top: 15px; font-size: 14px; color: #7f8c8d;">
+                        Get a free market report when you follow!
+                    </div>
+                    <div class="cta-social-proof">Join 1,247 neighbors already following</div>
+                    <div class="cta-disclaimer">Stay connected with your community</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OPTION 2: Learn More -->
+        <div class="comparison-section">
+            <h2>Option 2: "Learn More" Content Preview</h2>
+            <div class="cta-mockup new-cta">
+                <div class="cta-header">
+                    <h3>📊 Market Monday Insights</h3>
+                    <button class="close-btn">×</button>
+                </div>
+                <div class="cta-body">
+                    <div class="cta-image">📊</div>
+                    <div class="cta-subtitle">Your zip code saw a 12% increase</div>
+                    <div class="cta-description">
+                        Home values in your area increased 12% this quarter. Want the full market report?
+                    </div>
+                    <button class="cta-button" onclick="showSuccess(this)">📥 Get Full Report (Free)</button>
+                    <div class="cta-disclaimer">No sign-up required • Instant access</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OPTION 3: Community Spotlight -->
+        <div class="comparison-section">
+            <h2>Option 3: "Community Spotlight" Engagement</h2>
+            <div class="cta-mockup new-cta">
+                <div class="cta-header">
+                    <h3>🌟 This Week in Your Neighborhood</h3>
+                    <button class="close-btn">×</button>
+                </div>
+                <div class="cta-body">
+                    <div class="cta-image">🌟</div>
+                    <div class="cta-subtitle">See what's happening near you</div>
+                    <ul class="cta-features">
+                        <li>Weekend farmers market</li>
+                        <li>New restaurant opening</li>
+                        <li>Community cleanup event</li>
+                    </ul>
+                    <button class="cta-button" onclick="showSuccess(this)">👀 See What's Happening</button>
+                    <div class="cta-social-proof">Join 892 neighbors staying informed</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OPTION 4: Share Your Story -->
+        <div class="comparison-section">
+            <h2>Option 4: "Share Your Story" Interactive</h2>
+            <div class="cta-mockup new-cta">
+                <div class="cta-header">
+                    <h3>💬 Share Your Neighborhood Memory</h3>
+                    <button class="close-btn">×</button>
+                </div>
+                <div class="cta-body">
+                    <div class="cta-image">💬</div>
+                    <div class="cta-subtitle">We're collecting stories from neighbors</div>
+                    <div class="cta-description">
+                        Share a memory, photo, or tip about living in your area. Featured stories get shared with the community.
+                    </div>
+                    <button class="cta-button" onclick="showSuccess(this)">✨ Share Your Story</button>
+                    <div class="cta-disclaimer">Your story could be featured next week!</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OPTION 5: Quick Tip -->
+        <div class="comparison-section">
+            <h2>Option 5: "Quick Tip" Value-Add</h2>
+            <div class="cta-mockup new-cta">
+                <div class="cta-header">
+                    <h3>💡 Tip Tuesday</h3>
+                    <button class="close-btn">×</button>
+                </div>
+                <div class="cta-body">
+                    <div class="cta-image">💡</div>
+                    <div class="cta-subtitle">Increase your home value by 5-10%</div>
+                    <div class="cta-description">
+                        Quick Tip: Simple updates that boost value:
+                    </div>
+                    <ul class="cta-features">
+                        <li>Fresh paint</li>
+                        <li>Curb appeal improvements</li>
+                        <li>Energy-efficient upgrades</li>
+                    </ul>
+                    <button class="cta-button" onclick="showSuccess(this)">📖 Get Full Guide (Free)</button>
+                    <div class="cta-disclaimer">Get weekly tips delivered to you</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MOBILE BOTTOM SHEET -->
+        <div class="comparison-section">
+            <h2>📱 Mobile Bottom Sheet Variant</h2>
+            <div class="cta-mockup new-cta" style="max-width: 400px;">
+                <div class="cta-body" style="padding: 20px;">
+                    <div style="text-align: center; margin-bottom: 15px;">
+                        <div style="width: 40px; height: 4px; background: #ddd; border-radius: 2px; margin: 0 auto 15px;"></div>
+                    </div>
+                    <div class="cta-subtitle" style="text-align: center; margin-bottom: 10px;">🏘️ Follow for Neighborhood Updates</div>
+                    <div class="cta-description" style="text-align: center; margin-bottom: 20px;">
+                        Get weekly insights about your area
+                    </div>
+                    <button class="cta-button" onclick="showSuccess(this)">Follow</button>
+                    <div class="cta-disclaimer" style="margin-top: 15px;">Swipe down to close</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function showSuccess(button) {
+            const ctaBody = button.closest('.cta-body');
+            const originalHTML = ctaBody.innerHTML;
+            
+            ctaBody.innerHTML = `
+                <div class="success-state">
+                    <div class="success-icon">✓</div>
+                    <div class="success-message">Thanks for Following!</div>
+                    <div class="success-description">
+                        Get your free neighborhood market report and stay updated:
+                    </div>
+                    
+                    <!-- SMS Permission Checkbox -->
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 15px; text-align: left;">
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="checkbox" id="smsPermission" style="width: 20px; height: 20px; margin-right: 10px; cursor: pointer;" checked>
+                            <div>
+                                <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">📱 Get weekly updates via text</div>
+                                <div style="font-size: 12px; color: #7f8c8d;">
+                                    By checking this, you agree to receive text messages with neighborhood updates. 
+                                    Message and data rates may apply. Reply STOP to opt out anytime.
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    
+                    <button class="cta-button" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); margin-bottom: 10px;" onclick="downloadReport(this)">
+                        📊 Get Your Insider Report Now
+                    </button>
+                    <div style="font-size: 14px; color: #7f8c8d; margin-bottom: 15px;">
+                        Instant download • No email required
+                    </div>
+                    <button class="cta-button" style="background: #95a5a6; font-size: 14px; padding: 10px;" onclick="location.reload()">
+                        Continue Browsing
+                    </button>
+                </div>
+            `;
+        }
+
+        function downloadReport(button) {
+            // Check SMS permission
+            const smsCheckbox = document.getElementById('smsPermission');
+            const smsOptIn = smsCheckbox ? smsCheckbox.checked : false;
+            
+            // Track download and SMS opt-in
+            if (smsOptIn) {
+                alert("📊 Market Report Download Started!\n📱 SMS updates enabled!\n\n(In real implementation, this would download the PDF and save SMS consent)");
+            } else {
+                alert("📊 Market Report Download Started!\n\n(In real implementation, this would download the PDF)");
+            }
+            
+            // Show final success
+            const successState = button.closest('.success-state');
+            const smsMessage = smsOptIn ? 
+                "Your neighborhood market report is ready.<br>You'll also receive weekly text updates!" :
+                "Your neighborhood market report is ready.<br>Check your downloads folder.";
+            
+            successState.innerHTML = `
+                <div style="text-align: center;">
+                    <div class="success-icon">📊</div>
+                    <div class="success-message">Report Downloaded!</div>
+                    <div class="success-description">
+                        ${smsMessage}
+                    </div>
+                    <button class="cta-button" onclick="location.reload()">Continue Browsing</button>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
+
