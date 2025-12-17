@@ -99,6 +99,7 @@ WORKSPACE_MEMORY_LOG_[Topic]_Session_[YYYY-MM-DD].md
 | **WORKSPACE_MEMORY** | `TheGenie.ai.Database\GenieCursor\SOP Documentations\WORKSPACE_MEMORY_v2.md` | Technical reference (database, products, reports) |
 | **CREDENTIAL_TRACKER** | `G:\My Drive\Master_Credential_Tracker_v2.md` | All credentials and configuration |
 | **CURSOR_RULES** | `TheGenie.ai.Database\.cursorrules` | Master rules for file handling, GitHub, QA |
+| **GITHUB_CLEAN_RULE** | `c:\Cursor\TheGenie.ai\MASTER_RULE_GITHUB_CLEAN_v1.md` | Rules for clean commits - prevent garbage files |
 
 ---
 
