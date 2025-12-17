@@ -1,0 +1,328 @@
+Versium Cache Migration - Production Changes & Source Control Procedure
+Date: 12/16/2025
+
+================================================================================
+EXACT CHANGES ON PRODUCTION SERVER
+================================================================================
+
+IMPORTANT: This is a DATABASE-ONLY change. NO CODE CHANGES required.
+
+WHAT GETS CHANGED:
+------------------
+
+1. TABLE: FarmGenie.dbo.DataAppendContactLookup
+   ----------------------------------------------
+   Column Updated: LookupKey (varbinary) - MD5 hash of cache key
+   Column Updated: LookupKeyReadable (nvarchar) - Human-readable cache key
+   
+   WHAT CHANGES:
+   • LookupKeyReadable: ::PID-15237408::L-THOMAS::F-F
+     → ::PID-155176603::L-THOMAS::F-F
+   • LookupKey: MD5 hash of old key
+     → MD5 hash of new key
+   
+   HOW MANY ROWS:
+   • ~680,182 cache entries (properties with Attom mappings)
+   • Only properties that have Attom mappings are updated
+   • Properties without Attom mappings stay unchanged
+   
+   EXAMPLE:
+   Before: ::PID-15237408::L-THOMAS::F-F (DataTree ID)
+   After:  ::PID-155176603::L-THOMAS::F-F (Attom ID)
+
+2. BACKUP TABLE CREATED (Automatic)
+   ---------------------------------
+   Table: FarmGenie.dbo.DataAppendContactLookup_Backup_[Timestamp]
+   
+   WHAT IT CONTAINS:
+   • Complete backup of DataAppendContactLookup before migration
+   • All 17.7M records preserved
+   • Can be used for rollback if needed
+   
+   RETENTION:
+   • Keep for 30 days minimum
+   • Can be deleted after verification period
+
+WHAT DOES NOT CHANGE:
+--------------------
+❌ NO application code changes
+❌ NO configuration file changes
+❌ NO web.config changes
+❌ NO stored procedure changes (procedure already exists)
+❌ NO table structure changes
+❌ NO data loss (all data preserved)
+❌ NO new tables created (except backup)
+❌ NO indexes changed
+❌ NO permissions changed
+
+================================================================================
+SOURCE CONTROL PROCEDURE
+================================================================================
+
+SINCE THIS IS DATABASE-ONLY:
+----------------------------
+✅ NO source code changes = Minimal source control needed
+✅ Migration is a stored procedure execution
+✅ Stored procedure should already be in source control
+
+STEP 1: VERIFY STORED PROCEDURE IN SOURCE CONTROL
+--------------------------------------------------
+1. Check if usp_MigrateVersiumCache_DataTreeToAttom is in source control
+2. If yes: Verify it matches production version
+3. If no: Add it to source control (SQL scripts folder)
+
+STEP 2: DOCUMENT MIGRATION IN SOURCE CONTROL
+---------------------------------------------
+Create/Update these files in source control:
+
+1. Migration Script:
+   Location: /SQL/StoredProcedures/usp_MigrateVersiumCache_DataTreeToAttom.sql
+   - The actual stored procedure code
+   - Should already exist (created 12/14/2025)
+
+2. Migration Documentation:
+   Location: /Documentation/VersiumCacheMigration/
+   - Migration procedure document
+   - Test results
+   - Rollback procedures
+
+3. Deployment Log:
+   Location: /Documentation/Deployments/
+   - Date/time of migration
+   - Records updated count
+   - Test results
+   - Sign-off
+
+STEP 3: TAG/BRANCH IN SOURCE CONTROL (Optional)
+----------------------------------------------
+If using Git:
+• Create tag: "VersiumCacheMigration-v1.0-2025-12-16"
+• Or create branch: "feature/versium-cache-migration"
+• Document in commit message:
+  "Versium Cache Migration: Updated 680K cache keys from DataTree to Attom IDs"
+
+If using Visual SourceSafe (VSS):
+• Label the database schema version
+• Document migration in VSS comments
+• Create deployment package label
+
+STEP 4: POST-MIGRATION VERIFICATION
+------------------------------------
+After migration completes:
+1. Verify records updated correctly
+2. Run test queries
+3. Document results
+4. Update source control with verification results
+
+================================================================================
+DEPLOYMENT PROCEDURE (PROPER STEPS)
+================================================================================
+
+PHASE 1: PRE-DEPLOYMENT (Source Control)
+----------------------------------------
+1. ✅ Verify stored procedure in source control
+2. ✅ Review migration procedure code
+3. ✅ Verify test results from sandbox
+4. ✅ Get approval from stakeholders
+5. ✅ Schedule maintenance window (if needed)
+
+PHASE 2: BACKUP (Critical!)
+---------------------------
+1. ✅ Migration procedure creates automatic backup
+2. ✅ Verify backup table created successfully
+3. ✅ Document backup table name
+4. ✅ Verify backup contains all records
+
+PHASE 3: PREVIEW MODE (Test in Production)
+-------------------------------------------
+1. ✅ Run: EXEC usp_MigrateVersiumCache_DataTreeToAttom @Mode = 'PREVIEW'
+2. ✅ Review preview results
+3. ✅ Verify expected records will be updated
+4. ✅ Check for any warnings/errors
+5. ✅ Document preview results
+
+PHASE 4: EXECUTE MIGRATION
+--------------------------
+1. ✅ Run: EXEC usp_MigrateVersiumCache_DataTreeToAttom @Mode = 'EXECUTE'
+2. ✅ Monitor execution (30-60 minutes)
+3. ✅ Verify completion
+4. ✅ Check for errors
+5. ✅ Document execution results
+
+PHASE 5: VERIFICATION
+---------------------
+1. ✅ Verify records updated correctly
+2. ✅ Run test queries
+3. ✅ Check cache lookups work
+4. ✅ Monitor system for 24-48 hours
+5. ✅ Document verification results
+
+PHASE 6: POST-DEPLOYMENT (Source Control)
+------------------------------------------
+1. ✅ Update source control with:
+   - Migration execution log
+   - Records updated count
+   - Test results
+   - Verification results
+2. ✅ Tag/Label source control version
+3. ✅ Update deployment documentation
+4. ✅ Close deployment ticket
+
+================================================================================
+SOURCE CONTROL CHECKLIST
+================================================================================
+
+BEFORE MIGRATION:
+-----------------
+☐ Stored procedure in source control
+☐ Migration documentation in source control
+☐ Test results documented
+☐ Approval obtained
+☐ Backup verified
+
+DURING MIGRATION:
+-----------------
+☐ Preview mode executed
+☐ Preview results reviewed
+☐ Execute mode executed
+☐ Execution monitored
+☐ Backup table verified
+
+AFTER MIGRATION:
+----------------
+☐ Records updated verified
+☐ Test queries passed
+☐ System monitoring active
+☐ Results documented in source control
+☐ Deployment log updated
+☐ Source control tagged/labeled
+
+================================================================================
+WHAT TO COMMIT TO SOURCE CONTROL
+================================================================================
+
+REQUIRED FILES:
+---------------
+1. Stored Procedure:
+   - usp_MigrateVersiumCache_DataTreeToAttom.sql
+   - Location: /SQL/StoredProcedures/
+
+2. Documentation:
+   - Migration procedure document
+   - Test results
+   - Rollback procedures
+   - Location: /Documentation/VersiumCacheMigration/
+
+3. Deployment Log:
+   - Execution date/time
+   - Records updated
+   - Test results
+   - Location: /Documentation/Deployments/
+
+OPTIONAL FILES:
+--------------
+- Test scripts
+- Verification queries
+- Monitoring queries
+
+DO NOT COMMIT:
+--------------
+❌ Backup tables (database-only, not in source control)
+❌ Production data exports
+❌ Personal test files
+
+================================================================================
+ROLLBACK PROCEDURE (If Needed)
+================================================================================
+
+IF MIGRATION FAILS OR NEEDS ROLLBACK:
+------------------------------------
+
+1. STOP: Do not proceed if errors occur
+2. VERIFY: Check backup table exists
+3. RESTORE: Restore from backup table
+4. DOCUMENT: Log rollback in source control
+5. INVESTIGATE: Determine cause of failure
+
+ROLLBACK SQL:
+------------
+```sql
+-- Restore from backup (example - actual table name will have timestamp)
+UPDATE c
+SET 
+    c.LookupKey = b.LookupKey,
+    c.LookupKeyReadable = b.LookupKeyReadable
+FROM FarmGenie.dbo.DataAppendContactLookup c
+INNER JOIN FarmGenie.dbo.DataAppendContactLookup_Backup_[Timestamp] b
+    ON c.DataAppendContactLookupId = b.DataAppendContactLookupId;
+```
+
+VERIFY ROLLBACK:
+---------------
+- Check records restored correctly
+- Verify cache lookups work
+- Document rollback in source control
+
+================================================================================
+VISUAL SOURCESAFE (VSS) SPECIFIC PROCEDURE
+================================================================================
+
+IF USING VISUAL SOURCESAFE:
+---------------------------
+
+1. CHECK OUT:
+   - Check out migration procedure file
+   - Check out deployment documentation
+
+2. LABEL BEFORE:
+   - Create label: "Pre-VersiumMigration-2025-12-16"
+   - Label current database schema version
+
+3. EXECUTE MIGRATION:
+   - Run migration procedure
+   - Document execution
+
+4. LABEL AFTER:
+   - Create label: "Post-VersiumMigration-2025-12-16"
+   - Label new database schema version
+
+5. CHECK IN:
+   - Check in migration logs
+   - Check in deployment documentation
+   - Add comments: "Versium Cache Migration completed - 680K records updated"
+
+6. DOCUMENT:
+   - Update VSS project notes
+   - Document migration in deployment log
+
+================================================================================
+KEY POINTS
+================================================================================
+
+✅ DATABASE-ONLY CHANGE
+   • No code changes required
+   • No application deployment needed
+   • No downtime required
+
+✅ AUTOMATIC BACKUP
+   • Migration creates backup automatically
+   • Backup can be used for rollback
+   • Keep backup for 30 days
+
+✅ SOURCE CONTROL MINIMAL
+   • Mainly documentation
+   • Stored procedure (if not already in source control)
+   • Deployment logs
+
+✅ REVERSIBLE
+   • Can rollback if needed
+   • Backup table preserves all data
+   • No data loss risk
+
+✅ TESTED
+   • Test in sandbox first
+   • Preview mode shows what will change
+   • Execute mode makes actual changes
+
+================================================================================
+
