@@ -8,36 +8,48 @@
 
 ## EXECUTIVE SUMMARY
 
-### The Problem
-We have **17.7 million Versium cache entries** representing **~15 million Versium credits** worth of data. This cache is currently **not being used** - every data append request is fetching new Versium data instead of using the existing cache, wasting credits we've already paid for.
+### The Case: We're Wasting Millions in Credits We've Already Paid For
 
-**Root Cause:** On November 6, 2025, we migrated property data providers from First American (DataTree) to Attom Data Solutions. Our Versium cache uses PropertyIDs in the cache lookup key. All 17.7M cache entries use **DataTree PropertyIDs**, but the system now uses **Attom PropertyIDs** for all new requests. Result: Cache keys don't match → Cache lookups fail → Zero cache hits.
+**The Situation:**
+We have **17.7 million Versium cache entries** in our database - representing **approximately 15 million Versium credits** worth of data that we've already purchased and stored. This cache contains 7+ years of data append results (July 2018 through December 2025).
 
-**Business Impact:**
-- **Credits at Risk:** ~15 million Versium credits
-- **Cache Hit Rate Since Migration:** 0% (was working before)
-- **Cost:** Every data append is wasting credits we've already paid for
+**The Problem:**
+Since November 6, 2025, **this entire cache has become unusable**. Every single data append request is now fetching brand new Versium data from the API instead of using our existing cache. We're essentially paying twice - once for the cached data we can't access, and again for every new API call.
 
-### The Solution
-**Smart cache lookup with owner validation** that preserves and utilizes existing 17.7M cache entries:
+**What Happened:**
+On November 6, 2025, we completed a migration from First American (DataTree) to Attom Data Solutions as our property data provider. This was a necessary business decision, but it created an unintended consequence:
 
-1. Check Attom cache first (for new cache entries going forward)
-2. If not found, get DataTree PropertyID from `AssessorDataPropertyMap`
-3. Compare owner names (Attom vs DataTree):
-   - **If owners match:** Property hasn't transferred → Use existing DataTree cache ✅
-   - **If owners differ:** Property transferred → Fetch new Versium data for new owner ✅
-4. New Versium data gets cached with Attom PropertyID (future-proof)
+- **Before Migration:** Our Versium cache lookup keys used DataTree PropertyIDs (e.g., `::PID-15237408::L-THOMAS::F-F`)
+- **After Migration:** All new requests use Attom PropertyIDs (e.g., `::PID-155176603::L-THOMAS::F-F`)
+- **Result:** Cache keys don't match → Every lookup fails → 0% cache hit rate (down from working perfectly)
 
-**Why Owner Validation is Critical:**
-- If property transferred to new owner, old cache is for wrong person
-- Owner name comparison ensures cache is still valid
-- Prevents data quality issues from stale cache
+**The Business Impact:**
+- **~15 million Versium credits** sitting unused in our database
+- **100% cache miss rate** since November 6th
+- **Every data append** is wasting credits we've already paid for
+- **No end in sight** - this will continue indefinitely until fixed
 
-**Business Benefits:**
-- **Saves ~15M Versium credits** (immediate savings)
-- **Preserves all 17.7M existing cache entries** (no data loss)
-- **Future-proof** (new cache uses Attom IDs automatically)
-- **Zero downtime** (backward compatible, no data changes)
+### The Solution: Smart Cache Lookup with Owner Validation
+
+**The Strategy:**
+Instead of abandoning 17.7 million cache entries, we implement a smart lookup system that:
+
+1. **First:** Checks for new Attom-based cache entries (for data going forward)
+2. **If not found:** Looks up the old DataTree PropertyID for the same property
+3. **Validates:** Compares owner names between Attom and DataTree data
+   - **If owners match:** Property hasn't transferred → Safe to use old cache ✅
+   - **If owners differ:** Property transferred to new owner → Fetch fresh data ✅
+4. **Future-proofs:** New Versium data automatically caches with Attom IDs
+
+**Why This Works:**
+The key insight: **If the property owner hasn't changed, the Versium data is still valid.** Owner name comparison ensures we don't use stale cache for properties that have transferred, while preserving all valid cached data.
+
+**The Business Value:**
+- **Immediate savings:** ~15 million Versium credits preserved and reusable
+- **Zero data loss:** All 17.7M cache entries remain valuable
+- **Future-proof:** New cache automatically uses Attom IDs
+- **Zero risk:** Backward compatible, no data changes required
+- **Zero downtime:** Can deploy without service interruption
 
 ---
 
