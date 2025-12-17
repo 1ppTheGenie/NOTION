@@ -174,7 +174,9 @@ SELECT
     SUM(CreditsUsed) AS CreditsUsed
 FROM FarmGenie.dbo.DataAppendFileLog
 WHERE CreateDate >= [DEPLOYMENT_TIME]
-    AND DataAppendProviderId = 3;  -- Versium
+    AND ReportId = [REPORT_ID];  -- Filter by specific report
+    -- NOTE: DataAppendFileLog does NOT have DataAppendProviderId column
+    -- ReportId is sufficient to identify Versium optimizations
 ```
 
 **Expected Results:**
