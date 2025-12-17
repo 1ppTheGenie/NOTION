@@ -96,10 +96,11 @@ WORKSPACE_MEMORY_LOG_[Topic]_Session_[YYYY-MM-DD].md
 | File | Location | Purpose |
 |------|----------|---------|
 | **MASTER_INDEX** | `c:\Cursor\TheGenie.ai\MASTER_INDEX_v1.md` | This file - start here |
+| **CURSOR_RULES** | `TheGenie.ai.Database\.cursorrules` | **🚨 COMPLETE MASTER RULES - Auto-loaded by Cursor** |
 | **WORKSPACE_MEMORY** | `TheGenie.ai.Database\GenieCursor\SOP Documentations\WORKSPACE_MEMORY_v2.md` | Technical reference (database, products, reports) |
 | **CREDENTIAL_TRACKER** | `G:\My Drive\Master_Credential_Tracker_v2.md` | All credentials and configuration |
-| **CURSOR_RULES** | `TheGenie.ai.Database\.cursorrules` | Master rules for file handling, GitHub, QA |
 | **GITHUB_CLEAN_RULE** | `c:\Cursor\TheGenie.ai\MASTER_RULE_GITHUB_CLEAN_v1.md` | Rules for clean commits - prevent garbage files |
+| **MEMORY_LOG_RULES** | `c:\Cursor\TheGenie.ai\MASTER_RULE_MEMORY_LOGS_v1.md` | Memory log workflow and template |
 
 ---
 
@@ -252,23 +253,37 @@ cd c:\Cursor\_ARCHIVE_Downloads\sandbox_configs
 
 ---
 
-## 📋 MASTER RULES (From Memory Logs)
+## 📋 MASTER RULES QUICK REFERENCE
 
-### File Versioning
+**🚨 IMPORTANT:** `.cursorrules` is automatically loaded by Cursor and contains the COMPLETE master rules. This section is a quick reference only.
+
+**Full Rules Location:** `TheGenie.ai.Database\.cursorrules`
+
+### Critical Rules (Quick Reference)
+
+#### File Versioning
 - **NEVER overwrite files** - Always increment version number
 - Format: `[Name]_v[N].ext` or `[Name]_[YYYY-MM-DD]_v[N].ext`
 - Minor changes: v1.0 → v1.1
 - Major changes: v1.1 → v2.0
 
-### Documentation
+#### Documentation System
 - **GitHub is PRIMARY** - All docs must be in GitHub (NOT Notion)
-- **Memory logs are REQUIRED** - Every session gets a memory log
+- **Memory logs are REQUIRED** - Every significant session gets a memory log
 - **Executive Summary** - Every document needs 5-second understanding at top
+- **NEVER use `git add -A`** - Add files specifically, check for duplicates first
 
-### Database
+#### QA & Testing
+- **NEVER deliver files without QA verification** - Check data accuracy, calculations, sample rows
+- **ALWAYS test with real data** - Never claim "ready" without actual testing
+- **ALWAYS verify schema** - Check database schema before writing queries
+
+#### Database Rules
 - **Clicks = COUNT(DISTINCT GenieLeadId)** - NOT AccessCount
 - **Property Types are SEPARATE** - SFR (0) and Condo (1) are different orders
 - **CC = PropertyCastTypeId = 1** - Includes BOTH trigger types (ListingSold + ListingNew)
+
+**For complete rules, see:** `TheGenie.ai.Database\.cursorrules`
 
 ---
 
@@ -287,12 +302,15 @@ cd c:\Cursor\_ARCHIVE_Downloads\sandbox_configs
 
 When you start a new chat, I should:
 
-- [ ] Read this MASTER_INDEX file
+- [ ] **Study this MASTER_INDEX file** (required before starting any task)
+- [ ] **Review `.cursorrules`** (automatically loaded, but verify you understand the rules)
 - [ ] Check recent memory logs in `c:\Cursor\TheGenie.ai\MemoryLogs\`
 - [ ] Understand current project context from latest log
 - [ ] Know where to save new memory logs
 - [ ] Know GitHub location for permanent storage
 - [ ] Reference WORKSPACE_MEMORY_v2.md for technical details if needed
+
+**When user asks you to "study [document]" - Read that document completely before proceeding.**
 
 ---
 
