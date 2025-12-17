@@ -1,14 +1,19 @@
-Versium Smart Cache Lookup with Owner Validation - CORRECTED Strategy
+Versium Smart Cache Lookup with Owner Validation 
 Date: 12/16/2025
 
-================================================================================
-YOUR CORRECTED LOGIC - THE REAL STRATEGY
-================================================================================
+Ankit,
 
-You said: "Attom data comes in, uses same database row as DataTree. Look up 
-property. If there was a Versium cache entry in the past, check if owner name 
+Can you get this fixed ASAP?  Since !1/06/2024 ouyr cost for Versium has skyrocketed due to you disabling the cache system.  
+
+I'm sending this as a guide to get it fixed.  Let me know if you have qyuestions
+
+================================================================================
+CORRECT THE LOGIC - THE REAL STRATEGY
+================================================================================
+Attom data uses same database row as DataTree. The system Looks up a 
+property. If there was a Versium cache entry in the past, check if  owner name 
 matches. If match → Use cache. If different → Property transferred, fetch new 
-Versium data."
+Versium data.
 
 THIS IS THE CORRECT APPROACH:
 -----------------------------
@@ -155,134 +160,8 @@ var attomCacheKey = Utility.GetLookupCacheKeyReadable(
 SaveCache(attomCacheKey, newVersiumData);
 ```
 
-================================================================================
-KEY DIFFERENCES FROM MY ORIGINAL THINKING
-================================================================================
 
-WHAT I THOUGHT (WRONG):
------------------------
-❌ Check Attom cache first, then DataTree cache
-❌ Just check if cache exists
-❌ Don't validate owner name
-
-WHAT YOU'RE SAYING (CORRECT):
------------------------------
-✅ Attom data comes in (same database row)
-✅ Look up DataTree PropertyID from same row
-✅ Check Versium cache using DataTree PropertyID
-✅ VALIDATE: Compare owner names
-   • Match → Use cache (property hasn't transferred)
-   • Different → Property transferred, fetch new data
-✅ Cache new data with Attom PropertyID (going forward)
-
-THE CRITICAL INSIGHT:
---------------------
-• Compare Attom owner vs DataTree owner (NOT Versium cache owner)
-• If owners match → Property hasn't transferred → Check Versium cache → Use if exists
-• If owners different → Property transferred → Ignore old cache → MUST fetch new Versium data
-• Old Versium cache doesn't matter if owner changed - it's for the wrong owner!
-
-================================================================================
-THE DATABASE STRUCTURE
-================================================================================
-
-AssessorDataPropertyMap Table:
--------------------------------
-• PropertyId: Genie PropertyID (or DataTree ID)
-• DataTreePropertyId: DataTree PropertyID (15237408)
-• AttomId: Attom PropertyID (155176603)
-• Same row = Same property, different vendor IDs
-
-Versium Cache (DataAppendContactLookup):
------------------------------------------
-• LookupKeyReadable: ::PID-15237408::L-THOMAS::F-F (DataTree ID)
-• ResponseJson: Contains Versium data including owner name
-• CreateDate: When cached
-
-THE CONNECTION:
----------------
-• Attom PropertyID → Look up AssessorDataPropertyMap → Get DataTree PropertyID
-• DataTree PropertyID → Look up Versium cache → Get cached data
-• Validate: Compare cached owner vs. Attom owner
-• Use cache if match, fetch new if different
-
-================================================================================
-THE BENEFITS
-================================================================================
-
-PRESERVES EXISTING CACHE:
-------------------------
-✅ All 17.7M cache records usable
-✅ All 15M credits preserved
-✅ Validates cache before using (owner name check)
-✅ Prevents using stale cache for transferred properties
-
-SMART VALIDATION:
------------------
-✅ Owner name comparison ensures cache is valid
-✅ Detects property transfers automatically
-✅ Only fetches new data when needed
-✅ Prevents wasting credits on stale cache
-
-WORKS GOING FORWARD:
---------------------
-✅ New cache entries use Attom PropertyIDs
-✅ Attom cache builds up over time
-✅ Eventually Attom cache becomes primary
-✅ DataTree cache still works as fallback (with validation)
-
-================================================================================
-IMPLEMENTATION CHECKLIST
-================================================================================
-
-STEP 1: LOOK UP PROPERTY RECORD
---------------------------------
-☐ Query AssessorDataPropertyMap for DataTree PropertyID
-☐ Use Attom PropertyID to find same row
-☐ Get DataTree PropertyID from same row
-
-STEP 2: CHECK VERSIUM CACHE
-----------------------------
-☐ Build cache key using DataTree PropertyID
-☐ Look up cache entry
-☐ Check if cache exists
-
-STEP 3: VALIDATE CACHE (If Found)
-----------------------------------
-☐ Extract owner name from cached Versium data
-☐ Get owner name from Attom data
-☐ Compare owner names
-☐ If match → Use cache
-☐ If different → Property transferred, fetch new
-
-STEP 4: FETCH NEW DATA (If Needed)
------------------------------------
-☐ Call Versium API with Attom PropertyID
-☐ Get fresh Versium data
-☐ Cache with Attom PropertyID (going forward)
-
-STEP 5: TEST THOROUGHLY
-------------------------
-☐ Test with matching owner (should use cache)
-☐ Test with different owner (should fetch new)
-☐ Test with no cache (should fetch new)
-☐ Verify credits saved correctly
-
-================================================================================
-KEY INSIGHT
-================================================================================
-
-YOU'RE ABSOLUTELY RIGHT:
------------------------
-✅ Attom data uses same database row as DataTree
-✅ Look up DataTree PropertyID from same row
-✅ Check Versium cache using DataTree PropertyID
-✅ VALIDATE: Owner name comparison is critical!
-   • Match → Use cache (property hasn't transferred)
-   • Different → Property transferred, fetch new data
-✅ Cache new data with Attom PropertyID (going forward)
-
-THE REAL SOLUTION:
+THE SOLUTION:
 ------------------
 • Look up property record (Attom → DataTree mapping)
 • Check Versium cache using DataTree PropertyID
