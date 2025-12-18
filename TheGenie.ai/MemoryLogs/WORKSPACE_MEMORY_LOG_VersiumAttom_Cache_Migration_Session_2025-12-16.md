@@ -219,9 +219,7 @@ SELECT
     SUM(CreditsUsed) AS CreditsUsed
 FROM FarmGenie.dbo.DataAppendFileLog
 WHERE CreateDate >= [DEPLOYMENT_TIME]
-    AND ReportId = [REPORT_ID];  -- Filter by specific report
-    -- NOTE: DataAppendFileLog does NOT have DataAppendProviderId column
-    -- ReportId is sufficient to identify Versium optimizations
+    AND DataAppendProviderId = 3;  -- Versium
 ```
 
 **Expected Results:**
@@ -418,10 +416,33 @@ WHERE CreateDate >= [DEPLOYMENT_TIME]
 | Version | Date | Changes |
 |---------|------|---------|
 | 1.0 | 12/16/2025 | Initial memory log - Complete session documentation |
+| 1.1 | 12/17/2025 | Updated with final session notes, memory log committed to GitHub |
+
+---
+
+## SESSION END NOTES (12/17/2025)
+
+### Final Status
+- **Memory log created and committed to GitHub** ✅
+- **Deployment document ready:** `Versium_Cache_Fix_For_Ankit_v1.md`
+- **Strategy document:** `Versium_Smart_Cache_Validation_Strategy_v1.docx`
+- **Local test attempted** - deferred to sandbox/production testing
+- **Services identified:** SMART.DataAppendData, SMART.CreditService, SMART.HubMarketingService (were stopped, user restarted)
+
+### Key Files for Pickup
+1. `c:\Users\Simulator\.cursor\Versium_Cache_Fix_For_Ankit_v1.md` - FINAL for Ankit
+2. `c:\Users\Simulator\.cursor\Versium_Smart_Cache_Validation_Strategy_v1.docx` - Strategy doc
+3. `c:\Cursor\TheGenie.ai\MemoryLogs\WORKSPACE_MEMORY_LOG_VersiumAttom_Cache_Migration_Session_2025-12-16.md` - This log
+
+### Next Steps When Resuming
+1. Give `Versium_Cache_Fix_For_Ankit_v1.md` to Ankit for deployment
+2. Dev team implements code changes in `ActionCacheCheck.cs`
+3. Test in sandbox/production
+4. Monitor cache hit rates post-deployment
 
 ---
 
 **This memory log documents the complete Versium/Attom cache migration project from discovery through solution design and deployment preparation.**
 
-*Session completed: 12/16/2025*
+*Session completed: 12/17/2025*
 
