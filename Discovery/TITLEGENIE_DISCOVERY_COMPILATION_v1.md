@@ -6,7 +6,7 @@
 | **Created** | 2025-01-15 |
 | **Last Updated** | 2025-01-15 |
 | **Author** | AI Assistant |
-| **Purpose** | Comprehensive compilation of all TitleGenie findings from C Drive, G Drive, and codebase for discovery session |
+| **Purpose** | Comprehensive compilation of all TitleGenie findings from C Drive, D Drive, and codebase for discovery session |
 
 ---
 
@@ -19,7 +19,7 @@
 
 This document compiles **ALL** findings related to TitleGenie across:
 - **C Drive** - Codebase, source files, documentation
-- **G Drive** - Asset library, marketing materials, onboarding docs
+- **D Drive** - Asset library, marketing materials, onboarding docs (updated from G Drive)
 - **Codebase** - Invitation system, partnership logic, database structure
 
 **Focus Areas (In Priority Order):**
@@ -33,8 +33,8 @@ This document compiles **ALL** findings related to TitleGenie across:
 
 ## 📚 SOURCES REVIEWED
 
-### G Drive Asset Library
-**Location:** `G:\My Drive\111PPDrive\Organized_TheGenie_Assets\`
+### D Drive Asset Library (Updated from G Drive)
+**Location:** `D:\My Drive\111PPDrive\Organized_TheGenie_Assets\` ⏳ Verify path
 
 | File | Location | Purpose |
 |------|----------|---------|
@@ -68,7 +68,7 @@ This document compiles **ALL** findings related to TitleGenie across:
 ### Current Onboarding Template
 **File:** `TheGenie Title Operation Onboarding Worksheet Template.xlsx`
 
-**Location:** `G:\My Drive\111PPDrive\Organized_TheGenie_Assets\01_TheGenie_Core\`
+**Location:** `D:\My Drive\111PPDrive\Organized_TheGenie_Assets\01_TheGenie_Core\` ⏳ Verify path
 
 **Purpose:** Title rep onboarding worksheet template
 
@@ -226,19 +226,19 @@ var invitationUrl = $"https://app.thegenie.ai/invitation/accept/{invitationId}/{
 
 **1. Sales Presentation**
 - **File:** `Intro to TitleGenie.pptx`
-- **Location:** `G:\My Drive\111PPDrive\Organized_TheGenie_Assets\01_TheGenie_Core\`
+- **Location:** `D:\My Drive\111PPDrive\Organized_TheGenie_Assets\01_TheGenie_Core\` ⏳ Verify path
 - **Purpose:** Sales presentation for TitleGenie
 - **Status:** ⚠️ **NEEDS REVIEW** - PowerPoint file
 
 **2. Sales Guide**
 - **File:** `Guide for Title Reps on approaching agents.docx`
-- **Location:** `G:\My Drive\111PPDrive\Organized_TheGenie_Assets\03_Playbooks_Guides\`
+- **Location:** `D:\My Drive\111PPDrive\Organized_TheGenie_Assets\03_Playbooks_Guides\` ⏳ Verify path
 - **Purpose:** Guide for title reps on how to approach agents
 - **Status:** ⚠️ **NEEDS REVIEW** - Word document
 
 **3. Interview Notes**
 - **File:** `Interview Notes - Top Title Reps - 092025.docx`
-- **Location:** `G:\My Drive\111PPDrive\Organized_TheGenie_Assets\01_TheGenie_Core\`
+- **Location:** `D:\My Drive\111PPDrive\Organized_TheGenie_Assets\01_TheGenie_Core\` ⏳ Verify path
 - **Purpose:** Insights from top title reps
 - **Status:** ⚠️ **NEEDS REVIEW** - Word document
 
@@ -610,11 +610,11 @@ FarmGenieInvitation
 
 | File | Location | Status |
 |------|----------|--------|
-| Intro to TitleGenie.pptx | `G:\My Drive\111PPDrive\Organized_TheGenie_Assets\01_TheGenie_Core\` | ⚠️ Needs review |
-| TheGenie Title Operation Onboarding Worksheet Template.xlsx | `G:\My Drive\111PPDrive\Organized_TheGenie_Assets\01_TheGenie_Core\` | ⚠️ Needs review |
-| Interview Notes - Top Title Reps - 092025.docx | `G:\My Drive\111PPDrive\Organized_TheGenie_Assets\01_TheGenie_Core\` | ⚠️ Needs review |
-| Guide for Title Reps on approaching agents.docx | `G:\My Drive\111PPDrive\Organized_TheGenie_Assets\03_Playbooks_Guides\` | ⚠️ Needs review |
-| title rep LC webinar email.txt | `G:\My Drive\111PPDrive\Extracted\drive-download-20251213T022742Z-3-009\1ParkPlace\DOCs\` | ✅ Reviewed |
+| Intro to TitleGenie.pptx | `D:\My Drive\111PPDrive\Organized_TheGenie_Assets\01_TheGenie_Core\` ⏳ Verify | ⚠️ Needs review |
+| TheGenie Title Operation Onboarding Worksheet Template.xlsx | `D:\My Drive\111PPDrive\Organized_TheGenie_Assets\01_TheGenie_Core\` ⏳ Verify | ⚠️ Needs review |
+| Interview Notes - Top Title Reps - 092025.docx | `D:\My Drive\111PPDrive\Organized_TheGenie_Assets\01_TheGenie_Core\` ⏳ Verify | ⚠️ Needs review |
+| Guide for Title Reps on approaching agents.docx | `D:\My Drive\111PPDrive\Organized_TheGenie_Assets\03_Playbooks_Guides\` ⏳ Verify | ⚠️ Needs review |
+| title rep LC webinar email.txt | `D:\My Drive\111PPDrive\Extracted\drive-download-20251213T022742Z-3-009\1ParkPlace\DOCs\` ⏳ Verify | ✅ Reviewed |
 
 ### Code Files Reviewed
 
@@ -752,4 +752,7 @@ FarmGenieInvitation
 ---
 
 **Status:** Complete compilation ready for discovery session review. All code analyzed, all files cataloged, all questions prepared.
+
+
+
 
