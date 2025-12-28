@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Asset Configurator - Figma Walkthrough</title>
+    <!--
+    ╔══════════════════════════════════════════════════════════════════════════════╗
+    ║  CUSTOMER ASSET CONFIGURATOR - FIGMA WALKTHROUGH                              ║
+    ║                                                                               ║
+    ║  Preview URL: file:///D:/Cursor/TheGenie.ai/Development/Paisley/              ║
+    ║               Pre.Listing.Command/Docs/CUSTOMER_ASSET_CONFIGURATOR_SPEC_v1.html║
+    ║                                                                               ║
+    ║  Version: 2.0 (Added CTA System)                                              ║
+    ║  Created: 12/28/2025                                                          ║
+    ║  Author: Cursor AI                                                            ║
+    ╚══════════════════════════════════════════════════════════════════════════════╝
+    -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-dark: #0f0f0f;
+            --bg-card: #1a1a1a;
+            --bg-input: #2a2a2a;
+            --border: #333;
+            --text: #f0f0f0;
+            --text-muted: #888;
+            --accent-blue: #4a9eff;
+            --accent-purple: #9b59b6;
+            --accent-green: #2ecc71;
+            --accent-orange: #f39c12;
+            --accent-red: #e74c3c;
+            --accent-pink: #e91e63;
+        }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 20px;
+            border: 1px solid #333;
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        
+        .header .subtitle {
+            color: var(--text-muted);
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .header .meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        
+        .header .meta span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Section */
+        .section {
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 5px;
+            height: 30px;
+            background: var(--accent-blue);
+            border-radius: 3px;
+        }
+        
+        /* Vision Box */
+        .vision-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .vision-box h3 {
+            color: var(--accent-orange);
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .pillars {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+        
+        @media (max-width: 1200px) {
+            .pillars {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .pillar {
+            background: var(--bg-input);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        
+        .pillar:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-blue);
+        }
+        
+        .pillar .icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .pillar h4 {
+            color: var(--text);
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .pillar p {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+        
+        /* Figma Frame */
+        .figma-frame {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .figma-header {
+            background: #252525;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .figma-dots {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .figma-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .figma-dot.red { background: #ff5f56; }
+        .figma-dot.yellow { background: #ffbd2e; }
+        .figma-dot.green { background: #27c93f; }
+        
+        .figma-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        
+        .figma-content {
+            padding: 30px;
+        }
+        
+        /* Screen Mock */
+        .screen-mock {
+            background: #1e1e2e;
+            border-radius: 12px;
+            border: 1px solid #333;
+            overflow: hidden;
+        }
+        
+        .screen-toolbar {
+            background: #16161e;
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #333;
+        }
+        
+        .toolbar-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .toolbar-logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent-purple);
+        }
+        
+        .toolbar-nav {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .toolbar-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        
+        .toolbar-nav a:hover,
+        .toolbar-nav a.active {
+            background: rgba(155, 89, 182, 0.2);
+            color: var(--accent-purple);
+        }
+        
+        .screen-body {
+            padding: 30px;
+        }
+        
+        /* Customer Search */
+        .customer-search {
+            background: var(--bg-input);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .search-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+        
+        .search-input-group {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .search-input {
+            flex: 1;
+            background: #1e1e2e;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 14px 18px;
+            color: var(--text);
+            font-size: 15px;
+        }
+        
+        .search-input::placeholder {
+            color: #666;
+        }
+        
+        .search-btn {
+            background: var(--accent-purple);
+            border: none;
+            border-radius: 8px;
+            padding: 14px 25px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Customer Card */
+        .customer-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border: 1px solid var(--accent-blue);
+        }
+        
+        .customer-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .customer-info {
+            flex: 1;
+        }
+        
+        .customer-name {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .customer-id {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        
+        .customer-badges {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .badge-theme {
+            background: rgba(243, 156, 18, 0.2);
+            color: var(--accent-orange);
+            border: 1px solid var(--accent-orange);
+        }
+        
+        .badge-collection {
+            background: rgba(46, 204, 113, 0.2);
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+        }
+        
+        /* Config Tabs */
+        .config-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .config-tab {
+            padding: 12px 24px;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-muted);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .config-tab:hover {
+            border-color: var(--accent-blue);
+            color: var(--text);
+        }
+        
+        .config-tab.active {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: white;
+        }
+        
+        /* Config Panel */
+        .config-panel {
+            background: var(--bg-input);
+            border-radius: 12px;
+            padding: 25px;
+        }
+        
+        .config-section {
+            margin-bottom: 25px;
+        }
+        
+        .config-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .config-section h4 {
+            font-size: 16px;
+            color: var(--accent-purple);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Theme Grid */
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        
+        .theme-card {
+            background: #1e1e2e;
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .theme-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+        
+        .theme-card.selected {
+            border-color: var(--accent-green);
+            background: rgba(46, 204, 113, 0.1);
+        }
+        
+        .theme-preview {
+            height: 60px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+        
+        .theme-preview.apple { background: linear-gradient(135deg, #1a1a1a 0%, #333 100%); }
+        .theme-preview.compass { background: linear-gradient(135deg, #000 0%, #1a1a1a 100%); }
+        .theme-preview.coastal { background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%); }
+        .theme-preview.inspired-re { background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%); }
+        
+        .theme-name {
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        /* Service Grid */
+        .service-grid {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .service-row {
+            display: grid;
+            grid-template-columns: 180px 1fr 1fr;
+            gap: 15px;
+            align-items: center;
+            background: #1e1e2e;
+            padding: 15px 20px;
+            border-radius: 10px;
+            border: 1px solid #333;
+        }
+        
+        .service-name {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .service-select {
+            background: #2a2a3e;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 10px 15px;
+            color: var(--text);
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        /* Preview Panel */
+        .preview-panel {
+            background: var(--bg-input);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+        
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .preview-header h4 {
+            color: var(--accent-orange);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .preview-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-preview {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-preview.secondary {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+        
+        .btn-preview.primary {
+            background: var(--accent-green);
+            color: white;
+        }
+        
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        
+        .preview-item {
+            background: #1e1e2e;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+        
+        .preview-thumb {
+            height: 140px;
+            background: linear-gradient(135deg, #2a2a3e 0%, #1a1a2e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+        
+        .preview-label {
+            padding: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            border-top: 1px solid #333;
+        }
+        
+        /* Workflow */
+        .workflow {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .workflow-step {
+            text-align: center;
+            position: relative;
+        }
+        
+        .workflow-step::after {
+            content: '→';
+            position: absolute;
+            right: -20px;
+            top: 30px;
+            font-size: 24px;
+            color: var(--text-muted);
+        }
+        
+        .workflow-step:last-child::after {
+            display: none;
+        }
+        
+        .workflow-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            margin: 0 auto 20px auto;
+        }
+        
+        .workflow-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .workflow-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        
+        /* Database Section */
+        .database-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+        
+        .database-section h3 {
+            color: var(--accent-green);
+            font-size: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .sql-block {
+            background: #0d1117;
+            border-radius: 10px;
+            padding: 20px;
+            overflow-x: auto;
+        }
+        
+        .sql-block pre {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            color: #c9d1d9;
+            white-space: pre-wrap;
+        }
+        
+        .sql-block .keyword { color: #ff7b72; }
+        .sql-block .type { color: #79c0ff; }
+        .sql-block .string { color: #a5d6ff; }
+        .sql-block .comment { color: #8b949e; }
+        
+        /* Architecture Diagram */
+        .architecture {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+        
+        .architecture h3 {
+            color: var(--accent-purple);
+            font-size: 20px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .arch-diagram {
+            background: #0d1117;
+            border-radius: 12px;
+            padding: 30px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            line-height: 1.8;
+            overflow-x: auto;
+            white-space: pre;
+        }
+        
+        /* Changelog */
+        .changelog {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+        
+        .changelog h3 {
+            color: var(--accent-orange);
+            margin-bottom: 20px;
+        }
+        
+        .changelog-item {
+            display: flex;
+            gap: 20px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .changelog-version {
+            background: var(--accent-blue);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .changelog-date {
+            color: var(--text-muted);
+            font-size: 13px;
+            min-width: 100px;
+        }
+        
+        .changelog-desc {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎨 Customer Asset Configurator</h1>
+            <p class="subtitle">The Admin Interface for Managing Customer Themes, Collections, and Service Assets</p>
+            <div class="meta">
+                <span>📋 Version 1.0</span>
+                <span>📅 Created: 12/28/2025</span>
+                <span>👤 Author: Cursor AI</span>
+            </div>
+        </div>
+        
+        <!-- Vision -->
+        <div class="section">
+            <h2 class="section-title">The Vision: End the "Compass Hack"</h2>
+            
+            <div class="vision-box">
+                <h3>The Problem We're Solving</h3>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">
+                    Currently, customers like <strong>Dainelle Scott</strong> are assigned competitor themes (Compass) as a workaround for 
+                    brand-matching colors. This causes competitor logos to appear on their assets! We need proper theme management, 
+                    not theme borrowing.
+                </p>
+                
+                <div class="pillars">
+                    <div class="pillar">
+                        <div class="icon">🎨</div>
+                        <h4>Theme Selection</h4>
+                        <p>Browse & assign proper themes (not competitor hacks)</p>
+                    </div>
+                    <div class="pillar">
+                        <div class="icon">✏️</div>
+                        <h4>Theme Editing</h4>
+                        <p>Create custom themes matching customer brand colors</p>
+                    </div>
+                    <div class="pillar">
+                        <div class="icon">📦</div>
+                        <h4>Collection Building</h4>
+                        <p>Customize which assets appear in marketing kits</p>
+                    </div>
+                    <div class="pillar">
+                        <div class="icon">🔗</div>
+                        <h4>Service Assignment</h4>
+                        <p>Map collections to LC, NC, PLS, Open House</p>
+                    </div>
+                    <div class="pillar" style="border-color: var(--accent-pink);">
+                        <div class="icon">🎯</div>
+                        <h4>CTA Configuration</h4>
+                        <p>Choose CTA style & function per landing page</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Figma Walkthrough -->
+        <div class="section">
+            <h2 class="section-title">Figma Walkthrough: The Admin UI</h2>
+            
+            <div class="figma-frame">
+                <div class="figma-header">
+                    <div class="figma-dots">
+                        <div class="figma-dot red"></div>
+                        <div class="figma-dot yellow"></div>
+                        <div class="figma-dot green"></div>
+                    </div>
+                    <div class="figma-title">TheGenie.ai Dashboard → Admin → Customer Configurator</div>
+                </div>
+                
+                <div class="figma-content">
+                    <div class="screen-mock">
+                        <div class="screen-toolbar">
+                            <div class="toolbar-left">
+                                <span class="toolbar-logo">TheGenie.ai</span>
+                                <nav class="toolbar-nav">
+                                    <a href="#">Dashboard</a>
+                                    <a href="#">Reports</a>
+                                    <a href="#" class="active">Admin Tools</a>
+                                    <a href="#">Settings</a>
+                                </nav>
+                            </div>
+                        </div>
+                        
+                        <div class="screen-body">
+                            <!-- Step 1: Customer Search -->
+                            <div class="customer-search">
+                                <div class="search-label">🔍 STEP 1: Search for Customer</div>
+                                <div class="search-input-group">
+                                    <input type="text" class="search-input" placeholder="Search by name, email, or paste User ID..." value="Dainelle Scott">
+                                    <button class="search-btn">
+                                        <span>🔎</span> Search
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Customer Card -->
+                            <div class="customer-card">
+                                <div class="customer-avatar">DS</div>
+                                <div class="customer-info">
+                                    <div class="customer-name">Dainelle Scott</div>
+                                    <div class="customer-id">9f750957-4d66-4151-bd37-9588d17d4fb8</div>
+                                    <div class="customer-badges">
+                                        <span class="badge badge-theme">Theme: apple-black</span>
+                                        <span class="badge badge-collection">Collection: listing-command-sample</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Config Tabs -->
+                            <div class="config-tabs">
+                                <div class="config-tab active">🎨 Theme</div>
+                                <div class="config-tab">📦 Collections</div>
+                                <div class="config-tab">🔗 Service Mapping</div>
+                                <div class="config-tab" style="border-color: var(--accent-pink);">🎯 CTAs</div>
+                                <div class="config-tab">⚙️ Advanced</div>
+                            </div>
+                            
+                            <!-- Config Panel -->
+                            <div class="config-panel">
+                                <div class="config-section">
+                                    <h4>🎨 Assign Theme to Customer</h4>
+                                    <div class="theme-grid">
+                                        <div class="theme-card">
+                                            <div class="theme-preview apple"></div>
+                                            <div class="theme-name">apple-black</div>
+                                        </div>
+                                        <div class="theme-card selected">
+                                            <div class="theme-preview coastal"></div>
+                                            <div class="theme-name">coastal-elegance ✨ NEW</div>
+                                        </div>
+                                        <div class="theme-card">
+                                            <div class="theme-preview inspired-re"></div>
+                                            <div class="theme-name">inspired-re</div>
+                                        </div>
+                                        <div class="theme-card" style="border-style: dashed; opacity: 0.7;">
+                                            <div class="theme-preview" style="display: flex; align-items: center; justify-content: center; background: #2a2a3e; font-size: 24px;">➕</div>
+                                            <div class="theme-name">Create Custom</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="config-section" style="margin-top: 30px;">
+                                    <h4>🔗 Service → Collection Mapping</h4>
+                                    <div class="service-grid">
+                                        <div class="service-row">
+                                            <div class="service-name">📋 Listing Command</div>
+                                            <select class="service-select">
+                                                <option>Listing Command Proof Kit</option>
+                                                <option selected>Dainelle Custom Kit</option>
+                                                <option>Basic Marketing Kit</option>
+                                            </select>
+                                            <select class="service-select">
+                                                <option selected>Hollywood Landing</option>
+                                                <option>Property Compare</option>
+                                                <option>QR Compare</option>
+                                            </select>
+                                        </div>
+                                        <div class="service-row">
+                                            <div class="service-name">🏘️ Neighborhood</div>
+                                            <select class="service-select">
+                                                <option>Market Report Kit</option>
+                                            </select>
+                                            <select class="service-select">
+                                                <option>Market Report Page</option>
+                                            </select>
+                                        </div>
+                                        <div class="service-row">
+                                            <div class="service-name">🔒 PLS (Coming Soon)</div>
+                                            <select class="service-select">
+                                                <option selected>PLS Social Collection</option>
+                                            </select>
+                                            <select class="service-select">
+                                                <option selected>PLS Hollywood</option>
+                                            </select>
+                                        </div>
+                                        <div class="service-row">
+                                            <div class="service-name">🏠 Open House</div>
+                                            <select class="service-select">
+                                                <option>Open House Kit</option>
+                                            </select>
+                                            <select class="service-select">
+                                                <option>OH Landing Page</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- CTA Configuration Section -->
+                            <div class="config-panel" style="margin-top: 25px; border-left: 3px solid var(--accent-pink);">
+                                <div class="config-section">
+                                    <h4 style="color: var(--accent-pink);">🎯 CTA Configuration (per Landing Page)</h4>
+                                    <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 20px;">
+                                        Choose which CTA asset appears and which function it triggers. Design the experience here; 
+                                        Engagement Center handles tracking when orders are placed.
+                                    </p>
+                                    
+                                    <!-- CTA by Landing Page -->
+                                    <div class="service-grid">
+                                        <div class="service-row" style="grid-template-columns: 180px 1fr 1fr 1fr;">
+                                            <div class="service-name" style="font-size: 12px; color: var(--text-muted);">Landing Page</div>
+                                            <div style="font-size: 12px; color: var(--text-muted);">CTA Asset</div>
+                                            <div style="font-size: 12px; color: var(--text-muted);">CTA Function</div>
+                                            <div style="font-size: 12px; color: var(--text-muted);">Trigger</div>
+                                        </div>
+                                        <div class="service-row" style="grid-template-columns: 180px 1fr 1fr 1fr;">
+                                            <div class="service-name">🏠 LC Hollywood</div>
+                                            <select class="service-select">
+                                                <option selected>Soft Follow Popup</option>
+                                                <option>Home Value Modal</option>
+                                                <option>SMS Brochure Request</option>
+                                                <option>Schedule Showing</option>
+                                                <option>CTA Rotation (A/B)</option>
+                                            </select>
+                                            <select class="service-select">
+                                                <option selected>Follow (No Form)</option>
+                                                <option>Phone Capture</option>
+                                                <option>Email Capture</option>
+                                                <option>Full Form</option>
+                                            </select>
+                                            <select class="service-select">
+                                                <option>3s Delay</option>
+                                                <option selected>50% Scroll</option>
+                                                <option>Exit Intent</option>
+                                                <option>Mobile Banner</option>
+                                            </select>
+                                        </div>
+                                        <div class="service-row" style="grid-template-columns: 180px 1fr 1fr 1fr;">
+                                            <div class="service-name">🔒 PLS Hollywood</div>
+                                            <select class="service-select">
+                                                <option>Soft Follow Popup</option>
+                                                <option selected>Exclusive Preview CTA</option>
+                                                <option>Get Notified</option>
+                                                <option>Private Showing</option>
+                                            </select>
+                                            <select class="service-select">
+                                                <option selected>Phone + Email</option>
+                                                <option>Phone Only</option>
+                                                <option>Email Only</option>
+                                            </select>
+                                            <select class="service-select">
+                                                <option selected>Immediate</option>
+                                                <option>3s Delay</option>
+                                                <option>50% Scroll</option>
+                                            </select>
+                                        </div>
+                                        <div class="service-row" style="grid-template-columns: 180px 1fr 1fr 1fr;">
+                                            <div class="service-name">📊 Property Compare</div>
+                                            <select class="service-select">
+                                                <option selected>Home Value Modal</option>
+                                                <option>Market Report CTA</option>
+                                                <option>Soft Follow</option>
+                                            </select>
+                                            <select class="service-select">
+                                                <option selected>Address Lookup</option>
+                                                <option>Phone Capture</option>
+                                            </select>
+                                            <select class="service-select">
+                                                <option>Immediate</option>
+                                                <option selected>After Embed Load</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Deployment Context -->
+                                <div class="config-section" style="margin-top: 25px;">
+                                    <h4 style="color: var(--accent-orange);">📤 Deployment Context</h4>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
+                                        <div style="background: #1e1e2e; padding: 20px; border-radius: 10px; border: 1px solid #333;">
+                                            <h5 style="color: var(--accent-green); margin-bottom: 10px;">⚡ Automated (FarmCast)</h5>
+                                            <ul style="color: var(--text-muted); font-size: 13px; padding-left: 20px;">
+                                                <li>Listing Command, Neighborhood Command, Comp Command</li>
+                                                <li>CTAs auto-added based on this config</li>
+                                                <li>Engagement Center tracks all interactions</li>
+                                                <li>SMS links → Landing Page → CTA → Lead Capture</li>
+                                            </ul>
+                                        </div>
+                                        <div style="background: #1e1e2e; padding: 20px; border-radius: 10px; border: 1px solid #333;">
+                                            <h5 style="color: var(--accent-blue); margin-bottom: 10px;">📋 Non-Automated (Static)</h5>
+                                            <ul style="color: var(--text-muted); font-size: 13px; padding-left: 20px;">
+                                                <li>Door-to-door flyers, Open Houses, QR codes</li>
+                                                <li>Collection created with handouts</li>
+                                                <li>Visitors land on page via QR/URL</li>
+                                                <li>Same CTA config, just different entry point</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Preview Panel -->
+                            <div class="preview-panel">
+                                <div class="preview-header">
+                                    <h4>👁️ Live Preview (as Dainelle Scott)</h4>
+                                    <div class="preview-actions">
+                                        <button class="btn-preview secondary">↻ Refresh Preview</button>
+                                        <button class="btn-preview primary">✓ Save Configuration</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="preview-grid">
+                                    <div class="preview-item">
+                                        <div class="preview-thumb">📬</div>
+                                        <div class="preview-label">Direct Mail Postcard</div>
+                                    </div>
+                                    <div class="preview-item">
+                                        <div class="preview-thumb">📱</div>
+                                        <div class="preview-label">Social Media Ad</div>
+                                    </div>
+                                    <div class="preview-item">
+                                        <div class="preview-thumb">🌐</div>
+                                        <div class="preview-label">Landing Page (Hollywood)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Admin Workflow -->
+        <div class="section">
+            <h2 class="section-title">The Admin Workflow</h2>
+            
+            <div class="workflow">
+                <div class="workflow-step">
+                    <div class="workflow-icon">🔍</div>
+                    <div class="workflow-title">1. Select Customer</div>
+                    <div class="workflow-desc">Search by name, email, or paste AspNetUserId directly</div>
+                </div>
+                <div class="workflow-step">
+                    <div class="workflow-icon">🎨</div>
+                    <div class="workflow-title">2. Configure Theme</div>
+                    <div class="workflow-desc">Assign existing theme or create custom colors</div>
+                </div>
+                <div class="workflow-step">
+                    <div class="workflow-icon">📦</div>
+                    <div class="workflow-title">3. Map Services</div>
+                    <div class="workflow-desc">Choose collection + landing page per service type</div>
+                </div>
+                <div class="workflow-step">
+                    <div class="workflow-icon">👁️</div>
+                    <div class="workflow-title">4. Preview & Save</div>
+                    <div class="workflow-desc">Render assets AS the customer, confirm & save</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CTA System Architecture -->
+        <div class="section">
+            <h2 class="section-title" style="color: var(--accent-pink);">CTA System Architecture</h2>
+            
+            <div class="vision-box" style="border-color: var(--accent-pink);">
+                <h3 style="color: var(--accent-pink);">The CTA Strategy</h3>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">
+                    Separate CTA <strong>design & selection</strong> (our scope) from CTA <strong>execution & tracking</strong> (PLS/Genie Application team).
+                    We focus on building amazing CTAs and configuring which ones appear where. They handle engagement center integration.
+                </p>
+                
+                <div style="background: #0d1117; border-radius: 12px; padding: 25px; font-family: 'Space Mono', monospace; font-size: 12px; line-height: 1.8; overflow-x: auto; white-space: pre;">
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                              CTA SYSTEM ARCHITECTURE                                      │
+├─────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                           │
+│  ┌────────────────────────────────────────────────────────────────────────────────────┐  │
+│  │                        OUR SCOPE (Asset Configurator)                               │  │
+│  ├────────────────────────────────────────────────────────────────────────────────────┤  │
+│  │                                                                                      │  │
+│  │  CTA ASSETS (What They Look Like)                                                   │  │
+│  │  ├── Soft Follow Popup (Tom Ferry style, minimal friction)                         │  │
+│  │  ├── Home Value Modal (address input + immediate result)                           │  │
+│  │  ├── SMS Brochure Request (phone only, text brochure)                              │  │
+│  │  ├── Schedule Showing (calendar picker)                                            │  │
+│  │  ├── Exclusive Preview CTA (for Coming Soon/Private)                               │  │
+│  │  ├── Get Notified (for pre-listing)                                                │  │
+│  │  └── CTA Rotation / A/B Collection                                                 │  │
+│  │                                                                                      │  │
+│  │  CTA FUNCTIONS (What They Do)                                                       │  │
+│  │  ├── Follow (No Form) - Single click, engagement tracked                           │  │
+│  │  ├── Phone Capture - Phone field only → SMS delivery                               │  │
+│  │  ├── Email Capture - Email field only                                              │  │
+│  │  ├── Phone + Email - Combined capture                                              │  │
+│  │  ├── Full Form - Name, email, phone, message                                        │  │
+│  │  └── Address Lookup - Property search → Home value                                 │  │
+│  │                                                                                      │  │
+│  │  CTA TRIGGERS (When They Appear)                                                    │  │
+│  │  ├── Immediate - On page load                                                       │  │
+│  │  ├── Delay (3s, 5s, 10s) - After N seconds                                         │  │
+│  │  ├── Scroll (25%, 50%, 75%) - After scrolling N%                                   │  │
+│  │  ├── Exit Intent - Mouse leaves viewport                                           │  │
+│  │  └── Mobile Banner - Sticky bottom bar                                             │  │
+│  │                                                                                      │  │
+│  └────────────────────────────────────────────────────────────────────────────────────┘  │
+│                                        │                                                  │
+│                                        ▼                                                  │
+│  ┌────────────────────────────────────────────────────────────────────────────────────┐  │
+│  │                    PLS/GENIE APPLICATION TEAM SCOPE                                 │  │
+│  ├────────────────────────────────────────────────────────────────────────────────────┤  │
+│  │                                                                                      │  │
+│  │  EXECUTION                           TRACKING                                        │  │
+│  │  ├── Render CTA on page             ├── UTM parameters                              │  │
+│  │  ├── Submit to Engagement Center    ├── LeadTagTypeId assignment                    │  │
+│  │  ├── Trigger Versium append         ├── Source labeling                             │  │
+│  │  └── SMS/Email delivery             └── Conversion attribution                      │  │
+│  │                                                                                      │  │
+│  └────────────────────────────────────────────────────────────────────────────────────┘  │
+│                                                                                           │
+└─────────────────────────────────────────────────────────────────────────────────────────┘</div>
+            </div>
+            
+            <!-- Available CTA Options -->
+            <div style="background: var(--bg-card); border-radius: 16px; padding: 30px; margin-top: 30px;">
+                <h3 style="color: var(--accent-pink); margin-bottom: 20px;">🎯 Available CTA Options</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: var(--bg-input);">
+                            <th style="padding: 12px; text-align: left; border-bottom: 1px solid var(--border);">ID</th>
+                            <th style="padding: 12px; text-align: left; border-bottom: 1px solid var(--border);">CTA Asset</th>
+                            <th style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);">Friction</th>
+                            <th style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);">Target %</th>
+                            <th style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">10</td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);"><strong>Soft Follow (Tom Ferry)</strong> - Single click, no form</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);"><span style="background: var(--accent-green); padding: 2px 8px; border-radius: 4px; font-size: 11px;">LOW</span></td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);">15-25%</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);"><span style="color: var(--accent-orange);">🔴 TO BUILD</span></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">11</td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);"><strong>Home Value Request</strong> - Address lookup modal</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);"><span style="background: var(--accent-orange); padding: 2px 8px; border-radius: 4px; font-size: 11px;">MEDIUM</span></td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);">5-10%</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);"><span style="color: var(--accent-orange);">🔴 TO BUILD</span></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">12</td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);"><strong>SMS Brochure Request</strong> - Phone only, text PDF</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);"><span style="background: var(--accent-green); padding: 2px 8px; border-radius: 4px; font-size: 11px;">LOW</span></td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);">10-15%</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);"><span style="color: var(--accent-orange);">🔴 TO BUILD</span></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">13</td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);"><strong>Private Showing Request</strong> - Calendar + contact</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);"><span style="background: var(--accent-orange); padding: 2px 8px; border-radius: 4px; font-size: 11px;">MEDIUM</span></td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);">8-12%</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);"><span style="color: var(--accent-orange);">🔴 TO BUILD</span></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">14</td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);"><strong>Get Notified</strong> - Pre-listing exclusive access</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);"><span style="background: var(--accent-green); padding: 2px 8px; border-radius: 4px; font-size: 11px;">LOW</span></td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);">12-18%</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);"><span style="color: var(--accent-orange);">🔴 TO BUILD</span></td>
+                        </tr>
+                        <tr style="background: rgba(46, 204, 113, 0.1);">
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">0</td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">No CTA</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);">-</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);">-</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);"><span style="color: var(--accent-green);">✅ EXISTS</span></td>
+                        </tr>
+                        <tr style="background: rgba(46, 204, 113, 0.1);">
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">2</td>
+                            <td style="padding: 12px; border-bottom: 1px solid var(--border);">Home Value (Current Full Form)</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);"><span style="background: var(--accent-red); padding: 2px 8px; border-radius: 4px; font-size: 11px;">HIGH</span></td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);">2-5%</td>
+                            <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border);"><span style="color: var(--accent-green);">✅ EXISTS</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Deployment Options -->
+            <div style="background: var(--bg-card); border-radius: 16px; padding: 30px; margin-top: 30px;">
+                <h3 style="color: var(--accent-blue); margin-bottom: 20px;">📤 Two Deployment Paths</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+                    <div style="background: linear-gradient(135deg, #1a3a2e 0%, #0f2e1e 100%); border-radius: 12px; padding: 25px; border: 1px solid var(--accent-green);">
+                        <h4 style="color: var(--accent-green); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 28px;">⚡</span> Automated (FarmCast)
+                        </h4>
+                        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 15px;">
+                            System-triggered marketing campaigns
+                        </p>
+                        <ul style="color: var(--text); font-size: 13px; padding-left: 20px; line-height: 2;">
+                            <li><strong>Listing Command</strong> - New listing triggers kit</li>
+                            <li><strong>Neighborhood Command</strong> - Market updates</li>
+                            <li><strong>Comp Command</strong> - Competition analysis</li>
+                            <li>CTAs auto-configured from Customer Config</li>
+                            <li>Engagement Center tracks all interactions</li>
+                        </ul>
+                        <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin-top: 15px; font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent-green);">
+                            SMS Link → Landing Page → CTA → Lead Capture → Engagement Center
+                        </div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #1a2e3a 0%, #0f1e2e 100%); border-radius: 12px; padding: 25px; border: 1px solid var(--accent-blue);">
+                        <h4 style="color: var(--accent-blue); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 28px;">📋</span> Non-Automated (Static)
+                        </h4>
+                        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 15px;">
+                            Human-distributed marketing materials
+                        </p>
+                        <ul style="color: var(--text); font-size: 13px; padding-left: 20px; line-height: 2;">
+                            <li><strong>Door-to-door flyers</strong> with QR codes</li>
+                            <li><strong>Open House handouts</strong></li>
+                            <li><strong>Print brochures</strong> with landing page URLs</li>
+                            <li>Same CTA config applies</li>
+                            <li>Entry point differs (QR vs SMS link)</li>
+                        </ul>
+                        <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin-top: 15px; font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent-blue);">
+                            QR Code → Landing Page → CTA → Lead Capture → Engagement Center
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Database Changes -->
+        <div class="database-section">
+            <h3>🗄️ Proposed Database Schema</h3>
+            
+            <div class="sql-block">
+                <pre><span class="comment">-- User-level service configuration (maps service → collection → landing page)</span>
+<span class="keyword">CREATE TABLE</span> FarmGenie.dbo.UserServiceCollection (
+    UserServiceCollectionId <span class="type">INT</span> <span class="keyword">IDENTITY</span>(1,1) <span class="keyword">PRIMARY KEY</span>,
+    AspNetUserId <span class="type">NVARCHAR</span>(128) <span class="keyword">NOT NULL</span>,
+    PropertyCastTypeId <span class="type">INT</span> <span class="keyword">NOT NULL</span>,        <span class="comment">-- 1=LC, 2=NC, 3=CC, 4=PLS</span>
+    CollectionName <span class="type">NVARCHAR</span>(100) <span class="keyword">NOT NULL</span>,    <span class="comment">-- "dainelle-listing-kit"</span>
+    LandingPageAsset <span class="type">NVARCHAR</span>(100),           <span class="comment">-- "landing-pages/lc-hollywood"</span>
+    HubAssetSettingId <span class="type">INT</span>,                    <span class="comment">-- Links to existing system</span>
+    IsActive <span class="type">BIT</span> <span class="keyword">DEFAULT</span> 1,
+    CreateDate <span class="type">DATETIME</span> <span class="keyword">DEFAULT GETDATE</span>(),
+    LastModified <span class="type">DATETIME</span> <span class="keyword">DEFAULT GETDATE</span>(),
+    ModifiedBy <span class="type">NVARCHAR</span>(128),                 <span class="comment">-- Admin who made the change</span>
+    
+    <span class="keyword">CONSTRAINT</span> FK_UserServiceCollection_User 
+        <span class="keyword">FOREIGN KEY</span> (AspNetUserId) <span class="keyword">REFERENCES</span> AspNetUsers(Id),
+    <span class="keyword">CONSTRAINT</span> UQ_UserServiceCollection 
+        <span class="keyword">UNIQUE</span> (AspNetUserId, PropertyCastTypeId)
+);
+
+<span class="comment">-- Index for fast lookups by user</span>
+<span class="keyword">CREATE INDEX</span> IX_UserServiceCollection_UserId 
+    <span class="keyword">ON</span> UserServiceCollection(AspNetUserId);
+
+<span class="comment">-- CTA Configuration per landing page</span>
+<span class="keyword">CREATE TABLE</span> FarmGenie.dbo.LandingPageCtaConfig (
+    LandingPageCtaConfigId <span class="type">INT</span> <span class="keyword">IDENTITY</span>(1,1) <span class="keyword">PRIMARY KEY</span>,
+    AspNetUserId <span class="type">NVARCHAR</span>(128),             <span class="comment">-- NULL = default for all users</span>
+    LandingPageAsset <span class="type">NVARCHAR</span>(100) <span class="keyword">NOT NULL</span>, <span class="comment">-- "landing-pages/lc-hollywood"</span>
+    CtaAssetId <span class="type">INT</span> <span class="keyword">NOT NULL</span>,                 <span class="comment">-- 10=Soft Follow, 11=Home Value, etc.</span>
+    CtaFunction <span class="type">NVARCHAR</span>(50) <span class="keyword">NOT NULL</span>,       <span class="comment">-- "follow", "phone", "email", "full-form"</span>
+    TriggerType <span class="type">NVARCHAR</span>(50) <span class="keyword">DEFAULT</span> <span class="string">'scroll'</span>, <span class="comment">-- "immediate", "delay", "scroll", "exit"</span>
+    TriggerValue <span class="type">INT</span> <span class="keyword">DEFAULT</span> 50,            <span class="comment">-- seconds for delay, % for scroll</span>
+    ShowMobileBanner <span class="type">BIT</span> <span class="keyword">DEFAULT</span> 1,
+    IsActive <span class="type">BIT</span> <span class="keyword">DEFAULT</span> 1,
+    CreateDate <span class="type">DATETIME</span> <span class="keyword">DEFAULT GETDATE</span>(),
+    ModifiedBy <span class="type">NVARCHAR</span>(128)
+);
+
+<span class="comment">-- CTA Asset definitions (what they look like)</span>
+<span class="keyword">CREATE TABLE</span> FarmGenie.dbo.CtaAsset (
+    CtaAssetId <span class="type">INT</span> <span class="keyword">PRIMARY KEY</span>,
+    Name <span class="type">NVARCHAR</span>(100) <span class="keyword">NOT NULL</span>,
+    Description <span class="type">NVARCHAR</span>(255),
+    FrictionLevel <span class="type">NVARCHAR</span>(10),              <span class="comment">-- "LOW", "MEDIUM", "HIGH"</span>
+    TargetEngagementMin <span class="type">INT</span>,
+    TargetEngagementMax <span class="type">INT</span>,
+    TemplatePath <span class="type">NVARCHAR</span>(200),              <span class="comment">-- XSL/JSX template location</span>
+    IsActive <span class="type">BIT</span> <span class="keyword">DEFAULT</span> 1
+);
+
+<span class="comment">-- Seed CTA assets</span>
+<span class="keyword">INSERT INTO</span> FarmGenie.dbo.CtaAsset <span class="keyword">VALUES</span>
+    (0,  <span class="string">'No CTA'</span>, <span class="string">'No call-to-action displayed'</span>, <span class="keyword">NULL</span>, <span class="keyword">NULL</span>, <span class="keyword">NULL</span>, <span class="keyword">NULL</span>, 1),
+    (2,  <span class="string">'Home Value Full Form'</span>, <span class="string">'Current high-friction form'</span>, <span class="string">'HIGH'</span>, 2, 5, <span class="keyword">NULL</span>, 1),
+    (10, <span class="string">'Soft Follow'</span>, <span class="string">'Tom Ferry style, single click'</span>, <span class="string">'LOW'</span>, 15, 25, <span class="keyword">NULL</span>, 0),
+    (11, <span class="string">'Home Value Request'</span>, <span class="string">'Address lookup modal'</span>, <span class="string">'MEDIUM'</span>, 5, 10, <span class="keyword">NULL</span>, 0),
+    (12, <span class="string">'SMS Brochure'</span>, <span class="string">'Phone only, text PDF'</span>, <span class="string">'LOW'</span>, 10, 15, <span class="keyword">NULL</span>, 0),
+    (13, <span class="string">'Private Showing'</span>, <span class="string">'Calendar + contact'</span>, <span class="string">'MEDIUM'</span>, 8, 12, <span class="keyword">NULL</span>, 0),
+    (14, <span class="string">'Get Notified'</span>, <span class="string">'Pre-listing exclusive'</span>, <span class="string">'LOW'</span>, 12, 18, <span class="keyword">NULL</span>, 0);
+
+<span class="comment">-- New permissions for admin access</span>
+<span class="keyword">INSERT INTO</span> FarmGenie.dbo.Permission (PermissionID, Description, Notes) <span class="keyword">VALUES</span>
+    (220, <span class="string">'ManageCustomerAssets'</span>, <span class="string">'Configure themes/collections for customers'</span>),
+    (221, <span class="string">'ManageCtaAssets'</span>, <span class="string">'Create and edit CTA templates'</span>),
+    (222, <span class="string">'ConfigureCtaPerLandingPage'</span>, <span class="string">'Assign CTAs to landing pages'</span>);</pre>
+            </div>
+        </div>
+        
+        <!-- Architecture -->
+        <div class="architecture">
+            <h3>🏗️ System Architecture</h3>
+            
+            <div class="arch-diagram">
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                           GENIE ASSET MANAGEMENT ECOSYSTEM                                │
+├─────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                           │
+│   ┌─────────────────────┐    ┌─────────────────────┐    ┌─────────────────────┐          │
+│   │   THEME EDITOR      │    │  COLLECTION EDITOR  │    │ CUSTOMER CONFIG     │          │
+│   │   (Partial Exists)  │    │  (John's SolidJS)   │    │  (NEW - Angular)    │          │
+│   │                     │    │                     │    │                     │          │
+│   │ • Create theme      │    │ • Build kits        │    │ • Select customer   │          │
+│   │ • Edit colors       │    │ • Add/remove assets │    │ • Assign theme      │          │
+│   │ • Upload logos      │    │ • Set display order │    │ • Map services      │          │
+│   │                     │    │                     │    │ • Preview AS user   │          │
+│   └─────────┬───────────┘    └─────────┬───────────┘    └─────────┬───────────┘          │
+│             │                          │                          │                       │
+│             └──────────────────────────┼──────────────────────────┘                       │
+│                                        │                                                  │
+│                                        ▼                                                  │
+│                          ┌─────────────────────────────┐                                  │
+│                          │     GENIE DASHBOARD         │                                  │
+│                          │   /admin/customer-config    │                                  │
+│                          │   (SuperUser only)          │                                  │
+│                          └─────────────┬───────────────┘                                  │
+│                                        │                                                  │
+│           ┌────────────────────────────┼────────────────────────────┐                     │
+│           │                            │                            │                     │
+│           ▼                            ▼                            ▼                     │
+│   ┌───────────────┐          ┌───────────────────┐         ┌───────────────┐             │
+│   │   HubTheme    │          │ UserServiceColl.  │         │ HubAssetSetting│             │
+│   │ Availability  │          │    (NEW TABLE)    │         │   Override     │             │
+│   └───────┬───────┘          └─────────┬─────────┘         └───────┬───────┘             │
+│           │                            │                            │                     │
+│           └────────────────────────────┼────────────────────────────┘                     │
+│                                        │                                                  │
+│                                        ▼                                                  │
+│                          ┌─────────────────────────────┐                                  │
+│                          │    PROPERTYCAST WORKFLOW    │                                  │
+│                          │  (Uses overrides at render) │                                  │
+│                          └─────────────┬───────────────┘                                  │
+│                                        │                                                  │
+│                                        ▼                                                  │
+│                          ┌─────────────────────────────┐                                  │
+│                          │        GENIECLOUD API       │                                  │
+│                          │   /prepare → S3 render      │                                  │
+│                          └─────────────────────────────┘                                  │
+│                                                                                           │
+└─────────────────────────────────────────────────────────────────────────────────────────┘</div>
+        </div>
+        
+        <!-- Changelog -->
+        <div class="changelog">
+            <h3>📋 Change Log</h3>
+            
+            <div class="changelog-item">
+                <span class="changelog-version">v2.0</span>
+                <span class="changelog-date">12/28/2025</span>
+                <span class="changelog-desc"><strong>CTA System:</strong> Added 5th pillar (CTA Configuration), CTA tab in UI, CTA architecture diagram, available CTA options table, deployment paths (Automated vs Non-Automated), LandingPageCtaConfig & CtaAsset database tables, new permissions</span>
+            </div>
+            <div class="changelog-item">
+                <span class="changelog-version">v1.0</span>
+                <span class="changelog-date">12/28/2025</span>
+                <span class="changelog-desc">Initial specification - vision, Figma walkthrough, database schema, architecture diagram</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

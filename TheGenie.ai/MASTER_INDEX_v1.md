@@ -266,6 +266,7 @@ cd c:\Cursor\_ARCHIVE_Downloads\sandbox_configs
 - Format: `[Name]_v[N].ext` or `[Name]_[YYYY-MM-DD]_v[N].ext`
 - Minor changes: v1.0 → v1.1
 - Major changes: v1.1 → v2.0
+- **CRITICAL:** If continuing the SAME document on a different date, it's still a new version (v2, v3, etc.), NOT a new v1. Date changes don't reset version numbers.
 
 #### Documentation System
 - **GitHub is PRIMARY** - All docs must be in GitHub (NOT Notion)

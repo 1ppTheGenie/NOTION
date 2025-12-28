@@ -44,13 +44,19 @@
 
 **Naming Convention:**
 ```
-WORKSPACE_MEMORY_LOG_[Topic]_Session_[YYYY-MM-DD].md
+WORKSPACE_MEMORY_LOG_[Topic]_Session_[YYYY-MM-DD]_v[N].md
 ```
 
 **Examples:**
-- `WORKSPACE_MEMORY_LOG_AreaOwnership_LeadCustody_Session_2025-12-15.md`
-- `WORKSPACE_MEMORY_LOG_CCReports_Session_2025-12-15.md`
-- `WORKSPACE_MEMORY_LOG_NurtureEngine_Discovery_2025-12-15.md`
+- `WORKSPACE_MEMORY_LOG_AreaOwnership_LeadCustody_Session_2025-12-15_v1.md`
+- `WORKSPACE_MEMORY_LOG_CCReports_Session_2025-12-15_v1.md`
+- `WORKSPACE_MEMORY_LOG_NurtureEngine_Discovery_2025-12-15_v1.md`
+
+**🚨 CRITICAL VERSIONING RULE:**
+- If continuing the **SAME document** on a different date, it's still a **new version** (v2, v3, etc.), NOT a new v1
+- Date changes do NOT reset version numbers
+- Example: `WORKSPACE_MEMORY_LOG_TitleGenie_Paisley_Discovery_Session_2025-12-18_v1.md` → `WORKSPACE_MEMORY_LOG_TitleGenie_Paisley_Discovery_Session_2025-12-19_v2.md`
+- Same topic + different date = increment version number
 
 ### Step 2: Copy to GitHub (Permanent)
 **Source:** `c:\Cursor\TheGenie.ai\MemoryLogs\[filename].md`  
@@ -198,6 +204,7 @@ c:\Cursor\TheGenie.ai\MASTER_INDEX_v1.md
 | Version | Date | Changes |
 |--------|------|---------|
 | 1.0 | 12/15/2025 | Initial master rule created |
+| 1.1 | 12/19/2025 | Added critical versioning rule: Date changes don't reset version numbers |
 
 ---
 
