@@ -1,7 +1,7 @@
 # Azure DevOps User Audit Report
 ## OneParkPlace Organization - SMART Project
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Created:** December 29, 2025  
 **Last Updated:** December 29, 2025  
 **Author:** AI Agent / Steve Hundley  
@@ -30,7 +30,7 @@ This report documents a comprehensive audit of all users and permissions in the 
 | 4 | Gerome Wilson | gwilson.1parkplace.com@live.com | Basic | 7/18/2013 | 12/23/2025 | ✅ Active |
 | 5 | Manoj Sharma | manoj.sharma@reliqus.com | Basic | 5/27/2025 | 12/29/2025 | ✅ Active (India Team) |
 | 6 | **Steve Hundley** | steve.hundley@1parkplace.com | Basic | 1/23/2025 | 12/29/2025 | ✅ Active (OWNER) |
-| 7 | sfox@1parkplace.com | sfox@1parkplace.com | Basic | 5/8/2025 | Never | 🔴 NEVER LOGGED IN |
+| 7 | sfox@1parkplace.com | sfox@1parkplace.com | **Stakeholder** | 5/8/2025 | Never | ❄️ ON ICE (Changed 12/29/2025) |
 | 8 | support@reliqus.com | support@reliqus.com | Basic | 5/21/2025 | Never | 🔴 NEVER LOGGED IN |
 
 ---
@@ -78,7 +78,7 @@ This report documents a comprehensive audit of all users and permissions in the 
 |-------|------------|----------------|
 | Andrew Meyer has TWO accounts in Project Collection Administrators | 🟡 Medium | Consider consolidating to one account (drewmeyer@1parkplace.com) |
 | andrewmeyer23@gmail.com account inactive since April 2025 | 🟡 Medium | Remove from Project Collection Administrators |
-| sfox@1parkplace.com never logged in | 🟢 Low | Investigate purpose; consider removing if unused |
+| sfox@1parkplace.com never logged in | ✅ RESOLVED | Changed to Stakeholder access (12/29/2025) |
 | support@reliqus.com never logged in | 🟢 Low | Generic account - consider removing |
 
 ---
@@ -92,9 +92,10 @@ This report documents a comprehensive audit of all users and permissions in the 
    - He now uses drewmeyer@1parkplace.com
    - No need for dual admin access
 
-2. **Verify sfox@1parkplace.com purpose**
-   - This account was added 5/8/2025 but never logged in
-   - If not needed, remove to reduce exposure
+2. ~~**Verify sfox@1parkplace.com purpose**~~ ✅ DONE
+   - Changed from Basic to Stakeholder (12/29/2025)
+   - Account is now "on ice" with minimal access
+   - Can be upgraded back to Basic if consultant work resumes
 
 3. **Review support@reliqus.com**
    - Generic India team support account
@@ -150,4 +151,5 @@ This report documents a comprehensive audit of all users and permissions in the 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | 1.0 | 12/29/2025 | AI Agent | Initial audit - complete user inventory, admin group analysis, recommendations |
+| 1.1 | 12/29/2025 | AI Agent | sfox@1parkplace.com changed to Stakeholder access ("on ice") |
 
