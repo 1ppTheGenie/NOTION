@@ -1,0 +1,116 @@
+# OneParkPlace CI/CD Pipeline
+# Created: December 29, 2025
+# Author: Steve Hundley + Cursor Agent
+# Purpose: Automated build and deployment for Smart.Dashboard
+
+trigger:
+  branches:
+    include:
+      - main
+      - master
+  paths:
+    include:
+      - 'Web/Smart.Web.FarmGenie/*'
+
+pool:
+  name: 'Default'
+
+variables:
+  solution: 'Web/Smart.Web.FarmGenie/Smart.Web.FarmGenie.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  publishFolder: '$(Build.ArtifactStagingDirectory)/publish'
+
+stages:
+  # ============================================
+  # STAGE 1: BUILD
+  # ============================================
+  - stage: Build
+    displayName: 'Build Solution'
+    jobs:
+      - job: BuildJob
+        displayName: 'Build Smart.Dashboard'
+        steps:
+          - task: NuGetToolInstaller@1
+            displayName: 'Install NuGet'
+
+          - task: NuGetCommand@2
+            displayName: 'Restore NuGet Packages'
+            inputs:
+              restoreSolution: '$(solution)'
+
+          - task: VSBuild@1
+            displayName: 'Build Solution'
+            inputs:
+              solution: '$(solution)'
+              msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(publishFolder)"'
+              platform: '$(buildPlatform)'
+              configuration: '$(buildConfiguration)'
+
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publish Artifacts'
+            inputs:
+              PathtoPublish: '$(publishFolder)'
+              ArtifactName: 'drop'
+              publishLocation: 'Container'
+
+  # ============================================
+  # STAGE 2: DEPLOY TO STAGING
+  # ============================================
+  - stage: DeployStaging
+    displayName: 'Deploy to Staging'
+    dependsOn: Build
+    condition: succeeded()
+    jobs:
+      - deployment: DeployToStaging
+        displayName: 'Deploy to SMART-Staging'
+        environment: 'SMART-Staging'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: DownloadBuildArtifacts@1
+                  displayName: 'Download Artifacts'
+                  inputs:
+                    buildType: 'current'
+                    downloadType: 'single'
+                    artifactName: 'drop'
+                    downloadPath: '$(System.ArtifactsDirectory)'
+
+                - task: IISWebAppDeploymentOnMachineGroup@0
+                  displayName: 'Deploy to IIS - Staging'
+                  inputs:
+                    WebSiteName: 'stage.thegenie.ai'
+                    Package: '$(System.ArtifactsDirectory)/drop/*.zip'
+                    TakeAppOfflineFlag: true
+
+  # ============================================
+  # STAGE 3: DEPLOY TO PRODUCTION (APPROVAL REQUIRED)
+  # ============================================
+  - stage: DeployProduction
+    displayName: 'Deploy to Production'
+    dependsOn: DeployStaging
+    condition: succeeded()
+    jobs:
+      - deployment: DeployToProduction
+        displayName: 'Deploy to SMART-Production'
+        environment: 'SMART-Production'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: DownloadBuildArtifacts@1
+                  displayName: 'Download Artifacts'
+                  inputs:
+                    buildType: 'current'
+                    downloadType: 'single'
+                    artifactName: 'drop'
+                    downloadPath: '$(System.ArtifactsDirectory)'
+
+                - task: IISWebAppDeploymentOnMachineGroup@0
+                  displayName: 'Deploy to IIS - Production'
+                  inputs:
+                    WebSiteName: 'app.thegenie.ai'
+                    Package: '$(System.ArtifactsDirectory)/drop/*.zip'
+                    TakeAppOfflineFlag: true
+
