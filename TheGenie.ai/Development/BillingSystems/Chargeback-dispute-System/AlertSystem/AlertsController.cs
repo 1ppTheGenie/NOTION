@@ -26,8 +26,7 @@ namespace Smart.Dashboard.Controllers
         // Recipients (TODO: Move to database for UI configuration)
         private static readonly string[] AlertRecipients = new string[]
         {
-            // Add Steve's phone number here in format: +1XXXXXXXXXX
-            // Example: "+15551234567"
+            "+16195074404"  // Steve Hundley
         };
 
         // Alert Configuration (TODO: Move to database for UI configuration)

@@ -65,7 +65,7 @@ This document specifies an SMS Alert System that sends text message notification
 | Account SID | [See Master Credential Tracker] |
 | Auth Token | (stored securely - see Master Credential Tracker) |
 | From Phone | +16193043643 |
-| To Phone | (Steve's mobile - to be configured) |
+| To Phone | +16195074404 (Steve Hundley) |
 
 ---
 
