@@ -514,7 +514,7 @@
             </div>
             <h1 style="margin-top: 0;">TheGenie.ai Project Universe</h1>
             <p class="subtitle">Master Dashboard for Title Genie, Paisley 2.0, Pre-Listing Command, Engagement Center & Billing Systems (PUB)</p>
-            <p class="updated">Last Updated: December 29, 2025 at 1:30 AM PST | Version 3.6</p>
+            <p class="updated">Last Updated: December 29, 2025 at 3:30 AM PST | Version 3.7</p>
         </div>
         
         <!-- 🚨 CRITICAL: GITHUB SYNC ALERT -->
@@ -2725,13 +2725,6 @@ D:\Cursor\_SourceCode\stage.geniecloud\
                         <td><span class="badge" style="background: #3498db; color: white;">NORMAL</span></td>
                         <td><span class="status-planning">PLANNED</span></td>
                     </tr>
-                    <tr style="background: #fff5f5;">
-                        <td><strong>8</strong></td>
-                        <td><strong>🆕 SendGrid Webhook Integration</strong></td>
-                        <td>Email tracking (delivery, opens, clicks) - CODE EXISTS but webhook not configured in SendGrid</td>
-                        <td><span class="badge" style="background: #e74c3c; color: white;">HIGH</span></td>
-                        <td><span class="status-mvp">📋 SPEC COMPLETE</span></td>
-                    </tr>
                 </tbody>
             </table>
             
@@ -2779,74 +2772,6 @@ D:\Cursor\_SourceCode\stage.geniecloud\
                         <td>Complete operational guide with queries, data sources, rules (One-Time)</td>
                         <td><span class="status-active">v1 Complete</span></td>
                         <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Docs/SOP_ListingCommand_ChargebackDefense_v1.md" class="file-link" target="_blank">📋 View</a></td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <!-- DISPUTE SYSTEM - DATABASE SCHEMA & SQL -->
-            <h5 style="margin: 20px 0 10px 0; color: #555;">🗄️ Database Schema & SQL</h5>
-            <table>
-                <thead>
-                    <tr>
-                        <th>File</th>
-                        <th>Description</th>
-                        <th>Status</th>
-                        <th>Link</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr style="background: #e6f3ff;">
-                        <td><strong>DISPUTE_ADMIN_SCHEMA_v1.sql</strong></td>
-                        <td>9 tables: DisputeCase, DisputeEvidence, DisputeDocument, DisputeActivityLog, DisputeAttachment, DisputeNote, DisputePermission, DisputeProductTemplate, PayPalWebhookLog</td>
-                        <td><span class="status-active">✅ Ready to Deploy</span></td>
-                        <td><a href="SQL/DISPUTE_ADMIN_SCHEMA_v1.sql" class="file-link" target="_blank">🗄️ View SQL</a></td>
-                    </tr>
-                    <tr style="background: #e6ffe6;">
-                        <td><strong>INSERT_INITIAL_DISPUTES_v1.sql</strong></td>
-                        <td>Initial data: Chris Plank (WON), Susan Featherly (Submitted) + activity logs + evidence items</td>
-                        <td><span class="status-active">✅ Ready to Deploy</span></td>
-                        <td><a href="SQL/INSERT_INITIAL_DISPUTES_v1.sql" class="file-link" target="_blank">🗄️ View SQL</a></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div style="background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 15px; margin-top: 15px;">
-                <p style="margin: 0; font-size: 13px;">
-                    <strong>📋 Schema Includes:</strong><br>
-                    • <code>fn_GenerateDisputeCaseNumber()</code> - Auto-generates case numbers (DC-2025-00001)<br>
-                    • <code>vw_DisputeDashboardStats</code> - Dashboard statistics view<br>
-                    • Product templates pre-configured for Competition Command and Listing Command
-                </p>
-            </div>
-            
-            <!-- DISPUTE SYSTEM - DEPLOYMENT -->
-            <h5 style="margin: 20px 0 10px 0; color: #555;">🚀 Deployment & Handoff</h5>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Document</th>
-                        <th>Description</th>
-                        <th>Audience</th>
-                        <th>Link</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr style="background: #fff5f5;">
-                        <td><strong>PRODUCTION_DEPLOYMENT_INSTRUCTIONS_India_v1.md</strong></td>
-                        <td>Step-by-step deployment guide for PayPal webhook to staging/production</td>
-                        <td>India Dev Team</td>
-                        <td><a href="Docs/PRODUCTION_DEPLOYMENT_INSTRUCTIONS_India_v1.md" class="file-link" target="_blank">📋 View</a></td>
-                    </tr>
-                    <tr>
-                        <td><strong>HANDOFF_PayPal_Webhook_Deployment_v1.md</strong></td>
-                        <td>Complete handoff with verification checklist and PayPal portal config</td>
-                        <td>India Dev Team</td>
-                        <td><a href="Docs/HANDOFF_PayPal_Webhook_Deployment_v1.md" class="file-link" target="_blank">📋 View</a></td>
-                    </tr>
-                    <tr style="background: #d4edda;">
-                        <td><strong>Changeset 4678</strong></td>
-                        <td>PayPal webhook files checked into Azure DevOps TFVC - 12/29/2025</td>
-                        <td>All</td>
-                        <td><code>$/SMART/1ppDevelopment/.../Smart.Dashboard/</code></td>
                     </tr>
                 </tbody>
             </table>
@@ -2953,17 +2878,11 @@ D:\Cursor\_SourceCode\stage.geniecloud\
                         <td><span class="status-discovery">Discovery</span></td>
                         <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Docs/DISCOVERY_ProductTemplates_v1.md" class="file-link" target="_blank">📄 View</a></td>
                     </tr>
-                    <tr style="background: #fff5f5;">
-                        <td><strong>🆕 SendGrid Webhook Spec</strong></td>
-                        <td>Full implementation spec - CODE EXISTS, just needs 1-line fix + SendGrid config</td>
-                        <td><span class="status-mvp">📋 SPEC COMPLETE</span></td>
-                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Docs/SENDGRID_WEBHOOK_INTEGRATION_SPEC_v1.md" class="file-link" target="_blank">📄 View</a></td>
-                    </tr>
                     <tr>
-                        <td><span style="color: #f39c12;">⚠️</span> SendGrid Integration Gap (Original)</td>
-                        <td>Original gap discovery document</td>
-                        <td><span class="status-discovery">Superseded</span></td>
-                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/INTEGRATION_GAP_SendGrid_v1.md" class="file-link" target="_blank">📄 View</a></td>
+                        <td><span style="color: #e74c3c;">⚠️</span> SendGrid Integration Gap</td>
+                        <td>Critical gap: Email event tracking not configured</td>
+                        <td><span class="status-planning">Action Needed</span></td>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/INTEGRATION_GAP_SendGrid_v1.md" class="file-link" target="_blank">⚠️ View</a></td>
                     </tr>
                     <tr>
                         <td>Intercom API Verified</td>
@@ -3120,6 +3039,198 @@ python generate_polished_response_v12.py
             </ul>
         </div>
         
+        <!-- ECOSYSTEM MANAGEMENT PROJECT -->
+        <div id="ecosystem-management" class="project-section" style="border: 4px solid #e74c3c; background: linear-gradient(135deg, #fff0f0 0%, #fff5f5 100%);">
+            <h2>
+                <span class="icon">🏢</span>
+                <span class="title" style="color: #c0392b;">DevOps Ecosystem Management</span>
+                <span class="badge" style="background: #e74c3c;">NEW PROJECT</span>
+            </h2>
+            
+            <div class="intro-text" style="background: #fff0f0; border: 2px solid #e74c3c;">
+                <p>
+                    <strong style="color: #c0392b;">CRITICAL INFRASTRUCTURE PROJECT:</strong> Reverse engineering and documenting the Azure DevOps deployment ecosystem 
+                    after the loss of our lead developer. Establishing proper deployment processes, sprint schedules, and team permissions.
+                </p>
+            </div>
+            
+            <!-- STATUS SUMMARY -->
+            <h4 style="color: #c0392b; margin: 20px 0 15px 0;">🚨 Current Status Summary</h4>
+            <table>
+                <thead style="background: #c0392b;">
+                    <tr>
+                        <th>Finding</th>
+                        <th>Status</th>
+                        <th>Impact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #fff5f5;">
+                        <td><strong>Release Pipelines</strong></td>
+                        <td><span class="badge" style="background: #e74c3c; color: white;">NONE EXIST</span></td>
+                        <td>All deployments are 100% manual</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Build Pipelines</strong></td>
+                        <td><span class="badge" style="background: #f39c12; color: white;">ABANDONED</span></td>
+                        <td>Last automated build: Aug 23, 2023</td>
+                    </tr>
+                    <tr style="background: #fff5f5;">
+                        <td><strong>Build Administrators</strong></td>
+                        <td><span class="badge" style="background: #e74c3c; color: white;">0 MEMBERS</span></td>
+                        <td>No one can trigger builds in DevOps</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sprint Iterations</strong></td>
+                        <td><span class="badge" style="background: #f39c12; color: white;">STOPPED</span></td>
+                        <td>Last sprint R160 ended Aug 2024</td>
+                    </tr>
+                    <tr style="background: #fff5f5;">
+                        <td><strong>Deployment Method</strong></td>
+                        <td><span class="badge" style="background: #3498db; color: white;">MANUAL</span></td>
+                        <td>FileSystem publish → manual copy (likely)</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- KEY DISCOVERY -->
+            <h4 style="color: #27ae60; margin: 25px 0 15px 0;">🔑 Key Discovery: How Deployments Actually Work</h4>
+            <div style="background: #e6ffe6; border: 2px solid #27ae60; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
+                <p style="margin: 0 0 10px 0;"><strong>From analyzing publish profiles in source code:</strong></p>
+                <table style="margin: 0;">
+                    <tr>
+                        <td><code>Smart.Dashboard</code></td>
+                        <td>→</td>
+                        <td><code>C:\Users\drewm\Documents\Deployments\</code> (Andrew's machine)</td>
+                    </tr>
+                    <tr>
+                        <td><code>Smart.Api.Notification</code></td>
+                        <td>→</td>
+                        <td><code>F:\1PP\Publish\</code> (File share?)</td>
+                    </tr>
+                    <tr>
+                        <td><code>Smart.Api.HttpWrapper</code></td>
+                        <td>→</td>
+                        <td><code>1pp.azurewebsites.net</code> (Azure Web Deploy)</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <!-- CHANGESET BACKLOG -->
+            <h4 style="color: #e67e22; margin: 25px 0 15px 0;">📦 Changeset Backlog (Potentially Undeployed)</h4>
+            <table>
+                <thead style="background: #e67e22;">
+                    <tr>
+                        <th>Range</th>
+                        <th>Count</th>
+                        <th>Author</th>
+                        <th>Period</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>4666-4677</strong></td>
+                        <td>12</td>
+                        <td>Andrew Meyer</td>
+                        <td>Mar 17 - Apr 10, 2025</td>
+                        <td>Facebook v22, AgentImage, R161-R163 labels</td>
+                    </tr>
+                    <tr style="background: #e6ffe6;">
+                        <td><strong>4678-4679</strong></td>
+                        <td>2</td>
+                        <td>Steve Hundley</td>
+                        <td>Dec 29, 2025</td>
+                        <td>PayPal + SendGrid webhooks (our new code)</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- DOCUMENTATION -->
+            <h4 style="color: #3498db; margin: 25px 0 15px 0;">📋 Project Documentation</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Document</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #e6f3ff;">
+                        <td><strong>Ecosystem Management Report v2</strong></td>
+                        <td>Complete audit: Azure DevOps, pipelines, users, permissions, publish profiles, questions for Andrew</td>
+                        <td><span class="status-active">✅ Complete</span></td>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/PROJECT_GENIE_ECOSYSTEM_MANAGEMENT_v2.md" class="file-link" target="_blank">📄 View</a></td>
+                    </tr>
+                    <tr>
+                        <td>Azure DevOps Portal</td>
+                        <td>Direct link to OneParkPlace project</td>
+                        <td><span class="status-active">Active</span></td>
+                        <td><a href="https://oneparkplace.visualstudio.com/SMART" class="file-link" target="_blank">🔗 Open</a></td>
+                    </tr>
+                    <tr>
+                        <td>Changesets View</td>
+                        <td>See all TFVC checkins</td>
+                        <td><span class="status-active">Active</span></td>
+                        <td><a href="https://oneparkplace.visualstudio.com/SMART/_versionControl/changesets" class="file-link" target="_blank">🔗 Open</a></td>
+                    </tr>
+                    <tr>
+                        <td>Permissions Settings</td>
+                        <td>Build Administrators, team permissions</td>
+                        <td><span class="status-active">Active</span></td>
+                        <td><a href="https://oneparkplace.visualstudio.com/SMART/_settings/permissions" class="file-link" target="_blank">🔗 Open</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- IMMEDIATE ACTIONS -->
+            <h4 style="color: #c0392b; margin: 25px 0 15px 0;">🎯 Immediate Action Items</h4>
+            <table>
+                <thead style="background: #c0392b;">
+                    <tr>
+                        <th>#</th>
+                        <th>Action</th>
+                        <th>Owner</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #fff5f5;">
+                        <td>1</td>
+                        <td><strong>Add Ankit + Manoj to Build Administrators</strong> (Project Settings → Permissions)</td>
+                        <td>Steve</td>
+                        <td><span class="status-planning">⏳ Pending</span></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><strong>Send deployment questions to Andrew</strong> (see v2 doc Section 4)</td>
+                        <td>Steve</td>
+                        <td><span class="status-planning">⏳ Pending</span></td>
+                    </tr>
+                    <tr style="background: #fff5f5;">
+                        <td>3</td>
+                        <td><strong>Get answers on how deployments were done</strong></td>
+                        <td>Andrew</td>
+                        <td><span class="status-planning">⏳ Waiting</span></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><strong>Create Sprint R164</strong> (Dec 30 - Jan 10)</td>
+                        <td>Steve</td>
+                        <td><span class="status-planning">⏳ Pending</span></td>
+                    </tr>
+                    <tr style="background: #fff5f5;">
+                        <td>5</td>
+                        <td><strong>Document deployment SOP</strong> (based on Andrew's answers)</td>
+                        <td>Agent</td>
+                        <td><span class="status-planning">⏳ Blocked</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
         <!-- CHANGE LOG -->
         <div id="changelog" class="project-section" style="border-left: 4px solid #7f8c8d;">
             <h2>
@@ -3135,32 +3246,18 @@ python generate_polished_response_v12.py
                     </tr>
                 </thead>
                 <tbody>
-                    <tr style="background: #fff5f5;">
-                        <td><strong>v3.6</strong></td>
-                        <td>Dec 29, 2025 @ 1:30 AM PST</td>
+                    <tr style="background: #ffe6e6; border: 2px solid #e74c3c;">
+                        <td><strong>v3.7</strong></td>
+                        <td>Dec 29, 2025 @ 3:30 AM PST</td>
                         <td>
-                            <strong>SendGrid Webhook Integration Spec:</strong>
+                            <strong>🏢 NEW: DevOps Ecosystem Management Project:</strong>
                             <ul style="margin: 5px 0 0 20px; padding: 0;">
-                                <li>🆕 DISCOVERY: SendGrid webhook infrastructure ALREADY EXISTS in codebase</li>
-                                <li>📋 Created SENDGRID_WEBHOOK_INTEGRATION_SPEC_v1.md - full implementation plan</li>
-                                <li>🔧 Issue: EmailController uses [HttpGet] but SendGrid sends POST (1-line fix)</li>
-                                <li>📊 Tables exist: EmailEventStatus, EmailEventMessageClick, EmailEventMessageBounce, etc.</li>
-                                <li>🎯 Added SendGrid as Feature Runway #8 (HIGH priority)</li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr style="background: #d4edda;">
-                        <td><strong>v3.5</strong></td>
-                        <td>Dec 29, 2025 @ 12:50 AM PST</td>
-                        <td>
-                            <strong>Database Schema & Deployment Complete:</strong>
-                            <ul style="margin: 5px 0 0 20px; padding: 0;">
-                                <li>✅ Created DISPUTE_ADMIN_SCHEMA_v1.sql - 9 tables for Dispute Admin UI</li>
-                                <li>✅ Created INSERT_INITIAL_DISPUTES_v1.sql - Chris Plank (WON) + Susan Featherly (Submitted)</li>
-                                <li>✅ Created PRODUCTION_DEPLOYMENT_INSTRUCTIONS_India_v1.md for India team</li>
-                                <li>✅ Changeset 4678 checked into Azure DevOps TFVC</li>
-                                <li>✅ Workspace configured: C:\Sandbox → $/SMART</li>
-                                <li>✅ All files pushed to GitHub: 1ppTheGenie/NOTION</li>
+                                <li>Complete Azure DevOps audit: pipelines, releases, users, permissions</li>
+                                <li>Analyzed all publish profiles - discovered deployment architecture</li>
+                                <li>Identified 14 potentially undeployed changesets (4666-4679)</li>
+                                <li>Questions for Andrew Meyer prepared (former IT Manager)</li>
+                                <li>Action items: Add Build Admins, Create Sprint R164, Document SOP</li>
+                                <li>Created PROJECT_GENIE_ECOSYSTEM_MANAGEMENT_v2.md</li>
                             </ul>
                         </td>
                     </tr>
@@ -3232,8 +3329,8 @@ python generate_polished_response_v12.py
         </div>
         
         <div class="footer">
-            <p>TheGenie.ai Project Universe Dashboard v3.4</p>
-            <p>Created: December 25, 2025 | Last Updated: December 28, 2025 at 8:05 PM PST | Location: D:\Cursor\TheGenie.ai\Development\PROJECT_UNIVERSE_DASHBOARD_v1.html</p>
+            <p>TheGenie.ai Project Universe Dashboard v3.7</p>
+            <p>Created: December 25, 2025 | Last Updated: December 29, 2025 at 3:30 AM PST | Location: D:\Cursor\TheGenie.ai\Development\PROJECT_UNIVERSE_DASHBOARD_v1.html</p>
             <p style="margin-top: 10px;">💡 <strong>Tip:</strong> Open this file in Chrome for best experience. Links open in new tabs.</p>
             <p style="margin-top: 5px;">📦 <strong>GitHub:</strong> <a href="https://github.com/1ppTheGenie/NOTION" target="_blank" style="color: #3498db;">github.com/1ppTheGenie/NOTION</a> | Always sync before ending session!</p>
         </div>
