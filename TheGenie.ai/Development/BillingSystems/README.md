@@ -109,5 +109,16 @@ See: `ChargebackDispute/Docs/HANDOFF_PayPal_Webhook_Deployment_v1.md`
 
 ---
 
+---
+
+## 🔗 Quick Links
+
+- **Project Universe Dashboard:** [VIEW DASHBOARD](../PROJECT_UNIVERSE_DASHBOARD_v1.html) (open locally)
+- **GitHub Docs:** [ChargebackDispute/Docs/](./ChargebackDispute/Docs/)
+- **Source Code:** [ChargebackDispute/SourceCode/](./ChargebackDispute/SourceCode/)
+- **Handoff for India Team:** [HANDOFF_PayPal_Webhook_Deployment_v1.md](./ChargebackDispute/Docs/HANDOFF_PayPal_Webhook_Deployment_v1.md)
+
+---
+
 *Last synced to GitHub: 12/28/2025*
 
