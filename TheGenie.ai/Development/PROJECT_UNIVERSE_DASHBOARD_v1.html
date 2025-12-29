@@ -514,7 +514,7 @@
             </div>
             <h1 style="margin-top: 0;">TheGenie.ai Project Universe</h1>
             <p class="subtitle">Master Dashboard for Title Genie, Paisley 2.0, Pre-Listing Command, Engagement Center & Billing Systems (PUB)</p>
-            <p class="updated">Last Updated: December 28, 2025 at 7:50 PM PST | Version 3.3</p>
+            <p class="updated">Last Updated: December 29, 2025 at 12:50 AM PST | Version 3.5</p>
         </div>
         
         <!-- 🚨 CRITICAL: GITHUB SYNC ALERT -->
@@ -2776,6 +2776,74 @@ D:\Cursor\_SourceCode\stage.geniecloud\
                 </tbody>
             </table>
             
+            <!-- DISPUTE SYSTEM - DATABASE SCHEMA & SQL -->
+            <h5 style="margin: 20px 0 10px 0; color: #555;">🗄️ Database Schema & SQL</h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th>File</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #e6f3ff;">
+                        <td><strong>DISPUTE_ADMIN_SCHEMA_v1.sql</strong></td>
+                        <td>9 tables: DisputeCase, DisputeEvidence, DisputeDocument, DisputeActivityLog, DisputeAttachment, DisputeNote, DisputePermission, DisputeProductTemplate, PayPalWebhookLog</td>
+                        <td><span class="status-active">✅ Ready to Deploy</span></td>
+                        <td><a href="SQL/DISPUTE_ADMIN_SCHEMA_v1.sql" class="file-link" target="_blank">🗄️ View SQL</a></td>
+                    </tr>
+                    <tr style="background: #e6ffe6;">
+                        <td><strong>INSERT_INITIAL_DISPUTES_v1.sql</strong></td>
+                        <td>Initial data: Chris Plank (WON), Susan Featherly (Submitted) + activity logs + evidence items</td>
+                        <td><span class="status-active">✅ Ready to Deploy</span></td>
+                        <td><a href="SQL/INSERT_INITIAL_DISPUTES_v1.sql" class="file-link" target="_blank">🗄️ View SQL</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 15px; margin-top: 15px;">
+                <p style="margin: 0; font-size: 13px;">
+                    <strong>📋 Schema Includes:</strong><br>
+                    • <code>fn_GenerateDisputeCaseNumber()</code> - Auto-generates case numbers (DC-2025-00001)<br>
+                    • <code>vw_DisputeDashboardStats</code> - Dashboard statistics view<br>
+                    • Product templates pre-configured for Competition Command and Listing Command
+                </p>
+            </div>
+            
+            <!-- DISPUTE SYSTEM - DEPLOYMENT -->
+            <h5 style="margin: 20px 0 10px 0; color: #555;">🚀 Deployment & Handoff</h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Document</th>
+                        <th>Description</th>
+                        <th>Audience</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #fff5f5;">
+                        <td><strong>PRODUCTION_DEPLOYMENT_INSTRUCTIONS_India_v1.md</strong></td>
+                        <td>Step-by-step deployment guide for PayPal webhook to staging/production</td>
+                        <td>India Dev Team</td>
+                        <td><a href="Docs/PRODUCTION_DEPLOYMENT_INSTRUCTIONS_India_v1.md" class="file-link" target="_blank">📋 View</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>HANDOFF_PayPal_Webhook_Deployment_v1.md</strong></td>
+                        <td>Complete handoff with verification checklist and PayPal portal config</td>
+                        <td>India Dev Team</td>
+                        <td><a href="Docs/HANDOFF_PayPal_Webhook_Deployment_v1.md" class="file-link" target="_blank">📋 View</a></td>
+                    </tr>
+                    <tr style="background: #d4edda;">
+                        <td><strong>Changeset 4678</strong></td>
+                        <td>PayPal webhook files checked into Azure DevOps TFVC - 12/29/2025</td>
+                        <td>All</td>
+                        <td><code>$/SMART/1ppDevelopment/.../Smart.Dashboard/</code></td>
+                    </tr>
+                </tbody>
+            </table>
+            
             <!-- DISPUTE SYSTEM - PRODUCTION SCRIPTS -->
             <h5 style="margin: 20px 0 10px 0; color: #555;">🐍 Production Scripts</h5>
             <table>
@@ -3054,6 +3122,21 @@ python generate_polished_response_v12.py
                     </tr>
                 </thead>
                 <tbody>
+                    <tr style="background: #d4edda;">
+                        <td><strong>v3.5</strong></td>
+                        <td>Dec 29, 2025 @ 12:50 AM PST</td>
+                        <td>
+                            <strong>Database Schema & Deployment Complete:</strong>
+                            <ul style="margin: 5px 0 0 20px; padding: 0;">
+                                <li>✅ Created DISPUTE_ADMIN_SCHEMA_v1.sql - 9 tables for Dispute Admin UI</li>
+                                <li>✅ Created INSERT_INITIAL_DISPUTES_v1.sql - Chris Plank (WON) + Susan Featherly (Submitted)</li>
+                                <li>✅ Created PRODUCTION_DEPLOYMENT_INSTRUCTIONS_India_v1.md for India team</li>
+                                <li>✅ Changeset 4678 checked into Azure DevOps TFVC</li>
+                                <li>✅ Workspace configured: C:\Sandbox → $/SMART</li>
+                                <li>✅ All files pushed to GitHub: 1ppTheGenie/NOTION</li>
+                            </ul>
+                        </td>
+                    </tr>
                     <tr style="background: #fffde6;">
                         <td><strong>v3.4</strong></td>
                         <td>Dec 28, 2025 @ 8:05 PM PST</td>
