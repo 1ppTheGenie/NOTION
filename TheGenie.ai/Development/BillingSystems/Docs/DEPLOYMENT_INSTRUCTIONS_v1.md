@@ -1,3 +1,27 @@
+# PRODUCTION DEPLOYMENT INSTRUCTIONS
+## PayPal Webhook - to Ankit
+
+**Version:** 1.0  
+**Created:** 12/29/2025  
+**Author:** Steve Hundley 
+**Priority:** 🔴 HIGH - Deploy TODAY  
+**Changeset:** 4678
+
+---
+
+## ✅ PRE-DEPLOYMENT CHECKLIST
+
+| Step | Action | Status |
+|:----:|--------|:------:|
+| 1 | Code checked into TFVC | ✅ DONE (Changeset 4678) |
+| 2 | Files verified in source control | ✅ DONE |
+| 3 | Sandbox tested | ✅ DONE |
+| 4 | Bypass Staging 
+| 5 | Deploy to Production | ⏳ YOUR TASK |
+| 6 | Test Production endpoint | ⏳ YOUR TASK |
+| 7 | If pass DONE - if not report error
+
+
 # Deploy Changeset 4678 to Production
 
 **Date:** 12/29/2025  
