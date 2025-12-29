@@ -1,7 +1,7 @@
 # SOP: CI/CD Pipeline Deployment Process
 ## SMART-Dashboard-Deploy Release Pipeline
 
-**Version:** 1.0  
+**Version:** 2.0  
 **Created:** December 29, 2025  
 **Last Updated:** December 29, 2025  
 **Author:** AI Agent / Steve Hundley  
@@ -10,22 +10,42 @@
 
 ## 📋 EXECUTIVE SUMMARY
 
-This document defines the Standard Operating Procedure for deploying code changes to TheGenie.ai platform using Azure DevOps Release Pipelines. The pipeline was created to replace the previous manual deployment process and provide automated, auditable, and reliable deployments.
+This document defines the Standard Operating Procedure for deploying code changes to TheGenie.ai platform using Azure DevOps CI/CD Pipelines. The pipeline was created to replace the previous manual deployment process and provide automated, auditable, and reliable deployments.
+
+**Key Components:**
+- **Build Pipeline:** `SMART-Dashboard-Build` - Compiles code and produces artifacts
+- **Release Pipeline:** `SMART-Dashboard-Deploy` - Deploys artifacts to Staging/Production
 
 ---
 
 ## 🏗️ PIPELINE ARCHITECTURE
 
-### Pipeline Name
-**SMART-Dashboard-Deploy**
+### Build Pipeline (CI)
 
-### Pipeline URL
-[https://oneparkplace.visualstudio.com/SMART/_release?definitionId=1](https://oneparkplace.visualstudio.com/SMART/_release?definitionId=1)
+| Property | Value |
+|----------|-------|
+| **Name** | SMART-Dashboard-Build |
+| **URL** | [Azure DevOps Build Pipeline](https://oneparkplace.visualstudio.com/SMART/_build?definitionId=5) |
+| **Source** | TFVC - $/SMART |
+| **Agent Pool** | Azure Pipelines (windows-2019) |
+| **Artifact** | `drop` |
 
-### Source
-- **Type:** TFVC (Team Foundation Version Control)
-- **Path:** $/SMART
-- **Version:** Latest
+**Build Tasks:**
+1. Use NuGet 4.4.1
+2. NuGet restore
+3. Build solution **/*.sln
+4. Test Assemblies
+5. Publish symbols path
+6. **Publish Artifact: drop** ← Consumed by Release Pipeline
+
+### Release Pipeline (CD)
+
+| Property | Value |
+|----------|-------|
+| **Name** | SMART-Dashboard-Deploy |
+| **URL** | [Azure DevOps Release Pipeline](https://oneparkplace.visualstudio.com/SMART/_release?definitionId=1) |
+| **Artifact Source** | SMART-Dashboard-Build (Build Pipeline output) |
+| **Default Version** | Latest |
 
 ### Stages
 
@@ -170,6 +190,7 @@ Before the pipeline is fully operational, the following information is needed:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 2.0 | 12/29/2025 | AI Agent | Added Build Pipeline (SMART-Dashboard-Build), linked Release Pipeline artifact source, configured Production stage with SMART-Production deployment group |
 | 1.0 | 12/29/2025 | AI Agent | Initial creation - Pipeline structure, Staging configuration |
 
 ---
@@ -177,22 +198,23 @@ Before the pipeline is fully operational, the following information is needed:
 ## 🔮 NEXT STEPS
 
 ### Immediate (Phase 1)
-1. [ ] Get IIS configuration details from Andrew
-2. [ ] Update Website Name in IIS deploy task
-3. [ ] Add NuGet restore task
-4. [ ] Configure Production stage tasks
+1. [ ] Get IIS configuration details from Andrew (website names, physical paths)
+2. [ ] Update Website Name in Staging IIS deploy task (currently "Default Web Site" placeholder)
+3. [ ] Add deployment task to Production stage deployment group job
+4. [ ] Run first Build Pipeline to generate artifacts
+5. [ ] Create first Release to test Staging deployment
 
 ### Short-term (Phase 2)
-1. [ ] Enable continuous deployment trigger
+1. [ ] Enable continuous deployment trigger (auto-release on build success)
 2. [ ] Add build verification tests
-3. [ ] Configure environment-specific variables
-4. [ ] Remove unused "Agent job" from Staging
+3. [ ] Configure environment-specific variables (connection strings, etc.)
+4. [ ] Remove unused "Agent job" from both Staging and Production stages
 
 ### Long-term (Phase 3)
 1. [ ] Add automated smoke tests
 2. [ ] Implement deployment slots for zero-downtime
 3. [ ] Add Slack/Teams notifications
-4. [ ] Create build pipeline for artifact packaging
+4. [x] ~~Create build pipeline for artifact packaging~~ **DONE - SMART-Dashboard-Build created**
 
 ---
 
