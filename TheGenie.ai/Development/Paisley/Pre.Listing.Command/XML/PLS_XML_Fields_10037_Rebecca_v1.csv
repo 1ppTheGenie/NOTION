@@ -1,0 +1,83 @@
+XML Path,Field Name,Description,10037 Rebecca Data,Source,Status,Notes
+===== OUTPUT ATTRIBUTES =====,,,,,,
+//output/@apiUrl,API URL,GenieCloud API endpoint,https://genie-api.dynamicarray.co.uk/,System,COMPLETE,Standard GenieCloud API
+//output/@siteUrl,Site URL,Asset base URL,https://cloud.thegenie.ai/,System,COMPLETE,Production CDN
+//output/@year,Year,Current year,2025,System,COMPLETE,Auto-generated
+//output/@reportDate,Report Date,Unix timestamp for report,1735171200,System,COMPLETE,12/25/2025 timestamp
+//output/@mapboxKey,Mapbox Key,Mapbox API key,pk.eyJ1IjoiMXBhcmtwbGFjZSIsImEiOiJ0VnNHQ0o4In0.Ju1ET8Y81mGY1Eu0l5DfRQ,Master Credentials,COMPLETE,From credential tracker
+//output/@googleKey,Google Key,Google API key,AIzaSyDLFcQk1FV7U4tf_aXU3NiLItNxy_b0AzU,Master Credentials,COMPLETE,From reference XML
+//output/@areaIndex,Area Index,Which area to use,1,System,COMPLETE,Default
+//output/@areaPeriod,Area Period,Months of data,12,System,COMPLETE,12-month lookback
+//output/@userId,User ID,Agent's user ID,a8436051-333d-4725-b8ce-88bf5262d26a,TheGenie System,COMPLETE,Steve Hundley's Agent ID
+//output/@theme,Theme,Color theme,compass-dark,User Selection,COMPLETE,Compass Dark (no logos)
+//output/@themeHue,Theme Hue,Light or dark,dark,User Selection,COMPLETE,Dark theme
+//output/@propertyType,Property Type,1=SFR 2=Condo etc,1,Property Data,COMPLETE,Single Family Residence
+//output/@downloadUrl,Download URL,PDF brochure link,,NEEDS INPUT,BLANK,Do you have a brochure PDF to link?
+===== AGENT DATA =====,,,,,,
+//agent/firstName,First Name,Agent first name,Steve,TheGenie Profile,COMPLETE,
+//agent/lastName,Last Name,Agent last name,Hundley,TheGenie Profile,COMPLETE,
+//agent/photo,Photo URL,Agent headshot URL,,TheGenie Profile,NEEDS INPUT,What's Steve's headshot URL?
+//agent/personalLogoLight,Personal Logo Light,Logo for light bg,,TheGenie Profile,NEEDS INPUT,Inspired.RE light logo URL?
+//agent/personalLogoDark,Personal Logo Dark,Logo for dark bg,,TheGenie Profile,NEEDS INPUT,Inspired.RE dark logo URL?
+//agent/companyLogoLight,Company Logo Light,Brokerage light logo,,TheGenie Profile,NEEDS INPUT,Compass or Inspired.RE light?
+//agent/companyLogoDark,Company Logo Dark,Brokerage dark logo,,TheGenie Profile,NEEDS INPUT,Compass or Inspired.RE dark?
+//agent/marketingName,Marketing Name,Display name,Steve Hundley,TheGenie Profile,COMPLETE,
+//agent/marketingTitle,Title,Job title,,TheGenie Profile,NEEDS INPUT,What title? (Broker Associate etc)
+//agent/marketingEmail,Email,Contact email,,TheGenie Profile,NEEDS INPUT,Steve's email address?
+//agent/marketingAbout,About,Bio paragraph,,TheGenie Profile,NEEDS INPUT,Steve's bio/about text?
+//agent/marketingLicense,License,License number,,TheGenie Profile,NEEDS INPUT,TX RE License #?
+//agent/mobile,Mobile,Phone number,,TheGenie Profile,NEEDS INPUT,Steve's mobile phone?
+//agent/website,Website,Website URL,,TheGenie Profile,NEEDS INPUT,inspiredhomes.com or similar?
+//agent/email,Email,Email address,,TheGenie Profile,NEEDS INPUT,Same as marketingEmail
+//agent/agentId,Agent ID,System ID,a8436051-333d-4725-b8ce-88bf5262d26a,TheGenie System,COMPLETE,
+//agent/address/company,Company Name,Brokerage name,Compass,TheGenie Profile,COMPLETE,Or Inspired.RE?
+//agent/address/street,Street Address,Office address,,TheGenie Profile,NEEDS INPUT,Office street address?
+//agent/address/city,City,Office city,San Antonio,TheGenie Profile,COMPLETE,
+//agent/address/state,State,Office state,TX,TheGenie Profile,COMPLETE,
+//agent/address/zip,Zip,Office zip,,TheGenie Profile,NEEDS INPUT,Office zip code?
+===== AREA DATA =====,,,,,,
+//area/id,Area ID,GenieCloud area ID,407559,TheGenie System,COMPLETE,Balcones Creek - All Neighborhoods
+//area/name,Area Name,Neighborhood name,Balcones Creek,TheGenie System,COMPLETE,Area name for widgets
+//area/centerLat,Center Latitude,Map center lat,29.6547,Geocoding,COMPLETE,Approximate
+//area/centerLng,Center Longitude,Map center lng,-98.4936,Geocoding,COMPLETE,Approximate
+===== LISTING DATA (SINGLE) =====,,,,,,
+//single/mlsNumber,PLS Number,Listing ID,PLS-2025-001,PLS System,COMPLETE,Paisley Listing Service ID
+//single/price,List Price,Asking price,,NEEDS INPUT,BLANK,What's the list price?
+//single/listed,List Date,Date listed,12/25/2025,PLS System,COMPLETE,Today's date
+//single/type,Property Type,Home/Condo/etc,Single Family,Attom/Manual,COMPLETE,
+//single/listingStatus,Listing Status,Text status,Coming Soon,PLS System,COMPLETE,Or "Private Listing"
+//single/statusTypeID,Status Type ID,1=Active 2=Sold 4=Pending 5=ComingSoon,5,PLS System,COMPLETE,5 = Coming Soon (new status)
+//single/description,Description,Property description,,NEEDS INPUT,BLANK,Property description text?
+//single/photoPrimary,Primary Photo,Main listing photo,https://genie-cloud-stage.s3.us-west-1.amazonaws.com/genie-pages/10037-rebecca-coming-soon/photos/front-of-home.jpg,S3 Upload,COMPLETE,Uploaded front photo
+//single/squareFeet,Square Feet,Living area,3018,Attom/Tax,COMPLETE,From tax records
+//single/lotSize,Lot Size,Lot square feet,7405,Attom/Tax,COMPLETE,0.17 acres = ~7405 sqft
+//single/built,Year Built,Construction year,2022,Attom/Tax,COMPLETE,From tax records
+//single/latitude,Latitude,Property lat,29.654321,Geocoding,COMPLETE,Need exact coords
+//single/longitude,Longitude,Property lng,-98.493456,Geocoding,COMPLETE,Need exact coords
+//single/city,City,Property city,San Antonio,Property Data,COMPLETE,
+//single/bedrooms/@count,Bedrooms,Number of beds,4,Attom/Tax,COMPLETE,From tax records
+//single/bathrooms/@total,Bathrooms Total,Total baths,3,Attom/Tax,COMPLETE,From tax records
+//single/bathrooms/@full,Bathrooms Full,Full baths,2,NEEDS CONFIRM,VERIFY,Is it 2 full + 1 half?
+//single/bathrooms/@half,Bathrooms Half,Half baths,1,NEEDS CONFIRM,VERIFY,Or 3 full?
+//single/parking/@spaces,Parking Spaces,Total parking,2,NEEDS INPUT,ESTIMATED,Total parking spots?
+//single/parking/@garage,Garage Spaces,Garage capacity,2,NEEDS INPUT,ESTIMATED,2-car garage?
+//single/address/streetNumber,Street Number,House number,10037,Property Data,COMPLETE,
+//single/address/street,Full Street,Full address line,10037 Rebecca Place,Property Data,COMPLETE,
+//single/address/streetName,Street Name,Street only,Rebecca Place,Property Data,COMPLETE,
+//single/address/city,City,Property city,San Antonio,Property Data,COMPLETE,
+//single/address/state,State,Property state,TX,Property Data,COMPLETE,
+//single/address/zip,Zip,Property zip,78254,Property Data,COMPLETE,Balcones Creek area
+//single/virtualTourUrl,Virtual Tour,3D tour URL,,NEEDS INPUT,BLANK,Any virtual tour available?
+===== IMAGES =====,,,,,,
+//single/images/image[1],Photo 1,Primary/Front,https://genie-cloud-stage.s3.us-west-1.amazonaws.com/genie-pages/10037-rebecca-coming-soon/photos/front-of-home.jpg,S3 Upload,COMPLETE,Front of home
+//single/images/image[2],Photo 2,Kitchen 1,https://genie-cloud-stage.s3.us-west-1.amazonaws.com/genie-pages/10037-rebecca-coming-soon/photos/kitchen-1.jpg,S3 Upload,COMPLETE,Kitchen photo 1
+//single/images/image[3],Photo 3,Kitchen 2,https://genie-cloud-stage.s3.us-west-1.amazonaws.com/genie-pages/10037-rebecca-coming-soon/photos/kitchen-2.jpg,S3 Upload,COMPLETE,Kitchen photo 2
+//single/images/image[4],Photo 4,Backyard 1,https://genie-cloud-stage.s3.us-west-1.amazonaws.com/genie-pages/10037-rebecca-coming-soon/photos/backyard-1.jpg,S3 Upload,COMPLETE,Backyard photo 1
+//single/images/image[5],Photo 5,Backyard 2,https://genie-cloud-stage.s3.us-west-1.amazonaws.com/genie-pages/10037-rebecca-coming-soon/photos/backyard-2.jpg,S3 Upload,COMPLETE,Backyard photo 2
+===== STATUS OPTIONS (PLS Feature) =====,,,,,,
+statusTypeID = 1,Active,Standard MLS Active,,Reference,INFO,Existing status
+statusTypeID = 2,Sold,Standard MLS Sold,,Reference,INFO,Existing status
+statusTypeID = 4,Pending,Standard MLS Pending,,Reference,INFO,Existing status
+statusTypeID = 5,Coming Soon,PLS Coming Soon,,PLS NEW,INFO,NEW - Pre-listing status
+statusTypeID = 6,Private Listing,PLS Private Listing,,PLS NEW,INFO,NEW - Off-market status
+
