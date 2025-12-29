@@ -514,7 +514,7 @@
             </div>
             <h1 style="margin-top: 0;">TheGenie.ai Project Universe</h1>
             <p class="subtitle">Master Dashboard for Title Genie, Paisley 2.0, Pre-Listing Command, Engagement Center & Billing Systems (PUB)</p>
-            <p class="updated">Last Updated: December 29, 2025 at 12:50 AM PST | Version 3.5</p>
+            <p class="updated">Last Updated: December 29, 2025 at 1:30 AM PST | Version 3.6</p>
         </div>
         
         <!-- 🚨 CRITICAL: GITHUB SYNC ALERT -->
@@ -2725,6 +2725,13 @@ D:\Cursor\_SourceCode\stage.geniecloud\
                         <td><span class="badge" style="background: #3498db; color: white;">NORMAL</span></td>
                         <td><span class="status-planning">PLANNED</span></td>
                     </tr>
+                    <tr style="background: #fff5f5;">
+                        <td><strong>8</strong></td>
+                        <td><strong>🆕 SendGrid Webhook Integration</strong></td>
+                        <td>Email tracking (delivery, opens, clicks) - CODE EXISTS but webhook not configured in SendGrid</td>
+                        <td><span class="badge" style="background: #e74c3c; color: white;">HIGH</span></td>
+                        <td><span class="status-mvp">📋 SPEC COMPLETE</span></td>
+                    </tr>
                 </tbody>
             </table>
             
@@ -2946,11 +2953,17 @@ D:\Cursor\_SourceCode\stage.geniecloud\
                         <td><span class="status-discovery">Discovery</span></td>
                         <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Docs/DISCOVERY_ProductTemplates_v1.md" class="file-link" target="_blank">📄 View</a></td>
                     </tr>
+                    <tr style="background: #fff5f5;">
+                        <td><strong>🆕 SendGrid Webhook Spec</strong></td>
+                        <td>Full implementation spec - CODE EXISTS, just needs 1-line fix + SendGrid config</td>
+                        <td><span class="status-mvp">📋 SPEC COMPLETE</span></td>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Docs/SENDGRID_WEBHOOK_INTEGRATION_SPEC_v1.md" class="file-link" target="_blank">📄 View</a></td>
+                    </tr>
                     <tr>
-                        <td><span style="color: #e74c3c;">⚠️</span> SendGrid Integration Gap</td>
-                        <td>Critical gap: Email event tracking not configured</td>
-                        <td><span class="status-planning">Action Needed</span></td>
-                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/INTEGRATION_GAP_SendGrid_v1.md" class="file-link" target="_blank">⚠️ View</a></td>
+                        <td><span style="color: #f39c12;">⚠️</span> SendGrid Integration Gap (Original)</td>
+                        <td>Original gap discovery document</td>
+                        <td><span class="status-discovery">Superseded</span></td>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/INTEGRATION_GAP_SendGrid_v1.md" class="file-link" target="_blank">📄 View</a></td>
                     </tr>
                     <tr>
                         <td>Intercom API Verified</td>
@@ -3122,6 +3135,20 @@ python generate_polished_response_v12.py
                     </tr>
                 </thead>
                 <tbody>
+                    <tr style="background: #fff5f5;">
+                        <td><strong>v3.6</strong></td>
+                        <td>Dec 29, 2025 @ 1:30 AM PST</td>
+                        <td>
+                            <strong>SendGrid Webhook Integration Spec:</strong>
+                            <ul style="margin: 5px 0 0 20px; padding: 0;">
+                                <li>🆕 DISCOVERY: SendGrid webhook infrastructure ALREADY EXISTS in codebase</li>
+                                <li>📋 Created SENDGRID_WEBHOOK_INTEGRATION_SPEC_v1.md - full implementation plan</li>
+                                <li>🔧 Issue: EmailController uses [HttpGet] but SendGrid sends POST (1-line fix)</li>
+                                <li>📊 Tables exist: EmailEventStatus, EmailEventMessageClick, EmailEventMessageBounce, etc.</li>
+                                <li>🎯 Added SendGrid as Feature Runway #8 (HIGH priority)</li>
+                            </ul>
+                        </td>
+                    </tr>
                     <tr style="background: #d4edda;">
                         <td><strong>v3.5</strong></td>
                         <td>Dec 29, 2025 @ 12:50 AM PST</td>

@@ -3,7 +3,7 @@
 
 **Version:** 1.0  
 **Created:** 12/29/2025  
-**Author:** Steve Hundley 
+**Author:** Steve Hundley
 **Priority:** 🔴 HIGH - Deploy TODAY  
 **Changeset:** 4678
 
