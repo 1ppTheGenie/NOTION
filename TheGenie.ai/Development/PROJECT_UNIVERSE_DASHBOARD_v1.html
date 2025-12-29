@@ -513,8 +513,8 @@
                 <img src="https://cloud.thegenie.ai/_assets/_img/genie-logo-1.png" alt="TheGenie.ai Logo" style="height: 60px; width: auto;">
             </div>
             <h1 style="margin-top: 0;">TheGenie.ai Project Universe</h1>
-            <p class="subtitle">Master Dashboard for Title Genie, Paisley 2.0, Pre-Listing Command & Engagement Center</p>
-            <p class="updated">Last Updated: December 28, 2025 | Version 3.1 - Added GitHub Sync Requirement</p>
+            <p class="subtitle">Master Dashboard for Title Genie, Paisley 2.0, Pre-Listing Command, Engagement Center & Billing Systems (PUB)</p>
+            <p class="updated">Last Updated: December 28, 2025 at 7:50 PM PST | Version 3.3</p>
         </div>
         
         <!-- 🚨 CRITICAL: GITHUB SYNC ALERT -->
@@ -1100,6 +1100,139 @@
                         <td><a href="file:///D:/Cursor/TheGenie.ai/Development/CompetitionCommand/ROADMAP_CompetitionCommand_Features_v1.md" class="file-link" target="_blank">ROADMAP_CompetitionCommand_Features_v1.md</a></td>
                         <td><span class="type-badge type-roadmap">ROADMAP</span></td>
                         <td>Feature roadmap for Competition Command</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- CHARGEBACK DISPUTE SYSTEM -->
+        <div class="project-section" style="border-left: 4px solid #e74c3c;">
+            <h2>
+                <span class="icon">⚖️</span>
+                <span class="title">Chargeback Dispute System</span>
+                <span class="badge status-active">PRODUCTION</span>
+            </h2>
+            
+            <div class="intro-text" style="background: #fdf2f2; border: 1px solid #e74c3c;">
+                <p>
+                    <strong>Automated chargeback defense engine.</strong> Collects evidence from WHMCS, FarmGenie, Intercom, SendGrid, and Zoom to generate bank-perfect dispute response documents. Supports both One-Off (Listing Command) and Subscription (Competition Command) products.
+                </p>
+            </div>
+            
+            <h4 style="color: #e74c3c; margin: 20px 0 15px 0;">📋 Documentation</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Document</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Docs/DISPUTE_ADMIN_SYSTEM_SPECIFICATION_v1.md" class="file-link" target="_blank">DISPUTE_ADMIN_SYSTEM_SPECIFICATION_v1.md</a></td>
+                        <td><span class="type-badge type-spec">SPEC</span></td>
+                        <td>Complete system specification - UI, database schema, workflows, permissions</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Docs/MASTER_EVIDENCE_WORKFLOW_v1.md" class="file-link" target="_blank">MASTER_EVIDENCE_WORKFLOW_v1.md</a></td>
+                        <td><span class="type-badge type-sop">WORKFLOW</span></td>
+                        <td>Master evidence collection workflow - One-Off vs Subscription paths</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Docs/MASTER_RULES_SubscriptionDisputes_v1.md" class="file-link" target="_blank">MASTER_RULES_SubscriptionDisputes_v1.md</a></td>
+                        <td><span class="type-badge type-spec">RULES</span></td>
+                        <td>Subscription dispute rules - tone, structure, GPT advisor recommendations</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Docs/SOP_ListingCommand_ChargebackDefense_v1.md" class="file-link" target="_blank">SOP_ListingCommand_ChargebackDefense_v1.md</a></td>
+                        <td><span class="type-badge type-sop">SOP</span></td>
+                        <td>Listing Command (One-Off) defense SOP</td>
+                    </tr>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Docs/INTEGRATION_GAP_SendGrid_v1.md" class="file-link" target="_blank">INTEGRATION_GAP_SendGrid_v1.md</a></td>
+                        <td><span class="type-badge type-discovery">GAP</span></td>
+                        <td>🔴 SendGrid webhook integration not configured - critical evidence gap</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4 style="color: #e74c3c; margin: 25px 0 15px 0;">⚙️ Production Scripts</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Script</th>
+                        <th>Product</th>
+                        <th>Version</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>generate_polished_response_v12.py</code></td>
+                        <td>Listing Command (One-Off)</td>
+                        <td>v12</td>
+                        <td><span style="color: #27ae60;">✅ GOLD STANDARD</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>generate_competition_command_response_v5.py</code></td>
+                        <td>Competition Command (Subscription)</td>
+                        <td>v5</td>
+                        <td><span style="color: #27ae60;">✅ SUBMISSION READY</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4 style="color: #e74c3c; margin: 25px 0 15px 0;">🎨 UI Wireframe</h4>
+            <table>
+                <tbody>
+                    <tr>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Wireframes/DISPUTE_ADMIN_WIREFRAME_v1.html" class="file-link" target="_blank">DISPUTE_ADMIN_WIREFRAME_v1.html</a></td>
+                        <td><span class="type-badge type-prototype">WIREFRAME</span></td>
+                        <td>Interactive dashboard wireframe - opens in browser</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4 style="color: #e74c3c; margin: 25px 0 15px 0;">📊 Evidence Sources</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Source</th>
+                        <th>Status</th>
+                        <th>Data Collected</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>WHMCS API</td>
+                        <td><span style="color: #27ae60;">✅ Active</span></td>
+                        <td>Clients, Invoices, Orders, Transactions</td>
+                    </tr>
+                    <tr>
+                        <td>FarmGenie Database</td>
+                        <td><span style="color: #27ae60;">✅ Active</span></td>
+                        <td>Login logs, Activity, Service usage</td>
+                    </tr>
+                    <tr>
+                        <td>Intercom API</td>
+                        <td><span style="color: #27ae60;">✅ Active</span></td>
+                        <td>Support conversations, Cancellation requests</td>
+                    </tr>
+                    <tr>
+                        <td>Zoom Phone API</td>
+                        <td><span style="color: #27ae60;">✅ Active</span></td>
+                        <td>Call logs</td>
+                    </tr>
+                    <tr>
+                        <td>SendGrid API</td>
+                        <td><span style="color: #e74c3c;">🔴 GAP</span></td>
+                        <td>Email delivery, opens, clicks (NOT CONFIGURED)</td>
+                    </tr>
+                    <tr>
+                        <td>Twilio</td>
+                        <td><span style="color: #27ae60;">✅ Active</span></td>
+                        <td>SMS delivery confirmations</td>
                     </tr>
                 </tbody>
             </table>
@@ -2515,26 +2648,95 @@ D:\Cursor\_SourceCode\stage.geniecloud\
             </div>
         </div>
         
-        <!-- BILLING SYSTEMS -->
+        <!-- BILLING SYSTEMS (PUB) -->
         <div id="billing-systems" class="project-section" style="border-left: 4px solid #e74c3c;">
             <h2>
                 <span class="icon">💳</span>
-                <span class="title">Billing Systems</span>
-                <span class="badge" style="background: #e74c3c;">COMPLIANCE</span>
+                <span class="title">Billing Systems (PUB)</span>
+                <span class="badge" style="background: #e74c3c;">PLATFORM</span>
             </h2>
             
             <div class="intro-text" style="background: #fff5f5; border: 1px solid #e74c3c;">
                 <p>
-                    <strong>Chargeback Defense System & Billing Compliance.</strong> Automated dispute response generation, 
-                    evidence collection from WHMCS/FarmGenie/Intercom, and payment processor integrations.
+                    <strong>PUB = WHMCS (Internal Name).</strong> Payment, billing, invoicing, and compliance infrastructure.
+                    Sub-projects: Dispute Admin, PayFlow Integration, Invoicing, Promotions, Money Management, and Customer Account UI.
                 </p>
             </div>
             
-            <h4 style="margin: 20px 0 15px 0; color: #e74c3c;">📂 Project Files</h4>
+            <!-- FEATURE RUNWAY -->
+            <h4 style="color: #9b59b6; margin: 25px 0 15px 0; border-bottom: 3px solid #9b59b6; padding-bottom: 10px;">🛤️ FEATURE RUNWAY - Priority Backlog</h4>
+            <table>
+                <thead style="background: #9b59b6;">
+                    <tr>
+                        <th>#</th>
+                        <th>Feature</th>
+                        <th>Description</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #fff5f5;">
+                        <td><strong>1</strong></td>
+                        <td><strong>Dispute Admin Interface</strong></td>
+                        <td>Dashboard for managing chargeback disputes, evidence collection, outcome logging</td>
+                        <td><span class="badge" style="background: #e74c3c; color: white;">HIGH</span></td>
+                        <td><span class="status-mvp">IN PROGRESS</span></td>
+                    </tr>
+                    <tr style="background: #e6ffe6;">
+                        <td><strong>2</strong></td>
+                        <td><strong>🎉 PUB/PayFlow Webhook</strong></td>
+                        <td>Bidirectional activity: chargebacks, refunds, credits flow back from PayFlow to PUB</td>
+                        <td><span class="badge" style="background: #28a745; color: white;">DONE</span></td>
+                        <td><span class="status-active">✅ SANDBOX VERIFIED 12/28</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>3</strong></td>
+                        <td><strong>Product Naming Cleanup</strong></td>
+                        <td>Update service naming for all products generating invoices in PUB (consistency)</td>
+                        <td><span class="badge" style="background: #f39c12; color: white;">MEDIUM</span></td>
+                        <td><span class="status-planning">PLANNED</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>4</strong></td>
+                        <td><strong>Invoice Auto-Send</strong></td>
+                        <td>Integrating client invoices and auto-sending to customers via email</td>
+                        <td><span class="badge" style="background: #f39c12; color: white;">MEDIUM</span></td>
+                        <td><span class="status-planning">PLANNED</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>5</strong></td>
+                        <td><strong>Promotions & Credits UI</strong></td>
+                        <td>Admin interface for configuring promo codes, credits, discounts</td>
+                        <td><span class="badge" style="background: #f39c12; color: white;">MEDIUM</span></td>
+                        <td><span class="status-planning">PLANNED</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>6</strong></td>
+                        <td><strong>Money Management Report</strong></td>
+                        <td>Financial reporting interface in Genie dashboard (revenue, refunds, disputes)</td>
+                        <td><span class="badge" style="background: #3498db; color: white;">NORMAL</span></td>
+                        <td><span class="status-planning">PLANNED</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>7</strong></td>
+                        <td><strong>Customer Account UI</strong></td>
+                        <td>Customer-facing portal to promote services and upgrades</td>
+                        <td><span class="badge" style="background: #3498db; color: white;">NORMAL</span></td>
+                        <td><span class="status-planning">PLANNED</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- SUB-PROJECT: DISPUTE ADMIN -->
+            <h4 style="color: #c0392b; margin: 25px 0 15px 0; border-bottom: 3px solid #c0392b; padding-bottom: 10px;">⚖️ SUB-PROJECT: Dispute Admin System</h4>
+            
+            <!-- DISPUTE SYSTEM - SPECIFICATION & ARCHITECTURE -->
+            <h5 style="margin: 20px 0 10px 0; color: #555;">📐 Specification & Architecture</h5>
             <table>
                 <thead>
                     <tr>
-                        <th>Component</th>
+                        <th>Document</th>
                         <th>Description</th>
                         <th>Status</th>
                         <th>Link</th>
@@ -2542,46 +2744,242 @@ D:\Cursor\_SourceCode\stage.geniecloud\
                 </thead>
                 <tbody>
                     <tr style="background: #fff5f5;">
-                        <td><strong>Chargeback Defense System</strong></td>
-                        <td>Automated dispute response generation with evidence collection</td>
-                        <td><span class="status-active">v12 COMPLETE</span></td>
-                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/" class="file-link" target="_blank">📁 Open Folder</a></td>
+                        <td><strong>📁 Project Folder</strong></td>
+                        <td>Root folder for Chargeback Dispute System</td>
+                        <td><span class="status-active">Active</span></td>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/" class="file-link" target="_blank">📁 Open</a></td>
                     </tr>
                     <tr>
-                        <td>Project Specification</td>
-                        <td>Complete technical specification for the system</td>
-                        <td><span class="status-active">Complete</span></td>
-                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Docs/PROJECT_SPECIFICATION_ChargebackDefenseSystem_v1.md" class="file-link" target="_blank">📄 View</a></td>
+                        <td>Dispute Admin System Spec</td>
+                        <td>Complete system design: database schema, workflows, permissions, API endpoints</td>
+                        <td><span class="status-active">v1 Complete</span></td>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Docs/DISPUTE_ADMIN_SYSTEM_SPECIFICATION_v1.md" class="file-link" target="_blank">📄 View</a></td>
                     </tr>
                     <tr>
-                        <td>README</td>
-                        <td>Quick start guide and project overview</td>
-                        <td><span class="status-active">Complete</span></td>
-                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/README.md" class="file-link" target="_blank">📄 View</a></td>
+                        <td>Master Evidence Workflow</td>
+                        <td>Complete evidence collection workflow - One-Off vs Subscription conditional logic</td>
+                        <td><span class="status-active">v1 Complete</span></td>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Docs/MASTER_EVIDENCE_WORKFLOW_v1.md" class="file-link" target="_blank">📄 View</a></td>
                     </tr>
                     <tr>
-                        <td>Master Template (Listing Command)</td>
-                        <td>v2.0 Master Template - Dynamic page counting (NumberedCanvas)</td>
-                        <td><span class="status-active">v2.0 Locked</span></td>
-                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Templates/ListingCommand/DisputeResponse_MasterTemplate_v2.0.py" class="file-link" target="_blank">🐍 View</a></td>
+                        <td>Master Rules - Subscription Disputes</td>
+                        <td>GPT Advisor recommendations: tone, structure, issuer psychology</td>
+                        <td><span class="status-active">v1 Complete</span></td>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Docs/MASTER_RULES_SubscriptionDisputes_v1.md" class="file-link" target="_blank">📄 View</a></td>
                     </tr>
                     <tr>
-                        <td><strong>SOP - Listing Command Disputes</strong></td>
-                        <td>Complete operational guide with queries, data sources, rules</td>
-                        <td><span class="status-active">v1.0 Complete</span></td>
+                        <td>SOP - Listing Command Disputes</td>
+                        <td>Complete operational guide with queries, data sources, rules (One-Time)</td>
+                        <td><span class="status-active">v1 Complete</span></td>
                         <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Docs/SOP_ListingCommand_ChargebackDefense_v1.md" class="file-link" target="_blank">📋 View</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- DISPUTE SYSTEM - PRODUCTION SCRIPTS -->
+            <h5 style="margin: 20px 0 10px 0; color: #555;">🐍 Production Scripts</h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Script</th>
+                        <th>Product Type</th>
+                        <th>Status</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #e6ffe6;">
+                        <td><strong>generate_polished_response_v12.py</strong></td>
+                        <td>Listing Command (One-Time) - Chris Plank Case</td>
+                        <td><span class="status-active">✅ GOLD STANDARD</span></td>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/generate_polished_response_v12.py" class="file-link" target="_blank">🐍 View</a></td>
+                    </tr>
+                    <tr style="background: #e6ffe6;">
+                        <td><strong>generate_competition_command_response_v5.py</strong></td>
+                        <td>Competition Command (Subscription) - Susan Featherly Case</td>
+                        <td><span class="status-active">✅ GOLD STANDARD</span></td>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/generate_competition_command_response_v5.py" class="file-link" target="_blank">🐍 View</a></td>
+                    </tr>
+                    <tr>
+                        <td>collect_evidence_chris_plank.py</td>
+                        <td>Evidence collection example</td>
+                        <td><span class="status-active">Reference</span></td>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/collect_evidence_chris_plank.py" class="file-link" target="_blank">🐍 View</a></td>
+                    </tr>
+                    <tr>
+                        <td>query_susan_featherly_whmcs.py</td>
+                        <td>PUB API query example</td>
+                        <td><span class="status-active">Reference</span></td>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/query_susan_featherly_whmcs.py" class="file-link" target="_blank">🐍 View</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- DISPUTE SYSTEM - WIREFRAMES & UI -->
+            <h5 style="margin: 20px 0 10px 0; color: #555;">🎨 Wireframes & UI</h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Wireframe</th>
+                        <th>Description</th>
+                        <th>Version</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #e6f3ff;">
+                        <td><strong>Dispute Admin Dashboard</strong></td>
+                        <td>User Lookup → Select Order → Create Dispute flow, Case Detail, Outcome Logging</td>
+                        <td><span class="status-active">v2</span></td>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Wireframes/DISPUTE_ADMIN_WIREFRAME_v2.html" class="file-link" target="_blank">🎨 Open in Browser</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- DISPUTE SYSTEM - DISCOVERY & INTEGRATION -->
+            <h5 style="margin: 20px 0 10px 0; color: #555;">🔍 Discovery & Integration</h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Document</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #d4edda; border: 2px solid #28a745;">
+                        <td><strong>🎉 PayPal Webhook Endpoint</strong></td>
+                        <td>SANDBOX VERIFIED 12/28/2025 - Bidirectional PayFlow integration LIVE</td>
+                        <td><span class="status-active">✅ DEPLOYED</span></td>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Docs/PAYPAL_WEBHOOK_DEPLOYMENT_GUIDE_v2.md" class="file-link" target="_blank">📄 View Guide</a></td>
+                    </tr>
+                    <tr style="background: #e6ffe6;">
+                        <td>Webhook Code Files (3 files)</td>
+                        <td>PayPalWebhooksController.cs, PayPalWebhookManager.cs, PayPalWebhookEvent.cs</td>
+                        <td><span class="status-active">✅ In Sandbox</span></td>
+                        <td><code>C:\Sandbox\...\Smart.Dashboard\</code></td>
+                    </tr>
+                    <tr>
+                        <td>PUB/PayFlow Webhook Discovery</td>
+                        <td>Initial discovery and requirements (superseded by Deployment Guide)</td>
+                        <td><span class="status-active">Complete</span></td>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Docs/DISCOVERY_WHMCS_Webhook_Integration_v1.md" class="file-link" target="_blank">📄 View</a></td>
+                    </tr>
+                    <tr>
+                        <td>PUB API Capabilities</td>
+                        <td>All available PUB API methods - verified from source code</td>
+                        <td><span class="status-active">v1 Complete</span></td>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Docs/WHMCS_API_CAPABILITIES_v1.md" class="file-link" target="_blank">📄 View</a></td>
                     </tr>
                     <tr>
                         <td>Product Templates Discovery</td>
-                        <td>Discovery for product-specific templates (subscriptions vs one-time)</td>
+                        <td>Product-specific templates (subscriptions vs one-time)</td>
                         <td><span class="status-discovery">Discovery</span></td>
                         <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Docs/DISCOVERY_ProductTemplates_v1.md" class="file-link" target="_blank">📄 View</a></td>
                     </tr>
                     <tr>
-                        <td>SendGrid Integration Gap</td>
+                        <td><span style="color: #e74c3c;">⚠️</span> SendGrid Integration Gap</td>
                         <td>Critical gap: Email event tracking not configured</td>
                         <td><span class="status-planning">Action Needed</span></td>
                         <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/INTEGRATION_GAP_SendGrid_v1.md" class="file-link" target="_blank">⚠️ View</a></td>
+                    </tr>
+                    <tr>
+                        <td>Intercom API Verified</td>
+                        <td>Token, search capabilities confirmed</td>
+                        <td><span class="status-active">✅ Verified</span></td>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Docs/DISCOVERY_Intercom_Verified_v2.md" class="file-link" target="_blank">📄 View</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- DISPUTE SYSTEM - OUTPUT SAMPLES -->
+            <h5 style="margin: 20px 0 10px 0; color: #555;">📄 Output Samples (Defense Kits)</h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Case</th>
+                        <th>Product</th>
+                        <th>Type</th>
+                        <th>Score</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Chris Plank</strong></td>
+                        <td>Listing Command Pro</td>
+                        <td>One-Time</td>
+                        <td><span style="color: #27ae60; font-weight: bold;">9.9/10</span></td>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Output/" class="file-link" target="_blank">📁 Output Folder</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Susan Featherly</strong></td>
+                        <td>Competition Command</td>
+                        <td>Subscription</td>
+                        <td><span style="color: #27ae60; font-weight: bold;">9.6/10</span></td>
+                        <td><a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Output/" class="file-link" target="_blank">📁 Output Folder</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- PUB API SECTION -->
+            <h4 style="color: #27ae60; margin: 25px 0 15px 0; border-bottom: 3px solid #27ae60; padding-bottom: 10px;">🔌 PUB (WHMCS) API - Verified from Source Code</h4>
+            <div style="background: #e6ffe6; border: 1px solid #27ae60; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
+                <p style="margin: 0; font-size: 13px;">
+                    <strong>Source:</strong> <code>Smart.Core\BLL\Helper\WhmcsHelper.cs</code><br>
+                    <strong>URL:</strong> <code>https://accounts.1parkplace.com/includes/api.php</code><br>
+                    <strong>Full Docs:</strong> <a href="file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Docs/WHMCS_API_CAPABILITIES_v1.md" class="file-link">WHMCS_API_CAPABILITIES_v1.md</a>
+                </p>
+            </div>
+            <table>
+                <thead style="background: #27ae60;">
+                    <tr>
+                        <th>Method</th>
+                        <th>Purpose</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>AddOrder</code></td>
+                        <td>Create new orders</td>
+                        <td><span class="status-active">✅ In Use</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>CapturePayment</code></td>
+                        <td>Charge credit cards</td>
+                        <td><span class="status-active">✅ In Use</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>GetClientsDetails</code></td>
+                        <td>Get customer info</td>
+                        <td><span class="status-active">✅ In Use</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>AddClientNote</code></td>
+                        <td>Add notes to client records</td>
+                        <td><span class="status-active">✅ In Use</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>AddTransaction</code></td>
+                        <td>Log refunds/credits</td>
+                        <td><span class="status-planning">🆕 Available</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>UpdateInvoice</code></td>
+                        <td>Mark as disputed</td>
+                        <td><span class="status-planning">🆕 Available</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>AddCredit</code></td>
+                        <td>Add account credits</td>
+                        <td><span class="status-planning">🆕 Available</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>OpenTicket</code></td>
+                        <td>Create support tickets</td>
+                        <td><span class="status-planning">🆕 Available</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -2596,10 +2994,15 @@ D:\Cursor\_SourceCode\stage.geniecloud\
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><strong>WHMCS API</strong></td>
+                    <tr style="background: #e6ffe6;">
+                        <td><strong>PUB (WHMCS) API</strong></td>
                         <td>Order, invoice, client data for dispute evidence</td>
-                        <td><span class="status-active">✅ Active</span></td>
+                        <td><span class="status-active">✅ Verified in Source</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>PayFlow</strong></td>
+                        <td>Payment gateway - credentials in PUB Admin, webhook config needed</td>
+                        <td><span class="status-mvp">⚠️ Check Admin</span></td>
                     </tr>
                     <tr>
                         <td><strong>SendGrid</strong></td>
@@ -2615,11 +3018,6 @@ D:\Cursor\_SourceCode\stage.geniecloud\
                         <td><strong>Intercom</strong></td>
                         <td>Customer support chat logs for "no contact" proof</td>
                         <td><span class="status-active">✅ Active</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>PayPal/PayFlow</strong></td>
-                        <td>Transaction details, statement descriptor verification</td>
-                        <td><span class="status-planning">🔴 Needs Verification</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -2641,9 +3039,91 @@ python generate_polished_response_v12.py
             </ul>
         </div>
         
+        <!-- CHANGE LOG -->
+        <div id="changelog" class="project-section" style="border-left: 4px solid #7f8c8d;">
+            <h2>
+                <span class="icon">📝</span>
+                <span class="title">Change Log</span>
+            </h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 80px;">Version</th>
+                        <th style="width: 180px;">Date</th>
+                        <th>Changes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #fffde6;">
+                        <td><strong>v3.4</strong></td>
+                        <td>Dec 28, 2025 @ 8:05 PM PST</td>
+                        <td>
+                            <strong>PayPal Webhook - DEPLOYED TO SANDBOX:</strong>
+                            <ul style="margin: 5px 0 0 20px; padding: 0;">
+                                <li>✅ All 3 files deployed to <code>C:\Sandbox\Genie\</code></li>
+                                <li>✅ MSBuild succeeded - all projects compiled</li>
+                                <li>✅ Health endpoint: <code>/api/webhooks/paypal/health</code></li>
+                                <li>Sandbox ready: Run <code>start-sandbox.ps1</code> to test</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr style="background: #e6ffe6;">
+                        <td><strong>v3.3</strong></td>
+                        <td>Dec 28, 2025 @ 7:50 PM PST</td>
+                        <td>
+                            <strong>PayPal Webhook Integration - CODE COMPLETE:</strong>
+                            <ul style="margin: 5px 0 0 20px; padding: 0;">
+                                <li>Created PayPalWebhooksController.cs in FarmGenie source</li>
+                                <li>Created PayPalWebhookManager.cs (modeled after Facebook pattern)</li>
+                                <li>Created PayPalWebhookEvent.cs model</li>
+                                <li>Documented deployment guide with all PayPal portal credentials</li>
+                                <li>Temporary webhook.site URL ready for testing</li>
+                                <li>Route: /api/webhooks/paypal (separate from Facebook)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>v3.2</strong></td>
+                        <td>Dec 28, 2025 @ 5:30 PM PST</td>
+                        <td>
+                            <strong>Billing Systems (PUB) Major Update:</strong>
+                            <ul style="margin: 5px 0 0 20px; padding: 0;">
+                                <li>Added Feature Runway with 7 prioritized features</li>
+                                <li>Created Dispute Admin sub-project with all documentation</li>
+                                <li>Added PUB API section with verified methods from source code</li>
+                                <li>Captured PayFlow credentials from PUB Admin</li>
+                                <li>Added PST timestamp to header</li>
+                                <li>Added Change Log section</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>v3.1</strong></td>
+                        <td>Dec 28, 2025</td>
+                        <td>Added GitHub Sync Requirement Alert banner at top of page</td>
+                    </tr>
+                    <tr>
+                        <td><strong>v3.0</strong></td>
+                        <td>Dec 27, 2025</td>
+                        <td>Major restructure: Added Pre-Listing Command section, Theme System documentation, CTA System docs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>v2.0</strong></td>
+                        <td>Dec 26, 2025</td>
+                        <td>Added ecosystem map, Chargeback Defense System section, production references</td>
+                    </tr>
+                    <tr>
+                        <td><strong>v1.0</strong></td>
+                        <td>Dec 25, 2025</td>
+                        <td>Initial creation with Title Genie, Paisley, PLS, and Engagement Center sections</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
         <div class="footer">
-            <p>TheGenie.ai Project Universe Dashboard v3.1 (Added GitHub Sync Requirement Alert)</p>
-            <p>Created: December 25, 2025 | Last Updated: December 28, 2025 | Location: D:\Cursor\TheGenie.ai\Development\PROJECT_UNIVERSE_DASHBOARD_v1.html</p>
+            <p>TheGenie.ai Project Universe Dashboard v3.4</p>
+            <p>Created: December 25, 2025 | Last Updated: December 28, 2025 at 8:05 PM PST | Location: D:\Cursor\TheGenie.ai\Development\PROJECT_UNIVERSE_DASHBOARD_v1.html</p>
             <p style="margin-top: 10px;">💡 <strong>Tip:</strong> Open this file in Chrome for best experience. Links open in new tabs.</p>
             <p style="margin-top: 5px;">📦 <strong>GitHub:</strong> <a href="https://github.com/1ppTheGenie/NOTION" target="_blank" style="color: #3498db;">github.com/1ppTheGenie/NOTION</a> | Always sync before ending session!</p>
         </div>

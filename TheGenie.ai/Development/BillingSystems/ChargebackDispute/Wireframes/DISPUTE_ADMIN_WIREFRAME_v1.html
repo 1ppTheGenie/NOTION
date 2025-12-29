@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dispute Admin - UI Wireframe</title>
+    <!--
+    ========================================================
+    DISPUTE ADMIN SYSTEM - INTERACTIVE WIREFRAME v1
+    ========================================================
+    Created: 12/28/2025
+    Author: Cursor Opus Agent
+    
+    PREVIEW URL: file:///D:/Cursor/TheGenie.ai/Development/BillingSystems/Chargeback-dispute-System/Wireframes/DISPUTE_ADMIN_WIREFRAME_v1.html
+    ========================================================
+    -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+            color: #1e293b;
+        }
+        
+        /* Layout */
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 240px;
+            background: linear-gradient(180deg, #1e3a5f 0%, #0f172a 100%);
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .sidebar-logo {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .sidebar-logo h1 {
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .sidebar-logo span {
+            font-size: 11px;
+            color: #94a3b8;
+        }
+        
+        .nav-section {
+            margin-bottom: 20px;
+        }
+        
+        .nav-section-title {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #64748b;
+            padding: 0 20px;
+            margin-bottom: 8px;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: #94a3b8;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        
+        .nav-item:hover {
+            background: rgba(255,255,255,0.05);
+            color: white;
+        }
+        
+        .nav-item.active {
+            background: linear-gradient(90deg, rgba(56,189,248,0.2), transparent);
+            color: #38bdf8;
+            border-left: 3px solid #38bdf8;
+        }
+        
+        .nav-item .icon {
+            margin-right: 12px;
+            font-size: 16px;
+        }
+        
+        .nav-item .label {
+            font-size: 14px;
+        }
+        
+        .nav-item .badge {
+            margin-left: auto;
+            background: #ef4444;
+            color: white;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 240px;
+            padding: 30px;
+        }
+        
+        /* Header */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .page-title h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        
+        .page-title p {
+            color: #64748b;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(59,130,246,0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #64748b;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .btn-secondary:hover {
+            background: #f1f5f9;
+        }
+        
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+        
+        .stat-card.open::before { background: #f59e0b; }
+        .stat-card.pending::before { background: #8b5cf6; }
+        .stat-card.won::before { background: #10b981; }
+        .stat-card.lost::before { background: #ef4444; }
+        
+        .stat-card .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+        
+        .stat-card.open .stat-icon { background: #fef3c7; }
+        .stat-card.pending .stat-icon { background: #ede9fe; }
+        .stat-card.won .stat-icon { background: #d1fae5; }
+        .stat-card.lost .stat-icon { background: #fee2e2; }
+        
+        .stat-card .stat-label {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+        
+        .stat-card .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        
+        .stat-card .stat-amount {
+            font-size: 14px;
+            color: #64748b;
+            margin-top: 4px;
+        }
+        
+        /* Filters */
+        .filters-bar {
+            background: white;
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .filter-label {
+            font-size: 13px;
+            color: #64748b;
+        }
+        
+        .filter-select {
+            padding: 8px 32px 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 13px;
+            background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center;
+            appearance: none;
+            cursor: pointer;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 10px 16px 10px 40px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E") no-repeat 14px center;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+        }
+        
+        /* Data Table */
+        .data-table {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .data-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .data-table th {
+            background: #f8fafc;
+            padding: 14px 20px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .data-table td {
+            padding: 16px 20px;
+            font-size: 14px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .data-table tr:hover {
+            background: #f8fafc;
+            cursor: pointer;
+        }
+        
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .case-number {
+            font-weight: 600;
+            color: #3b82f6;
+        }
+        
+        .customer-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .customer-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #818cf8, #6366f1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .customer-name {
+            font-weight: 500;
+        }
+        
+        .customer-email {
+            font-size: 12px;
+            color: #64748b;
+        }
+        
+        .product-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .product-badge.subscription {
+            background: #ede9fe;
+            color: #7c3aed;
+        }
+        
+        .product-badge.oneoff {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+        
+        .amount {
+            font-weight: 600;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+        }
+        
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-badge.open {
+            background: #fef3c7;
+            color: #b45309;
+        }
+        
+        .status-badge.pending {
+            background: #ede9fe;
+            color: #7c3aed;
+        }
+        
+        .status-badge.won {
+            background: #d1fae5;
+            color: #059669;
+        }
+        
+        .status-badge.lost {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        
+        .status-badge.open .status-dot { background: #f59e0b; }
+        .status-badge.pending .status-dot { background: #8b5cf6; }
+        .status-badge.won .status-dot { background: #10b981; }
+        .status-badge.lost .status-dot { background: #ef4444; }
+        
+        .actions-cell {
+            text-align: right;
+        }
+        
+        .action-btn {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid #e2e8f0;
+            background: white;
+            color: #64748b;
+            transition: all 0.2s;
+        }
+        
+        .action-btn:hover {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            background: white;
+            border-radius: 0 0 12px 12px;
+            border-top: 1px solid #f1f5f9;
+        }
+        
+        .pagination-info {
+            font-size: 13px;
+            color: #64748b;
+        }
+        
+        .pagination-controls {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .page-btn {
+            padding: 8px 14px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background: white;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .page-btn:hover {
+            background: #f1f5f9;
+        }
+        
+        .page-btn.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background: white;
+            border-radius: 16px;
+            width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: scale(0.95);
+            transition: transform 0.3s;
+        }
+        
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+        
+        .modal-header {
+            padding: 24px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: #f1f5f9;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-close:hover {
+            background: #e2e8f0;
+        }
+        
+        .modal-body {
+            padding: 24px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        
+        .modal-footer {
+            padding: 20px 24px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+        
+        /* Evidence Panel */
+        .evidence-panel {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .evidence-panel h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #374151;
+        }
+        
+        .evidence-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .evidence-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .evidence-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 16px;
+        }
+        
+        .evidence-icon.success { background: #d1fae5; }
+        .evidence-icon.warning { background: #fef3c7; }
+        .evidence-icon.error { background: #fee2e2; }
+        
+        .evidence-info {
+            flex: 1;
+        }
+        
+        .evidence-name {
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .evidence-detail {
+            font-size: 11px;
+            color: #64748b;
+        }
+        
+        .evidence-status {
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .evidence-status.success { color: #059669; }
+        .evidence-status.warning { color: #d97706; }
+        .evidence-status.error { color: #dc2626; }
+        
+        /* Super User Badge */
+        .super-user-badge {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Wireframe Note */
+        .wireframe-note {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #1e293b;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        .wireframe-note strong {
+            color: #fbbf24;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <h1>TheGenie.ai</h1>
+                <span>Admin Dashboard</span>
+            </div>
+            
+            <nav>
+                <div class="nav-section">
+                    <div class="nav-section-title">Main</div>
+                    <a class="nav-item">
+                        <span class="icon">🏠</span>
+                        <span class="label">Start</span>
+                    </a>
+                    <a class="nav-item">
+                        <span class="icon">💬</span>
+                        <span class="label">Ask Paisley</span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Admin</div>
+                    <a class="nav-item">
+                        <span class="icon">📊</span>
+                        <span class="label">Activity Tracker</span>
+                    </a>
+                    <a class="nav-item">
+                        <span class="icon">💰</span>
+                        <span class="label">Credits Adjust</span>
+                    </a>
+                    <a class="nav-item">
+                        <span class="icon">🏢</span>
+                        <span class="label">Organizations</span>
+                    </a>
+                    <a class="nav-item">
+                        <span class="icon">🔐</span>
+                        <span class="label">Permissions</span>
+                    </a>
+                    <a class="nav-item active">
+                        <span class="icon">⚖️</span>
+                        <span class="label">Dispute Admin</span>
+                        <span class="badge">12</span>
+                    </a>
+                    <a class="nav-item">
+                        <span class="icon">📧</span>
+                        <span class="label">Invitations</span>
+                    </a>
+                    <a class="nav-item">
+                        <span class="icon">📋</span>
+                        <span class="label">TPP</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <div class="page-header">
+                <div class="page-title">
+                    <h1>Dispute Admin <span class="super-user-badge">Super User</span></h1>
+                    <p>Manage chargeback disputes and defense documentation</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary">
+                        📥 Export
+                    </button>
+                    <button class="btn btn-primary" onclick="openModal()">
+                        ➕ New Dispute
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card open">
+                    <div class="stat-icon">🟡</div>
+                    <div class="stat-label">Open Cases</div>
+                    <div class="stat-value">12</div>
+                    <div class="stat-amount">$8,500 at risk</div>
+                </div>
+                <div class="stat-card pending">
+                    <div class="stat-icon">⏳</div>
+                    <div class="stat-label">Evidence Pending</div>
+                    <div class="stat-value">5</div>
+                    <div class="stat-amount">$3,200 at risk</div>
+                </div>
+                <div class="stat-card won">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-label">Won (2025)</div>
+                    <div class="stat-value">47</div>
+                    <div class="stat-amount">$32,450 recovered</div>
+                </div>
+                <div class="stat-card lost">
+                    <div class="stat-icon">❌</div>
+                    <div class="stat-label">Lost (2025)</div>
+                    <div class="stat-value">3</div>
+                    <div class="stat-amount">$1,800 lost</div>
+                </div>
+            </div>
+            
+            <!-- Filters -->
+            <div class="filters-bar">
+                <div class="filter-group">
+                    <span class="filter-label">Status:</span>
+                    <select class="filter-select">
+                        <option>All Status</option>
+                        <option>Open</option>
+                        <option>Evidence Pending</option>
+                        <option>Submitted</option>
+                        <option>Won</option>
+                        <option>Lost</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <span class="filter-label">Product:</span>
+                    <select class="filter-select">
+                        <option>All Products</option>
+                        <option>Competition Command</option>
+                        <option>Listing Command</option>
+                        <option>Paisley Plus</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <span class="filter-label">Type:</span>
+                    <select class="filter-select">
+                        <option>All Types</option>
+                        <option>Subscription</option>
+                        <option>One-Off</option>
+                    </select>
+                </div>
+                <input type="text" class="search-input" placeholder="Search by case #, customer, email...">
+            </div>
+            
+            <!-- Data Table -->
+            <div class="data-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Case #</th>
+                            <th>Customer</th>
+                            <th>Product</th>
+                            <th>Amount</th>
+                            <th>Filed</th>
+                            <th>Deadline</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="case-number">DC-2025-00067</span></td>
+                            <td>
+                                <div class="customer-info">
+                                    <div class="customer-avatar">CP</div>
+                                    <div>
+                                        <div class="customer-name">Chris Plank</div>
+                                        <div class="customer-email">cp@pacificapg.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="product-badge oneoff">Listing Command</span></td>
+                            <td><span class="amount">$67.50</span></td>
+                            <td>Dec 19</td>
+                            <td>Jan 3</td>
+                            <td><span class="status-badge won"><span class="status-dot"></span>Won</span></td>
+                            <td class="actions-cell"><button class="action-btn">View</button></td>
+                        </tr>
+                        <tr>
+                            <td><span class="case-number">DC-2025-00066</span></td>
+                            <td>
+                                <div class="customer-info">
+                                    <div class="customer-avatar">SF</div>
+                                    <div>
+                                        <div class="customer-name">Susan Featherly</div>
+                                        <div class="customer-email">homesbypeter.susan@gmail.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="product-badge subscription">Competition Command</span></td>
+                            <td><span class="amount">$500.00</span></td>
+                            <td>Oct 24</td>
+                            <td>Nov 8</td>
+                            <td><span class="status-badge open"><span class="status-dot"></span>Open</span></td>
+                            <td class="actions-cell"><button class="action-btn">View</button></td>
+                        </tr>
+                        <tr>
+                            <td><span class="case-number">DC-2025-00065</span></td>
+                            <td>
+                                <div class="customer-info">
+                                    <div class="customer-avatar">JD</div>
+                                    <div>
+                                        <div class="customer-name">John Doe</div>
+                                        <div class="customer-email">john.doe@email.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="product-badge subscription">Paisley Plus</span></td>
+                            <td><span class="amount">$99.00</span></td>
+                            <td>Dec 15</td>
+                            <td>Dec 30</td>
+                            <td><span class="status-badge pending"><span class="status-dot"></span>Evidence</span></td>
+                            <td class="actions-cell"><button class="action-btn">View</button></td>
+                        </tr>
+                        <tr>
+                            <td><span class="case-number">DC-2025-00064</span></td>
+                            <td>
+                                <div class="customer-info">
+                                    <div class="customer-avatar">JS</div>
+                                    <div>
+                                        <div class="customer-name">Jane Smith</div>
+                                        <div class="customer-email">jane.smith@realty.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="product-badge oneoff">Listing Command</span></td>
+                            <td><span class="amount">$45.00</span></td>
+                            <td>Dec 10</td>
+                            <td>Dec 25</td>
+                            <td><span class="status-badge won"><span class="status-dot"></span>Won</span></td>
+                            <td class="actions-cell"><button class="action-btn">View</button></td>
+                        </tr>
+                        <tr>
+                            <td><span class="case-number">DC-2025-00063</span></td>
+                            <td>
+                                <div class="customer-info">
+                                    <div class="customer-avatar">MJ</div>
+                                    <div>
+                                        <div class="customer-name">Mike Johnson</div>
+                                        <div class="customer-email">mike.j@homes.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="product-badge subscription">Competition Command</span></td>
+                            <td><span class="amount">$500.00</span></td>
+                            <td>Nov 28</td>
+                            <td>Dec 13</td>
+                            <td><span class="status-badge lost"><span class="status-dot"></span>Lost</span></td>
+                            <td class="actions-cell"><button class="action-btn">View</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    <div class="pagination-info">
+                        Showing 1-5 of 67 disputes
+                    </div>
+                    <div class="pagination-controls">
+                        <button class="page-btn">← Prev</button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <button class="page-btn">...</button>
+                        <button class="page-btn">14</button>
+                        <button class="page-btn">Next →</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal-overlay" id="newDisputeModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Create New Dispute Case</h2>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Payment Provider Case ID</label>
+                    <input type="text" class="form-input" placeholder="e.g., PP-R-NVE-599340890">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Transaction ID</label>
+                        <input type="text" class="form-input" placeholder="Gateway transaction ID">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Invoice ID</label>
+                        <input type="text" class="form-input" placeholder="WHMCS invoice">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Customer Email</label>
+                    <input type="email" class="form-input" placeholder="customer@email.com">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Dispute Reason</label>
+                        <select class="form-input">
+                            <option value="">Select reason...</option>
+                            <option>Unauthorized transaction</option>
+                            <option>Cancelled before being billed</option>
+                            <option>Product not received</option>
+                            <option>Product not as described</option>
+                            <option>Duplicate charge</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Dispute Filed Date</label>
+                        <input type="date" class="form-input">
+                    </div>
+                </div>
+                
+                <!-- Evidence Panel Preview -->
+                <div class="evidence-panel">
+                    <h3>Evidence Sources (Auto-collected)</h3>
+                    <div class="evidence-item">
+                        <div class="evidence-icon success">📋</div>
+                        <div class="evidence-info">
+                            <div class="evidence-name">WHMCS Transaction Details</div>
+                            <div class="evidence-detail">Invoice, order, payment history</div>
+                        </div>
+                        <span class="evidence-status success">✓ Ready</span>
+                    </div>
+                    <div class="evidence-item">
+                        <div class="evidence-icon success">🔐</div>
+                        <div class="evidence-info">
+                            <div class="evidence-name">FarmGenie Login Activity</div>
+                            <div class="evidence-detail">Login logs, IP addresses, device info</div>
+                        </div>
+                        <span class="evidence-status success">✓ Ready</span>
+                    </div>
+                    <div class="evidence-item">
+                        <div class="evidence-icon success">💬</div>
+                        <div class="evidence-info">
+                            <div class="evidence-name">Intercom Conversations</div>
+                            <div class="evidence-detail">Support tickets, cancellation requests</div>
+                        </div>
+                        <span class="evidence-status success">✓ Ready</span>
+                    </div>
+                    <div class="evidence-item">
+                        <div class="evidence-icon warning">📧</div>
+                        <div class="evidence-info">
+                            <div class="evidence-name">SendGrid Email Events</div>
+                            <div class="evidence-detail">Delivery, opens, clicks</div>
+                        </div>
+                        <span class="evidence-status warning">⚠️ Not Configured</span>
+                    </div>
+                    <div class="evidence-item">
+                        <div class="evidence-icon success">📞</div>
+                        <div class="evidence-info">
+                            <div class="evidence-name">Zoom Phone Call Logs</div>
+                            <div class="evidence-detail">Call history with customer</div>
+                        </div>
+                        <span class="evidence-status success">✓ Ready</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary">🔍 Lookup & Create</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="wireframe-note">
+        <strong>WIREFRAME v1</strong> | Dispute Admin System | 12/28/2025
+    </div>
+    
+    <script>
+        function openModal() {
+            document.getElementById('newDisputeModal').classList.add('active');
+        }
+        
+        function closeModal() {
+            document.getElementById('newDisputeModal').classList.remove('active');
+        }
+        
+        // Close modal on overlay click
+        document.getElementById('newDisputeModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+    </script>
+</body>
+</html>
+
