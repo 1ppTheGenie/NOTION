@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheGenie.ai - Project Universe Dashboard v2</title>
+    <style>
+        /* ============================================
+           REORGANIZED DASHBOARD - v2.0
+           Clear sections, sticky nav, easy to find
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* STICKY NAVIGATION */
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .sticky-nav .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .sticky-nav .logo img {
+            height: 32px;
+        }
+        
+        .sticky-nav .nav-dropdown {
+            position: relative;
+        }
+        
+        .sticky-nav .nav-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .sticky-nav .nav-btn:hover {
+            background: #2980b9;
+        }
+        
+        .sticky-nav .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: white;
+            min-width: 280px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        
+        .sticky-nav .nav-dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .sticky-nav .dropdown-content a {
+            display: block;
+            padding: 12px 20px;
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+        
+        .sticky-nav .dropdown-content a:hover {
+            background: #f0f8ff;
+        }
+        
+        .sticky-nav .dropdown-content a.highlight {
+            background: #fff5f5;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .sticky-nav .dropdown-content a.pls {
+            background: #f0f8ff;
+            border-left: 4px solid #3498db;
+        }
+        
+        .sticky-nav .dropdown-content a.geniecloud {
+            background: #fff8f0;
+            border-left: 4px solid #f39c12;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* HEADER */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 40px 30px;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            border-radius: 12px;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            color: #bdc3c7;
+            font-size: 16px;
+        }
+        
+        .header .updated {
+            color: #95a5a6;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        
+        /* GITHUB ALERT */
+        .github-alert {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border-radius: 8px;
+            padding: 15px 25px;
+            margin-bottom: 25px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .github-alert a {
+            background: white;
+            color: #c0392b;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+        }
+        
+        /* TWO-COLUMN LAYOUT FOR PLS + GENIECLOUD */
+        .twin-projects {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+        
+        @media (max-width: 1200px) {
+            .twin-projects {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* PROJECT SECTION */
+        .project-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        
+        .project-section.pls {
+            border-top: 5px solid #3498db;
+        }
+        
+        .project-section.geniecloud {
+            border-top: 5px solid #f39c12;
+        }
+        
+        .project-section.contract {
+            border-top: 5px solid #9b59b6;
+            background: linear-gradient(135deg, #f9f4fc 0%, #f5f0f8 100%);
+        }
+        
+        .project-section.billing {
+            border-top: 5px solid #e74c3c;
+        }
+        
+        .project-section h2 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .project-section h2 .badge {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        
+        .badge-active { background: #27ae60; color: white; }
+        .badge-mvp { background: #f39c12; color: white; }
+        .badge-inprogress { background: #3498db; color: white; }
+        .badge-discovery { background: #9b59b6; color: white; }
+        
+        /* INSTRUCTIONS BOX */
+        .instructions-box {
+            background: #fffbf0;
+            border: 2px solid #f39c12;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .instructions-box h3 {
+            color: #d35400;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .instructions-box ul {
+            margin-left: 20px;
+        }
+        
+        .instructions-box li {
+            margin-bottom: 8px;
+        }
+        
+        /* FILE TABLE */
+        .file-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-top: 15px;
+        }
+        
+        .file-table th {
+            background: #f8f9fa;
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        .file-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .file-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .file-table a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .file-table a:hover {
+            text-decoration: underline;
+        }
+        
+        /* STATUS BADGES */
+        .status {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .status-done { background: #d4edda; color: #155724; }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-active { background: #cce5ff; color: #004085; }
+        
+        /* QUICK LINKS */
+        .quick-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .quick-links a {
+            background: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .quick-links a:hover {
+            background: #2980b9;
+        }
+        
+        .quick-links a.secondary {
+            background: #6c757d;
+        }
+        
+        .quick-links a.secondary:hover {
+            background: #5a6268;
+        }
+        
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 12px;
+            margin-top: 30px;
+        }
+        
+        /* SECTION DIVIDER */
+        .section-divider {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .section-divider::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 2px;
+            background: #dee2e6;
+        }
+        
+        .section-divider span {
+            background: #f5f5f5;
+            padding: 0 20px;
+            position: relative;
+            color: #666;
+            font-size: 14px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- STICKY NAVIGATION -->
+    <nav class="sticky-nav">
+        <div class="logo">
+            <img src="https://cloud.thegenie.ai/_assets/_img/genie-logo-1.png" alt="Logo">
+            <span>TheGenie.ai Project Universe</span>
+        </div>
+        <div class="nav-dropdown">
+            <button class="nav-btn">📍 Jump To Section ▼</button>
+            <div class="dropdown-content">
+                <a href="#pls-integration" class="pls">🏠 PLS Integration (Your Focus)</a>
+                <a href="#paisley-reso-engine" style="border-left: 4px solid #16a085; background: #e8f8f5;">🚀 Paisley RESO Engine</a>
+                <a href="#geniecloud-integration" class="geniecloud">☁️ GenieCloud Integration</a>
+                <a href="#contract-bridge" class="highlight">📋 Contract (Bridge Doc)</a>
+                <a href="#production-references">🌟 Production References</a>
+                <a href="#memory-logs" style="border-left: 4px solid #17a2b8; background: #f0ffff;">📝 Memory Logs (Session History)</a>
+                <a href="#billing-systems">💳 Billing Systems</a>
+                <a href="#credentials">🔑 Credentials</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <h1>TheGenie.ai Project Universe</h1>
+            <p class="subtitle">Master Dashboard for All Development Projects</p>
+            <p class="updated">Last Updated: December 30, 2025 | Version 4.4 - Added Paisley RESO Engine Section</p>
+        </div>
+        
+        <!-- GITHUB ALERT -->
+        <div class="github-alert">
+            <div>
+                <strong>⚠️ Before ending ANY session:</strong> Sync all files to GitHub → 
+                <code style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px;">github.com/1ppTheGenie/NOTION</code>
+            </div>
+            <a href="https://github.com/1ppTheGenie/NOTION" target="_blank">Open GitHub Repo</a>
+        </div>
+        
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <!-- TWIN PROJECTS: PLS INTEGRATION + GENIECLOUD INTEGRATION     -->
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        
+        <div class="twin-projects">
+            
+            <!-- PLS INTEGRATION PROJECT -->
+            <div id="pls-integration" class="project-section pls">
+                <h2>
+                    🏠 PLS Integration
+                    <span class="badge badge-inprogress">IN PROGRESS</span>
+                </h2>
+                
+                <!-- INSTRUCTIONS BOX -->
+                <div class="instructions-box">
+                    <h3>📋 Your Instructions & Expectations</h3>
+                    <ul>
+                        <li><strong>Goal:</strong> Build the XML Interface to create PLS listings from MLS/Attom data</li>
+                        <li><strong>Database:</strong> Store PLS listings in <code>MlsListing.dbo.Listing</code> with <code>MlsId=999</code></li>
+                        <li><strong>Status Codes:</strong> 5 = Coming Soon, 6 = Private Listing</li>
+                        <li><strong>Integration:</strong> Connect to Listing Command workflow (PropertyCastType=4)</li>
+                        <li><strong>Zero Hardcoding:</strong> All data must come from XML/database - NEVER hardcode values</li>
+                    </ul>
+                </div>
+                
+                <h4 style="margin: 20px 0 10px 0; color: #2980b9;">📁 Key Files</h4>
+                <table class="file-table">
+                    <thead>
+                        <tr>
+                            <th>File</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/PLS_MASTER_SPECIFICATION_v3.md">PLS_MASTER_SPECIFICATION_v3.md</a></td>
+                            <td>Complete PLS spec - database, roles, phases</td>
+                            <td><span class="status status-done">v3.0</span></td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://htmlpreview.github.io/?https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/PLS_WIREFRAMES_AND_SCHEMA_v1.html">PLS_WIREFRAMES_AND_SCHEMA_v1.html</a></td>
+                            <td>UI wireframes for XML interface</td>
+                            <td><span class="status status-done">v1.0</span></td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Data/MLS_List_Complete_v1.csv">MLS_List_Complete_v1.csv</a></td>
+                            <td>All 78 MLS with IDs (SABOR=68, PLS=999)</td>
+                            <td><span class="status status-done">Exported</span></td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Data/MlsListing_Listing_Schema_v1.csv">MlsListing_Listing_Schema_v1.csv</a></td>
+                            <td>Listing table schema (93 columns)</td>
+                            <td><span class="status status-done">Exported</span></td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Data/TitleData_AttomDataAssessor_Schema_v1.csv">TitleData_AttomDataAssessor_Schema_v1.csv</a></td>
+                            <td>Attom property data schema (318 columns)</td>
+                            <td><span class="status status-done">Exported</span></td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/XML/PLS_XML_Fields_10037_Rebecca_v1.csv">PLS_XML_Fields_10037_Rebecca_v1.csv</a></td>
+                            <td>Complete XML field mapping (83 fields)</td>
+                            <td><span class="status status-done">Exported</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h4 style="margin: 20px 0 10px 0; color: #2980b9;">🎯 Current Milestones</h4>
+                <table class="file-table">
+                    <thead>
+                        <tr>
+                            <th>Milestone</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1. Data Layer (stored procedures)</td>
+                            <td><span class="status status-pending">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td>2. XML Generator from MLS/Attom</td>
+                            <td><span class="status status-pending">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td>3. UI Interface (web form)</td>
+                            <td><span class="status status-pending">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td>4. Listing Command Integration</td>
+                            <td><span class="status status-pending">Pending</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="quick-links">
+                    <a href="https://cloud.thegenie.ai/genie-pages/pls-10037-rebecca-place/pls-hollywood/index.html" target="_blank">View Live MVP</a>
+                    <a href="https://github.com/1ppTheGenie/NOTION/tree/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs" class="secondary">Open Docs Folder</a>
+                </div>
+            </div>
+            
+            <!-- GENIECLOUD INTEGRATION PROJECT -->
+            <div id="geniecloud-integration" class="project-section geniecloud">
+                <h2>
+                    ☁️ GenieCloud Integration
+                    <span class="badge badge-inprogress">IN PROGRESS</span>
+                </h2>
+                
+                <!-- INSTRUCTIONS BOX -->
+                <div class="instructions-box">
+                    <h3>📋 Instructions & Expectations</h3>
+                    <ul>
+                        <li><strong>Goal:</strong> Build Collection Manager UI, CTA assets, and admin tools</li>
+                        <li><strong>Collection Editor:</strong> Existing tool at <code>genie-collection-editor/</code></li>
+                        <li><strong>Deployment:</strong> Fix vite output path conflict with genie-monitor</li>
+                        <li><strong>CTAs:</strong> Build modern mobile-first CTAs (Tom Ferry soft-touch)</li>
+                    </ul>
+                </div>
+                
+                <h4 style="margin: 20px 0 10px 0; color: #e67e22;">📁 Key Files</h4>
+                <table class="file-table">
+                    <thead>
+                        <tr>
+                            <th>File</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="https://github.com/1ppTheGenie/stage.geniecloud/tree/main/genie-collection-editor">genie-collection-editor/</a></td>
+                            <td>Existing Collection Editor (Solid.js)</td>
+                            <td><span class="status status-active">Exists</span></td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://github.com/1ppTheGenie/NOTION/tree/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/DocsCOLLECTION_MANAGER_ANALYSIS_v1.md">COLLECTION_MANAGER_ANALYSIS_v1.md</a></td>
+                            <td>Collection system deep dive</td>
+                            <td><span class="status status-done">v1.0</span></td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://htmlpreview.github.io/?https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/CUSTOMER_ASSET_CONFIGURATOR_SPEC_v1.html">CUSTOMER_ASSET_CONFIGURATOR_SPEC_v1.html</a></td>
+                            <td>Customer Configurator wireframe</td>
+                            <td><span class="status status-done">v1.0</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h4 style="margin: 20px 0 10px 0; color: #e67e22;">🎯 Current TODO</h4>
+                <table class="file-table">
+                    <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1. Fix genie-monitor vite output path</td>
+                            <td><span class="status status-pending">DevOps</span></td>
+                        </tr>
+                        <tr>
+                            <td>2. Rebuild collection-editor on prod</td>
+                            <td><span class="status status-pending">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td>3. Add admin route to Angular Dashboard</td>
+                            <td><span class="status status-pending">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td>4. Build CTA assets</td>
+                            <td><span class="status status-pending">Pending</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="quick-links">
+                    <a href="https://cloud.thegenie.ai/genie-collection/15a521b8-3fbf-4042-bce3-58e378cd9a52" target="_blank">View Reference Collection</a>
+                    <a href="https://github.com/1ppTheGenie/stage.geniecloud" target="_blank" class="secondary">View on GitHub</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <!-- PAISLEY RESO ENGINE                                           -->
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        
+        <div id="paisley-reso-engine" class="project-section" style="border-top: 5px solid #16a085;">
+            <h2>
+                🚀 Paisley RESO Engine - Powers TheGenie PLS
+                <span class="badge badge-inprogress">IN PROGRESS</span>
+            </h2>
+            <p style="margin-bottom: 15px; color: #666;">
+                <strong>The Paisley RESO Listing Engine</strong> is a private listing service for pre-MLS listings (Coming Soon/Private) 
+                that enables agents to market properties BEFORE they hit MLS, with a future "one-button push" to automatically publish 
+                listings to actual MLSs (Bridge and Trestle) without double entry.
+            </p>
+            
+            <!-- INSTRUCTIONS BOX -->
+            <div class="instructions-box">
+                <h3>📋 Vision & Architecture</h3>
+                <ul>
+                    <li><strong>Phase 1 (Current):</strong> PLS foundation - Create Coming Soon/Private listings, generate marketing assets via GenieCloud</li>
+                    <li><strong>Phase 2 (Future):</strong> RESO Insert - Push listings directly into Bridge and Trestle MLSs via standardized RESO Insert API</li>
+                    <li><strong>Data Layer:</strong> Database infrastructure (PlsListingOwnership, PlsNumberSequence, MlsId=999)</li>
+                    <li><strong>Function Layer:</strong> API endpoints (create, save, render, push-to-mls)</li>
+                    <li><strong>Interface Layer:</strong> UI components (forms, photo upload, agent selection)</li>
+                </ul>
+            </div>
+            
+            <h4 style="margin: 20px 0 10px 0; color: #16a085;">📁 Key Files</h4>
+            <table class="file-table">
+                <thead>
+                    <tr>
+                        <th>File</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/MLS_Parsers/PLS_RESO_ENGINE/WORKSPACE_MEMORY_LOG_PLS_RESO_Engine_2025-12-30_v1.md">WORKSPACE_MEMORY_LOG_PLS_RESO_Engine_2025-12-30_v1.md</a></td>
+                        <td>Complete PLS RESO Engine discovery & development log</td>
+                        <td><span class="status status-done">v1.0</span></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/MLS_Parsers/PLS_DATABASE_IMPLEMENTATION_SPEC_v1.md">PLS_DATABASE_IMPLEMENTATION_SPEC_v1.md</a></td>
+                        <td>Database structure, tables, stored procedures, SQL scripts</td>
+                        <td><span class="status status-done">v1.0</span></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/MLS_Parsers/PLS_UI_SPECIFICATION_v1.md">PLS_UI_SPECIFICATION_v1.md</a></td>
+                        <td>Complete UI blueprint (eRealtor format) - flows, screens, functions</td>
+                        <td><span class="status status-done">v1.0</span></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/MLS_Parsers/PLS_XML_GENERATION_SPEC_v1.md">PLS_XML_GENERATION_SPEC_v1.md</a></td>
+                        <td>XML mapping & generation code for GenieCloud</td>
+                        <td><span class="status status-done">v1.0</span></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/MLS_Parsers/PLS_FRIDAY_PROTOTYPE_ROADMAP_v1.md">PLS_FRIDAY_PROTOTYPE_ROADMAP_v1.md</a></td>
+                        <td>Implementation roadmap for Friday prototype</td>
+                        <td><span class="status status-done">v1.0</span></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/MLS_Parsers/RESO_INSERT_OPPORTUNITY_ANALYSIS_v1.md">RESO_INSERT_OPPORTUNITY_ANALYSIS_v1.md</a></td>
+                        <td>Strategic opportunity analysis for RESO Insert standardization</td>
+                        <td><span class="status status-done">v1.0</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4 style="margin: 20px 0 10px 0; color: #16a085;">🎯 Current Milestones</h4>
+            <table class="file-table">
+                <thead>
+                    <tr>
+                        <th>Milestone</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1. Database Infrastructure (specs complete)</td>
+                        <td><span class="status status-pending">Implementation Pending</span></td>
+                    </tr>
+                    <tr>
+                        <td>2. API Endpoints (specs complete)</td>
+                        <td><span class="status status-pending">Implementation Pending</span></td>
+                    </tr>
+                    <tr>
+                        <td>3. UI Components (specs complete)</td>
+                        <td><span class="status status-pending">Implementation Pending</span></td>
+                    </tr>
+                    <tr>
+                        <td>4. XML Generation (specs complete)</td>
+                        <td><span class="status status-pending">Implementation Pending</span></td>
+                    </tr>
+                    <tr>
+                        <td>5. GenieCloud Integration (contract exists)</td>
+                        <td><span class="status status-active">Ready</span></td>
+                    </tr>
+                    <tr>
+                        <td>6. RESO Insert (research complete)</td>
+                        <td><span class="status status-pending">Future Feature</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4 style="margin: 20px 0 10px 0; color: #16a085;">🔗 Integration Points</h4>
+            <ul style="margin-left: 20px; color: #555;">
+                <li><strong>TitleGenie:</strong> Property research, Attom/MLS data (pre-populate listing)</li>
+                <li><strong>Paisley AI:</strong> Pre-listing descriptions (ChatStartTypeId=3)</li>
+                <li><strong>GenieCloud:</strong> Asset rendering (landing pages, social ads, brochures)</li>
+                <li><strong>Listing Command:</strong> Circle prospecting automation (PropertyCastTypeId=4)</li>
+                <li><strong>Engagement Center:</strong> Lead capture, UTM tracking, data append</li>
+                <li><strong>[Future] Bridge/Trestle:</strong> RESO Insert for push-to-MLS functionality</li>
+            </ul>
+            
+            <div class="quick-links">
+                <a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/CONTRACT_PLS_to_GenieCloud_v5.md#pls-reso-engine---infrastructure--database" target="_blank">View Contract Section</a>
+                <a href="https://github.com/1ppTheGenie/NOTION/tree/main/TheGenie.ai/Development/MLS_Parsers/PLS_RESO_ENGINE" target="_blank" class="secondary">Open PLS RESO Engine Folder</a>
+            </div>
+        </div>
+        
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <!-- CONTRACT - THE BRIDGE DOCUMENT                               -->
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        
+        <div id="contract-bridge" class="project-section contract">
+            <h2>
+                📋 CONTRACT: PLS ↔ GenieCloud Data Handshake
+                <span class="badge badge-active">v5.0</span>
+            </h2>
+            <p style="margin-bottom: 15px; color: #666;">
+                <strong>This is the BRIDGE DOCUMENT</strong> that connects PLS Integration and GenieCloud Integration. 
+                Both teams must agree on changes to this contract.
+            </p>
+            
+            <table class="file-table">
+                <thead>
+                    <tr>
+                        <th>Document</th>
+                        <th>Location</th>
+                        <th>Version</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #f9f4fc;">
+                        <td><strong><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/CONTRACT_PLS_to_GenieCloud_v5.md" target="_blank">CONTRACT_PLS_to_GenieCloud_v5.md</a></strong></td>
+                        <td>GitHub</td>
+                        <td><span class="status status-done">v5.0</span></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/CONTRACT_PLS_to_GenieCloud_v5.md" target="_blank">CONTRACT_PLS_to_GenieCloud_v5.md</a></td>
+                        <td>GitHub (shared)</td>
+                        <td><span class="status status-done">v5.0</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4 style="margin: 20px 0 10px 0; color: #8e44ad;">What's In The Contract:</h4>
+            <ul style="margin-left: 20px; color: #555;">
+                <li>XML data structure that PLS must provide</li>
+                <li>Fields that GenieCloud expects to render assets</li>
+                <li>Status codes (1=Active, 2=Sold, 5=Coming Soon, 6=Private)</li>
+                <li>API endpoints for triggering renders</li>
+                <li>Theme + Hue guidance</li>
+                <li>Collection System architecture</li>
+                <li>CTA System documentation</li>
+            </ul>
+        </div>
+        
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <!-- PRODUCTION REFERENCES                                        -->
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        
+        <div class="section-divider">
+            <span>REFERENCE MATERIALS</span>
+        </div>
+        
+        <div id="production-references" class="project-section" style="border-top: 5px solid #27ae60;">
+            <h2>
+                🌟 Production References
+                <span class="badge badge-active">LIVE</span>
+            </h2>
+            <p style="margin-bottom: 15px; color: #666;">Working examples to use as reference for all development.</p>
+            
+            <table class="file-table">
+                <thead>
+                    <tr>
+                        <th>Reference</th>
+                        <th>URL</th>
+                        <th>Use For</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>10037 Rebecca Place MVP</strong></td>
+                        <td><a href="https://cloud.thegenie.ai/genie-pages/pls-10037-rebecca-place/pls-hollywood/index.html" target="_blank">View Live Page</a></td>
+                        <td>PLS Hollywood landing page</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dainelle Scott Collection</strong></td>
+                        <td><a href="https://cloud.thegenie.ai/genie-collection/15a521b8-3fbf-4042-bce3-58e378cd9a52" target="_blank">View Collection</a></td>
+                        <td>Asset rendering reference (THE GOLD STANDARD)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <!-- WORKSPACE MEMORY LOGS                                        -->
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        
+        <div id="memory-logs" class="project-section" style="border-top: 5px solid #17a2b8;">
+            <h2>
+                📝 Workspace Memory Logs
+                <span class="badge" style="background: #17a2b8; color: white;">SESSION HISTORY</span>
+            </h2>
+            <p style="margin-bottom: 20px; color: #666;">
+                Complete session history documenting discoveries, decisions, and progress. 
+                <a href="https://github.com/1ppTheGenie/NOTION/tree/main/TheGenie.ai/MemoryLogs" target="_blank" style="color: #17a2b8;">View All on GitHub →</a>
+            </p>
+            
+            <!-- PLS & PAISLEY LOGS -->
+            <h4 style="margin: 15px 0 10px 0; color: #3498db;">🏠 PLS & Paisley Sessions</h4>
+            <table class="file-table">
+                <thead>
+                    <tr>
+                        <th>Session</th>
+                        <th>Date</th>
+                        <th>Key Topics</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/PLS_Workspace_Memory_Log_12-28-2025_v1.md" target="_blank">PLS Integration Session</a></td>
+                        <td>12/28/2025</td>
+                        <td>Dashboard reorganization, Data exports, XML schema</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/PLS_Hollywood_Workspace_Memory_Log_v1.md" target="_blank">PLS Hollywood Template</a></td>
+                        <td>12/25/2025</td>
+                        <td>Hollywood template, Theme system, Apple Black</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/MemoryLogs/WORKSPACE_MEMORY_LOG_TitleGenie_Paisley_Discovery_Session_2025-12-19_v2.md" target="_blank">Title Genie + Paisley Discovery v2</a></td>
+                        <td>12/19/2025</td>
+                        <td>System architecture, Data flow, Integration points</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/MemoryLogs/WORKSPACE_MEMORY_LOG_TitleGenie_Paisley_Discovery_2025-12-18_v1.md" target="_blank">Title Genie + Paisley Discovery v1</a></td>
+                        <td>12/18/2025</td>
+                        <td>Initial discovery, Database schemas</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/MemoryLogs/WORKSPACE_MEMORY_LOG_TitleGenie_Paisley_Study_Session_2025-12-17.md" target="_blank">Title Genie Study Session</a></td>
+                        <td>12/17/2025</td>
+                        <td>Deep dive into Title Genie functionality</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- VERSIUM & DATA LOGS -->
+            <h4 style="margin: 25px 0 10px 0; color: #9b59b6;">🔗 Versium & Data Migration</h4>
+            <table class="file-table">
+                <thead>
+                    <tr>
+                        <th>Session</th>
+                        <th>Date</th>
+                        <th>Key Topics</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/MemoryLogs/WORKSPACE_MEMORY_LOG_Versium_DataFlow_Investigation_Session_2025-12-17.md" target="_blank">Versium DataFlow Investigation</a></td>
+                        <td>12/17/2025</td>
+                        <td>Data flow analysis, Cache structure</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/MemoryLogs/WORKSPACE_MEMORY_LOG_Versium_Fallbrook_Analysis_AnkitFindings_Session_2025-12-17.md" target="_blank">Versium Fallbrook Analysis</a></td>
+                        <td>12/17/2025</td>
+                        <td>Ankit's findings, Fallbrook case study</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/MemoryLogs/WORKSPACE_MEMORY_LOG_VersiumAttom_Cache_Migration_Session_2025-12-16.md" target="_blank">Versium/Attom Cache Migration</a></td>
+                        <td>12/16/2025</td>
+                        <td>Migration from First American to Attom</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/MemoryLogs/WORKSPACE_MEMORY_LOG_Versium_ExecutiveSummary_Documentation_Session_2025-12-16.md" target="_blank">Versium Executive Summary</a></td>
+                        <td>12/16/2025</td>
+                        <td>Executive documentation, Credit savings</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- BILLING & SYSTEMS LOGS -->
+            <h4 style="margin: 25px 0 10px 0; color: #e74c3c;">💳 Billing & Systems</h4>
+            <table class="file-table">
+                <thead>
+                    <tr>
+                        <th>Session</th>
+                        <th>Date</th>
+                        <th>Key Topics</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/MemoryLogs/WORKSPACE_MEMORY_LOG_AutomatedDisputeDefense_SystemIntegration_Session_2025-12-20_v1.md" target="_blank">Automated Dispute Defense</a></td>
+                        <td>12/20/2025</td>
+                        <td>Chargeback system, WHMCS integration</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/MemoryLogs/WORKSPACE_MEMORY_LOG_DocumentationSystem_MasterRules_Established_Session_2025-12-16.md" target="_blank">Documentation System & Master Rules</a></td>
+                        <td>12/16/2025</td>
+                        <td>Master rules established, Versioning</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- LEADS & ENGAGEMENT LOGS -->
+            <h4 style="margin: 25px 0 10px 0; color: #27ae60;">📊 Leads & Engagement</h4>
+            <table class="file-table">
+                <thead>
+                    <tr>
+                        <th>Session</th>
+                        <th>Date</th>
+                        <th>Key Topics</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/MemoryLogs/WORKSPACE_MEMORY_LOG_AreaOwnership_LeadCustody_Session_2025-12-15.md" target="_blank">Area Ownership & Lead Custody</a></td>
+                        <td>12/15/2025</td>
+                        <td>Lead routing, Area assignments</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/MemoryLogs/WORKSPACE_MEMORY_LOG_LeadToListing_Analysis_2025-12-15.md" target="_blank">Lead to Listing Analysis</a></td>
+                        <td>12/15/2025</td>
+                        <td>Conversion flow, Pipeline stages</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/MemoryLogs/WORKSPACE_MEMORY_LOG_NurtureEngine_Discovery_2025-12-15.md" target="_blank">Nurture Engine Discovery</a></td>
+                        <td>12/15/2025</td>
+                        <td>Nurture workflows, Automation</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/MemoryLogs/WORKSPACE_MEMORY_LOG_CCReports_Session_2025-12-15.md" target="_blank">Competition Command Reports</a></td>
+                        <td>12/15/2025</td>
+                        <td>CC reporting, Analytics</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- COMPETITION COMMAND LOGS -->
+            <h4 style="margin: 25px 0 10px 0; color: #f39c12;">🏆 Competition Command</h4>
+            <table class="file-table">
+                <thead>
+                    <tr>
+                        <th>Session</th>
+                        <th>Version</th>
+                        <th>Key Topics</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/CompetitionCommand/MemoryLogs/WORKSPACE_MEMORY_MASTER_v10.md" target="_blank">Competition Command Master</a></td>
+                        <td>v10</td>
+                        <td>Complete CC enhancement history</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/CompetitionCommand/MemoryLogs/WORKSPACE_MEMORY_LOG_CompetitionCommand_Enhancement_v4.md" target="_blank">Enhancement Session v4</a></td>
+                        <td>v4</td>
+                        <td>Latest enhancement iteration</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <!-- BILLING SYSTEMS                                              -->
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        
+        <div id="billing-systems" class="project-section billing">
+            <h2>
+                💳 Billing Systems
+                <span class="badge badge-active">COMPLETE</span>
+            </h2>
+            <p style="margin-bottom: 15px; color: #666;">Chargeback Defense System - automated dispute response generation.</p>
+            
+            <div class="quick-links">
+                <a href="https://github.com/1ppTheGenie/NOTION/tree/main/TheGenie.ai/Development/BillingSystems" target="_blank" class="secondary">View on GitHub</a>
+            </div>
+        </div>
+        
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <!-- CREDENTIALS                                                  -->
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        
+        <div id="credentials" class="project-section" style="border-top: 5px solid #7f8c8d;">
+            <h2>🔑 Credentials & Access</h2>
+            <table class="file-table">
+                <thead>
+                    <tr>
+                        <th>Resource</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Master Credential Tracker</strong></td>
+                        <td><em>Available to team members with G: Drive access</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Database</strong></td>
+                        <td><code>192.168.29.45,1433</code> | User: cursor | Pass: 1ppINSAyay$</td>
+                    </tr>
+                    <tr>
+                        <td><strong>GitHub Repo</strong></td>
+                        <td><a href="https://github.com/1ppTheGenie/NOTION" target="_blank">github.com/1ppTheGenie/NOTION</a> (Private)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- FOOTER -->
+        <div class="footer">
+            <p>TheGenie.ai Project Universe Dashboard v4.4 (Added Paisley RESO Engine Section)</p>
+            <p>Created: December 25, 2025 | Last Updated: December 30, 2025</p>
+            <p>Location: D:\Cursor\TheGenie.ai\Development\PROJECT_UNIVERSE_DASHBOARD_v2.html</p>
+        </div>
+    </div>
+</body>
+</html>
+
