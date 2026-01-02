@@ -1,7 +1,7 @@
 # Global Master Rules for TheGenie.ai
-**Version:** 1.0  
-**Created:** 12/31/2025  
-**Last Updated:** 12/31/2025  
+**Version:** 1.1  
+**Created:** 12/31/2025 4:46 PM  
+**Last Updated:** 12/31/2025 4:50 PM  
 **Author:** Cursor AI Agent  
 **Status:** ✅ ACTIVE - These rules apply to ALL projects
 
@@ -82,36 +82,51 @@ Every document must include standard header and changelog
 ```markdown
 # Document Title
 **Version:** X.Y  
-**Created:** MM/DD/YYYY  
-**Last Updated:** MM/DD/YYYY  
+**Created:** MM/DD/YYYY HH:MM AM/PM  
+**Last Updated:** MM/DD/YYYY HH:MM AM/PM  
 **Author:** [Name]  
 **Status:** [Active/Draft/Archived]
 ```
+
+**⚠️ CRITICAL: Include TIME (not just date) in all timestamps.**
+- **Why:** Multiple files created same day need differentiation
+- **Especially important:** Code files (they don't use version naming in filename)
+- **Applies to:** Documents, SOPs, prompts, specs, code files, ALL files
 
 ### Required Footer
 ```markdown
 ## 🔄 CHANGE LOG
 
-| Version | Date | Changes |
-|:-------:|------|---------|
-| X.Y | MM/DD/YYYY | What changed |
+| Version | Date/Time | Changes |
+|:-------:|-----------|---------|
+| X.Y | MM/DD/YYYY HH:MM AM/PM | What changed |
 ```
 
 ---
 
-## 📋 RULE 5: DATE FORMAT
+## 📋 RULE 5: DATE/TIME FORMAT
 
 ### Rule Statement
-Master date format: **MM/DD/YYYY**
+Master date/time format: **MM/DD/YYYY HH:MM AM/PM**
 
 ### Details
-- Use consistently in all documents
-- Applies to: headers, change logs, content, Notion entries
+- **ALWAYS include TIME** in timestamps (not just date)
+- Use consistently in ALL files: documents, SOPs, prompts, specs, code files
+- **Critical for code files** - they don't use version naming, so time is the only differentiator
+- Applies to: headers, change logs, file comments, Notion entries
 - No exceptions
 
-### Example
-- ❌ Wrong: 2025-12-31, 31/12/2025, Dec 31 2025
-- ✅ Correct: 12/31/2025
+### Examples
+- ❌ Wrong: 12/31/2025, 2025-12-31, Dec 31 2025
+- ✅ Correct: 12/31/2025 4:43 PM
+- ✅ Correct: 12/31/2025 10:15 AM
+
+### Code File Example
+```csharp
+// Created: 12/31/2025 2:30 PM
+// Last Updated: 12/31/2025 4:45 PM
+// Author: Cursor AI Agent
+```
 
 ---
 
@@ -234,9 +249,10 @@ Project-specific rules extend (but don't override) these global rules:
 
 ## 🔄 CHANGE LOG
 
-| Version | Date | Changes |
-|:-------:|------|---------|
-| 1.0 | 12/31/2025 | Initial global rules - consolidated from Paisley rules, user rules, and established patterns. 10 core rules + data quality section. |
+| Version | Date/Time | Changes |
+|:-------:|-----------|---------|
+| 1.1 | 12/31/2025 4:50 PM | Updated Rule 4 & 5: Added TIME requirement to all timestamps. Critical for code files and same-day file differentiation. |
+| 1.0 | 12/31/2025 4:46 PM | Initial global rules - consolidated from Paisley rules, user rules, and established patterns. 10 core rules + data quality section. |
 
 ---
 
