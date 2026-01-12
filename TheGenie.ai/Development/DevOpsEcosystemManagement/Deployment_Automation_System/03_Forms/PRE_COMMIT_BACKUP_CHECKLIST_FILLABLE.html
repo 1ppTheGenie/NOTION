@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-Commit Backup Checklist</title>
+    <style>
+        @media print {
+            .no-print { display: none; }
+            body { margin: 0; padding: 20px; }
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #dc3545;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #95a5a6;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        .mandatory {
+            background-color: #f8d7da;
+            border: 2px solid #dc3545;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        input[type="text"], input[type="date"], input[type="time"], textarea, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .checkbox-group {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #dc3545;
+        }
+        .checkbox-item {
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+        .checkbox-item label {
+            flex: 1;
+            margin-left: 10px;
+        }
+        .section {
+            margin: 25px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        .button {
+            background-color: #dc3545;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        .button:hover {
+            background-color: #c82333;
+        }
+        .button-print {
+            background-color: #27ae60;
+        }
+        .button-print:hover {
+            background-color: #229954;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        table td:first-child {
+            font-weight: bold;
+            background-color: #f8f9fa;
+            width: 30%;
+        }
+    </style>
+</head>
+<body>
+    <div class="no-print" style="text-align: center; margin-bottom: 20px;">
+        <button class="button button-print" onclick="window.print()">🖨️ Print to PDF</button>
+        <button class="button" onclick="clearForm()">🗑️ Clear Form</button>
+    </div>
+
+    <h1>Pre-Commit Backup Checklist</h1>
+    <p><strong>Version:</strong> 1.0 | <strong>Created:</strong> 01/13/2026 | <strong>Status:</strong> ✅ MANDATORY</p>
+    
+    <div class="mandatory">
+        <strong>⚠️ CRITICAL RULE - NO EXCEPTIONS:</strong><br>
+        Create a complete backup of the sandbox <strong>BEFORE</strong> checking in any code changes via Visual Studio.
+    </div>
+
+    <div class="section">
+        <h2>📋 BACKUP INFORMATION</h2>
+        <table>
+            <tr>
+                <td>Backup Date:</td>
+                <td><input type="date" id="backup-date"></td>
+            </tr>
+            <tr>
+                <td>Backup Time:</td>
+                <td><input type="time" id="backup-time"></td>
+            </tr>
+            <tr>
+                <td>Backup Location:</td>
+                <td><input type="text" id="backup-location" placeholder="D:\Cursor\TheGenie.ai\Development\DevOpsEcosystemManagement\Monitoring\Server Troubleshooting\Danny\Backups\PreCommit_Backup_YYYYMMDD_HHMMSS"></td>
+            </tr>
+            <tr>
+                <td>Backup Name:</td>
+                <td><input type="text" id="backup-name" placeholder="PreCommit_Backup_YYYYMMDD_HHMMSS"></td>
+            </tr>
+            <tr>
+                <td>Sandbox Source Path:</td>
+                <td><input type="text" id="sandbox-path" value="C:\Sandbox\1ppDevelopment\Application\Web\Smart.Web.FarmGenie\Smart.Dashboard" readonly style="background-color: #f0f0f0;"></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>✅ BACKUP VERIFICATION CHECKLIST</h2>
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="backup-script-executed">
+                <label for="backup-script-executed">Pre-commit backup script executed</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="backup-directory-exists">
+                <label for="backup-directory-exists">Backup directory created</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="backup-file-count">
+                <label for="backup-file-count">File count matches sandbox (4,000+ files)</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="backup-size">
+                <label for="backup-size">Backup size > 100 MB</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="backup-location-verified">
+                <label for="backup-location-verified">Backup location verified and accessible</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="backup-documented">
+                <label for="backup-documented">Backup location documented in this form</label>
+            </div>
+        </div>
+        
+        <p><strong>File Count:</strong> <input type="number" id="file-count" placeholder="COUNT" style="width: 150px;"></p>
+        <p><strong>Backup Size:</strong> <input type="text" id="backup-size-value" placeholder="SIZE MB" style="width: 150px;"></p>
+    </div>
+
+    <div class="section">
+        <h2>📝 BACKUP SCRIPT EXECUTION</h2>
+        <p><strong>Script Location:</strong> <code>D:\Cursor\TheGenie.ai\Development\DevOpsEcosystemManagement\Monitoring\Server Troubleshooting\Danny\PRE_COMMIT_BACKUP_v1.ps1</code></p>
+        <p><strong>Script Executed:</strong> 
+            <select id="script-executed" style="width: 100px;">
+                <option value="">Select</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+            </select>
+        </p>
+        <p><strong>Execution Date:</strong> <input type="date" id="execution-date" style="width: 200px;"> <strong>Time:</strong> <input type="time" id="execution-time" style="width: 150px;"></p>
+        <p><strong>Execution Result:</strong> 
+            <select id="execution-result" style="width: 150px;">
+                <option value="">Select</option>
+                <option value="SUCCESS">SUCCESS</option>
+                <option value="FAILED">FAILED</option>
+            </select>
+        </p>
+        <p><strong>Execution Notes:</strong></p>
+        <textarea id="execution-notes" placeholder="Any notes about script execution"></textarea>
+    </div>
+
+    <div class="section">
+        <h2>🚨 STOP CONDITIONS</h2>
+        <div class="mandatory">
+            <strong>DO NOT CHECK IN CODE IF:</strong>
+            <ul>
+                <li>❌ Backup failed</li>
+                <li>❌ Backup location not verified</li>
+                <li>❌ Backup file count is 0</li>
+                <li>❌ Backup size is suspiciously small (< 100 MB)</li>
+            </ul>
+        </div>
+        <p><strong>All Stop Conditions Cleared:</strong> 
+            <select id="stop-conditions-cleared" style="width: 100px;">
+                <option value="">Select</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+            </select>
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>✅ FINAL VERIFICATION</h2>
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="all-checks-passed">
+                <label for="all-checks-passed">All verification checks passed</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="backup-ready">
+                <label for="backup-ready">Backup ready for rollback if needed</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="safe-to-checkin">
+                <label for="safe-to-checkin">Safe to proceed with code check-in</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>👤 VERIFICATION SIGN-OFF</h2>
+        <p><strong>Verified By:</strong> <input type="text" id="verified-by" placeholder="User/Agent Name" style="width: 300px;"> <strong>Date:</strong> <input type="date" id="verified-date" style="width: 200px;"> <strong>Time:</strong> <input type="time" id="verified-time" style="width: 150px;"></p>
+        <p><strong>Verification Status:</strong> 
+            <select id="verification-status" style="width: 150px;">
+                <option value="">Select</option>
+                <option value="PASSED">PASSED</option>
+                <option value="FAILED">FAILED</option>
+            </select>
+        </p>
+    </div>
+
+    <script>
+        function clearForm() {
+            if (confirm('Are you sure you want to clear all form fields?')) {
+                document.querySelectorAll('input[type="text"], input[type="date"], input[type="time"], input[type="number"], textarea, select').forEach(function(element) {
+                    if (element.type === 'checkbox') {
+                        element.checked = false;
+                    } else {
+                        element.value = '';
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

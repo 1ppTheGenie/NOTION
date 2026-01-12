@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-In Log (CIL) - Code Check-In Quality Control Form</title>
+    <style>
+        @media print {
+            .no-print { display: none; }
+            body { margin: 0; padding: 20px; }
+            .page-break { page-break-after: always; }
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #95a5a6;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #555;
+            margin-top: 20px;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .mandatory {
+            background-color: #f8d7da;
+            border: 2px solid #dc3545;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        table td:first-child {
+            font-weight: bold;
+            background-color: #f8f9fa;
+            width: 30%;
+        }
+        input[type="text"], input[type="date"], input[type="time"], textarea, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        textarea {
+            min-height: 60px;
+            resize: vertical;
+        }
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .checkbox-group {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+        }
+        .checkbox-item {
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+        .checkbox-item label {
+            flex: 1;
+            margin-left: 10px;
+        }
+        .section {
+            margin: 25px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        .code-block {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            margin: 10px 0;
+        }
+        .button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        .button:hover {
+            background-color: #2980b9;
+        }
+        .button-print {
+            background-color: #27ae60;
+        }
+        .button-print:hover {
+            background-color: #229954;
+        }
+        .file-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            background-color: #f0f8ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="no-print" style="text-align: center; margin-bottom: 20px;">
+        <button class="button button-print" onclick="window.print()">🖨️ Print to PDF</button>
+        <button class="button" onclick="clearForm()">🗑️ Clear Form</button>
+    </div>
+
+    <h1>Check-In Log (CIL)<br>Code Check-In Quality Control Form</h1>
+    
+    <div class="warning">
+        <strong>⚠️ NAMING CONVENTION:</strong><br>
+        File Name Format: <code>CIL_[FeatureName]_[YYYYMMDD]_v1.md</code><br>
+        Example: <code>CIL_WorkflowActionProcessorFix_20260112_v1.md</code>
+    </div>
+
+    <div class="mandatory">
+        <strong>❌ MANDATORY REQUIREMENT:</strong><br>
+        THIS FORM MUST BE COMPLETED BEFORE ANY CODE CHECK-IN<br>
+        NO CHECK-IN without this form completed<br>
+        NO CHECK-IN without all checkboxes verified<br>
+        NO CHECK-IN without deployment specialist review and approval
+    </div>
+
+    <div class="section">
+        <h2>📋 CHECK-IN INFORMATION</h2>
+        <table>
+            <tr>
+                <td>Check-In Number</td>
+                <td><input type="text" placeholder="Will be assigned after check-in - Changeset #"></td>
+            </tr>
+            <tr>
+                <td>Check-In Date</td>
+                <td><input type="date"></td>
+            </tr>
+            <tr>
+                <td>Check-In Time</td>
+                <td><input type="time"></td>
+            </tr>
+            <tr>
+                <td>Agent Name</td>
+                <td><input type="text" placeholder="Agent Name"></td>
+            </tr>
+            <tr>
+                <td>Fix/Feature Name</td>
+                <td><input type="text" placeholder="Brief description"></td>
+            </tr>
+            <tr>
+                <td>Priority</td>
+                <td>
+                    <select>
+                        <option value="">Select Priority</option>
+                        <option value="Critical">Critical</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Deployment Target</td>
+                <td><input type="text" placeholder="Sandbox → Stage → Production"></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>🔍 PRE-CHECK-IN QC (MANDATORY)</h2>
+        <p><strong>This section must be completed BEFORE checking in code.</strong></p>
+        
+        <h3>Build ID & Quality Control</h3>
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="build-id">
+                <label for="build-id">Build ID: <input type="text" placeholder="e.g., 20260112.1" style="width: 200px; display: inline-block;"></label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="build-status">
+                <label for="build-status">Build Status: 
+                    <select style="width: 150px; display: inline-block;">
+                        <option value="">Select Status</option>
+                        <option value="SUCCESS">SUCCESS</option>
+                        <option value="FAILED">FAILED</option>
+                    </select>
+                </label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="build-date">
+                <label for="build-date">Build Date: <input type="date" style="width: 200px; display: inline-block;"></label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="build-time">
+                <label for="build-time">Build Time: <input type="time" style="width: 150px; display: inline-block;"></label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="build-config">
+                <label for="build-config">Build Configuration: <strong>Release</strong> (must be Release, not Debug)</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="build-output">
+                <label for="build-output">Build Output Verified: 
+                    <select style="width: 100px; display: inline-block;">
+                        <option value="">Select</option>
+                        <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                    </select>
+                </label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="dll-timestamp">
+                <label for="dll-timestamp">DLL Timestamp Verified: 
+                    <select style="width: 100px; display: inline-block;">
+                        <option value="">Select</option>
+                        <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                    </select>
+                </label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="no-errors">
+                <label for="no-errors">No Compilation Errors: 
+                    <select style="width: 100px; display: inline-block;">
+                        <option value="">Select</option>
+                        <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                    </select>
+                </label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="no-warnings">
+                <label for="no-warnings">No Compilation Warnings (or documented): 
+                    <select style="width: 100px; display: inline-block;">
+                        <option value="">Select</option>
+                        <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+        
+        <p><strong>Build Output Location:</strong> <input type="text" placeholder="Full path to bin folder" style="width: 100%;"></p>
+        <p><strong>Build Verified By:</strong> <input type="text" placeholder="Agent Name" style="width: 300px;"></p>
+        <p><strong>Build Verified Date:</strong> <input type="date" style="width: 200px;"> <strong>Time:</strong> <input type="time" style="width: 150px;"></p>
+    </div>
+
+    <div class="section">
+        <h2>✅ PRE-COMMIT VALIDATION CHECKLIST (MANDATORY)</h2>
+        <p><strong>ALL items must be checked ✅ before proceeding to check-in.</strong></p>
+
+        <h3>1. Code Compilation ✅</h3>
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="compile-success">
+                <label for="compile-success">Code compiles successfully (no errors)</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="build-release">
+                <label for="build-release">Build configuration: <strong>Release</strong> mode</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="no-warnings-compile">
+                <label for="no-warnings-compile">No compilation warnings (or warnings are acceptable and documented)</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="files-present">
+                <label for="files-present">All referenced files present</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="build-timestamp">
+                <label for="build-timestamp">Build timestamp: <input type="date" style="width: 200px; display: inline-block;"> <input type="time" style="width: 150px; display: inline-block;"></label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="build-output-loc">
+                <label for="build-output-loc">Build output location: <input type="text" placeholder="PATH" style="width: 400px; display: inline-block;"></label>
+            </div>
+        </div>
+        <p><strong>Verification Method:</strong> <input type="text" placeholder="e.g., Visual Studio Rebuild Solution in Release mode" style="width: 100%;"></p>
+        <p><strong>Verified By:</strong> <input type="text" placeholder="Agent Name" style="width: 300px;"> <strong>Date:</strong> <input type="date" style="width: 200px;"> <strong>Time:</strong> <input type="time" style="width: 150px;"></p>
+
+        <h3>2. Logic Verification ✅</h3>
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="logic-verified">
+                <label for="logic-verified">Code logic verified (fix works as intended)</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="edge-cases">
+                <label for="edge-cases">Edge cases tested</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="error-handling">
+                <label for="error-handling">Error handling verified</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="no-breaking">
+                <label for="no-breaking">No breaking changes introduced</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="test-results">
+                <label for="test-results">Test results documented: 
+                    <select style="width: 100px; display: inline-block;">
+                        <option value="">Select</option>
+                        <option value="PASS">PASS</option>
+                        <option value="FAIL">FAIL</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+        <p><strong>Test Cases Executed:</strong></p>
+        <p>1. <input type="text" placeholder="Test case 1" style="width: 400px;"> Result: 
+            <select style="width: 100px;">
+                <option value="">Select</option>
+                <option value="PASS">PASS</option>
+                <option value="FAIL">FAIL</option>
+            </select>
+        </p>
+        <p>2. <input type="text" placeholder="Test case 2" style="width: 400px;"> Result: 
+            <select style="width: 100px;">
+                <option value="">Select</option>
+                <option value="PASS">PASS</option>
+                <option value="FAIL">FAIL</option>
+            </select>
+        </p>
+        <p>3. <input type="text" placeholder="Test case 3" style="width: 400px;"> Result: 
+            <select style="width: 100px;">
+                <option value="">Select</option>
+                <option value="PASS">PASS</option>
+                <option value="FAIL">FAIL</option>
+            </select>
+        </p>
+        <p><strong>Verified By:</strong> <input type="text" placeholder="Agent Name" style="width: 300px;"> <strong>Date:</strong> <input type="date" style="width: 200px;"> <strong>Time:</strong> <input type="time" style="width: 150px;"></p>
+
+        <h3>3. Code Integrity ✅</h3>
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="fix-present">
+                <label for="fix-present">Fix present in file (code changes are correct)</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="comments-doc">
+                <label for="comments-doc">Comments documented (what changed and why)</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="structure-intact">
+                <label for="structure-intact">Code structure intact (no accidental deletions)</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="no-debug">
+                <label for="no-debug">No debug code left in (console.log, Debug.WriteLine, etc.)</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="best-practices">
+                <label for="best-practices">Code reviewed for best practices</label>
+            </div>
+        </div>
+        <p><strong>Files Modified Count:</strong> <input type="number" placeholder="NUMBER" style="width: 100px;"></p>
+        <p><strong>Verified By:</strong> <input type="text" placeholder="Agent Name" style="width: 300px;"> <strong>Date:</strong> <input type="date" style="width: 200px;"> <strong>Time:</strong> <input type="time" style="width: 150px;"></p>
+    </div>
+
+    <div class="section">
+        <h2>📄 FILE-BY-FILE DETAIL (MANDATORY)</h2>
+        <p><strong>For EACH file modified, complete the following section.</strong></p>
+
+        <div class="file-section">
+            <h3>File 1</h3>
+            <p><strong>File Name:</strong> <input type="text" placeholder="File1.cs" style="width: 400px;"></p>
+            <p><strong>File Path:</strong> <input type="text" placeholder="Full path to file" style="width: 100%;"></p>
+            <p><strong>Lines Modified:</strong> <input type="text" placeholder="X-Y or Multiple ranges" style="width: 300px;"></p>
+            <p><strong>Change Type:</strong> 
+                <select style="width: 300px;">
+                    <option value="">Select Type</option>
+                    <option value="Bug Fix">Bug Fix</option>
+                    <option value="Feature">Feature</option>
+                    <option value="Refactor">Refactor</option>
+                    <option value="Configuration">Configuration</option>
+                </select>
+            </p>
+            <p><strong>What Changed:</strong></p>
+            <textarea placeholder="Detailed description of what changed in this specific file"></textarea>
+            <p><strong>Why This File Changed:</strong></p>
+            <textarea placeholder="Why this specific file needed to be modified for this fix"></textarea>
+            <p><strong>Code Changes (OLD CODE):</strong></p>
+            <textarea class="code-block" placeholder="Show old code"></textarea>
+            <p><strong>Code Changes (NEW CODE):</strong></p>
+            <textarea class="code-block" placeholder="Show new code"></textarea>
+            
+            <h4>Testing Specific to This File:</h4>
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="file1-unit-tests">
+                    <label for="file1-unit-tests">Unit tests updated/created for this file</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="file1-logic">
+                    <label for="file1-logic">Logic verified for this file's changes</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="file1-edge">
+                    <label for="file1-edge">Edge cases tested for this file</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="file1-integration">
+                    <label for="file1-integration">Integration with other files tested</label>
+                </div>
+            </div>
+            
+            <h4>Impact of This File's Changes:</h4>
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="file1-no-breaking">
+                    <label for="file1-no-breaking">No breaking changes</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="file1-dependencies">
+                    <label for="file1-dependencies">Dependencies verified</label>
+                </div>
+            </div>
+            <p><strong>Other files affected:</strong> <input type="text" placeholder="List or NONE" style="width: 100%;"></p>
+            <p><strong>Verified By:</strong> <input type="text" placeholder="Agent Name" style="width: 300px;"> <strong>Date:</strong> <input type="date" style="width: 200px;"> <strong>Time:</strong> <input type="time" style="width: 150px;"></p>
+        </div>
+
+        <p><strong>Total Files Modified:</strong> <input type="number" placeholder="COUNT" style="width: 100px;"></p>
+        <p><strong>All Files Accounted For:</strong> 
+            <select style="width: 100px;">
+                <option value="">Select</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+            </select>
+        </p>
+    </div>
+
+    <div class="section">
+        <h3>4. Impact Analysis ✅</h3>
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="only-intended">
+                <label for="only-intended">Only intended files modified</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="no-breaking-other">
+                <label for="no-breaking-other">No breaking changes to other components</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="low-regression">
+                <label for="low-regression">Low regression risk</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="dependencies-verified">
+                <label for="dependencies-verified">Dependencies verified (no missing references)</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="db-impact">
+                <label for="db-impact">Database impact assessed (if applicable)</label>
+            </div>
+        </div>
+        <p><strong>Files Modified:</strong> <input type="number" placeholder="COUNT" style="width: 100px;"></p>
+        <p><strong>Breaking Changes:</strong> 
+            <select style="width: 100px;">
+                <option value="">Select</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+            </select>
+            <strong>Details:</strong> <input type="text" placeholder="If yes, explain" style="width: 500px;">
+        </p>
+        <p><strong>Regression Risk:</strong> 
+            <select style="width: 150px;">
+                <option value="">Select</option>
+                <option value="LOW">LOW</option>
+                <option value="MEDIUM">MEDIUM</option>
+                <option value="HIGH">HIGH</option>
+            </select>
+            <strong>Rationale:</strong> <input type="text" placeholder="Explanation" style="width: 400px;">
+        </p>
+        <p><strong>Database Impact:</strong> 
+            <select style="width: 100px;">
+                <option value="">Select</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+            </select>
+            <strong>Details:</strong> <input type="text" placeholder="If yes, explain" style="width: 500px;">
+        </p>
+        <p><strong>Verified By:</strong> <input type="text" placeholder="Agent Name" style="width: 300px;"> <strong>Date:</strong> <input type="date" style="width: 200px;"> <strong>Time:</strong> <input type="time" style="width: 150px;"></p>
+
+        <h3>5. Database Verification (If Applicable) ✅</h3>
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="db-changes-tested">
+                <label for="db-changes-tested">Database changes tested (if any)</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="migration-scripts">
+                <label for="migration-scripts">Migration scripts verified (if any)</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="no-schema-breaking">
+                <label for="no-schema-breaking">No breaking schema changes (if any)</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="data-migration">
+                <label for="data-migration">Data migration tested (if any)</label>
+            </div>
+        </div>
+        <p><strong>Tables Modified:</strong> <input type="text" placeholder="List or N/A" style="width: 100%;"></p>
+        <p><strong>Schema Changes:</strong> <input type="text" placeholder="List or N/A" style="width: 100%;"></p>
+        <p><strong>Data Migrations:</strong> <input type="text" placeholder="List or N/A" style="width: 100%;"></p>
+        <p><strong>Test Results:</strong> 
+            <select style="width: 100px;">
+                <option value="">Select</option>
+                <option value="PASS">PASS</option>
+                <option value="FAIL">FAIL</option>
+            </select>
+        </p>
+        <p><strong>Verified By:</strong> <input type="text" placeholder="Agent Name" style="width: 300px;"> <strong>Date:</strong> <input type="date" style="width: 200px;"> <strong>Time:</strong> <input type="time" style="width: 150px;"></p>
+    </div>
+
+    <div class="section">
+        <h2>📦 PRE-COMMIT BACKUP (MANDATORY)</h2>
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="backup-script-executed">
+                <label for="backup-script-executed">Pre-commit backup script executed</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="backup-created">
+                <label for="backup-created">Backup created successfully</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="backup-location-verified">
+                <label for="backup-location-verified">Backup location verified</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="backup-file-count">
+                <label for="backup-file-count">Backup file count matches sandbox</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="backup-size">
+                <label for="backup-size">Backup size verified (> 100 MB)</label>
+            </div>
+        </div>
+        <p><strong>Backup Location:</strong> <input type="text" placeholder="Full path" style="width: 100%;"></p>
+        <p><strong>Backup Name:</strong> <input type="text" placeholder="PreCommit_Backup_YYYYMMDD_HHMMSS" style="width: 100%;"></p>
+        <p><strong>File Count:</strong> <input type="number" placeholder="COUNT" style="width: 150px;"> <strong>Backup Size:</strong> <input type="text" placeholder="SIZE MB" style="width: 150px;"></p>
+        <p><strong>Backup Date:</strong> <input type="date" style="width: 200px;"> <strong>Time:</strong> <input type="time" style="width: 150px;"></p>
+        <p><strong>Backup Script Executed:</strong> 
+            <select style="width: 100px;">
+                <option value="">Select</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+            </select>
+        </p>
+        <p><strong>Script Location:</strong> <code>D:\Cursor\TheGenie.ai\Development\DevOpsEcosystemManagement\Monitoring\Server Troubleshooting\Danny\PRE_COMMIT_BACKUP_v1.ps1</code></p>
+        <p><strong>Executed By:</strong> <input type="text" placeholder="Agent Name" style="width: 300px;"> <strong>Date:</strong> <input type="date" style="width: 200px;"> <strong>Time:</strong> <input type="time" style="width: 150px;"></p>
+    </div>
+
+    <div class="section">
+        <h2>📝 CHECK-IN COMMENT (MANDATORY)</h2>
+        <p><strong>⚠️ CRITICAL: Complete check-in comment must include ALL 10 sections below.</strong></p>
+        <p><strong>Fill out all fields below, then click "Generate Check-In Comment" to create the single comment for Visual Studio.</strong></p>
+        
+        <p><strong>Fix (Brief):</strong> <input type="text" id="comment-fix-brief" placeholder="Brief description of fix" style="width: 100%;"></p>
+        <p><strong>Problem:</strong> <textarea id="comment-problem" placeholder="What problem does this fix solve?"></textarea></p>
+        <p><strong>Root Cause:</strong> <textarea id="comment-root-cause" placeholder="What caused the problem?"></textarea></p>
+        <p><strong>Fix (Detailed):</strong> <textarea id="comment-fix-detail" placeholder="What was changed to fix it?"></textarea></p>
+        <p><strong>Code Context - Method:</strong> <input type="text" id="comment-method" placeholder="Method name" style="width: 100%;"></p>
+        <p><strong>Code Context - Purpose:</strong> <textarea id="comment-purpose" placeholder="What does this method do?"></textarea></p>
+        <p><strong>Code Context - Location:</strong> <input type="text" id="comment-location" placeholder="File path" style="width: 100%;"></p>
+        <p><strong>Code Context - Lines:</strong> <input type="text" id="comment-lines" placeholder="Line numbers" style="width: 200px;"></p>
+        <p><strong>Code Context - Class Responsibility:</strong> <textarea id="comment-class-responsibility" placeholder="What does this class do?"></textarea></p>
+        <p><strong>Files Modified:</strong> <textarea id="comment-files-modified" placeholder="File1.cs (lines X-Y)&#10;File2.cs (lines X-Y)"></textarea></p>
+        <p><strong>Change - OLD CODE:</strong> <textarea id="comment-old-code" class="code-block" placeholder="old code"></textarea></p>
+        <p><strong>Change - NEW CODE:</strong> <textarea id="comment-new-code" class="code-block" placeholder="new code"></textarea></p>
+        <p><strong>Edge Cases Tested:</strong> <textarea id="comment-edge-cases" placeholder="Edge case 1&#10;Edge case 2&#10;Edge case 3"></textarea></p>
+        <p><strong>Performance Impact:</strong> <textarea id="comment-performance" placeholder="Performance assessment"></textarea></p>
+        <p><strong>Integration Testing:</strong> <textarea id="comment-integration" placeholder="Integration test results"></textarea></p>
+        <p><strong>Rollback Plan - Revert:</strong> <input type="text" id="comment-rollback-revert" placeholder="Changeset NUMBER" style="width: 200px;"></p>
+        <p><strong>Rollback Plan - Impact:</strong> <textarea id="comment-rollback-impact" placeholder="What happens if rolled back"></textarea></p>
+        <p><strong>Rollback Plan - Monitoring:</strong> <textarea id="comment-rollback-monitoring" placeholder="What to watch"></textarea></p>
+        <p><strong>Rollback Plan - Rollback Trigger:</strong> <textarea id="comment-rollback-trigger" placeholder="When to rollback"></textarea></p>
+        <p><strong>Production Readiness - Risk Level:</strong> 
+            <select id="comment-risk-level" style="width: 150px;">
+                <option value="">Select</option>
+                <option value="LOW">LOW</option>
+                <option value="MEDIUM">MEDIUM</option>
+                <option value="HIGH">HIGH</option>
+            </select>
+        </p>
+        <p><strong>Production Readiness - Success Criteria:</strong> <textarea id="comment-success-criteria" placeholder="How to know it worked"></textarea></p>
+        <p><strong>Testing:</strong> <textarea id="comment-testing" placeholder="Testing summary"></textarea></p>
+        <p><strong>Backup:</strong> <input type="text" id="comment-backup" placeholder="PreCommit_Backup_YYYYMMDD_HHMMSS" style="width: 100%;"></p>
+        <p><strong>Check-In Comment Prepared By:</strong> <input type="text" id="comment-prepared-by" placeholder="Agent Name" style="width: 300px;"> <strong>Date:</strong> <input type="date" id="comment-prepared-date" style="width: 200px;"> <strong>Time:</strong> <input type="time" id="comment-prepared-time" style="width: 150px;"></p>
+        
+        <div style="margin: 20px 0; padding: 15px; background-color: #e8f4f8; border: 2px solid #2196F3; border-radius: 5px;">
+            <h3 style="margin-top: 0; color: #1976D2;">📋 GENERATED CHECK-IN COMMENT</h3>
+            <p><strong>Click the button below to generate the complete check-in comment from all fields above.</strong></p>
+            <button onclick="generateCheckInComment()" style="background-color: #2196F3; color: white; padding: 12px 24px; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; margin-bottom: 15px;">🔄 Generate Check-In Comment</button>
+            <p><strong>Copy this entire text and paste into Visual Studio's check-in comment field:</strong></p>
+            <textarea id="generated-comment" readonly style="width: 100%; min-height: 400px; font-family: 'Courier New', monospace; font-size: 12px; padding: 10px; border: 2px solid #ccc; border-radius: 5px; background-color: #f9f9f9;"></textarea>
+            <button onclick="copyCommentToClipboard()" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 14px; cursor: pointer; margin-top: 10px;">📋 Copy to Clipboard</button>
+            <span id="copy-status" style="margin-left: 10px; color: #4CAF50; font-weight: bold;"></span>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>✅ FINAL VERIFICATION (BEFORE CHECK-IN)</h2>
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="all-checkboxes">
+                <label for="all-checkboxes">All checkboxes above are checked ✅</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="all-sections">
+                <label for="all-sections">All sections completed</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="all-timestamps">
+                <label for="all-timestamps">All timestamps filled in (with TIME, not just date)</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="all-signatures">
+                <label for="all-signatures">All verification signatures provided</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="form-saved">
+                <label for="form-saved">Form saved to CheckInLogs folder</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="filename-format">
+                <label for="filename-format">File name follows format: CIL_[FeatureName]_[YYYYMMDD]_v1.md</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="comment-ready">
+                <label for="comment-ready">Check-in comment section completed and ready to copy</label>
+            </div>
+        </div>
+        <p><strong>Form Saved Location:</strong> <input type="text" placeholder="Full path" style="width: 100%;"></p>
+        <p><strong>Form Saved Date:</strong> <input type="date" style="width: 200px;"> <strong>Time:</strong> <input type="time" style="width: 150px;"></p>
+        <p><strong>Form Saved By:</strong> <input type="text" placeholder="Agent Name" style="width: 300px;"></p>
+    </div>
+
+    <div class="section">
+        <h2>📤 SUBMISSION FOR REVIEW</h2>
+        <p><strong>This form must be reviewed and approved by Deployment Specialist before check-in.</strong></p>
+        <p><strong>Form Submitted For Review:</strong> 
+            <select style="width: 100px;">
+                <option value="">Select</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+            </select>
+        </p>
+        <p><strong>Submitted Date:</strong> <input type="date" style="width: 200px;"> <strong>Time:</strong> <input type="time" style="width: 150px;"></p>
+        <p><strong>Submitted By:</strong> <input type="text" placeholder="Agent Name" style="width: 300px;"></p>
+    </div>
+
+    <div class="section">
+        <h2>👤 DEPLOYMENT SPECIALIST REVIEW</h2>
+        <p><strong>This section completed by Deployment Specialist (Danny)</strong></p>
+        
+        <h3>Review Checklist:</h3>
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="review-validation">
+                <label for="review-validation">All validation checkboxes verified</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="review-docs">
+                <label for="review-docs">All documentation sections complete</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="review-context">
+                <label for="review-context">Code context provided</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="review-edge">
+                <label for="review-edge">Edge cases documented</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="review-performance">
+                <label for="review-performance">Performance impact assessed</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="review-integration">
+                <label for="review-integration">Integration testing verified</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="review-rollback">
+                <label for="review-rollback">Rollback plan provided</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="review-readiness">
+                <label for="review-readiness">Production readiness assessed</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="review-backup">
+                <label for="review-backup">Backup verified</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="review-comment">
+                <label for="review-comment">Check-in comment complete</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="review-build">
+                <label for="review-build">Build ID verified (if applicable)</label>
+            </div>
+        </div>
+        
+        <p><strong>Review Notes:</strong></p>
+        <textarea placeholder="Deployment Specialist review notes here" style="min-height: 100px;"></textarea>
+        
+        <h3>Review Decision:</h3>
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="decision-approved" name="decision">
+                <label for="decision-approved">✅ <strong>APPROVED</strong> - Proceed with check-in</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="decision-rejected" name="decision">
+                <label for="decision-rejected">❌ <strong>REJECTED</strong> - Issues found, see notes above</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="decision-conditional" name="decision">
+                <label for="decision-conditional">⚠️ <strong>CONDITIONAL</strong> - Approved with conditions (see notes)</label>
+            </div>
+        </div>
+        <p><strong>Reviewed By:</strong> <input type="text" placeholder="Deployment Specialist Name" style="width: 300px;"> <strong>Date:</strong> <input type="date" style="width: 200px;"> <strong>Time:</strong> <input type="time" style="width: 150px;"></p>
+        <p><strong>Review Signature:</strong> <input type="text" placeholder="Signature/Initials" style="width: 300px;"></p>
+    </div>
+
+    <div class="section">
+        <h2>✅ CHECK-IN COMPLETION</h2>
+        <p><strong>This section completed after check-in</strong></p>
+        <p><strong>Check-In Completed:</strong> 
+            <select style="width: 100px;">
+                <option value="">Select</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+            </select>
+        </p>
+        <p><strong>Changeset Number:</strong> <input type="text" placeholder="Changeset #" style="width: 200px;"></p>
+        <p><strong>Check-In Date:</strong> <input type="date" style="width: 200px;"> <strong>Time:</strong> <input type="time" style="width: 150px;"></p>
+        <p><strong>Check-In By:</strong> <input type="text" placeholder="Agent Name" style="width: 300px;"></p>
+        <p><strong>Check-In Status:</strong> 
+            <select style="width: 150px;">
+                <option value="">Select</option>
+                <option value="SUCCESS">SUCCESS</option>
+                <option value="FAILED">FAILED</option>
+            </select>
+        </p>
+        <p><strong>If Failed, Reason:</strong> <textarea placeholder="Explanation"></textarea></p>
+    </div>
+
+    <div class="section">
+        <h2>🚀 DEPLOYMENT TRACKING</h2>
+        <p><strong>This section tracks which deployment this check-in is part of</strong></p>
+        <p><strong>Deployment Assigned:</strong> 
+            <select style="width: 100px;">
+                <option value="">Select</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+            </select>
+        </p>
+        <p><strong>Deployment Name:</strong> <input type="text" placeholder="e.g., Sprint_20260111 or Emergency_FileDownloadFix_20260111" style="width: 100%;"></p>
+        <p><strong>Deployment Type:</strong> 
+            <select style="width: 200px;">
+                <option value="">Select</option>
+                <option value="Emergency">Emergency</option>
+                <option value="Sprint">Sprint</option>
+                <option value="Scheduled">Scheduled</option>
+            </select>
+        </p>
+        <p><strong>Deployment Date:</strong> <input type="date" style="width: 200px;"></p>
+        <p><strong>Deployment Folder:</strong> <input type="text" placeholder="Full path to deployment folder" style="width: 100%;"></p>
+        <p><strong>Build Number:</strong> <input type="text" placeholder="Will be filled after build - e.g., 20260112.1" style="width: 300px;"></p>
+        <p><strong>Release Number:</strong> <input type="text" placeholder="Will be filled after release - e.g., Release-40" style="width: 300px;"></p>
+        <p><strong>Deployment Status:</strong> 
+            <select style="width: 200px;">
+                <option value="">Select</option>
+                <option value="PENDING">PENDING</option>
+                <option value="DEPLOYED">DEPLOYED</option>
+                <option value="FAILED">FAILED</option>
+                <option value="ROLLED BACK">ROLLED BACK</option>
+            </select>
+        </p>
+        <p><strong>Deployment Log:</strong> <input type="text" placeholder="Link to deployment log file" style="width: 100%;"></p>
+        <p><strong>Assigned By:</strong> <input type="text" placeholder="Deployment Specialist Name" style="width: 300px;"> <strong>Date:</strong> <input type="date" style="width: 200px;"> <strong>Time:</strong> <input type="time" style="width: 150px;"></p>
+    </div>
+
+    <div class="section">
+        <h2>📊 POST-DEPLOYMENT VALIDATION</h2>
+        <p><strong>This section completed AFTER deployment to Stage and Production</strong></p>
+        
+        <h3>Stage Deployment Validation</h3>
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="stage-deploy-date">
+                <label for="stage-deploy-date">Deployment Date: <input type="date" id="stage-deploy-date-input" style="width: 200px; display: inline-block;"> Time: <input type="time" id="stage-deploy-time-input" style="width: 150px; display: inline-block;"></label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="stage-deploy-status">
+                <label for="stage-deploy-status">Deployment Status: 
+                    <select id="stage-deploy-status-select" style="width: 150px; display: inline-block;">
+                        <option value="">Select</option>
+                        <option value="SUCCESS">SUCCESS</option>
+                        <option value="FAILED">FAILED</option>
+                    </select>
+                </label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="stage-site-available">
+                <label for="stage-site-available">Site Available: 
+                    <select id="stage-site-available-select" style="width: 100px; display: inline-block;">
+                        <option value="">Select</option>
+                        <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                    </select>
+                    URL: <input type="text" id="stage-site-url" placeholder="https://stage.thegenie.ai" style="width: 300px; display: inline-block;">
+                </label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="stage-login">
+                <label for="stage-login">Login Works: 
+                    <select id="stage-login-select" style="width: 100px; display: inline-block;">
+                        <option value="">Select</option>
+                        <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                    </select>
+                </label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="stage-feature">
+                <label for="stage-feature">Feature Tested: 
+                    <select id="stage-feature-select" style="width: 100px; display: inline-block;">
+                        <option value="">Select</option>
+                        <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                    </select>
+                    Test Results: 
+                    <select id="stage-feature-results-select" style="width: 100px; display: inline-block;">
+                        <option value="">Select</option>
+                        <option value="PASS">PASS</option>
+                        <option value="FAIL">FAIL</option>
+                    </select>
+                </label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="stage-no-errors">
+                <label for="stage-no-errors">No Errors in Event Viewer: 
+                    <select id="stage-no-errors-select" style="width: 100px; display: inline-block;">
+                        <option value="">Select</option>
+                        <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                    </select>
+                </label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="stage-webhooks">
+                <label for="stage-webhooks">Webhooks Responding: 
+                    <select id="stage-webhooks-select" style="width: 100px; display: inline-block;">
+                        <option value="">Select</option>
+                        <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                    </select>
+                    (if applicable)
+                </label>
+            </div>
+        </div>
+        <p><strong>Stage Validation Notes:</strong></p>
+        <textarea id="stage-validation-notes" placeholder="Any notes about Stage deployment validation" style="min-height: 80px;"></textarea>
+        <p><strong>Stage Validated By:</strong> <input type="text" id="stage-validated-by" placeholder="Agent Name" style="width: 300px;"> <strong>Date:</strong> <input type="date" id="stage-validated-date" style="width: 200px;"> <strong>Time:</strong> <input type="time" id="stage-validated-time" style="width: 150px;"></p>
+        
+        <h3>Production Deployment Validation</h3>
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="prod-deploy-date">
+                <label for="prod-deploy-date">Deployment Date: <input type="date" style="width: 200px; display: inline-block;"> Time: <input type="time" style="width: 150px; display: inline-block;"></label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="prod-deploy-status">
+                <label for="prod-deploy-status">Deployment Status: 
+                    <select style="width: 150px; display: inline-block;">
+                        <option value="">Select</option>
+                        <option value="SUCCESS">SUCCESS</option>
+                        <option value="FAILED">FAILED</option>
+                    </select>
+                </label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="prod-site-available">
+                <label for="prod-site-available">Site Available: 
+                    <select style="width: 100px; display: inline-block;">
+                        <option value="">Select</option>
+                        <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                    </select>
+                    URL: <input type="text" placeholder="https://app.thegenie.ai" style="width: 300px; display: inline-block;">
+                </label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="prod-login">
+                <label for="prod-login">Login Works: 
+                    <select style="width: 100px; display: inline-block;">
+                        <option value="">Select</option>
+                        <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                    </select>
+                </label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="prod-feature">
+                <label for="prod-feature">Feature Tested: 
+                    <select style="width: 100px; display: inline-block;">
+                        <option value="">Select</option>
+                        <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                    </select>
+                    Test Results: 
+                    <select style="width: 100px; display: inline-block;">
+                        <option value="">Select</option>
+                        <option value="PASS">PASS</option>
+                        <option value="FAIL">FAIL</option>
+                    </select>
+                </label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="prod-no-errors">
+                <label for="prod-no-errors">No Errors in Event Viewer: 
+                    <select style="width: 100px; display: inline-block;">
+                        <option value="">Select</option>
+                        <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                    </select>
+                </label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="prod-webhooks">
+                <label for="prod-webhooks">Webhooks Responding: 
+                    <select style="width: 100px; display: inline-block;">
+                        <option value="">Select</option>
+                        <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                    </select>
+                    (if applicable)
+                </label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="prod-monitoring">
+                <label for="prod-monitoring">Monitoring Active: 
+                    <select style="width: 100px; display: inline-block;">
+                        <option value="">Select</option>
+                        <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+        
+        <h3>Post-Deployment Issues</h3>
+        <p><strong>Issues Found:</strong> 
+            <select style="width: 100px;">
+                <option value="">Select</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+            </select>
+        </p>
+        <p><strong>If YES, Document Issues:</strong></p>
+        <textarea placeholder="Document any issues found after deployment" style="min-height: 100px;"></textarea>
+        
+        <p><strong>Rollback Required:</strong> 
+            <select style="width: 100px;">
+                <option value="">Select</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+            </select>
+        </p>
+        <p><strong>If YES, Rollback Details:</strong></p>
+        <p>Rollback Date: <input type="date" style="width: 200px;"> Time: <input type="time" style="width: 150px;"></p>
+        <p>Rollback Reason: <textarea placeholder="Explanation"></textarea></p>
+        <p>Rollback Changeset: <input type="text" placeholder="Changeset #" style="width: 200px;"></p>
+        
+        <h3>Post-Deployment Sign-Off</h3>
+        <p><strong>Deployment Validated By:</strong> <input type="text" placeholder="Agent/Deployment Specialist Name" style="width: 300px;"> <strong>Date:</strong> <input type="date" style="width: 200px;"> <strong>Time:</strong> <input type="time" style="width: 150px;"></p>
+        <p><strong>Validation Status:</strong> 
+            <select style="width: 150px;">
+                <option value="">Select</option>
+                <option value="PASSED">PASSED</option>
+                <option value="FAILED">FAILED</option>
+            </select>
+        </p>
+    </div>
+
+    <script>
+        function clearForm() {
+            if (confirm('Are you sure you want to clear all form fields?')) {
+                document.querySelectorAll('input[type="text"], input[type="date"], input[type="time"], input[type="number"], textarea, select').forEach(function(element) {
+                    if (element.type === 'checkbox') {
+                        element.checked = false;
+                    } else {
+                        element.value = '';
+                    }
+                });
+                document.getElementById('generated-comment').value = '';
+                document.getElementById('copy-status').textContent = '';
+            }
+        }
+        
+        function generateCheckInComment() {
+            var comment = '';
+            
+            // Section 1: Fix (Brief)
+            var fixBrief = document.getElementById('comment-fix-brief').value.trim();
+            if (fixBrief) {
+                comment += '=== FIX ===\n';
+                comment += fixBrief + '\n\n';
+            }
+            
+            // Section 2: Problem
+            var problem = document.getElementById('comment-problem').value.trim();
+            if (problem) {
+                comment += '=== PROBLEM ===\n';
+                comment += problem + '\n\n';
+            }
+            
+            // Section 3: Root Cause
+            var rootCause = document.getElementById('comment-root-cause').value.trim();
+            if (rootCause) {
+                comment += '=== ROOT CAUSE ===\n';
+                comment += rootCause + '\n\n';
+            }
+            
+            // Section 4: Fix (Detailed)
+            var fixDetail = document.getElementById('comment-fix-detail').value.trim();
+            if (fixDetail) {
+                comment += '=== FIX (DETAILED) ===\n';
+                comment += fixDetail + '\n\n';
+            }
+            
+            // Section 5: Code Context
+            var method = document.getElementById('comment-method').value.trim();
+            var purpose = document.getElementById('comment-purpose').value.trim();
+            var location = document.getElementById('comment-location').value.trim();
+            var lines = document.getElementById('comment-lines').value.trim();
+            var classResp = document.getElementById('comment-class-responsibility').value.trim();
+            
+            if (method || purpose || location || lines || classResp) {
+                comment += '=== CODE CONTEXT ===\n';
+                if (method) comment += 'Method: ' + method + '\n';
+                if (purpose) comment += 'Purpose: ' + purpose + '\n';
+                if (location) comment += 'Location: ' + location + '\n';
+                if (lines) comment += 'Lines: ' + lines + '\n';
+                if (classResp) comment += 'Class Responsibility: ' + classResp + '\n';
+                comment += '\n';
+            }
+            
+            // Section 6: Files Modified
+            var filesModified = document.getElementById('comment-files-modified').value.trim();
+            if (filesModified) {
+                comment += '=== FILES MODIFIED ===\n';
+                comment += filesModified + '\n\n';
+            }
+            
+            // Section 7: Code Changes
+            var oldCode = document.getElementById('comment-old-code').value.trim();
+            var newCode = document.getElementById('comment-new-code').value.trim();
+            if (oldCode || newCode) {
+                comment += '=== CODE CHANGES ===\n';
+                if (oldCode) {
+                    comment += 'OLD CODE:\n' + oldCode + '\n\n';
+                }
+                if (newCode) {
+                    comment += 'NEW CODE:\n' + newCode + '\n\n';
+                }
+            }
+            
+            // Section 8: Testing
+            var edgeCases = document.getElementById('comment-edge-cases').value.trim();
+            var performance = document.getElementById('comment-performance').value.trim();
+            var integration = document.getElementById('comment-integration').value.trim();
+            var testing = document.getElementById('comment-testing').value.trim();
+            
+            if (edgeCases || performance || integration || testing) {
+                comment += '=== TESTING ===\n';
+                if (edgeCases) {
+                    comment += 'Edge Cases Tested:\n' + edgeCases + '\n\n';
+                }
+                if (performance) {
+                    comment += 'Performance Impact:\n' + performance + '\n\n';
+                }
+                if (integration) {
+                    comment += 'Integration Testing:\n' + integration + '\n\n';
+                }
+                if (testing) {
+                    comment += 'Testing Summary:\n' + testing + '\n\n';
+                }
+            }
+            
+            // Section 9: Rollback Plan
+            var rollbackRevert = document.getElementById('comment-rollback-revert').value.trim();
+            var rollbackImpact = document.getElementById('comment-rollback-impact').value.trim();
+            var rollbackMonitoring = document.getElementById('comment-rollback-monitoring').value.trim();
+            var rollbackTrigger = document.getElementById('comment-rollback-trigger').value.trim();
+            
+            if (rollbackRevert || rollbackImpact || rollbackMonitoring || rollbackTrigger) {
+                comment += '=== ROLLBACK PLAN ===\n';
+                if (rollbackRevert) comment += 'Revert to Changeset: ' + rollbackRevert + '\n';
+                if (rollbackImpact) comment += 'Impact: ' + rollbackImpact + '\n';
+                if (rollbackMonitoring) comment += 'Monitoring: ' + rollbackMonitoring + '\n';
+                if (rollbackTrigger) comment += 'Rollback Trigger: ' + rollbackTrigger + '\n';
+                comment += '\n';
+            }
+            
+            // Section 10: Production Readiness
+            var riskLevel = document.getElementById('comment-risk-level').value.trim();
+            var successCriteria = document.getElementById('comment-success-criteria').value.trim();
+            
+            if (riskLevel || successCriteria) {
+                comment += '=== PRODUCTION READINESS ===\n';
+                if (riskLevel) comment += 'Risk Level: ' + riskLevel + '\n';
+                if (successCriteria) comment += 'Success Criteria: ' + successCriteria + '\n';
+                comment += '\n';
+            }
+            
+            // Backup
+            var backup = document.getElementById('comment-backup').value.trim();
+            if (backup) {
+                comment += '=== BACKUP ===\n';
+                comment += 'Pre-Commit Backup: ' + backup + '\n\n';
+            }
+            
+            // Prepared By
+            var preparedBy = document.getElementById('comment-prepared-by').value.trim();
+            var preparedDate = document.getElementById('comment-prepared-date').value;
+            var preparedTime = document.getElementById('comment-prepared-time').value;
+            if (preparedBy || preparedDate || preparedTime) {
+                comment += '=== PREPARED BY ===\n';
+                if (preparedBy) comment += 'Agent: ' + preparedBy + '\n';
+                if (preparedDate) comment += 'Date: ' + preparedDate + '\n';
+                if (preparedTime) comment += 'Time: ' + preparedTime + '\n';
+            }
+            
+            document.getElementById('generated-comment').value = comment;
+        }
+        
+        function copyCommentToClipboard() {
+            var commentText = document.getElementById('generated-comment');
+            commentText.select();
+            commentText.setSelectionRange(0, 99999); // For mobile devices
+            
+            try {
+                document.execCommand('copy');
+                document.getElementById('copy-status').textContent = '✅ Copied to clipboard!';
+                setTimeout(function() {
+                    document.getElementById('copy-status').textContent = '';
+                }, 3000);
+            } catch (err) {
+                document.getElementById('copy-status').textContent = '❌ Failed to copy';
+            }
+        }
+    </script>
+</body>
+</html>

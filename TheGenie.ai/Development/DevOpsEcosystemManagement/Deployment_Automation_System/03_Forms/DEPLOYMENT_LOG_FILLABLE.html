@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deployment Log</title>
+    <style>
+        @media print {
+            .no-print { display: none; }
+            body { margin: 0; padding: 20px; }
+            .page-break { page-break-after: always; }
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #95a5a6;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        input[type="text"], input[type="date"], input[type="time"], textarea, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .checkbox-group {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+        }
+        .checkbox-item {
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+        .section {
+            margin: 25px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        .button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        .button:hover {
+            background-color: #2980b9;
+        }
+        .button-print {
+            background-color: #27ae60;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        table td:first-child {
+            font-weight: bold;
+            background-color: #f8f9fa;
+            width: 30%;
+        }
+    </style>
+</head>
+<body>
+    <div class="no-print" style="text-align: center; margin-bottom: 20px;">
+        <button class="button button-print" onclick="window.print()">🖨️ Print to PDF</button>
+        <button class="button" onclick="clearForm()">🗑️ Clear Form</button>
+    </div>
+
+    <h1>Deployment Log</h1>
+    <p><strong>Version:</strong> 1.0 | <strong>Created:</strong> 01/13/2026 | <strong>Status:</strong> ✅ ACTIVE</p>
+
+    <div class="section">
+        <h2>📋 DEPLOYMENT INFORMATION</h2>
+        <table>
+            <tr>
+                <td>Deployment Name:</td>
+                <td><input type="text" id="deployment-name" placeholder="e.g., File Download Fix - Stage"></td>
+            </tr>
+            <tr>
+                <td>Deployment Date/Time:</td>
+                <td><input type="date" id="deployment-date" style="width: 200px;"> <input type="time" id="deployment-time" style="width: 150px;"></td>
+            </tr>
+            <tr>
+                <td>Deployed By:</td>
+                <td><input type="text" id="deployed-by" placeholder="Agent Name / User Name"></td>
+            </tr>
+            <tr>
+                <td>Source Environment:</td>
+                <td>
+                    <select id="source-env">
+                        <option value="">Select</option>
+                        <option value="Sandbox">Sandbox</option>
+                        <option value="Stage">Stage</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Target Environment:</td>
+                <td>
+                    <select id="target-env">
+                        <option value="">Select</option>
+                        <option value="Stage">Stage</option>
+                        <option value="Production">Production</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Changeset Number:</td>
+                <td><input type="text" id="changeset-number" placeholder="e.g., 4710"></td>
+            </tr>
+            <tr>
+                <td>Build Number:</td>
+                <td><input type="text" id="build-number" placeholder="e.g., 20260111.1"></td>
+            </tr>
+            <tr>
+                <td>Release Number:</td>
+                <td><input type="text" id="release-number" placeholder="e.g., Release-40"></td>
+            </tr>
+            <tr>
+                <td>Deployment Type:</td>
+                <td>
+                    <select id="deployment-type">
+                        <option value="">Select</option>
+                        <option value="Hotfix">Hotfix</option>
+                        <option value="Feature">Feature</option>
+                        <option value="Maintenance">Maintenance</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Status:</td>
+                <td>
+                    <select id="status">
+                        <option value="">Select</option>
+                        <option value="IN PROGRESS">IN PROGRESS</option>
+                        <option value="COMPLETE">COMPLETE</option>
+                        <option value="FAILED">FAILED</option>
+                        <option value="ROLLED BACK">ROLLED BACK</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>✅ PRE-DEPLOYMENT CHECKLIST</h2>
+        <h3>Phase 1: Pre-Commit (Sandbox Only)</h3>
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="precommit-backup">
+                <label for="precommit-backup">Pre-commit backup created</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="precommit-backup-location">
+                <label for="precommit-backup-location">Backup location documented</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="precommit-code-reviewed">
+                <label for="precommit-code-reviewed">Code reviewed</label>
+            </div>
+        </div>
+        <p><strong>Backup Location:</strong> <input type="text" id="precommit-backup-path" placeholder="BACKUP_PATH" style="width: 100%;"></p>
+        <p><strong>Changeset Number:</strong> <input type="text" id="precommit-changeset" placeholder="NUMBER" style="width: 200px;"></p>
+
+        <h3>Phase 2: Pre-Build</h3>
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="build-triggered">
+                <label for="build-triggered">Build pipeline triggered</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="artifacts-verified">
+                <label for="artifacts-verified">Artifacts verified (DLLs, folders present)</label>
+            </div>
+        </div>
+        <p><strong>Build Number:</strong> <input type="text" id="build-number-phase2" placeholder="NUMBER" style="width: 200px;"></p>
+        <p><strong>Build Status:</strong> 
+            <select id="build-status" style="width: 150px;">
+                <option value="">Select</option>
+                <option value="SUCCESS">SUCCESS</option>
+                <option value="FAILED">FAILED</option>
+            </select>
+        </p>
+
+        <h3>Phase 3: Pre-Deployment</h3>
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="predeploy-backup">
+                <label for="predeploy-backup">Pre-deployment backup created</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="rollback-verified">
+                <label for="rollback-verified">Rollback procedure verified</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="checklist-reviewed">
+                <label for="checklist-reviewed">Deployment checklist reviewed</label>
+            </div>
+        </div>
+        <p><strong>Backup Location:</strong> <input type="text" id="predeploy-backup-path" placeholder="BACKUP_PATH" style="width: 100%;"></p>
+    </div>
+
+    <div class="section">
+        <h2>📦 DEPLOYMENT ARTIFACTS</h2>
+        <h3>Files Deployed:</h3>
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="file-dashboard-dll">
+                <label for="file-dashboard-dll">Smart.Dashboard.dll</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="file-core-dll">
+                <label for="file-core-dll">Smart.Core.dll</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="file-agent-folder">
+                <label for="file-agent-folder">Agent folder</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="file-appdata-folder">
+                <label for="file-appdata-folder">App_Data folder</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="file-webconfig">
+                <label for="file-webconfig">Web.config</label>
+            </div>
+        </div>
+        <p><strong>Agent Folder File Count:</strong> <input type="number" id="agent-file-count" placeholder="COUNT" style="width: 150px;"></p>
+        <p><strong>App_Data Folder File Count:</strong> <input type="number" id="appdata-file-count" placeholder="COUNT" style="width: 150px;"></p>
+        <p><strong>Web.config Modified:</strong> 
+            <select id="webconfig-modified" style="width: 100px;">
+                <option value="">Select</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+            </select>
+        </p>
+
+        <h3>Configuration Changes:</h3>
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="config-connection-strings">
+                <label for="config-connection-strings">Connection strings updated</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="config-apppool">
+                <label for="config-apppool">App Pool settings verified</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="config-iis">
+                <label for="config-iis">IIS site configuration verified</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🔄 DEPLOYMENT STEPS EXECUTED</h2>
+        <table>
+            <tr>
+                <th>Step</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Time</th>
+                <th>Notes</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Pre-deployment backup</td>
+                <td><select id="step1-status"><option value="">Select</option><option value="✅">✅</option><option value="❌">❌</option></select></td>
+                <td><input type="time" id="step1-time"></td>
+                <td><input type="text" id="step1-notes" placeholder="NOTES"></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>IIS services stopped</td>
+                <td><select id="step2-status"><option value="">Select</option><option value="✅">✅</option><option value="❌">❌</option></select></td>
+                <td><input type="time" id="step2-time"></td>
+                <td><input type="text" id="step2-notes" placeholder="NOTES"></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Files deployed</td>
+                <td><select id="step3-status"><option value="">Select</option><option value="✅">✅</option><option value="❌">❌</option></select></td>
+                <td><input type="time" id="step3-time"></td>
+                <td><input type="text" id="step3-notes" placeholder="NOTES"></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Configuration updated</td>
+                <td><select id="step4-status"><option value="">Select</option><option value="✅">✅</option><option value="❌">❌</option></select></td>
+                <td><input type="time" id="step4-time"></td>
+                <td><input type="text" id="step4-notes" placeholder="NOTES"></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>IIS services started</td>
+                <td><select id="step5-status"><option value="">Select</option><option value="✅">✅</option><option value="❌">❌</option></select></td>
+                <td><input type="time" id="step5-time"></td>
+                <td><input type="text" id="step5-notes" placeholder="NOTES"></td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Post-deployment validation</td>
+                <td><select id="step6-status"><option value="">Select</option><option value="✅">✅</option><option value="❌">❌</option></select></td>
+                <td><input type="time" id="step6-time"></td>
+                <td><input type="text" id="step6-notes" placeholder="NOTES"></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>✅ POST-DEPLOYMENT VALIDATION</h2>
+        <h3>Functional Tests:</h3>
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="test-login">
+                <label for="test-login">Login works</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="test-dashboard">
+                <label for="test-dashboard">Dashboard loads</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="test-feature1">
+                <label for="test-feature1">Feature 1 works</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="test-feature2">
+                <label for="test-feature2">Feature 2 works</label>
+            </div>
+        </div>
+        <p><strong>Feature 1 Name:</strong> <input type="text" id="feature1-name" placeholder="Feature name" style="width: 100%;"></p>
+        <p><strong>Feature 2 Name:</strong> <input type="text" id="feature2-name" placeholder="Feature name" style="width: 100%;"></p>
+
+        <h3>Performance Checks:</h3>
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="perf-page-load">
+                <label for="perf-page-load">Page load times acceptable</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="perf-api">
+                <label for="perf-api">API response times acceptable</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="perf-memory">
+                <label for="perf-memory">No memory leaks detected</label>
+            </div>
+        </div>
+
+        <h3>Error Monitoring:</h3>
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="error-no-new">
+                <label for="error-no-new">No new errors in logs</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="error-no-500">
+                <label for="error-no-500">No 500 errors</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="error-no-critical">
+                <label for="error-no-critical">No critical exceptions</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📊 DEPLOYMENT METRICS</h2>
+        <table>
+            <tr>
+                <td>Deployment Duration:</td>
+                <td><input type="text" id="deployment-duration" placeholder="e.g., 45 minutes"></td>
+            </tr>
+            <tr>
+                <td>Files Deployed Count:</td>
+                <td><input type="number" id="files-deployed-count" placeholder="COUNT"></td>
+            </tr>
+            <tr>
+                <td>DLLs Updated Count:</td>
+                <td><input type="number" id="dlls-updated-count" placeholder="COUNT"></td>
+            </tr>
+            <tr>
+                <td>Configuration Changes Count:</td>
+                <td><input type="number" id="config-changes-count" placeholder="COUNT"></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>📝 INCIDENT LOG (If Applicable)</h2>
+        <p><strong>Issues Found:</strong> 
+            <select id="issues-found" style="width: 100px;">
+                <option value="">Select</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+            </select>
+        </p>
+        <p><strong>If YES, Document Issues:</strong></p>
+        <textarea id="incident-details" placeholder="What happened, how it was resolved, status (resolved/pending)" style="min-height: 150px;"></textarea>
+    </div>
+
+    <div class="section">
+        <h2>✅ SIGN-OFF</h2>
+        <table>
+            <tr>
+                <td>Deployed By:</td>
+                <td><input type="text" id="signed-by" placeholder="NAME"></td>
+            </tr>
+            <tr>
+                <td>Date/Time:</td>
+                <td><input type="date" id="signed-date" style="width: 200px;"> <input type="time" id="signed-time" style="width: 150px;"></td>
+            </tr>
+            <tr>
+                <td>Status:</td>
+                <td>
+                    <select id="final-status">
+                        <option value="">Select</option>
+                        <option value="COMPLETE">COMPLETE</option>
+                        <option value="FAILED">FAILED</option>
+                        <option value="ROLLED BACK">ROLLED BACK</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        function clearForm() {
+            if (confirm('Are you sure you want to clear all form fields?')) {
+                document.querySelectorAll('input[type="text"], input[type="date"], input[type="time"], input[type="number"], textarea, select').forEach(function(element) {
+                    if (element.type === 'checkbox') {
+                        element.checked = false;
+                    } else {
+                        element.value = '';
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
