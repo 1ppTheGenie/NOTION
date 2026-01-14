@@ -1,0 +1,181 @@
+{
+  "project": "PLS Pre-Listing Command",
+  "version": "1.0",
+  "created": "01/13/2026 8:40 PM",
+  "agents": [
+    {
+      "id": "pls-database",
+      "name": "Database Specialist",
+      "role": "Database Specialist",
+      "description": "You are the DATABASE SPECIALIST in the PLS Pre-Listing Command project. You handle all SQL Server schema, stored procedures, and data migration tasks.",
+      "workspace": "D:\\Cursor\\TheGenie.ai\\Development\\PLS_PreListing_Command_Complete",
+      "masterDocuments": [
+        "AgentCollaboration/PLS_AGENT_COORDINATION_MASTER_v1.md",
+        "01_Master_Documents/PLS_DATABASE_SCHEMA_RELATIONAL_v1.md",
+        "02_Scripts/PLS_SCHEMA_EXTENSIONS_NORMALIZED_v3.sql",
+        "02_Scripts/PLS_STORED_PROCEDURES_COMPLETE_v1.sql"
+      ],
+      "statusFile": "AgentStatus/AGENT_STATUS_DATABASE_v1.md",
+      "phase": 1,
+      "dependencies": [],
+      "handoffsTo": ["pls-backend-api", "pls-devops"],
+      "keyTasks": [
+        "Execute PLS_SCHEMA_EXTENSIONS_NORMALIZED_v3.sql in Sandbox",
+        "Create PLS number sequence table and stored procedure",
+        "Implement usp_GetNextPlsNumber",
+        "Insert master data (status types, source types)",
+        "Test PLS number generation (format: PLS100000A)"
+      ],
+      "successCriteria": [
+        "All database tables created in Sandbox",
+        "All stored procedures tested and working",
+        "Master data inserted",
+        "PLS number generation verified",
+        "Database ready for API integration"
+      ]
+    },
+    {
+      "id": "pls-backend-api",
+      "name": "Backend API Specialist",
+      "role": "Backend API Specialist",
+      "description": "You are the BACKEND API SPECIALIST in the PLS Pre-Listing Command project. You handle all C# controllers, REST API endpoints, and business logic.",
+      "workspace": "D:\\Cursor\\TheGenie.ai\\Development\\PLS_PreListing_Command_Complete",
+      "masterDocuments": [
+        "AgentCollaboration/PLS_AGENT_COORDINATION_MASTER_v1.md",
+        "01_Master_Documents/PLS_RESO_ENGINE_PROJECT_BLUEPRINT_v1.7.md",
+        "08_Source_Code/PlsController_Complete_v1.cs",
+        "08_Source_Code/DataController_PLS_Complete_v1.cs"
+      ],
+      "statusFile": "AgentStatus/AGENT_STATUS_BACKEND_API_v1.md",
+      "phase": 2,
+      "dependencies": ["pls-database"],
+      "handoffsTo": ["pls-frontend-ui", "pls-xml-integration"],
+      "keyTasks": [
+        "Implement PlsController.cs with all 9 endpoints",
+        "Implement DataController.PLS.cs partial class",
+        "Create PlsService business logic layer",
+        "Add data validation and error handling",
+        "Integrate with Database Specialist's stored procedures"
+      ],
+      "successCriteria": [
+        "All API endpoints implemented",
+        "Data validation working",
+        "Error handling complete",
+        "API documentation updated",
+        "Ready for Frontend UI integration"
+      ]
+    },
+    {
+      "id": "pls-frontend-ui",
+      "name": "Frontend UI Specialist",
+      "role": "Frontend UI Specialist",
+      "description": "You are the FRONTEND UI SPECIALIST in the PLS Pre-Listing Command project. You handle all Angular components, user interface, and UX for the PLS application.",
+      "workspace": "D:\\Cursor\\TheGenie.ai\\Development\\PLS_PreListing_Command_Complete",
+      "masterDocuments": [
+        "AgentCollaboration/PLS_AGENT_COORDINATION_MASTER_v1.md",
+        "01_Master_Documents/PLS_WIREFRAME_SPECIFICATIONS_v1.md",
+        "08_Source_Code/pls-create.component.*",
+        "09_Prototypes/PLS_PROTOTYPE_ADDRESS_LOOKUP_v4.html"
+      ],
+      "statusFile": "AgentStatus/AGENT_STATUS_FRONTEND_UI_v1.md",
+      "phase": 3,
+      "dependencies": ["pls-backend-api"],
+      "handoffsTo": ["pls-devops"],
+      "keyTasks": [
+        "Implement PlsMyListingsComponent",
+        "Implement PlsCreateComponent",
+        "Implement PlsEditComponent",
+        "Implement PlsPhotoUploadComponent",
+        "Integrate Mapbox address lookup",
+        "Mobile-responsive design"
+      ],
+      "successCriteria": [
+        "All Angular components implemented",
+        "Mobile-responsive design working",
+        "Form validation working",
+        "API integration complete",
+        "User experience smooth"
+      ]
+    },
+    {
+      "id": "pls-xml-integration",
+      "name": "XML/Integration Specialist",
+      "role": "XML/Integration Specialist",
+      "description": "You are the XML/INTEGRATION SPECIALIST in the PLS Pre-Listing Command project. You handle GenieCloud XML generation and API integration. You work closely with the Backend API Specialist on the /render endpoint.",
+      "workspace": "D:\\Cursor\\TheGenie.ai\\Development\\PLS_PreListing_Command_Complete",
+      "masterDocuments": [
+        "AgentCollaboration/PLS_AGENT_COORDINATION_MASTER_v1.md",
+        "11_Contracts/CONTRACT_PLS_to_GenieCloud_v6.1.md",
+        "01_Master_Documents/PLS_GENIECLOUD_XML_MAPPING_v1.md",
+        "01_Master_Documents/PLS_RESO_ENGINE_PROJECT_BLUEPRINT_v1.7.md"
+      ],
+      "statusFile": "AgentStatus/AGENT_STATUS_XML_INTEGRATION_v1.md",
+      "phase": 1.5,
+      "dependencies": ["pls-database"],
+      "handoffsTo": ["pls-backend-api", "pls-devops"],
+      "keyTasks": [
+        "Implement XML generation from PLS listing data",
+        "Follow CONTRACT_PLS_to_GenieCloud_v6.1.md exactly",
+        "Map PLS data to GenieCloud XML structure",
+        "Implement GenieCloud API integration",
+        "Test marketing asset generation"
+      ],
+      "successCriteria": [
+        "XML generation matches contract exactly",
+        "GenieCloud accepts XML and creates collection",
+        "Marketing assets generated successfully",
+        "Collection system functional"
+      ]
+    },
+    {
+      "id": "pls-devops",
+      "name": "DevOps/Deployment Specialist",
+      "role": "DevOps/Deployment Specialist",
+      "description": "You are the DEVOPS/DEPLOYMENT SPECIALIST in the PLS Pre-Listing Command project. You handle deployment automation, configuration management, and testing infrastructure for all phases.",
+      "workspace": "D:\\Cursor\\TheGenie.ai\\Development\\PLS_PreListing_Command_Complete",
+      "masterDocuments": [
+        "AgentCollaboration/PLS_AGENT_COORDINATION_MASTER_v1.md",
+        "01_Master_Documents/PLS_RESO_ENGINE_PROJECT_BLUEPRINT_v1.7.md",
+        "02_Scripts/*.ps1"
+      ],
+      "statusFile": "AgentStatus/AGENT_STATUS_DEVOPS_v1.md",
+      "phase": "all",
+      "dependencies": [],
+      "handoffsTo": [],
+      "keyTasks": [
+        "Create deployment scripts (PowerShell/Python)",
+        "Set up test environments (Sandbox, Stage)",
+        "Create backup and rollback procedures",
+        "CRITICAL: Include DLL.config in all backups",
+        "Follow Fortune 500 enterprise procedures"
+      ],
+      "successCriteria": [
+        "Deployment scripts for all environments",
+        "Backup/rollback procedures tested",
+        "All environments configured",
+        "Production deployment successful"
+      ]
+    }
+  ],
+  "messageProtocol": {
+    "version": "1.0",
+    "messageTypes": [
+      "handoff",
+      "blocker",
+      "status_update",
+      "question",
+      "coordination"
+    ],
+    "messageFormat": {
+      "from": "agent-id",
+      "to": "agent-id | all",
+      "type": "message-type",
+      "timestamp": "ISO-8601",
+      "subject": "Brief subject",
+      "body": "Detailed message",
+      "attachments": ["file-paths"],
+      "actionRequired": true,
+      "priority": "low | medium | high | critical"
+    }
+  }
+}

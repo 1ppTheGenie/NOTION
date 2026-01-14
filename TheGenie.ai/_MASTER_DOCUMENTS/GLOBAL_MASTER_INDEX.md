@@ -1,7 +1,7 @@
 # Global Master Index for TheGenie.ai
-**Version:** 4.6  
+**Version:** 4.12  
 **Created:** 12/23/2025  
-**Last Updated:** 01/07/2026  
+**Last Updated:** 01/13/2026 4:50 AM  
 **Author:** Cursor AI Agent  
 **Status:** ✅ ACTIVE - Unified Master Index (Consolidated 12/31/2025)
 
@@ -19,8 +19,9 @@ This is the **SINGLE SOURCE OF TRUTH** for all TheGenie.ai development documenta
 
 | Document | Description | Version |
 |----------|-------------|---------|
-| **GLOBAL_MASTER_INDEX.md** | This file - central index of all documentation | 4.0 |
-| **GLOBAL_MASTER_RULES.md** | Universal rules for all projects | 1.0 |
+| **GLOBAL_MASTER_INDEX.md** | This file - central index of all documentation | 4.11 |
+| **GLOBAL_MASTER_RULES.md** | Universal rules for all projects | 1.3 |
+| **DRA_2026_POLICY_v1.md** | Document Reduction Act of 2026 - Master policy for document management | 1.0 |
 | **PROJECT_UNIVERSE_DASHBOARD.html** | Visual dashboard for all projects | 5.0 |
 | **SOP_MASTER_DOCUMENT_MANAGEMENT_v1.md** | How to update/maintain master docs | 1.0 |
 | **MASTER_DOCUMENT_INVENTORY_v1.md** | Complete inventory of all versions | 1.0 |
@@ -33,6 +34,7 @@ This is the **SINGLE SOURCE OF TRUTH** for all TheGenie.ai development documenta
 | Document | Location | Description |
 |----------|----------|-------------|
 | **GLOBAL_MASTER_RULES** | `_MASTER_DOCUMENTS\GLOBAL_MASTER_RULES.md` | Universal rules - file versioning, dates, links |
+| **DRA-2026 POLICY** | `_MASTER_DOCUMENTS\DRA_2026_POLICY_v1.md` | Document Reduction Act of 2026 - Master policy for document management |
 | **Paisley Rules** | `Paisley\MASTER_RULES_v1.md` | Paisley-specific additions |
 | **Billing Rules** | `BillingSystems\...\MASTER_RULES_SubscriptionDisputes_v1.md` | Billing domain rules |
 
@@ -102,36 +104,51 @@ This is the **SINGLE SOURCE OF TRUTH** for all TheGenie.ai development documenta
 
 ---
 
-## 🚀 PLS RESO ENGINE
+## 🚀 PLS RESO ENGINE (Paisley RESO Listing Engine)
 
-**Location:** `D:\Cursor\TheGenie.ai\Development\MLS_Parsers\PLS_RESO_ENGINE\`  
-**Purpose:** Paisley RESO Listing Engine - Private listing service with future RESO Insert capability
+**Location:** `D:\Cursor\TheGenie.ai\Development\PLS_PreListing_Command_Complete\`  
+**GitHub:** [PLS_PreListing_Command_Complete](https://github.com/1ppTheGenie/NOTION/tree/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete)  
+**Purpose:** Paisley RESO Listing Engine - Private listing service with full marketing automation, circle prospecting, and future RESO Insert capability
 
-### Master Project Documents (DRA-2026 Compliant)
-| Document | Location | Version | Status |
-|----------|----------|---------|--------|
-| **Project Blueprint** | `PLS_RESO_ENGINE_PROJECT_BLUEPRINT_v1.2.md` | 1.2 | ✅ Complete |
-| **3-Layer Gap Analysis** | `PLS_3_LAYER_GAP_ANALYSIS_v1.md` | 1.0 | ✅ Complete |
-| **GenieCloud XML Mapping** | `PLS_GENIECLOUD_XML_MAPPING_v1.md` | 1.0 | ✅ Complete |
-| **Database Schema (Relational)** | `PLS_DATABASE_SCHEMA_RELATIONAL_v1.md` | 1.0 | ✅ Complete |
-| **Wireframe Specifications** | `PLS_WIREFRAME_SPECIFICATIONS_v1.md` | 1.0 | ✅ Complete |
-| **DRA-2026 Compliance** | `PLS_DRA_2026_COMPLIANCE_v1.md` | 1.0 | ✅ Complete |
+### Master Project Documents (DRA-2026 Compliant) ⭐ **START HERE**
 
-### Specifications
-| Document | Location | Version |
-|----------|----------|---------|
-| **Field Mapping Analysis** | `TITLEDATA_TO_MLSLISTING_FIELD_MAPPING_ANALYSIS_v1.md` | 1.0 |
-| **Database Implementation Spec** | `../PLS_DATABASE_IMPLEMENTATION_SPEC_v1.md` | 1.0 |
-| **UI Specification** | `../PLS_UI_SPECIFICATION_v1.md` | 1.0 |
-| **XML Generation Spec** | `../PLS_XML_GENERATION_SPEC_v1.md` | 1.0 |
-| **Friday Prototype Roadmap** | `../PLS_FRIDAY_PROTOTYPE_ROADMAP_v1.md` | 1.0 |
-| **RESO Insert Opportunity** | `../RESO_INSERT_OPPORTUNITY_ANALYSIS_v1.md` | 1.0 |
+| Document | GitHub Link | Version | Status |
+|----------|-------------|---------|--------|
+| **Project Blueprint** | [PLS_RESO_ENGINE_PROJECT_BLUEPRINT_v2.0.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete/01_Master_Documents/PLS_RESO_ENGINE_PROJECT_BLUEPRINT_v2.0.md) | 2.0 | ✅ **MASTER BLUEPRINT** |
+| **Ecosystem Document Catalog** | [PLS_ECOSYSTEM_DOCUMENT_CATALOG_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete/01_Master_Documents/PLS_ECOSYSTEM_DOCUMENT_CATALOG_v1.md) | 1.0 | ✅ Complete |
+| **User Journey - Paisley Integration** | [PLS_USER_JOURNEY_PAISLEY_INTEGRATION_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete/01_Master_Documents/PLS_USER_JOURNEY_PAISLEY_INTEGRATION_v1.md) | 1.0 | ✅ Complete |
+| **Database Schema (Relational)** | [PLS_DATABASE_SCHEMA_RELATIONAL_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete/01_Master_Documents/PLS_DATABASE_SCHEMA_RELATIONAL_v1.md) | 1.0 | ✅ Complete |
+| **GenieCloud XML Mapping** | [PLS_GENIECLOUD_XML_MAPPING_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete/01_Master_Documents/PLS_GENIECLOUD_XML_MAPPING_v1.md) | 1.0 | ✅ Complete |
+| **Wireframe Specifications** | [PLS_WIREFRAME_SPECIFICATIONS_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete/01_Master_Documents/PLS_WIREFRAME_SPECIFICATIONS_v1.md) | 1.0 | ✅ Complete |
+| **3-Layer Gap Analysis** | [PLS_3_LAYER_GAP_ANALYSIS_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete/01_Master_Documents/PLS_3_LAYER_GAP_ANALYSIS_v1.md) | 1.0 | ✅ Complete |
+| **GenieCloud Contract** ⭐⭐⭐ | [CONTRACT_PLS_to_GenieCloud_v6.1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete/01_Master_Documents/CONTRACT_PLS_to_GenieCloud_v6.1.md) | 6.1 | ✅ **CRITICAL - XML Contract** |
+| **Field Mapping Analysis** | [TITLEDATA_TO_MLSLISTING_FIELD_MAPPING_ANALYSIS_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete/01_Master_Documents/TITLEDATA_TO_MLSLISTING_FIELD_MAPPING_ANALYSIS_v1.md) | 1.0 | ✅ Complete |
+| **Master Specification** | [PLS_MASTER_SPECIFICATION_v3.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete/01_Master_Documents/PLS_MASTER_SPECIFICATION_v3.md) | 3.0 | ✅ Complete |
 
-### Workspace Memory Logs
-| Document | Date | Focus |
-|----------|------|-------|
-| **PLS RESO Engine Log** | 12/30/2025 | Complete PLS RESO Engine discovery |
-| **MLS Data Discovery Log** | 12/30/2025 | MLS data operation reverse engineering |
+### Deployment & Scripts
+
+| Document | GitHub Link | Version | Status |
+|----------|-------------|---------|--------|
+| **Complete Deployment Guide** | [PLS_COMPLETE_DEPLOYMENT_READY_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete/02_Scripts/PLS_COMPLETE_DEPLOYMENT_READY_v1.md) | 1.0 | ✅ Ready |
+| **Database Schema Extensions** | [PLS_SCHEMA_EXTENSIONS_NORMALIZED_v3.sql](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete/02_Scripts/PLS_SCHEMA_EXTENSIONS_NORMALIZED_v3.sql) | 3.0 | ✅ Ready |
+| **PLS Number Sequence** | [PLS_DATABASE_PLSNUMBER_SEQUENCE_v4.sql](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete/02_Scripts/PLS_DATABASE_PLSNUMBER_SEQUENCE_v4.sql) | 4.0 | ✅ Ready |
+| **Master Data** | [PLS_DATABASE_MASTER_DATA_v3.sql](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete/02_Scripts/PLS_DATABASE_MASTER_DATA_v3.sql) | 3.0 | ✅ Ready |
+| **Stored Procedures** | [PLS_STORED_PROCEDURES_COMPLETE_v1.sql](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete/02_Scripts/PLS_STORED_PROCEDURES_COMPLETE_v1.sql) | 1.0 | ✅ Ready |
+
+### Agent Collaboration & Role Introductions
+
+| Document | GitHub Link | Version | Status |
+|----------|-------------|---------|--------|
+| **Role Introductions Index** | [ROLE_INTRODUCTIONS_INDEX_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete/AgentCollaboration/ROLE_INTRODUCTIONS_INDEX_v1.md) | 1.0 | ✅ Complete |
+| **Database Specialist** | [ROLE_INTRODUCTION_DATABASE_SPECIALIST_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete/AgentCollaboration/ROLE_INTRODUCTION_DATABASE_SPECIALIST_v1.md) | 1.0 | ✅ Complete |
+| **Backend API Specialist** | [ROLE_INTRODUCTION_BACKEND_API_SPECIALIST_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete/AgentCollaboration/ROLE_INTRODUCTION_BACKEND_API_SPECIALIST_v1.md) | 1.0 | ✅ Complete |
+| **Frontend UI Specialist** | [ROLE_INTRODUCTION_FRONTEND_UI_SPECIALIST_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete/AgentCollaboration/ROLE_INTRODUCTION_FRONTEND_UI_SPECIALIST_v1.md) | 1.0 | ✅ Complete |
+| **XML/Integration Specialist** | [ROLE_INTRODUCTION_XML_INTEGRATION_SPECIALIST_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete/AgentCollaboration/ROLE_INTRODUCTION_XML_INTEGRATION_SPECIALIST_v1.md) | 1.0 | ✅ Complete |
+| **DevOps Specialist** | [ROLE_INTRODUCTION_DEVOPS_SPECIALIST_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete/AgentCollaboration/ROLE_INTRODUCTION_DEVOPS_SPECIALIST_v1.md) | 1.0 | ✅ Complete |
+
+### Legacy Documents (MLS_Parsers Location)
+
+**Note:** Some legacy documents remain in `MLS_Parsers/PLS_RESO_ENGINE/` for historical reference. All active work is in `PLS_PreListing_Command_Complete/`.
 
 ---
 
@@ -211,8 +228,15 @@ This is the **SINGLE SOURCE OF TRUTH** for all TheGenie.ai development documenta
 **Master Documentation:**
 | Document | Location | Version | Status |
 |----------|----------|---------|--------|
-| **Complete Pipeline Fix** | `Frank/COMPLETE_PIPELINE_FIX_v3.md` | 3.1 | ✅ **SINGLE SOURCE OF TRUTH** - All pipeline configuration |
+| **Master Troubleshooting Guide** | `MASTER_TROUBLESHOOTING_GUIDE_DRA2026_v1.md` | 1.0 | ✅ **SINGLE SOURCE OF TRUTH** - All troubleshooting procedures, diagnostics, server access, Visual Studio, backup/restore |
+| **The Deployment Prompt (Beta)** | `../CI_CD_Pipelines/Handoffs/THE_DEPLOYMENT_PROMPT_v5.0.md` | 5.0 | ✅ **LATEST** - Complete end-to-end workflow, timeline estimates, Stage backup, compatibility audit |
+| **Iron-Clad Deployment Process** | `Danny/IRONCLAD_DEPLOYMENT_PROCESS_v1.md` | 1.0 | ✅ **NEW** - Complete deployment process with automation, isolation, rollback |
+| **Complete System Status** | `Danny/COMPLETE_SYSTEM_STATUS_v1.md` | 1.0 | ✅ **NEW** - System health, automation status, documentation inventory |
+| **Final Clean Slate Summary** | `Danny/FINAL_CLEAN_SLATE_SUMMARY_v1.md` | 1.0 | ✅ **NEW** - Clean slate achievement, ready for PLS UI development |
+| **Root Cause Analysis** | `Danny/ROOT_CAUSE_ANALYSIS_v1.md` | 1.0 | ✅ Sandbox authentication failure analysis |
+| **Complete Pipeline Fix** | `Frank/COMPLETE_PIPELINE_FIX_v3.md` | 3.1 | ✅ All pipeline configuration |
 | **Workspace Memory Log** | `WORKSPACE_MEMORY_LOG_2026_01_07_v1.md` | 1.0 | ✅ Complete session documentation |
+| **Handoff to Competent Agent** | `HANDOFF_TO_COMPETENT_AGENT_v2.md` | 2.0 | ✅ Complete failure analysis, skillset requirements, document chain |
 
 **Key Findings (01/06-01/07/2026):**
 - **Missing error.txt:** `C:\1PP\Temp\Reports\error.txt` required for report downloads
@@ -229,6 +253,9 @@ This is the **SINGLE SOURCE OF TRUTH** for all TheGenie.ai development documenta
 - **Staging:** ⚠️ Needs verification to ensure same updates applied
 
 **Key Scripts:**
+- `Danny/AUTOMATED_PRE_COMMIT_BACKUP_v1.ps1` - ✅ **NEW** - Automatic backup before check-in (no human intervention)
+- `Danny/SYNC_PRODUCTION_TO_ALL_ENVIRONMENTS_v1.ps1` - ✅ **NEW** - Sync Production → Stage → Sandbox
+- `Danny/CLEAN_VS_WARNINGS_v1.ps1` - ✅ **NEW** - Clean Visual Studio warnings
 - `FIX_FACEBOOK_LOGO_FONTS_v2.ps1` - Font fix diagnostic and deployment
 - `FIX_MISSING_ERROR_FILE_v2.ps1` - error.txt creation script
 - `FIX_ALL_PIPELINES_v4.ps1` - Automation script (requires task ID fixes)
@@ -275,6 +302,12 @@ This is the **SINGLE SOURCE OF TRUTH** for all TheGenie.ai development documenta
 
 | Version | Date | Changes |
 |:-------:|------|---------|
+| 4.12 | 01/13/2026 4:50 AM | **DRA-2026 MASTER POLICY:** Created consolidated DRA_2026_POLICY_v1.md master document. All previous DRA-2026 iterations consolidated into single source of truth. Added DRA-2026 to Master Documents table and Rules & Standards section. DRA-2026 is now the #1 policy for document management, equal to Master Rules. Applies to ALL workspaces, chat sessions, projects, and documents. Linked from Master Rules (Rule 11), Master Index, and Project Universe Dashboard. |
+| 4.11 | 01/11/2026 3:00 AM | **DEPLOYMENT PROMPT v5.0:** Updated Master Index with link to THE_DEPLOYMENT_PROMPT_v5.0.md. v5.0 includes complete end-to-end workflow (13 phases from check-in to production), timeline/runway estimates, Stage pre-deployment backup requirement, Quick Reference section, Success Criteria for each phase, and Compatibility Audit findings integrated. Comprehensive Azure DevOps pipeline audit in progress to ensure 100% compliance with Deployment Prompt SOP. |
+| 4.10 | 01/11/2026 2:45 AM | **CLEAN SLATE ACHIEVED - IRON-CLAD DEPLOYMENT PROCESS:** Complete system sync (Production → Stage → Sandbox). Automated pre-commit backup configured (no human intervention). Iron-clad deployment process documented with environment isolation, automatic rollback, and complete safeguards. Created comprehensive documentation: IRONCLAD_DEPLOYMENT_PROCESS_v1.md, COMPLETE_SYSTEM_STATUS_v1.md, FINAL_CLEAN_SLATE_SUMMARY_v1.md. Key scripts: AUTOMATED_PRE_COMMIT_BACKUP_v1.ps1, SYNC_PRODUCTION_TO_ALL_ENVIRONMENTS_v1.ps1. System ready for PLS UI development with complete protection. |
+| 4.9 | 01/11/2026 12:20 AM | **MASTER TROUBLESHOOTING GUIDE & DEPLOYMENT PROMPT v4.0:** Added Master Troubleshooting Guide (DRA-2026 compliant) consolidating all diagnostics, server access (UNC, PowerShell remoting, RDP), Visual Studio operations, backup/restore procedures, timeout solutions, authentication troubleshooting, and code check-in best practices. Updated Deployment Prompt to v4.0 with mandatory pre-commit backup policy and sandbox restore lessons learned. Documented complete A-Z sandbox backup (SANDBOX_COMPLETE_BACKUP_AZ_20260111_000643). Added links to both documents in Server Troubleshooting section. |
+| 4.8 | 01/10/2026 3:15 AM | **PLS RESO ENGINE ROLLBACK FIX:** Updated PLS RESO Engine Project Blueprint to v1.15. Documented critical rollback failure: DLL.config was missing from backup/restore procedures. Updated Deployment Prompt Beta section to include DLL.config in all backup/rollback scripts. This is why rollback didn't work - DLL.config contains connection strings loaded at startup. |
+| 4.7 | 01/08/2026 | **HANDOFF DOCUMENT ADDED:** Added HANDOFF_TO_COMPETENT_AGENT_v2.md to Server Troubleshooting & Pipeline Fixes section. Document contains complete failure analysis, required skillset (Azure DevOps PhD), document chain (8 previous handoffs), DevOps disaster explanation (predecessor agent's configuration), file location map, and maintenance requirements. Agent admitted incompetence and documented all mistakes. |
 | 4.6 | 01/07/2026 | **SERVER TROUBLESHOOTING & PIPELINE FIXES:** Added Server Troubleshooting & Pipeline Fixes section to DevOps Ecosystem Management. Documented production deployment (01/07/2026) with all fixes (fonts, error.txt, folders). Added master documentation links (COMPLETE_PIPELINE_FIX_v3.md, WORKSPACE_MEMORY_LOG_2026_01_07_v1.md). Documented key findings: missing error.txt, missing Font Awesome fonts, Publish Artifact path configuration, required folders deployment. |
 | 4.5 | 01/06/2026 | **SQL CLONE PROJECT BUG FIX:** Identified and fixed critical bug in v1 script (attempted to write temp SQL files to inaccessible K: drive). Updated reference document to use v2 script which uses local `$env:TEMP` directory. Updated master index with correct project location (Infrastructure/1pp-SQLServer-universe/) and script names. v2 script is production-ready. |
 | 4.4 | 01/06/2026 | **SQL CLONE PROJECT COMPLETE:** Fixed all PowerShell syntax errors, successfully tested clone on smallest database (RTK_LISTING_UPLOADS). Created working full clone script (FULL_CLONE_ALL_DATABASES_v1.ps1) executing in background. Created comprehensive database deployment process documentation (DATABASE_DEPLOYMENT_PROCESS_v1.md) covering VS 2022 development → check-in → build → release → staging → production workflow. All documentation DRA-2026 compliant. |

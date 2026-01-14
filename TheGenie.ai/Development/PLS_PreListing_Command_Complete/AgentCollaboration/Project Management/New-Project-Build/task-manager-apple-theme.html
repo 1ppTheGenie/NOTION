@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager - Apple Minimalist Theme</title>
+    <!-- SF Pro Font -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.8/index.css">
+    <style>
+        /* SF Pro approximation - use Inter as fallback, or system SF on Mac */
+        @font-face {
+            font-family: 'SF Pro Display';
+            src: local('.SF NS Display'), local('.SFNSDisplay'), local('.SF Pro Display'), local('SF Pro Display');
+            font-weight: 100 900;
+        }
+        
+        @font-face {
+            font-family: 'SF Pro Text';
+            src: local('.SF NS Text'), local('.SFNSText'), local('.SF Pro Text'), local('SF Pro Text');
+            font-weight: 100 900;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            /* Apple-style colors */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f5f5f7;
+            --bg-tertiary: #fbfbfd;
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --text-tertiary: #aeaeb2;
+            --accent: #0071e3;
+            --accent-hover: #0077ed;
+            --border: #d2d2d7;
+            --border-light: #e8e8ed;
+            --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --card-shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --modal-shadow: 0 24px 80px rgba(0, 0, 0, 0.12);
+            
+            /* Status colors - muted Apple style */
+            --status-gray: #8e8e93;
+            --status-blue: #007aff;
+            --status-orange: #ff9500;
+            --status-purple: #af52de;
+            --status-green: #34c759;
+            --status-red: #ff3b30;
+        }
+        
+        body {
+            font-family: 'SF Pro Text', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-size: 14px;
+            line-height: 1.47059;
+            letter-spacing: -0.022em;
+        }
+        
+        /* Header - Apple style thin bar */
+        .header {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .back-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 18px;
+            transition: background 0.2s;
+        }
+        
+        .back-btn:hover {
+            background: var(--bg-secondary);
+        }
+        
+        .project-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.022em;
+        }
+        
+        .project-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            letter-spacing: -0.008em;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .user-name {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            font-size: 13px;
+        }
+        
+        .logout-btn {
+            color: var(--text-secondary);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        
+        .logout-btn:hover {
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+        }
+        
+        /* Board */
+        .board {
+            padding: 24px;
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            min-height: calc(100vh - 60px);
+        }
+        
+        /* Column - Apple Card style */
+        .column {
+            width: 300px;
+            min-width: 300px;
+            background: var(--bg-primary);
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            max-height: calc(100vh - 108px);
+        }
+        
+        .column-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .column-title-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        
+        .column-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 15px;
+            letter-spacing: -0.016em;
+        }
+        
+        .task-count {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 500;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        
+        .add-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 7px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            color: var(--text-tertiary);
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .add-btn:hover {
+            background: var(--bg-secondary);
+            color: var(--accent);
+        }
+        
+        .tasks-container {
+            flex: 1;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            overflow-y: auto;
+        }
+        
+        /* Task Card - Ultra clean Apple style */
+        .task-card {
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+            padding: 14px 16px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        .task-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            bottom: 12px;
+            width: 3px;
+            border-radius: 2px;
+        }
+        
+        .task-card:hover {
+            background: var(--bg-primary);
+            border-color: var(--border-light);
+            box-shadow: var(--card-shadow-hover);
+        }
+        
+        .task-card.priority-low::before { background: var(--status-gray); }
+        .task-card.priority-medium::before { background: var(--status-blue); }
+        .task-card.priority-high::before { background: var(--status-orange); }
+        .task-card.priority-urgent::before { background: var(--status-red); }
+        
+        .task-title {
+            font-weight: 500;
+            color: var(--text-primary);
+            font-size: 14px;
+            margin-bottom: 4px;
+            line-height: 1.4;
+            letter-spacing: -0.016em;
+            padding-left: 8px;
+        }
+        
+        .task-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            margin-bottom: 12px;
+            padding-left: 8px;
+            letter-spacing: -0.008em;
+        }
+        
+        .task-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 8px;
+        }
+        
+        .task-meta-left {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+        
+        .meta-item.overdue {
+            color: var(--status-red);
+        }
+        
+        .priority-badge {
+            font-size: 11px;
+            font-weight: 500;
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+        
+        .priority-badge.high {
+            background: rgba(255, 149, 0, 0.12);
+            color: #c77700;
+        }
+        
+        .priority-badge.urgent {
+            background: rgba(255, 59, 48, 0.12);
+            color: #d70015;
+        }
+        
+        .assignee {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+        
+        /* Empty state */
+        .empty-state {
+            color: var(--text-tertiary);
+            text-align: center;
+            padding: 32px 16px;
+            font-size: 13px;
+        }
+        
+        /* Section Divider */
+        .section-divider {
+            text-align: center;
+            padding: 32px;
+            background: var(--text-primary);
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        
+        /* Login Page */
+        .login-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-secondary);
+            padding: 40px;
+        }
+        
+        .login-card {
+            background: var(--bg-primary);
+            border-radius: 18px;
+            padding: 48px 40px;
+            width: 380px;
+            box-shadow: var(--modal-shadow);
+            text-align: center;
+        }
+        
+        .login-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, var(--accent) 0%, #5856d6 100%);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 32px;
+        }
+        
+        .login-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.026em;
+            margin-bottom: 8px;
+        }
+        
+        .login-subtitle {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+            text-align: left;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: inherit;
+            background: var(--bg-tertiary);
+            transition: all 0.2s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15);
+        }
+        
+        .form-input::placeholder {
+            color: var(--text-tertiary);
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 8px;
+        }
+        
+        .login-btn:hover {
+            background: var(--accent-hover);
+        }
+        
+        .login-footer {
+            margin-top: 24px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .login-footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Dashboard */
+        .dashboard {
+            padding: 32px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+        }
+        
+        .dashboard-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.026em;
+        }
+        
+        .new-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .new-btn:hover {
+            background: var(--accent-hover);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+        }
+        
+        .project-card {
+            background: var(--bg-primary);
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .project-card:hover {
+            box-shadow: var(--card-shadow-hover);
+            transform: translateY(-1px);
+        }
+        
+        .project-name {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            letter-spacing: -0.022em;
+        }
+        
+        .project-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        
+        .project-meta {
+            font-size: 13px;
+            color: var(--text-tertiary);
+        }
+        
+        /* Theme label */
+        .theme-label {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--text-primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            box-shadow: var(--modal-shadow);
+        }
+    </style>
+</head>
+<body>
+    <!-- LOGIN -->
+    <div class="section-divider">Login Screen</div>
+    <div class="login-section">
+        <div class="login-card">
+            <div class="login-icon">📋</div>
+            <div class="login-title">Task Manager</div>
+            <div class="login-subtitle">Sign in to your workspace</div>
+            
+            <div class="form-group">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-input" placeholder="you@company.com">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-input" placeholder="Enter your password">
+            </div>
+            
+            <button class="login-btn">Sign In</button>
+            
+            <div class="login-footer">
+                Don't have an account? <a href="#">Create one</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- DASHBOARD -->
+    <div class="section-divider">Dashboard - Projects</div>
+    <div style="background: var(--bg-secondary);">
+        <div class="header">
+            <div class="header-left">
+                <span style="font-size: 20px;">📋</span>
+                <span class="project-title">Task Manager</span>
+            </div>
+            <div class="header-right">
+                <span class="user-name">Steve</span>
+                <div class="avatar">S</div>
+            </div>
+        </div>
+        
+        <div class="dashboard">
+            <div class="dashboard-header">
+                <div class="dashboard-title">Projects</div>
+                <button class="new-btn">
+                    <span>+</span>
+                    <span>New Project</span>
+                </button>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-name">FarmGenie Recovery</div>
+                    <div class="project-description">Production system recovery and stabilization tasks</div>
+                    <div class="project-meta">12 tasks · Steve</div>
+                </div>
+                <div class="project-card">
+                    <div class="project-name">SMS Automation</div>
+                    <div class="project-description">Restore revenue-generating SMS notification systems</div>
+                    <div class="project-meta">8 tasks · Steve</div>
+                </div>
+                <div class="project-card">
+                    <div class="project-name">Database Migration</div>
+                    <div class="project-description">September 2024 backup restoration project</div>
+                    <div class="project-meta">5 tasks · Steve</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- KANBAN BOARD -->
+    <div class="section-divider">Kanban Board</div>
+    <div class="header">
+        <div class="header-left">
+            <button class="back-btn">←</button>
+            <div>
+                <div class="project-title">FarmGenie Recovery</div>
+                <div class="project-desc">Production system recovery tasks</div>
+            </div>
+        </div>
+        <div class="header-right">
+            <span class="user-name">Steve</span>
+            <div class="avatar">S</div>
+            <button class="logout-btn">⎋</button>
+        </div>
+    </div>
+    
+    <div class="board">
+        <!-- Backlog -->
+        <div class="column">
+            <div class="column-header">
+                <div class="column-title-group">
+                    <div class="status-dot" style="background: var(--status-gray);"></div>
+                    <span class="column-title">Backlog</span>
+                    <span class="task-count">4</span>
+                </div>
+                <button class="add-btn">+</button>
+            </div>
+            <div class="tasks-container">
+                <div class="task-card priority-high">
+                    <div class="task-title">DB-001: Execute PLS_SCHEMA_EXTENSIONS</div>
+                    <div class="task-desc">Create all PLS tables</div>
+                    <div class="task-meta">
+                        <div class="task-meta-left">
+                            <span class="priority-badge high">High</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="task-card priority-high">
+                    <div class="task-title">DB-002: Execute PLS_DATABASE_PLSNUMBER</div>
+                    <div class="task-desc">PLS number generation</div>
+                    <div class="task-meta">
+                        <div class="task-meta-left">
+                            <span class="priority-badge high">High</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="task-card priority-medium">
+                    <div class="task-title">DB-003: Execute MASTER_DATA_v3.sql</div>
+                    <div class="task-desc">Master data inserts</div>
+                    <div class="task-meta">
+                        <div class="task-meta-left">
+                            <span class="meta-item">📅 Jan 20</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="task-card priority-urgent">
+                    <div class="task-title">DB-004: Execute STORED_PROCEDURES</div>
+                    <div class="task-desc">All stored procedures</div>
+                    <div class="task-meta">
+                        <div class="task-meta-left">
+                            <span class="priority-badge urgent">Urgent</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- To Do -->
+        <div class="column">
+            <div class="column-header">
+                <div class="column-title-group">
+                    <div class="status-dot" style="background: var(--status-blue);"></div>
+                    <span class="column-title">To Do</span>
+                    <span class="task-count">0</span>
+                </div>
+                <button class="add-btn">+</button>
+            </div>
+            <div class="tasks-container">
+                <div class="empty-state">No tasks</div>
+            </div>
+        </div>
+        
+        <!-- In Progress -->
+        <div class="column">
+            <div class="column-header">
+                <div class="column-title-group">
+                    <div class="status-dot" style="background: var(--status-orange);"></div>
+                    <span class="column-title">In Progress</span>
+                    <span class="task-count">2</span>
+                </div>
+                <button class="add-btn">+</button>
+            </div>
+            <div class="tasks-container">
+                <div class="task-card priority-medium">
+                    <div class="task-title">DEPLOY-001: Create deployment scripts</div>
+                    <div class="task-desc">PowerShell/Python supporting all phases</div>
+                    <div class="task-meta">
+                        <div class="task-meta-left">
+                            <span class="meta-item">📅 Jan 15</span>
+                        </div>
+                        <span class="assignee">Steve</span>
+                    </div>
+                </div>
+                <div class="task-card priority-medium">
+                    <div class="task-title">DEPLOY-002: Set up Sandbox environment</div>
+                    <div class="task-desc">Test environment configuration</div>
+                    <div class="task-meta">
+                        <div class="task-meta-left">
+                            <span class="meta-item">📅 Jan 16</span>
+                        </div>
+                        <span class="assignee">Steve</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- In Review -->
+        <div class="column">
+            <div class="column-header">
+                <div class="column-title-group">
+                    <div class="status-dot" style="background: var(--status-purple);"></div>
+                    <span class="column-title">In Review</span>
+                    <span class="task-count">0</span>
+                </div>
+                <button class="add-btn">+</button>
+            </div>
+            <div class="tasks-container">
+                <div class="empty-state">No tasks</div>
+            </div>
+        </div>
+        
+        <!-- Done -->
+        <div class="column">
+            <div class="column-header">
+                <div class="column-title-group">
+                    <div class="status-dot" style="background: var(--status-green);"></div>
+                    <span class="column-title">Done</span>
+                    <span class="task-count">0</span>
+                </div>
+                <button class="add-btn">+</button>
+            </div>
+            <div class="tasks-container">
+                <div class="empty-state">No tasks</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="theme-label">Apple Minimalist Theme · SF Pro</div>
+</body>
+</html>
