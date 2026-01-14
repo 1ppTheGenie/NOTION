@@ -148,32 +148,49 @@ This is the **SINGLE SOURCE OF TRUTH** for all TheGenie.ai development documenta
 | **XML/Integration Specialist** | [ROLE_INTRODUCTION_XML_INTEGRATION_SPECIALIST_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete/AgentCollaboration/ROLE_INTRODUCTION_XML_INTEGRATION_SPECIALIST_v1.md) | 1.0 | ✅ Complete |
 | **DevOps Specialist** | [ROLE_INTRODUCTION_DEVOPS_SPECIALIST_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/PLS_PreListing_Command_Complete/AgentCollaboration/ROLE_INTRODUCTION_DEVOPS_SPECIALIST_v1.md) | 1.0 | ✅ Complete |
 
-### Legacy Documents (MLS_Parsers Location)
+### MLS Parsers Folder ⭐ **VALUABLE WORK - RESO & BRIDGE RESEARCH**
 
-**Note:** Some legacy documents remain in `MLS_Parsers/PLS_RESO_ENGINE/` for historical reference. All active work is in `PLS_PreListing_Command_Complete/`.
+**Location:** `D:\Cursor\TheGenie.ai\Development\MLS_Parsers\`  
+**GitHub:** [MLS_Parsers](https://github.com/1ppTheGenie/NOTION/tree/main/TheGenie.ai/Development/MLS_Parsers)  
+**Purpose:** MLS data operation reverse engineering, Bridge/Trestle API research, RESO Insert opportunity analysis
+
+| Document | GitHub Link | Version | Status |
+|----------|-------------|---------|--------|
+| **MLS Data Operation Reverse Engineering** | [MLS_DATA_OPERATION_REVERSE_ENGINEERING_DISCOVERY_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/MLS_Parsers/MLS_DATA_OPERATION_REVERSE_ENGINEERING_DISCOVERY_v1.md) | 1.0 | ✅ Complete |
+| **RESO Insert Opportunity** | [RESO_INSERT_OPPORTUNITY_ANALYSIS_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/MLS_Parsers/RESO_INSERT_OPPORTUNITY_ANALYSIS_v1.md) | 1.0 | ✅ Complete |
+| **Bridge API Documentation** | [BRIDGE_API_DOCUMENTATION_REFERENCE_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/MLS_Parsers/BRIDGE_API_DOCUMENTATION_REFERENCE_v1.md) | 1.0 | ✅ Complete |
+| **Bridge API Write Capability** | [BRIDGE_API_WRITE_CAPABILITY_ANALYSIS_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/MLS_Parsers/BRIDGE_API_WRITE_CAPABILITY_ANALYSIS_v1.md) | 1.0 | ✅ Complete |
+| **Trestle & RESO Write Capabilities** | [TRESTLE_AND_RESO_WRITE_CAPABILITIES_RESEARCH_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/MLS_Parsers/TRESTLE_AND_RESO_WRITE_CAPABILITIES_RESEARCH_v1.md) | 1.0 | ✅ Complete |
+| **PLS Database Implementation Spec** | [PLS_DATABASE_IMPLEMENTATION_SPEC_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/MLS_Parsers/PLS_DATABASE_IMPLEMENTATION_SPEC_v1.md) | 1.0 | ✅ Complete |
+| **PLS UI Specification** | [PLS_UI_SPECIFICATION_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/MLS_Parsers/PLS_UI_SPECIFICATION_v1.md) | 1.0 | ✅ Complete |
+| **PLS XML Generation Spec** | [PLS_XML_GENERATION_SPEC_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/MLS_Parsers/PLS_XML_GENERATION_SPEC_v1.md) | 1.0 | ✅ Complete |
+| **Friday Prototype Roadmap** | [PLS_FRIDAY_PROTOTYPE_ROADMAP_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/MLS_Parsers/PLS_FRIDAY_PROTOTYPE_ROADMAP_v1.md) | 1.0 | ✅ Complete |
+
+**Note:** Legacy documents in `MLS_Parsers/PLS_RESO_ENGINE/` are for historical reference. All active work is in `PLS_PreListing_Command_Complete/`.
 
 ---
 
-## 🎯 TITLEGENIE
+## 🎯 TITLEGENIE ⭐ **PROPERTY DATA SOURCE**
 
 **Location:** `D:\Cursor\TheGenie.ai\Development\TitleGenie\`  
-**Purpose:** Title company integration and property profile system for pre-listing research
+**GitHub:** [TitleGenie](https://github.com/1ppTheGenie/NOTION/tree/main/TheGenie.ai/Development/TitleGenie)  
+**Purpose:** Title company integration and property profile system for pre-listing research (provides property data for PLS pre-population)
 
 ### Master Project Documents (DRA-2026 Compliant)
-| Document | Location | Version | Status |
-|----------|----------|---------|--------|
-| **MVP Roadmap & GTM Plan** | `TITLEGENIE_MVP_ROADMAP_GTM_PLAN_v2.md` | 2.0 | ✅ Canonical |
-| **Discovery Compilation** | `Discovery/TITLEGENIE_DISCOVERY_COMPILATION_v1.2.md` | 1.2 | ✅ Canonical |
-| **Master Compilation** | `TITLEGENIE_MASTER_COMPILATION_v1.md` | 1.0 | ✅ Canonical |
-| **Complete Strategy Compilation** | `TITLEGENIE_COMPLETE_STRATEGY_COMPILATION_v1.md` | 1.0 | ✅ Canonical |
-| **Paisley Dashboard Design** | `TITLEGENIE_PAISLEY_DASHBOARD_DESIGN_v1.md` | 1.0 | ✅ Active |
+| Document | GitHub Link | Version | Status |
+|----------|-------------|---------|--------|
+| **MVP Roadmap & GTM Plan** | [TITLEGENIE_MVP_ROADMAP_GTM_PLAN_v2.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/TitleGenie/TITLEGENIE_MVP_ROADMAP_GTM_PLAN_v2.md) | 2.0 | ✅ Canonical |
+| **Discovery Compilation** | [TITLEGENIE_DISCOVERY_COMPILATION_v1.2.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/TitleGenie/Discovery/TITLEGENIE_DISCOVERY_COMPILATION_v1.2.md) | 1.2 | ✅ Canonical |
+| **Master Compilation** | [TITLEGENIE_MASTER_COMPILATION_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/TitleGenie/TITLEGENIE_MASTER_COMPILATION_v1.md) | 1.0 | ✅ Canonical |
+| **Complete Strategy Compilation** | [TITLEGENIE_COMPLETE_STRATEGY_COMPILATION_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/TitleGenie/TITLEGENIE_COMPLETE_STRATEGY_COMPILATION_v1.md) | 1.0 | ✅ Canonical |
+| **Paisley Dashboard Design** | [TITLEGENIE_PAISLEY_DASHBOARD_DESIGN_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/TitleGenie/TITLEGENIE_PAISLEY_DASHBOARD_DESIGN_v1.md) | 1.0 | ✅ Active |
 
 ### GTM & Operations
-| Document | Location | Version | Status |
-|----------|----------|---------|--------|
-| **Outreach Email Sequence** | `GTM/TITLEGENIE_OUTREACH_EMAIL_SEQUENCE_v1.md` | 1.0 | ✅ Active |
-| **Trial Experience** | `GTM/TITLEGENIE_TRIAL_EXPERIENCE_v1.md` | 1.0 | ✅ Active |
-| **Onboarding SOP** | `SOPs/TITLEGENIE_ONBOARDING_SOP_v1.md` | 1.0 | ✅ Active |
+| Document | GitHub Link | Version | Status |
+|----------|-------------|---------|--------|
+| **Outreach Email Sequence** | [TITLEGENIE_OUTREACH_EMAIL_SEQUENCE_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/TitleGenie/GTM/TITLEGENIE_OUTREACH_EMAIL_SEQUENCE_v1.md) | 1.0 | ✅ Active |
+| **Trial Experience** | [TITLEGENIE_TRIAL_EXPERIENCE_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/TitleGenie/GTM/TITLEGENIE_TRIAL_EXPERIENCE_v1.md) | 1.0 | ✅ Active |
+| **Onboarding SOP** | [TITLEGENIE_ONBOARDING_SOP_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/TitleGenie/SOPs/TITLEGENIE_ONBOARDING_SOP_v1.md) | 1.0 | ✅ Active |
 
 ---
 
