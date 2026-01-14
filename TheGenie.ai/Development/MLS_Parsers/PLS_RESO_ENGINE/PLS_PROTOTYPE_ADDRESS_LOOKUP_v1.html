@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLS Address Lookup Prototype</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            padding: 24px;
+            color: #212529;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            padding: 32px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            color: #6c757d;
+            margin-bottom: 32px;
+        }
+        
+        .form-section {
+            margin-bottom: 32px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #495057;
+        }
+        
+        label.required::after {
+            content: " *";
+            color: #e74c3c;
+        }
+        
+        input, select {
+            height: 40px;
+            padding: 8px 12px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #3498db;
+            border-width: 2px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        
+        button {
+            height: 40px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        button.primary {
+            background: #3498db;
+            color: white;
+        }
+        
+        button.primary:hover {
+            background: #2980b9;
+        }
+        
+        button.secondary {
+            background: transparent;
+            color: #3498db;
+            border: 1px solid #3498db;
+        }
+        
+        button.secondary:hover {
+            background: #f8f9fa;
+        }
+        
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .results-section {
+            margin-top: 32px;
+            padding: 24px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .results-section.visible {
+            display: block;
+        }
+        
+        .data-source {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        
+        .data-source.titledata {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .data-source.mls {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .conflict-warning {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 12px 16px;
+            border-radius: 4px;
+            margin-top: 16px;
+            display: none;
+        }
+        
+        .conflict-warning.visible {
+            display: block;
+        }
+        
+        .conflict-warning strong {
+            color: #856404;
+        }
+        
+        .pre-populated-field {
+            background: #e8f5e9;
+            border-color: #4caf50;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 8px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .geo-coords {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PLS Address Lookup & Pre-Population</h1>
+        <p class="subtitle">Prototype UI for testing address lookup and data pre-population from TitleData + Historical MLS</p>
+        
+        <!-- STEP 1: ADDRESS INPUT -->
+        <div class="form-section">
+            <div class="section-title">Step 1: Property Address</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="streetNumber" class="required">Street Number</label>
+                    <input type="text" id="streetNumber" placeholder="10037">
+                </div>
+                <div class="form-group">
+                    <label for="streetName" class="required">Street Name</label>
+                    <input type="text" id="streetName" placeholder="Rebecca Place">
+                </div>
+                <div class="form-group">
+                    <label for="city" class="required">City</label>
+                    <input type="text" id="city" placeholder="Boerne">
+                </div>
+                <div class="form-group">
+                    <label for="state" class="required">State</label>
+                    <select id="state">
+                        <option value="TX" selected>TX</option>
+                        <option value="CA">CA</option>
+                        <option value="FL">FL</option>
+                        <!-- Add more states as needed -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="zip" class="required">Zip Code</label>
+                    <input type="text" id="zip" placeholder="78006" maxlength="5">
+                </div>
+            </div>
+            <div class="button-group">
+                <button class="primary" id="btnLookup" onclick="lookupAddress()">Lookup & Pre-Populate</button>
+                <button class="secondary" onclick="clearForm()">Clear</button>
+            </div>
+            <div class="geo-coords" id="geoCoords" style="display: none;"></div>
+        </div>
+        
+        <!-- STEP 2: PROPERTY DETAILS (Pre-populated) -->
+        <div class="form-section">
+            <div class="section-title">Step 2: Property Details</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="listPrice" class="required">List Price</label>
+                    <input type="number" id="listPrice" placeholder="$749,000">
+                </div>
+                <div class="form-group">
+                    <label for="bedrooms" class="required">Bedrooms</label>
+                    <input type="number" id="bedrooms" placeholder="4">
+                </div>
+                <div class="form-group">
+                    <label for="bathroomsFull" class="required">Bathrooms (Full)</label>
+                    <input type="number" id="bathroomsFull" placeholder="3">
+                </div>
+                <div class="form-group">
+                    <label for="bathroomsHalf">Bathrooms (Half)</label>
+                    <input type="number" id="bathroomsHalf" placeholder="0">
+                </div>
+                <div class="form-group">
+                    <label for="sqft" class="required">Square Feet</label>
+                    <input type="number" id="sqft" placeholder="3,018">
+                </div>
+                <div class="form-group">
+                    <label for="lotSize" class="required">Lot Size (sq ft)</label>
+                    <input type="number" id="lotSize" placeholder="9,101">
+                </div>
+                <div class="form-group">
+                    <label for="yearBuilt" class="required">Year Built</label>
+                    <input type="number" id="yearBuilt" placeholder="2022">
+                </div>
+                <div class="form-group">
+                    <label for="propertyType" class="required">Property Type</label>
+                    <select id="propertyType">
+                        <option value="">Select...</option>
+                        <option value="Single Family">Single Family</option>
+                        <option value="Condo">Condo</option>
+                        <option value="Townhouse">Townhouse</option>
+                        <option value="Multi-Family">Multi-Family</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="garageSpaces">Garage Spaces</label>
+                    <input type="number" id="garageSpaces" placeholder="3">
+                </div>
+                <div class="form-group">
+                    <label for="parkingSpaces">Parking Spaces</label>
+                    <input type="number" id="parkingSpaces" placeholder="3">
+                </div>
+            </div>
+            
+            <!-- Conflict Warning -->
+            <div class="conflict-warning" id="conflictWarning">
+                <strong>⚠️ Data Conflict Detected</strong>
+                <div id="conflictDetails"></div>
+            </div>
+        </div>
+        
+        <!-- RESULTS SECTION (Debug/API Response) -->
+        <div class="results-section" id="resultsSection">
+            <div class="section-title">API Response (Debug)</div>
+            <pre id="apiResponse"></pre>
+        </div>
+    </div>
+    
+    <script>
+        // Mock API endpoint (replace with actual endpoint when backend is ready)
+        const API_BASE = '/api/pls';
+        
+        async function lookupAddress() {
+            const streetNumber = document.getElementById('streetNumber').value;
+            const streetName = document.getElementById('streetName').value;
+            const city = document.getElementById('city').value;
+            const state = document.getElementById('state').value;
+            const zip = document.getElementById('zip').value;
+            
+            if (!streetNumber || !streetName || !city || !state || !zip) {
+                alert('Please fill in all required address fields');
+                return;
+            }
+            
+            const address = `${streetNumber} ${streetName}, ${city}, ${state} ${zip}`;
+            
+            const btnLookup = document.getElementById('btnLookup');
+            btnLookup.disabled = true;
+            btnLookup.innerHTML = 'Looking up... <span class="loading"></span>';
+            
+            try {
+                // TODO: Replace with actual API call
+                // const response = await fetch(`${API_BASE}/pre-populate`, {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify({ address })
+                // });
+                // const data = await response.json();
+                
+                // MOCK DATA for testing
+                const data = {
+                    titleData: {
+                        streetNumber: "10037",
+                        streetName: "Rebecca Place",
+                        city: "Boerne",
+                        state: "TX",
+                        zip: "78006",
+                        sqft: 2500,
+                        bedrooms: 4,
+                        bathroomsFull: 3,
+                        lotSize: 9101,
+                        yearBuilt: 2022,
+                        propertyType: "Single Family",
+                        garageSpaces: 3,
+                        parkingSpaces: 3,
+                        latitude: 29.72229,
+                        longitude: -98.68958
+                    },
+                    historicalMls: {
+                        sqft: 3018,
+                        bedrooms: 4,
+                        bathroomsFull: 3,
+                        lotSize: 9101,
+                        yearBuilt: 2022
+                    },
+                    conflicts: [
+                        {
+                            field: "sqft",
+                            titleDataValue: 2500,
+                            mlsValue: 3018,
+                            recommended: 3018,
+                            reason: "MLS value includes permitted expansion"
+                        }
+                    ]
+                };
+                
+                // Simulate API delay
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                populateForm(data);
+                showResults(data);
+                
+            } catch (error) {
+                console.error('Lookup error:', error);
+                alert('Error looking up address. Check console for details.');
+            } finally {
+                btnLookup.disabled = false;
+                btnLookup.innerHTML = 'Lookup & Pre-Populate';
+            }
+        }
+        
+        function populateForm(data) {
+            const { titleData, historicalMls, conflicts } = data;
+            
+            // Use historical MLS if available, otherwise TitleData
+            const source = historicalMls && Object.keys(historicalMls).length > 0 ? historicalMls : titleData;
+            
+            // Populate fields
+            if (titleData.listPrice) document.getElementById('listPrice').value = titleData.listPrice;
+            if (source.bedrooms) document.getElementById('bedrooms').value = source.bedrooms;
+            if (source.bathroomsFull) document.getElementById('bathroomsFull').value = source.bathroomsFull;
+            if (source.bathroomsHalf) document.getElementById('bathroomsHalf').value = source.bathroomsHalf || 0;
+            if (source.sqft) document.getElementById('sqft').value = source.sqft;
+            if (source.lotSize) document.getElementById('lotSize').value = source.lotSize;
+            if (source.yearBuilt) document.getElementById('yearBuilt').value = source.yearBuilt;
+            if (titleData.propertyType) document.getElementById('propertyType').value = titleData.propertyType;
+            if (titleData.garageSpaces) document.getElementById('garageSpaces').value = titleData.garageSpaces;
+            if (titleData.parkingSpaces) document.getElementById('parkingSpaces').value = titleData.parkingSpaces;
+            
+            // Show geo coordinates
+            if (titleData.latitude && titleData.longitude) {
+                document.getElementById('geoCoords').style.display = 'block';
+                document.getElementById('geoCoords').textContent = 
+                    `📍 Coordinates: ${titleData.latitude}, ${titleData.longitude}`;
+            }
+            
+            // Highlight pre-populated fields
+            const fields = ['bedrooms', 'bathroomsFull', 'sqft', 'lotSize', 'yearBuilt'];
+            fields.forEach(field => {
+                const input = document.getElementById(field);
+                if (input.value) {
+                    input.classList.add('pre-populated-field');
+                }
+            });
+            
+            // Show conflicts
+            if (conflicts && conflicts.length > 0) {
+                const conflictWarning = document.getElementById('conflictWarning');
+                const conflictDetails = document.getElementById('conflictDetails');
+                
+                let conflictHtml = '<ul style="margin-top: 8px; margin-left: 20px;">';
+                conflicts.forEach(conflict => {
+                    conflictHtml += `<li>
+                        <strong>${conflict.field.toUpperCase()}:</strong> 
+                        TitleData: ${conflict.titleDataValue} | 
+                        Historical MLS: ${conflict.mlsValue} (recommended) 
+                        <span style="color: #856404;">- ${conflict.reason}</span>
+                    </li>`;
+                });
+                conflictHtml += '</ul>';
+                
+                conflictDetails.innerHTML = conflictHtml;
+                conflictWarning.classList.add('visible');
+            }
+        }
+        
+        function showResults(data) {
+            document.getElementById('apiResponse').textContent = JSON.stringify(data, null, 2);
+            document.getElementById('resultsSection').classList.add('visible');
+        }
+        
+        function clearForm() {
+            document.querySelectorAll('input, select').forEach(el => {
+                el.value = '';
+                el.classList.remove('pre-populated-field');
+            });
+            document.getElementById('conflictWarning').classList.remove('visible');
+            document.getElementById('resultsSection').classList.remove('visible');
+            document.getElementById('geoCoords').style.display = 'none';
+        }
+        
+        // Auto-populate test data on load (for quick testing)
+        window.addEventListener('load', () => {
+            document.getElementById('streetNumber').value = '10037';
+            document.getElementById('streetName').value = 'Rebecca Place';
+            document.getElementById('city').value = 'Boerne';
+            document.getElementById('state').value = 'TX';
+            document.getElementById('zip').value = '78006';
+        });
+    </script>
+</body>
+</html>
+

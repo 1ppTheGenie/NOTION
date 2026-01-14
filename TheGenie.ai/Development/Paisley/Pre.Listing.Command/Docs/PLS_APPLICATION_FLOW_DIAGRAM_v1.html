@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLS Application Flow Diagram</title>
+    <!--
+    ╔══════════════════════════════════════════════════════════════════════════════╗
+    ║  PLS APPLICATION FLOW DIAGRAM                                                 ║
+    ║  Complete Process Flow with Decision Points & Error Handling                  ║
+    ║                                                                               ║
+    ║  Version: 1.0                                                                 ║
+    ║  Created: 12/29/2025                                                          ║
+    ║  Author: Steve Hundley / Cursor AI                                            ║
+    ║                                                                               ║
+    ║  Preview: Open in browser to view interactive flowchart                       ║
+    ╚══════════════════════════════════════════════════════════════════════════════╝
+    -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+        
+        :root {
+            /* Apple Black Theme */
+            --bg-primary: #000000;
+            --bg-secondary: #1c1c1e;
+            --bg-tertiary: #2c2c2e;
+            --bg-card: #1c1c1e;
+            --text-primary: #ffffff;
+            --text-secondary: #8e8e93;
+            --text-muted: #636366;
+            --accent-blue: #0a84ff;
+            --accent-green: #30d158;
+            --accent-orange: #ff9f0a;
+            --accent-red: #ff453a;
+            --accent-purple: #bf5af2;
+            --accent-teal: #64d2ff;
+            --accent-pink: #ff375f;
+            --border-color: #38383a;
+            --success: #30d158;
+            --warning: #ff9f0a;
+            --error: #ff453a;
+            --info: #0a84ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, var(--text-primary), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .header .meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+        }
+
+        .legend-shape {
+            width: 40px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .legend-shape.start-end {
+            background: var(--accent-green);
+            border-radius: 12px;
+        }
+
+        .legend-shape.process {
+            background: var(--accent-blue);
+            border-radius: 4px;
+        }
+
+        .legend-shape.decision {
+            background: var(--accent-orange);
+            transform: rotate(45deg);
+            width: 20px;
+            height: 20px;
+        }
+
+        .legend-shape.data {
+            background: var(--accent-purple);
+            clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+        }
+
+        .legend-shape.error {
+            background: var(--accent-red);
+            border-radius: 4px;
+        }
+
+        .legend-shape.api {
+            background: var(--accent-teal);
+            border-radius: 50%;
+            width: 25px;
+        }
+
+        /* Flow Container */
+        .flow-container {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .flow-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Flow Diagram */
+        .flow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        .flow-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 40px;
+            width: 100%;
+        }
+
+        /* Nodes */
+        .node {
+            position: relative;
+            text-align: center;
+            min-width: 200px;
+            max-width: 280px;
+        }
+
+        .node-box {
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .node-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Node Types */
+        .node-start, .node-end {
+            background: linear-gradient(135deg, var(--accent-green), #248a46);
+            color: white;
+            border-radius: 25px;
+        }
+
+        .node-screen {
+            background: linear-gradient(135deg, var(--accent-blue), #0066cc);
+            color: white;
+        }
+
+        .node-decision {
+            background: linear-gradient(135deg, var(--accent-orange), #cc7a00);
+            color: white;
+            transform: rotate(0deg);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            padding: 35px 20px;
+            min-width: 160px;
+        }
+
+        .node-data {
+            background: linear-gradient(135deg, var(--accent-purple), #8e3fb8);
+            color: white;
+            clip-path: polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%);
+        }
+
+        .node-api {
+            background: linear-gradient(135deg, var(--accent-teal), #4ab3d6);
+            color: var(--bg-primary);
+        }
+
+        .node-error {
+            background: linear-gradient(135deg, var(--accent-red), #cc3a30);
+            color: white;
+        }
+
+        .node-success {
+            background: linear-gradient(135deg, var(--accent-green), #248a46);
+            color: white;
+        }
+
+        /* Screen Number Badge */
+        .screen-badge {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            background: var(--bg-primary);
+            color: var(--accent-blue);
+            border: 2px solid var(--accent-blue);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* Node Details (on hover) */
+        .node-details {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 10px;
+            width: 300px;
+            text-align: left;
+            z-index: 100;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .node:hover .node-details {
+            display: block;
+        }
+
+        .node-details h4 {
+            color: var(--accent-blue);
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .node-details p {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+        }
+
+        .node-details .detail-section {
+            margin-bottom: 12px;
+        }
+
+        .node-details .detail-label {
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .node-details code {
+            background: var(--bg-primary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-teal);
+        }
+
+        .node-details ul {
+            padding-left: 16px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .node-details li {
+            margin-bottom: 4px;
+        }
+
+        /* Arrows */
+        .arrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .arrow-line {
+            width: 2px;
+            height: 30px;
+            background: var(--text-muted);
+        }
+
+        .arrow-head {
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 10px solid var(--text-muted);
+        }
+
+        .arrow-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        /* Horizontal Arrow */
+        .arrow-horizontal {
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .arrow-horizontal .arrow-line {
+            width: 40px;
+            height: 2px;
+        }
+
+        .arrow-horizontal .arrow-head {
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-left: 10px solid var(--text-muted);
+        }
+
+        /* Branch */
+        .branch {
+            display: flex;
+            gap: 60px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .branch-path {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .branch-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        .branch-label.yes {
+            background: rgba(48, 209, 88, 0.2);
+            color: var(--accent-green);
+        }
+
+        .branch-label.no {
+            background: rgba(255, 69, 58, 0.2);
+            color: var(--accent-red);
+        }
+
+        /* Connector Lines */
+        .connector {
+            position: relative;
+            height: 40px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .connector::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: var(--text-muted);
+        }
+
+        /* Phase Separator */
+        .phase-separator {
+            width: 100%;
+            text-align: center;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .phase-separator::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .phase-separator span {
+            background: var(--bg-secondary);
+            padding: 8px 24px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-purple);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Summary Table */
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .summary-table th,
+        .summary-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .summary-table th {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .summary-table td {
+            font-size: 0.9rem;
+        }
+
+        .summary-table tr:hover {
+            background: var(--bg-tertiary);
+        }
+
+        /* Status Indicators */
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .status-required {
+            background: rgba(255, 69, 58, 0.2);
+            color: var(--accent-red);
+        }
+
+        .status-optional {
+            background: rgba(142, 142, 147, 0.2);
+            color: var(--text-secondary);
+        }
+
+        .status-auto {
+            background: rgba(48, 209, 88, 0.2);
+            color: var(--accent-green);
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            .node-details {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🔄 PLS Application Flow Diagram</h1>
+            <p class="subtitle">Complete Process Flow with Decision Points, Error Handling & Data Operations</p>
+            <div class="meta">
+                <span>📋 Version 1.0</span>
+                <span>📅 12/29/2025</span>
+                <span>👤 Steve Hundley / Cursor AI</span>
+                <span>🎨 Theme: Apple Black</span>
+            </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-shape start-end"></div>
+                <span>Start/End</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape process"></div>
+                <span>Screen/Process</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape decision"></div>
+                <span>Decision</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape data"></div>
+                <span>Database</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape api"></div>
+                <span>API Call</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape error"></div>
+                <span>Error State</span>
+            </div>
+        </div>
+
+        <!-- PHASE 1: Entry & Property Lookup -->
+        <div class="flow-container">
+            <h2 class="flow-title">Phase 1: Entry Point & Property Lookup</h2>
+            
+            <div class="flow">
+                <!-- START -->
+                <div class="node">
+                    <div class="node-box node-start">
+                        🚀 START
+                    </div>
+                    <div class="node-details">
+                        <h4>Entry Points</h4>
+                        <div class="detail-section">
+                            <div class="detail-label">User can enter from:</div>
+                            <ul>
+                                <li>Paisley Chat (ChatStartTypeId=3)</li>
+                                <li>Dashboard → "Create PLS"</li>
+                                <li>My Listings → "Add Private Listing"</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    <div class="arrow-line"></div>
+                    <div class="arrow-head"></div>
+                </div>
+
+                <!-- Screen 1: Address Entry -->
+                <div class="node">
+                    <div class="node-box node-screen">
+                        <span class="screen-badge">1</span>
+                        📍 Enter Property Address
+                    </div>
+                    <div class="node-details">
+                        <h4>Screen 1: Address Entry</h4>
+                        <div class="detail-section">
+                            <div class="detail-label">URL</div>
+                            <code>/pls/create</code>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-label">Required Fields</div>
+                            <ul>
+                                <li>Street Address (autocomplete)</li>
+                                <li>City, State, ZIP</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-label">Validation</div>
+                            <ul>
+                                <li>Address must be parseable</li>
+                                <li>Must be US address</li>
+                                <li>Cannot be empty</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    <div class="arrow-line"></div>
+                    <div class="arrow-head"></div>
+                    <span class="arrow-label">Submit</span>
+                </div>
+
+                <!-- API: Geocode -->
+                <div class="node">
+                    <div class="node-box node-api">
+                        🌐 Geocode Address
+                    </div>
+                    <div class="node-details">
+                        <h4>API: Address Geocoding</h4>
+                        <div class="detail-section">
+                            <div class="detail-label">Service</div>
+                            <code>Google Maps Geocoding API</code>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-label">Returns</div>
+                            <ul>
+                                <li>Latitude/Longitude</li>
+                                <li>Formatted address</li>
+                                <li>Address components</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    <div class="arrow-line"></div>
+                    <div class="arrow-head"></div>
+                </div>
+
+                <!-- Decision: Valid Address? -->
+                <div class="node">
+                    <div class="node-box node-decision">
+                        Valid?
+                    </div>
+                    <div class="node-details">
+                        <h4>Decision: Valid Address?</h4>
+                        <div class="detail-section">
+                            <div class="detail-label">Checks</div>
+                            <ul>
+                                <li>Geocoding returned result?</li>
+                                <li>Has street number?</li>
+                                <li>Has ZIP code?</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Branch -->
+                <div class="branch">
+                    <div class="branch-path">
+                        <span class="branch-label no">NO</span>
+                        <div class="node">
+                            <div class="node-box node-error">
+                                ❌ Show Error:<br>"Address not found"
+                            </div>
+                            <div class="node-details">
+                                <h4>Error: Invalid Address</h4>
+                                <div class="detail-section">
+                                    <div class="detail-label">User Action</div>
+                                    <p>Return to Screen 1, highlight address field in red, show error message</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="branch-path">
+                        <span class="branch-label yes">YES</span>
+                        <div class="arrow">
+                            <div class="arrow-line"></div>
+                            <div class="arrow-head"></div>
+                        </div>
+                        <!-- Database: Attom Lookup -->
+                        <div class="node">
+                            <div class="node-box node-data">
+                                🗄️ Query Attom Data
+                            </div>
+                            <div class="node-details">
+                                <h4>Database: Property Lookup</h4>
+                                <div class="detail-section">
+                                    <div class="detail-label">Table</div>
+                                    <code>TitleData.dbo.ViewAssessor_v3</code>
+                                </div>
+                                <div class="detail-section">
+                                    <div class="detail-label">Fields Retrieved</div>
+                                    <ul>
+                                        <li>Bedrooms, Bathrooms</li>
+                                        <li>LivingSquareFeet</li>
+                                        <li>YearBuilt</li>
+                                        <li>LotSizeSquareFeet</li>
+                                        <li>PropertyLatitude/Longitude</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    <div class="arrow-line"></div>
+                    <div class="arrow-head"></div>
+                </div>
+
+                <!-- Decision: Attom Data Found? -->
+                <div class="node">
+                    <div class="node-box node-decision">
+                        Data Found?
+                    </div>
+                    <div class="node-details">
+                        <h4>Decision: Property Data Exists?</h4>
+                        <div class="detail-section">
+                            <div class="detail-label">What If NO?</div>
+                            <p>Proceed anyway - user will enter all fields manually. Show warning that no pre-fill data is available.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="branch">
+                    <div class="branch-path">
+                        <span class="branch-label no">NO DATA</span>
+                        <div class="node">
+                            <div class="node-box node-screen" style="background: linear-gradient(135deg, var(--accent-orange), #cc7a00);">
+                                ⚠️ Warning: Manual Entry Required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="branch-path">
+                        <span class="branch-label yes">DATA FOUND</span>
+                        <div class="node">
+                            <div class="node-box node-success">
+                                ✓ Pre-fill Form Fields
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 2: Listing Type & Details -->
+        <div class="flow-container">
+            <h2 class="flow-title">Phase 2: Listing Type Selection & Property Details</h2>
+            
+            <div class="flow">
+                <!-- Screen 2: Status Selection -->
+                <div class="node">
+                    <div class="node-box node-screen">
+                        <span class="screen-badge">2</span>
+                        📋 Select Listing Status
+                    </div>
+                    <div class="node-details">
+                        <h4>Screen 2: Status Selection</h4>
+                        <div class="detail-section">
+                            <div class="detail-label">URL</div>
+                            <code>/pls/create/status</code>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-label">Options</div>
+                            <ul>
+                                <li><strong>Coming Soon</strong> (StatusTypeID=14) - Pre-market teaser</li>
+                                <li><strong>Private Listing</strong> (StatusTypeID=6) - Off-market exclusive</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-label">Database Mapping</div>
+                            <code>MlsListing.dbo.StatusType.StatusTypeID</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    <div class="arrow-line"></div>
+                    <div class="arrow-head"></div>
+                    <span class="arrow-label">Select & Continue</span>
+                </div>
+
+                <!-- Screen 3: Property Details -->
+                <div class="node">
+                    <div class="node-box node-screen">
+                        <span class="screen-badge">3</span>
+                        🏠 Property Details Form
+                    </div>
+                    <div class="node-details">
+                        <h4>Screen 3: Property Details</h4>
+                        <div class="detail-section">
+                            <div class="detail-label">URL</div>
+                            <code>/pls/create/details</code>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-label">Required Fields</div>
+                            <ul>
+                                <li>List Price (integer, no $)</li>
+                                <li>Bedrooms (integer)</li>
+                                <li>Bathrooms (integer)</li>
+                                <li>Square Feet (integer)</li>
+                                <li>Year Built (4-digit year)</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-label">Optional Fields</div>
+                            <ul>
+                                <li>Lot Size</li>
+                                <li>Garage Spaces</li>
+                                <li>School District</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-label">Database Mapping</div>
+                            <code>MlsListing.dbo.Listing</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    <div class="arrow-line"></div>
+                    <div class="arrow-head"></div>
+                </div>
+
+                <!-- Decision: All Required? -->
+                <div class="node">
+                    <div class="node-box node-decision">
+                        Valid?
+                    </div>
+                    <div class="node-details">
+                        <h4>Validation: Required Fields</h4>
+                        <div class="detail-section">
+                            <div class="detail-label">Field Validation Rules</div>
+                            <ul>
+                                <li>Price: &gt; 0, &lt; 999,999,999</li>
+                                <li>Bedrooms: 0-99</li>
+                                <li>Bathrooms: 0-99</li>
+                                <li>Sqft: &gt; 0</li>
+                                <li>Year: 1800-current+1</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="branch">
+                    <div class="branch-path">
+                        <span class="branch-label no">INVALID</span>
+                        <div class="node">
+                            <div class="node-box node-error">
+                                ❌ Highlight Invalid Fields
+                            </div>
+                        </div>
+                    </div>
+                    <div class="branch-path">
+                        <span class="branch-label yes">VALID</span>
+                        <div class="arrow">
+                            <div class="arrow-line"></div>
+                            <div class="arrow-head"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 3: Photos & Description -->
+        <div class="flow-container">
+            <h2 class="flow-title">Phase 3: Photos & AI Description</h2>
+            
+            <div class="flow">
+                <!-- Screen 4: Photo Upload -->
+                <div class="node">
+                    <div class="node-box node-screen">
+                        <span class="screen-badge">4</span>
+                        📷 Upload Photos
+                    </div>
+                    <div class="node-details">
+                        <h4>Screen 4: Photo Upload</h4>
+                        <div class="detail-section">
+                            <div class="detail-label">URL</div>
+                            <code>/pls/create/photos</code>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-label">Requirements</div>
+                            <ul>
+                                <li>Minimum 1 photo required</li>
+                                <li>First photo = Primary (hero)</li>
+                                <li>Max 25 photos</li>
+                                <li>Formats: JPG, PNG, WebP</li>
+                                <li>Max size: 10MB each</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-label">Upload Destination</div>
+                            <code>s3://genie-cloud/pls-photos/{pls-number}/</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    <div class="arrow-line"></div>
+                    <div class="arrow-head"></div>
+                    <span class="arrow-label">For each photo</span>
+                </div>
+
+                <!-- API: Upload to S3 -->
+                <div class="node">
+                    <div class="node-box node-api">
+                        ☁️ Upload to S3
+                    </div>
+                    <div class="node-details">
+                        <h4>API: S3 Photo Upload</h4>
+                        <div class="detail-section">
+                            <div class="detail-label">Process</div>
+                            <ul>
+                                <li>Resize to max 2000px width</li>
+                                <li>Convert to optimized JPG</li>
+                                <li>Upload to S3 bucket</li>
+                                <li>Return CDN URL</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-label">Error Handling</div>
+                            <p>If upload fails, show retry button. Don't block other uploads.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    <div class="arrow-line"></div>
+                    <div class="arrow-head"></div>
+                </div>
+
+                <!-- Decision: Photos Valid? -->
+                <div class="node">
+                    <div class="node-box node-decision">
+                        ≥1 Photo?
+                    </div>
+                    <div class="node-details">
+                        <h4>Validation: At Least One Photo</h4>
+                        <div class="detail-section">
+                            <div class="detail-label">What If NO?</div>
+                            <p>Cannot proceed. Show error: "At least one photo is required"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="branch">
+                    <div class="branch-path">
+                        <span class="branch-label no">NO PHOTOS</span>
+                        <div class="node">
+                            <div class="node-box node-error">
+                                ❌ "At least 1 photo required"
+                            </div>
+                        </div>
+                    </div>
+                    <div class="branch-path">
+                        <span class="branch-label yes">HAS PHOTOS</span>
+                        <div class="arrow">
+                            <div class="arrow-line"></div>
+                            <div class="arrow-head"></div>
+                        </div>
+                        <!-- Screen 5: Description -->
+                        <div class="node">
+                            <div class="node-box node-screen">
+                                <span class="screen-badge">5</span>
+                                ✍️ Property Description
+                            </div>
+                            <div class="node-details">
+                                <h4>Screen 5: Description</h4>
+                                <div class="detail-section">
+                                    <div class="detail-label">URL</div>
+                                    <code>/pls/create/description</code>
+                                </div>
+                                <div class="detail-section">
+                                    <div class="detail-label">Options</div>
+                                    <ul>
+                                        <li>AI Generate (Paisley)</li>
+                                        <li>Manual entry</li>
+                                        <li>Paste from clipboard</li>
+                                    </ul>
+                                </div>
+                                <div class="detail-section">
+                                    <div class="detail-label">AI Generation</div>
+                                    <code>ChatStartTypeId=3 (Pre-Listing Focused)</code>
+                                    <p style="margin-top: 5px;">Uses Assessor data, NOT MLS</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    <div class="arrow-line"></div>
+                    <div class="arrow-head"></div>
+                </div>
+
+                <!-- Decision: Use AI? -->
+                <div class="node">
+                    <div class="node-box node-decision">
+                        Generate AI?
+                    </div>
+                </div>
+
+                <div class="branch">
+                    <div class="branch-path">
+                        <span class="branch-label yes">YES</span>
+                        <div class="node">
+                            <div class="node-box node-api">
+                                🤖 Call Paisley AI
+                            </div>
+                            <div class="node-details">
+                                <h4>API: Paisley Description Generator</h4>
+                                <div class="detail-section">
+                                    <div class="detail-label">Endpoint</div>
+                                    <code>POST /api/paisley/generate</code>
+                                </div>
+                                <div class="detail-section">
+                                    <div class="detail-label">Input Data</div>
+                                    <ul>
+                                        <li>Property address</li>
+                                        <li>Beds, baths, sqft</li>
+                                        <li>Year built</li>
+                                        <li>Neighborhood name</li>
+                                        <li>Assessor data</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="branch-path">
+                        <span class="branch-label no">NO (Manual)</span>
+                        <div class="node">
+                            <div class="node-box node-screen" style="background: var(--bg-tertiary); border: 1px solid var(--border-color);">
+                                ✍️ User Types Description
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 4: Agent & Area Selection -->
+        <div class="flow-container">
+            <h2 class="flow-title">Phase 4: Agent Selection & Area Assignment</h2>
+            
+            <div class="flow">
+                <!-- Screen 6: Agent Selection -->
+                <div class="node">
+                    <div class="node-box node-screen">
+                        <span class="screen-badge">6</span>
+                        👤 Select Agent
+                    </div>
+                    <div class="node-details">
+                        <h4>Screen 6: Agent Selection</h4>
+                        <div class="detail-section">
+                            <div class="detail-label">URL</div>
+                            <code>/pls/create/agent</code>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-label">Who Can Select</div>
+                            <ul>
+                                <li><strong>Agent:</strong> Auto-selects self</li>
+                                <li><strong>Title Rep:</strong> Selects from their agents</li>
+                                <li><strong>Admin:</strong> Searches any agent</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-label">Database Query</div>
+                            <code>UserMarketingProfile WHERE AspNetUserId = ?</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    <div class="arrow-line"></div>
+                    <div class="arrow-head"></div>
+                </div>
+
+                <!-- Decision: Role Check -->
+                <div class="node">
+                    <div class="node-box node-decision">
+                        User Role?
+                    </div>
+                    <div class="node-details">
+                        <h4>Decision: User Role Determines Flow</h4>
+                        <div class="detail-section">
+                            <div class="detail-label">Role-Based Behavior</div>
+                            <ul>
+                                <li><strong>Agent (8, 22):</strong> Skip selection, use self</li>
+                                <li><strong>Affiliate (2, 4):</strong> Show partner agents dropdown</li>
+                                <li><strong>SuperUser (5):</strong> Show full search</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="branch">
+                    <div class="branch-path">
+                        <span class="branch-label" style="background: rgba(10, 132, 255, 0.2); color: var(--accent-blue);">AGENT</span>
+                        <div class="node">
+                            <div class="node-box node-data">
+                                🗄️ Load Own Profile
+                            </div>
+                        </div>
+                    </div>
+                    <div class="branch-path">
+                        <span class="branch-label" style="background: rgba(191, 90, 242, 0.2); color: var(--accent-purple);">TITLE REP</span>
+                        <div class="node">
+                            <div class="node-box node-data">
+                                🗄️ Query Partner Agents
+                            </div>
+                            <div class="node-details">
+                                <h4>Database: Partner Agents</h4>
+                                <div class="detail-section">
+                                    <div class="detail-label">Table</div>
+                                    <code>UserPartner WHERE PartnerUserId = ? AND PartnerTypeId = 2</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="branch-path">
+                        <span class="branch-label" style="background: rgba(255, 159, 10, 0.2); color: var(--accent-orange);">ADMIN</span>
+                        <div class="node">
+                            <div class="node-box node-screen">
+                                🔍 Search All Agents
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    <div class="arrow-line"></div>
+                    <div class="arrow-head"></div>
+                </div>
+
+                <!-- Screen 7: Area Selection -->
+                <div class="node">
+                    <div class="node-box node-screen">
+                        <span class="screen-badge">7</span>
+                        🗺️ Select Marketing Area
+                    </div>
+                    <div class="node-details">
+                        <h4>Screen 7: Area Selection</h4>
+                        <div class="detail-section">
+                            <div class="detail-label">URL</div>
+                            <code>/pls/create/area</code>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-label">Purpose</div>
+                            <p>Area is used for market statistics widgets on landing pages and SMS campaign targeting.</p>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-label">Database</div>
+                            <code>FarmGenie.dbo.Area</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 5: Review & Publish -->
+        <div class="flow-container">
+            <h2 class="flow-title">Phase 5: Review, Save & Publish</h2>
+            
+            <div class="flow">
+                <!-- Screen 8: Review -->
+                <div class="node">
+                    <div class="node-box node-screen">
+                        <span class="screen-badge">8</span>
+                        👁️ Review & Confirm
+                    </div>
+                    <div class="node-details">
+                        <h4>Screen 8: Final Review</h4>
+                        <div class="detail-section">
+                            <div class="detail-label">URL</div>
+                            <code>/pls/create/review</code>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-label">Displays</div>
+                            <ul>
+                                <li>Property card preview</li>
+                                <li>All entered details</li>
+                                <li>Photo gallery</li>
+                                <li>Agent info</li>
+                                <li>Selected area</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-label">Actions</div>
+                            <ul>
+                                <li>← Edit (go back)</li>
+                                <li>✓ Publish</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    <div class="arrow-line"></div>
+                    <div class="arrow-head"></div>
+                    <span class="arrow-label">Click "Publish"</span>
+                </div>
+
+                <!-- API: Generate PLS Number -->
+                <div class="node">
+                    <div class="node-box node-api">
+                        🔢 Generate PLS Number
+                    </div>
+                    <div class="node-details">
+                        <h4>Stored Procedure: Get Next PLS Number</h4>
+                        <div class="detail-section">
+                            <div class="detail-label">Procedure</div>
+                            <code>EXEC dbo.usp_GetNextPlsNumber</code>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-label">Format</div>
+                            <code>PLS-2025-00001</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    <div class="arrow-line"></div>
+                    <div class="arrow-head"></div>
+                </div>
+
+                <!-- Database: Insert Listing -->
+                <div class="node">
+                    <div class="node-box node-data">
+                        🗄️ INSERT into Listing
+                    </div>
+                    <div class="node-details">
+                        <h4>Database: Create Listing Record</h4>
+                        <div class="detail-section">
+                            <div class="detail-label">Table</div>
+                            <code>MlsListing.dbo.Listing</code>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-label">Key Values</div>
+                            <ul>
+                                <li>MlsID = 999 (PLS)</li>
+                                <li>MlsNumber = PLS-YYYY-NNNNN</li>
+                                <li>StatusTypeID = 6 or 14</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    <div class="arrow-line"></div>
+                    <div class="arrow-head"></div>
+                </div>
+
+                <!-- Database: Insert Photos -->
+                <div class="node">
+                    <div class="node-box node-data">
+                        🗄️ INSERT Photos
+                    </div>
+                    <div class="node-details">
+                        <h4>Database: Photo Records</h4>
+                        <div class="detail-section">
+                            <div class="detail-label">Table</div>
+                            <code>MlsListing.dbo.Photo</code>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-label">Fields</div>
+                            <ul>
+                                <li>ListingID (FK to Listing)</li>
+                                <li>PhotoUrl (S3 URL)</li>
+                                <li>DisplayOrder (1, 2, 3...)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    <div class="arrow-line"></div>
+                    <div class="arrow-head"></div>
+                </div>
+
+                <!-- Database: Insert Ownership -->
+                <div class="node">
+                    <div class="node-box node-data">
+                        🗄️ INSERT PlsListingOwnership
+                    </div>
+                    <div class="node-details">
+                        <h4>Database: Ownership Record</h4>
+                        <div class="detail-section">
+                            <div class="detail-label">Table</div>
+                            <code>FarmGenie.dbo.PlsListingOwnership</code>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-label">Purpose</div>
+                            <p>Links the ASP.NET User to this PLS listing for "My Listings" queries</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    <div class="arrow-line"></div>
+                    <div class="arrow-head"></div>
+                </div>
+
+                <!-- Decision: All Inserts Successful? -->
+                <div class="node">
+                    <div class="node-box node-decision">
+                        Success?
+                    </div>
+                </div>
+
+                <div class="branch">
+                    <div class="branch-path">
+                        <span class="branch-label no">ERROR</span>
+                        <div class="node">
+                            <div class="node-box node-error">
+                                ❌ Rollback Transaction<br>Show Error
+                            </div>
+                            <div class="node-details">
+                                <h4>Error: Database Transaction Failed</h4>
+                                <div class="detail-section">
+                                    <div class="detail-label">Action</div>
+                                    <p>Roll back all inserts, show error message, keep user on review page with data intact</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="branch-path">
+                        <span class="branch-label yes">SUCCESS</span>
+                        <div class="arrow">
+                            <div class="arrow-line"></div>
+                            <div class="arrow-head"></div>
+                        </div>
+                        <!-- API: Trigger GenieCloud Render -->
+                        <div class="node">
+                            <div class="node-box node-api">
+                                🎨 Trigger GenieCloud Render
+                            </div>
+                            <div class="node-details">
+                                <h4>API: Asset Generation</h4>
+                                <div class="detail-section">
+                                    <div class="detail-label">Endpoint</div>
+                                    <code>POST cloud-api.thegenie.ai/api/render</code>
+                                </div>
+                                <div class="detail-section">
+                                    <div class="detail-label">Generates</div>
+                                    <ul>
+                                        <li>Landing page (pls-hollywood)</li>
+                                        <li>Social graphics (4x)</li>
+                                        <li>Collection page</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    <div class="arrow-line"></div>
+                    <div class="arrow-head"></div>
+                </div>
+
+                <!-- Screen 9: Success -->
+                <div class="node">
+                    <div class="node-box node-screen">
+                        <span class="screen-badge">9</span>
+                        🎉 Success! PLS Created
+                    </div>
+                    <div class="node-details">
+                        <h4>Screen 9: Success Page</h4>
+                        <div class="detail-section">
+                            <div class="detail-label">URL</div>
+                            <code>/pls/success/{pls-number}</code>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-label">Displays</div>
+                            <ul>
+                                <li>Landing page URL (copyable)</li>
+                                <li>Collection URL</li>
+                                <li>QR Code (optional)</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-label">Next Actions</div>
+                            <ul>
+                                <li>View Landing Page</li>
+                                <li>Start Campaign (→ ListingCommand flow)</li>
+                                <li>Manage My Listings</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow">
+                    <div class="arrow-line"></div>
+                    <div class="arrow-head"></div>
+                </div>
+
+                <!-- END -->
+                <div class="node">
+                    <div class="node-box node-end">
+                        ✅ END
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen Summary Table -->
+        <div class="flow-container">
+            <h2 class="flow-title">📋 Screen Summary with Data Mapping</h2>
+            
+            <table class="summary-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Screen Name</th>
+                        <th>Route</th>
+                        <th>Data Source (Read)</th>
+                        <th>Data Target (Write)</th>
+                        <th>Key Validations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Address Entry</td>
+                        <td><code>/pls/create</code></td>
+                        <td>Google Geocoding API</td>
+                        <td>Session state</td>
+                        <td>Valid US address, parseable</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Status Selection</td>
+                        <td><code>/pls/create/status</code></td>
+                        <td>TitleData.ViewAssessor_v3</td>
+                        <td>Session state</td>
+                        <td>StatusTypeID = 6 or 14</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Property Details</td>
+                        <td><code>/pls/create/details</code></td>
+                        <td>Pre-fill from Attom</td>
+                        <td>Session state</td>
+                        <td>Price > 0, Beds/Baths valid, Sqft > 0</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Photo Upload</td>
+                        <td><code>/pls/create/photos</code></td>
+                        <td>—</td>
+                        <td>S3: genie-cloud/pls-photos/</td>
+                        <td>Min 1 photo, JPG/PNG, < 10MB</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Description</td>
+                        <td><code>/pls/create/description</code></td>
+                        <td>Paisley AI (optional)</td>
+                        <td>Session state</td>
+                        <td>Not empty (if no AI)</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Agent Selection</td>
+                        <td><code>/pls/create/agent</code></td>
+                        <td>UserMarketingProfile, UserPartner</td>
+                        <td>Session state</td>
+                        <td>Valid AspNetUserId</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Area Selection</td>
+                        <td><code>/pls/create/area</code></td>
+                        <td>FarmGenie.dbo.Area</td>
+                        <td>Session state</td>
+                        <td>Valid AreaId</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Review & Confirm</td>
+                        <td><code>/pls/create/review</code></td>
+                        <td>All session state</td>
+                        <td>—</td>
+                        <td>All required fields present</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Success</td>
+                        <td><code>/pls/success/{id}</code></td>
+                        <td>Newly created records</td>
+                        <td>MlsListing.Listing, Photo, PlsListingOwnership</td>
+                        <td>—</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- What-If Scenarios -->
+        <div class="flow-container">
+            <h2 class="flow-title">❓ "What If" Decision Matrix</h2>
+            
+            <table class="summary-table">
+                <thead>
+                    <tr>
+                        <th>Scenario</th>
+                        <th>What Happens</th>
+                        <th>User Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Address not found in geocoding</td>
+                        <td>Error shown, stays on Screen 1</td>
+                        <td>Re-enter address or use manual coordinates</td>
+                    </tr>
+                    <tr>
+                        <td>No Attom data for property</td>
+                        <td>Warning shown, proceed with empty form</td>
+                        <td>Enter all fields manually</td>
+                    </tr>
+                    <tr>
+                        <td>Photo upload fails</td>
+                        <td>Red X on failed photo, retry button</td>
+                        <td>Click retry or remove and re-upload</td>
+                    </tr>
+                    <tr>
+                        <td>No photos uploaded</td>
+                        <td>Cannot proceed, error message</td>
+                        <td>Must upload at least 1 photo</td>
+                    </tr>
+                    <tr>
+                        <td>Paisley AI times out</td>
+                        <td>Show timeout message, enable manual entry</td>
+                        <td>Type description manually or retry</td>
+                    </tr>
+                    <tr>
+                        <td>Title Rep has no partner agents</td>
+                        <td>Show empty state with "Invite Agent" button</td>
+                        <td>Invite agent first, or use Admin flow</td>
+                    </tr>
+                    <tr>
+                        <td>Database insert fails</td>
+                        <td>Transaction rolled back, error shown</td>
+                        <td>Retry, data preserved on form</td>
+                    </tr>
+                    <tr>
+                        <td>GenieCloud render fails</td>
+                        <td>Listing created, but assets pending</td>
+                        <td>Assets will retry automatically via queue</td>
+                    </tr>
+                    <tr>
+                        <td>User refreshes mid-wizard</td>
+                        <td>Session state preserved (localStorage backup)</td>
+                        <td>Continue from where they left off</td>
+                    </tr>
+                    <tr>
+                        <td>User closes browser mid-wizard</td>
+                        <td>Draft saved if > Screen 3</td>
+                        <td>Resume from drafts on next login</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align: center; margin-top: 40px; padding: 20px; color: var(--text-muted); font-size: 0.85rem;">
+            <p>PLS Application Flow Diagram v1.0 | Created 12/29/2025 | Steve Hundley / Cursor AI</p>
+            <p style="margin-top: 10px;">Hover over any node for detailed information. Print-friendly version available.</p>
+        </div>
+    </div>
+</body>
+</html>
+
+

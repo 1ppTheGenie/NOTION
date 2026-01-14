@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLS Complete Design Blueprint - Print Ready</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --bg: #000;
+            --bg2: #1c1c1e;
+            --bg3: #2c2c2e;
+            --text: #fff;
+            --text2: #8e8e93;
+            --blue: #0a84ff;
+            --green: #30d158;
+            --orange: #ff9f0a;
+            --red: #ff453a;
+            --purple: #bf5af2;
+            --teal: #64d2ff;
+            --border: #38383a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 30px; }
+
+        /* Cover Page */
+        .cover {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            page-break-after: always;
+        }
+
+        .cover h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .cover .subtitle {
+            font-size: 1.5rem;
+            color: var(--text2);
+            margin-bottom: 40px;
+        }
+
+        .cover .meta {
+            background: var(--bg2);
+            border-radius: 16px;
+            padding: 30px 50px;
+            display: inline-block;
+        }
+
+        .cover .meta p {
+            margin: 8px 0;
+            color: var(--text2);
+        }
+
+        .cover .meta strong { color: var(--text); }
+
+        /* Page Break */
+        .page-break { page-break-before: always; }
+
+        /* Section Headers */
+        .section-header {
+            background: linear-gradient(135deg, var(--bg2), var(--bg3));
+            border-radius: 16px;
+            padding: 30px;
+            margin: 40px 0 30px;
+            border-left: 4px solid var(--blue);
+        }
+
+        .section-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .section-header p { color: var(--text2); }
+
+        /* Flow Chart Styles */
+        .flow-container {
+            background: var(--bg2);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .flow-phase {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .flow-phase:last-child { border-bottom: none; }
+
+        .phase-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--blue);
+            margin-bottom: 15px;
+        }
+
+        .flow-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .node {
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .node-start { background: var(--green); color: #000; border-radius: 20px; }
+        .node-end { background: var(--red); color: #fff; border-radius: 20px; }
+        .node-screen { background: var(--blue); color: #fff; }
+        .node-decision { background: var(--orange); color: #000; transform: rotate(0deg); }
+        .node-db { background: var(--purple); color: #fff; }
+        .node-api { background: var(--teal); color: #000; }
+        .node-error { background: rgba(255,69,58,0.2); color: var(--red); border: 1px solid var(--red); }
+
+        .arrow { color: var(--text2); font-size: 1.2rem; }
+
+        /* Screen Cards */
+        .screen-card {
+            background: var(--bg2);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            page-break-inside: avoid;
+        }
+
+        .screen-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .screen-num {
+            width: 45px;
+            height: 45px;
+            background: var(--blue);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .screen-title { font-size: 1.3rem; font-weight: 600; }
+        .screen-route { 
+            font-family: monospace; 
+            font-size: 0.8rem; 
+            color: var(--teal); 
+            background: var(--bg); 
+            padding: 3px 8px; 
+            border-radius: 4px; 
+            margin-left: auto;
+        }
+
+        .screen-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 800px) {
+            .screen-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Info Boxes */
+        .info-box {
+            background: var(--bg3);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .info-box h4 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .info-box.inputs h4 { color: var(--blue); }
+        .info-box.validation h4 { color: var(--green); }
+        .info-box.errors h4 { color: var(--red); }
+        .info-box.db h4 { color: var(--purple); }
+
+        .info-box ul {
+            list-style: none;
+            font-size: 0.85rem;
+        }
+
+        .info-box li {
+            padding: 5px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .info-box li:last-child { border-bottom: none; }
+
+        code {
+            background: var(--bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: var(--teal);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.85rem;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--bg3);
+            font-weight: 600;
+            color: var(--text2);
+        }
+
+        tr:hover { background: rgba(255,255,255,0.02); }
+
+        /* What If Table */
+        .whatif-table th:first-child { width: 30%; }
+        .whatif-table th:nth-child(2) { width: 35%; }
+        .whatif-table th:nth-child(3) { width: 35%; }
+
+        /* Print Styles */
+        @media print {
+            body { background: #fff; color: #000; font-size: 11pt; }
+            .container { max-width: 100%; padding: 0; }
+            .cover { min-height: auto; padding: 50px 0; }
+            .cover .meta { background: #f5f5f5; }
+            .section-header { background: #f0f0f0; }
+            .flow-container, .screen-card, .info-box { background: #f8f8f8; }
+            .node-start, .node-screen, .node-db, .node-api { color: #000 !important; }
+            code { background: #eee; }
+            th { background: #e0e0e0; }
+        }
+
+        /* Wireframe Preview */
+        .wireframe {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .wireframe-bar {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 15px;
+        }
+
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot-r { background: #ff5f56; }
+        .dot-y { background: #ffbd2e; }
+        .dot-g { background: #27c93f; }
+
+        .form-field {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            color: var(--text2);
+            font-size: 0.85rem;
+        }
+
+        .btn-preview {
+            background: var(--blue);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .badge-req { background: rgba(255,69,58,0.2); color: var(--red); }
+        .badge-opt { background: rgba(142,142,147,0.2); color: var(--text2); }
+        .badge-auto { background: rgba(48,209,88,0.2); color: var(--green); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- COVER PAGE -->
+        <div class="cover">
+            <h1>🏡 PLS Design Blueprint</h1>
+            <p class="subtitle">Pre-Listing System Complete UI/UX Specification</p>
+            <div class="meta">
+                <p><strong>Version:</strong> 1.0</p>
+                <p><strong>Date:</strong> December 29, 2025</p>
+                <p><strong>Author:</strong> Steve Hundley / Cursor AI</p>
+                <p><strong>Theme:</strong> Apple Black</p>
+                <p><strong>Status:</strong> Draft for Review</p>
+            </div>
+        </div>
+
+        <!-- TABLE OF CONTENTS -->
+        <div class="page-break"></div>
+        <div class="section-header">
+            <h2>📑 Table of Contents</h2>
+        </div>
+        <table>
+            <tr><td>1</td><td>Application Flow Diagram</td><td>Page 3</td></tr>
+            <tr><td>2</td><td>"What If" Decision Matrix</td><td>Page 4</td></tr>
+            <tr><td>3</td><td>Screen 1: Address Entry</td><td>Page 5</td></tr>
+            <tr><td>4</td><td>Screen 2: Status Selection</td><td>Page 6</td></tr>
+            <tr><td>5</td><td>Screen 3: Property Details</td><td>Page 7</td></tr>
+            <tr><td>6</td><td>Screen 4: Photo Upload</td><td>Page 8</td></tr>
+            <tr><td>7</td><td>Screen 5: AI Description</td><td>Page 9</td></tr>
+            <tr><td>8</td><td>Screen 6: Agent Selection</td><td>Page 10</td></tr>
+            <tr><td>9</td><td>Screen 7: Area Selection</td><td>Page 11</td></tr>
+            <tr><td>10</td><td>Screen 8: Review & Confirm</td><td>Page 12</td></tr>
+            <tr><td>11</td><td>Screen 9: Success</td><td>Page 13</td></tr>
+            <tr><td>12</td><td>Database Schema Summary</td><td>Page 14</td></tr>
+        </table>
+
+        <!-- FLOW DIAGRAM -->
+        <div class="page-break"></div>
+        <div class="section-header">
+            <h2>🔄 Application Flow Diagram</h2>
+            <p>Complete process flow from start to finish with decision points</p>
+        </div>
+
+        <div class="flow-container">
+            <div class="flow-phase">
+                <div class="phase-title">Phase 1: Entry & Property Lookup</div>
+                <div class="flow-row">
+                    <span class="node node-start">🚀 START</span>
+                    <span class="arrow">→</span>
+                    <span class="node node-screen">1️⃣ Enter Address</span>
+                    <span class="arrow">→</span>
+                    <span class="node node-api">🌐 Geocode</span>
+                    <span class="arrow">→</span>
+                    <span class="node node-decision">Valid?</span>
+                </div>
+                <div class="flow-row" style="margin-left: 40px;">
+                    <span class="arrow">↳ NO →</span>
+                    <span class="node node-error">❌ "Address not found"</span>
+                    <span class="arrow">→ Back to Screen 1</span>
+                </div>
+                <div class="flow-row" style="margin-left: 40px;">
+                    <span class="arrow">↳ YES →</span>
+                    <span class="node node-db">🗄️ Query Attom</span>
+                    <span class="arrow">→</span>
+                    <span class="node node-decision">Data?</span>
+                    <span class="arrow">→</span>
+                    <span class="node node-screen">✓ Pre-fill OR ⚠️ Manual</span>
+                </div>
+            </div>
+
+            <div class="flow-phase">
+                <div class="phase-title">Phase 2: Listing Type & Details</div>
+                <div class="flow-row">
+                    <span class="node node-screen">2️⃣ Select Status</span>
+                    <span class="arrow">→</span>
+                    <span class="node node-screen">3️⃣ Property Details</span>
+                    <span class="arrow">→</span>
+                    <span class="node node-decision">Valid?</span>
+                </div>
+                <div class="flow-row" style="margin-left: 40px;">
+                    <span class="arrow">↳ NO →</span>
+                    <span class="node node-error">❌ Highlight invalid fields</span>
+                </div>
+                <div class="flow-row" style="margin-left: 40px;">
+                    <span class="arrow">↳ YES → Continue</span>
+                </div>
+            </div>
+
+            <div class="flow-phase">
+                <div class="phase-title">Phase 3: Photos & Description</div>
+                <div class="flow-row">
+                    <span class="node node-screen">4️⃣ Upload Photos</span>
+                    <span class="arrow">→</span>
+                    <span class="node node-api">☁️ S3 Upload</span>
+                    <span class="arrow">→</span>
+                    <span class="node node-decision">≥1?</span>
+                </div>
+                <div class="flow-row" style="margin-left: 40px;">
+                    <span class="arrow">↳ NO →</span>
+                    <span class="node node-error">❌ "At least 1 photo required"</span>
+                </div>
+                <div class="flow-row" style="margin-left: 40px;">
+                    <span class="arrow">↳ YES →</span>
+                    <span class="node node-screen">5️⃣ Description</span>
+                    <span class="arrow">→</span>
+                    <span class="node node-decision">Use AI?</span>
+                    <span class="arrow">→</span>
+                    <span class="node node-api">🤖 Paisley</span>
+                    <span class="arrow">OR</span>
+                    <span class="node node-screen">✍️ Manual</span>
+                </div>
+            </div>
+
+            <div class="flow-phase">
+                <div class="phase-title">Phase 4: Agent & Area</div>
+                <div class="flow-row">
+                    <span class="node node-screen">6️⃣ Select Agent</span>
+                    <span class="arrow">→</span>
+                    <span class="node node-decision">Role?</span>
+                </div>
+                <div class="flow-row" style="margin-left: 40px;">
+                    <span class="arrow">↳ Agent →</span>
+                    <span class="node node-db">Load Own Profile</span>
+                </div>
+                <div class="flow-row" style="margin-left: 40px;">
+                    <span class="arrow">↳ Title Rep →</span>
+                    <span class="node node-db">Query Partners</span>
+                </div>
+                <div class="flow-row" style="margin-left: 40px;">
+                    <span class="arrow">↳ Admin →</span>
+                    <span class="node node-db">Search All</span>
+                </div>
+                <div class="flow-row">
+                    <span class="node node-screen">7️⃣ Select Area</span>
+                    <span class="arrow">→ Continue</span>
+                </div>
+            </div>
+
+            <div class="flow-phase">
+                <div class="phase-title">Phase 5: Publish</div>
+                <div class="flow-row">
+                    <span class="node node-screen">8️⃣ Review</span>
+                    <span class="arrow">→ Publish →</span>
+                    <span class="node node-db">🔢 PLS#</span>
+                    <span class="arrow">→</span>
+                    <span class="node node-db">INSERT Listing</span>
+                    <span class="arrow">→</span>
+                    <span class="node node-db">INSERT Photos</span>
+                </div>
+                <div class="flow-row">
+                    <span class="arrow">→</span>
+                    <span class="node node-db">INSERT Ownership</span>
+                    <span class="arrow">→</span>
+                    <span class="node node-decision">Success?</span>
+                </div>
+                <div class="flow-row" style="margin-left: 40px;">
+                    <span class="arrow">↳ ERROR →</span>
+                    <span class="node node-error">❌ Rollback + Show Error</span>
+                </div>
+                <div class="flow-row" style="margin-left: 40px;">
+                    <span class="arrow">↳ SUCCESS →</span>
+                    <span class="node node-api">🎨 GenieCloud</span>
+                    <span class="arrow">→</span>
+                    <span class="node node-screen">9️⃣ Success!</span>
+                    <span class="arrow">→</span>
+                    <span class="node node-end">✅ END</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- WHAT IF MATRIX -->
+        <div class="page-break"></div>
+        <div class="section-header">
+            <h2>❓ "What If" Decision Matrix</h2>
+            <p>How the system handles every edge case and error scenario</p>
+        </div>
+
+        <table class="whatif-table">
+            <thead>
+                <tr>
+                    <th>Scenario</th>
+                    <th>What Happens</th>
+                    <th>User Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Address not found in geocoding</td>
+                    <td>Error shown, stays on Screen 1</td>
+                    <td>Re-enter address or use manual coordinates</td>
+                </tr>
+                <tr>
+                    <td>No Attom data for property</td>
+                    <td>Warning shown, proceed with empty form</td>
+                    <td>Enter all fields manually</td>
+                </tr>
+                <tr>
+                    <td>Photo upload fails</td>
+                    <td>Red X on failed photo, retry button</td>
+                    <td>Click retry or remove and re-upload</td>
+                </tr>
+                <tr>
+                    <td>No photos uploaded</td>
+                    <td>Cannot proceed, error message</td>
+                    <td>Must upload at least 1 photo</td>
+                </tr>
+                <tr>
+                    <td>Paisley AI times out</td>
+                    <td>Show timeout message, enable manual entry</td>
+                    <td>Type description manually or retry</td>
+                </tr>
+                <tr>
+                    <td>Title Rep has no partner agents</td>
+                    <td>Show empty state with "Invite Agent" button</td>
+                    <td>Invite agent first, or use Admin flow</td>
+                </tr>
+                <tr>
+                    <td>Database insert fails</td>
+                    <td>Transaction rolled back, error shown</td>
+                    <td>Retry, data preserved on form</td>
+                </tr>
+                <tr>
+                    <td>GenieCloud render fails</td>
+                    <td>Listing created, but assets pending</td>
+                    <td>Assets will retry automatically via queue</td>
+                </tr>
+                <tr>
+                    <td>User refreshes mid-wizard</td>
+                    <td>Session state preserved (localStorage backup)</td>
+                    <td>Continue from where they left off</td>
+                </tr>
+                <tr>
+                    <td>User closes browser mid-wizard</td>
+                    <td>Draft saved if past Screen 3</td>
+                    <td>Resume from drafts on next login</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- SCREEN 1 -->
+        <div class="page-break"></div>
+        <div class="screen-card">
+            <div class="screen-header">
+                <div class="screen-num">1</div>
+                <div class="screen-title">📍 Address Entry</div>
+                <div class="screen-route">/pls/create</div>
+            </div>
+            <div class="screen-grid">
+                <div>
+                    <div class="wireframe">
+                        <div class="wireframe-bar">
+                            <div class="dot dot-r"></div>
+                            <div class="dot dot-y"></div>
+                            <div class="dot dot-g"></div>
+                        </div>
+                        <h3 style="margin-bottom: 15px;">Create Private Listing</h3>
+                        <div class="form-field">📍 Property Address <span class="badge badge-req">Required</span><br><em>Start typing address...</em></div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <div class="form-field">🏙️ City</div>
+                            <div class="form-field">🗺️ State</div>
+                        </div>
+                        <div class="form-field">📬 ZIP Code</div>
+                        <div class="btn-preview">Continue →</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-box inputs">
+                        <h4>📥 Input Fields</h4>
+                        <ul>
+                            <li><strong>Address:</strong> Google Places autocomplete</li>
+                            <li><strong>City:</strong> Auto-filled from autocomplete</li>
+                            <li><strong>State:</strong> Dropdown, auto-selected</li>
+                            <li><strong>ZIP:</strong> Auto-filled, 5 digits</li>
+                        </ul>
+                    </div>
+                    <div class="info-box validation">
+                        <h4>✅ Validation</h4>
+                        <ul>
+                            <li>Address must be parseable by Google</li>
+                            <li>Must have street number</li>
+                            <li>Must be US address</li>
+                            <li>ZIP must be 5 digits</li>
+                        </ul>
+                    </div>
+                    <div class="info-box errors">
+                        <h4>❌ Errors</h4>
+                        <ul>
+                            <li><strong>Not found:</strong> "We couldn't find this address"</li>
+                            <li><strong>No street #:</strong> "Please include street number"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 2 -->
+        <div class="screen-card">
+            <div class="screen-header">
+                <div class="screen-num">2</div>
+                <div class="screen-title">📋 Status Selection</div>
+                <div class="screen-route">/pls/create/status</div>
+            </div>
+            <div class="screen-grid">
+                <div>
+                    <div class="wireframe">
+                        <div class="wireframe-bar">
+                            <div class="dot dot-r"></div>
+                            <div class="dot dot-y"></div>
+                            <div class="dot dot-g"></div>
+                        </div>
+                        <h3 style="margin-bottom: 5px;">What type of listing?</h3>
+                        <p style="color: var(--text2); margin-bottom: 15px; font-size: 0.85rem;">Choose how you want to market this property</p>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+                            <div class="form-field" style="text-align: center; border-color: var(--blue);">
+                                <div style="font-size: 2rem;">🏠</div>
+                                <strong>Coming Soon</strong><br>
+                                <span style="font-size: 0.8rem;">Pre-market teaser</span>
+                            </div>
+                            <div class="form-field" style="text-align: center;">
+                                <div style="font-size: 2rem;">🔒</div>
+                                <strong>Private Listing</strong><br>
+                                <span style="font-size: 0.8rem;">Off-market exclusive</span>
+                            </div>
+                        </div>
+                        <div class="btn-preview">Continue →</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-box db">
+                        <h4>🗄️ Database</h4>
+                        <ul>
+                            <li><strong>Coming Soon:</strong> <code>StatusTypeID = 14</code></li>
+                            <li><strong>Private Listing:</strong> <code>StatusTypeID = 6</code></li>
+                        </ul>
+                    </div>
+                    <div class="info-box inputs">
+                        <h4>📥 Background Lookup</h4>
+                        <ul>
+                            <li><strong>Source:</strong> <code>TitleData.ViewAssessor_v3</code></li>
+                            <li><strong>Match by:</strong> Geocode (lat/lng)</li>
+                            <li><strong>Returns:</strong> Beds, Baths, Sqft, YearBuilt</li>
+                        </ul>
+                    </div>
+                    <div class="info-box errors">
+                        <h4>⚠️ What If No Data?</h4>
+                        <ul>
+                            <li>Show warning: "No property records found"</li>
+                            <li>User can still proceed (NOT a blocker)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 3 -->
+        <div class="page-break"></div>
+        <div class="screen-card">
+            <div class="screen-header">
+                <div class="screen-num">3</div>
+                <div class="screen-title">🏠 Property Details</div>
+                <div class="screen-route">/pls/create/details</div>
+            </div>
+            <div class="screen-grid">
+                <div>
+                    <div class="wireframe">
+                        <div class="wireframe-bar">
+                            <div class="dot dot-r"></div>
+                            <div class="dot dot-y"></div>
+                            <div class="dot dot-g"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                            <h3>Property Details</h3>
+                            <span class="badge badge-auto">Pre-filled</span>
+                        </div>
+                        <div class="form-field">💰 List Price <span class="badge badge-req">Required</span><br><strong style="font-size: 1.2rem;">$749,000</strong></div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <div class="form-field">🛏️ Bedrooms <span class="badge badge-req">Req</span><br><strong>4</strong></div>
+                            <div class="form-field">🛁 Bathrooms <span class="badge badge-req">Req</span><br><strong>3</strong></div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <div class="form-field">📐 Sqft <span class="badge badge-req">Req</span><br><strong>3,018</strong></div>
+                            <div class="form-field">📅 Year <span class="badge badge-req">Req</span><br><strong>2022</strong></div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <div class="form-field">🌳 Lot Size <span class="badge badge-opt">Opt</span><br>9,101 sqft</div>
+                            <div class="form-field">🚗 Garage <span class="badge badge-opt">Opt</span><br>3</div>
+                        </div>
+                        <div class="btn-preview">Continue →</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-box validation">
+                        <h4>✅ Required Fields</h4>
+                        <ul>
+                            <li><strong>Price:</strong> Integer > 0</li>
+                            <li><strong>Bedrooms:</strong> Integer 0-99</li>
+                            <li><strong>Bathrooms:</strong> Integer 0-99</li>
+                            <li><strong>Sqft:</strong> Integer > 0</li>
+                            <li><strong>Year:</strong> 1800 to current+1</li>
+                        </ul>
+                    </div>
+                    <div class="info-box db">
+                        <h4>🗄️ Database Mapping</h4>
+                        <ul>
+                            <li><strong>Table:</strong> <code>MlsListing.dbo.Listing</code></li>
+                            <li>Price → <code>PriceLow</code></li>
+                            <li>Beds → <code>Bedrooms</code></li>
+                            <li>Baths → <code>BathroomsFull</code></li>
+                            <li>Sqft → <code>SqFtTotal</code></li>
+                        </ul>
+                    </div>
+                    <div class="info-box errors">
+                        <h4>❌ Validation Errors</h4>
+                        <ul>
+                            <li><strong>Price = 0:</strong> "Please enter a valid price"</li>
+                            <li><strong>Year > 2026:</strong> "Cannot be in the future"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 4 -->
+        <div class="screen-card">
+            <div class="screen-header">
+                <div class="screen-num">4</div>
+                <div class="screen-title">📷 Photo Upload</div>
+                <div class="screen-route">/pls/create/photos</div>
+            </div>
+            <div class="screen-grid">
+                <div>
+                    <div class="wireframe">
+                        <div class="wireframe-bar">
+                            <div class="dot dot-r"></div>
+                            <div class="dot dot-y"></div>
+                            <div class="dot dot-g"></div>
+                        </div>
+                        <h3 style="margin-bottom: 5px;">Upload Property Photos</h3>
+                        <p style="color: var(--text2); margin-bottom: 15px; font-size: 0.85rem;">First photo = hero image</p>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 15px;">
+                            <div style="aspect-ratio: 1; background: var(--bg3); border: 2px solid var(--orange); border-radius: 8px; display: flex; align-items: center; justify-content: center;">📷</div>
+                            <div style="aspect-ratio: 1; background: var(--bg3); border: 2px solid var(--green); border-radius: 8px; display: flex; align-items: center; justify-content: center;">📷</div>
+                            <div style="aspect-ratio: 1; background: var(--bg3); border: 2px solid var(--green); border-radius: 8px; display: flex; align-items: center; justify-content: center;">📷</div>
+                            <div style="aspect-ratio: 1; background: var(--bg3); border: 2px dashed var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text2);">+</div>
+                            <div style="aspect-ratio: 1; background: var(--bg3); border: 2px dashed var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text2);">+</div>
+                            <div style="aspect-ratio: 1; background: var(--bg3); border: 2px dashed var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text2);">+</div>
+                        </div>
+                        <p style="font-size: 0.75rem; color: var(--text2);"><span style="color: var(--orange);">●</span> Primary &nbsp; <span style="color: var(--green);">●</span> Additional</p>
+                        <div class="btn-preview">Continue →</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-box inputs">
+                        <h4>📷 Requirements</h4>
+                        <ul>
+                            <li><strong>Minimum:</strong> 1 photo required</li>
+                            <li><strong>Maximum:</strong> 25 photos</li>
+                            <li><strong>Formats:</strong> JPG, PNG, WebP</li>
+                            <li><strong>Max size:</strong> 10MB per photo</li>
+                        </ul>
+                    </div>
+                    <div class="info-box db">
+                        <h4>☁️ Upload Process</h4>
+                        <ul>
+                            <li><strong>S3:</strong> <code>genie-cloud/pls-photos/</code></li>
+                            <li><strong>Processing:</strong> Resize to 2000px max</li>
+                            <li><strong>Table:</strong> <code>MlsListing.dbo.Photo</code></li>
+                        </ul>
+                    </div>
+                    <div class="info-box errors">
+                        <h4>❌ Errors</h4>
+                        <ul>
+                            <li><strong>No photos:</strong> Cannot proceed</li>
+                            <li><strong>Upload fail:</strong> Show retry button</li>
+                            <li><strong>Too large:</strong> "Exceeds 10MB limit"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 5 -->
+        <div class="page-break"></div>
+        <div class="screen-card">
+            <div class="screen-header">
+                <div class="screen-num">5</div>
+                <div class="screen-title">✍️ AI Description</div>
+                <div class="screen-route">/pls/create/description</div>
+            </div>
+            <div class="screen-grid">
+                <div>
+                    <div class="wireframe">
+                        <div class="wireframe-bar">
+                            <div class="dot dot-r"></div>
+                            <div class="dot dot-y"></div>
+                            <div class="dot dot-g"></div>
+                        </div>
+                        <h3 style="margin-bottom: 15px;">Property Description</h3>
+                        <div style="background: rgba(10,132,255,0.1); border: 1px solid var(--blue); border-radius: 10px; padding: 12px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 1.5rem;">🤖</span>
+                            <div style="flex: 1;">
+                                <strong>Paisley AI</strong><br>
+                                <span style="font-size: 0.8rem; color: var(--text2);">Generate a professional description</span>
+                            </div>
+                            <button style="background: var(--blue); color: #fff; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600;">Generate</button>
+                        </div>
+                        <div class="form-field" style="min-height: 100px;">
+                            <span class="badge badge-req">Required</span><br>
+                            Stunning 4-bedroom home in the prestigious Balcones Creek neighborhood...
+                        </div>
+                        <div class="btn-preview">Continue →</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-box inputs">
+                        <h4>🤖 Paisley AI Integration</h4>
+                        <ul>
+                            <li><strong>ChatStartTypeId:</strong> <code>3</code> (Pre-Listing)</li>
+                            <li><strong>Inputs:</strong> Address, beds, baths, sqft, year</li>
+                            <li><strong>Source:</strong> Assessor data (NOT MLS)</li>
+                            <li>User can edit generated text</li>
+                        </ul>
+                    </div>
+                    <div class="info-box db">
+                        <h4>🗄️ Database</h4>
+                        <ul>
+                            <li><strong>Field:</strong> <code>MlsListing.dbo.Listing.Remarks</code></li>
+                            <li><strong>Type:</strong> VARCHAR(MAX)</li>
+                        </ul>
+                    </div>
+                    <div class="info-box errors">
+                        <h4>❌ Errors</h4>
+                        <ul>
+                            <li><strong>AI timeout:</strong> "Paisley is taking a while. Type manually or retry."</li>
+                            <li><strong>Empty:</strong> "Please add a description"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 6 -->
+        <div class="screen-card">
+            <div class="screen-header">
+                <div class="screen-num">6</div>
+                <div class="screen-title">👤 Agent Selection</div>
+                <div class="screen-route">/pls/create/agent</div>
+            </div>
+            <div class="screen-grid">
+                <div>
+                    <div class="wireframe">
+                        <div class="wireframe-bar">
+                            <div class="dot dot-r"></div>
+                            <div class="dot dot-y"></div>
+                            <div class="dot dot-g"></div>
+                        </div>
+                        <h3 style="margin-bottom: 5px;">Select Listing Agent</h3>
+                        <p style="color: var(--text2); margin-bottom: 15px; font-size: 0.85rem;">This agent will be displayed on the landing page</p>
+                        <div style="background: linear-gradient(135deg, var(--bg3), var(--bg)); border: 2px solid var(--blue); border-radius: 12px; padding: 15px; display: flex; align-items: center; gap: 12px;">
+                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--blue), var(--purple)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700;">DS</div>
+                            <div style="flex: 1;">
+                                <strong>Dainelle Scott</strong><br>
+                                <span style="font-size: 0.8rem; color: var(--text2);">Compass Real Estate</span>
+                            </div>
+                            <span style="color: var(--green);">✓</span>
+                        </div>
+                        <div class="btn-preview">Continue →</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-box inputs">
+                        <h4>👥 Role-Based Behavior</h4>
+                        <ul>
+                            <li><strong>Agent:</strong> Auto-selects self, skips screen</li>
+                            <li><strong>Title Rep:</strong> Shows dropdown of partners</li>
+                            <li><strong>Admin:</strong> Full search across all agents</li>
+                        </ul>
+                    </div>
+                    <div class="info-box db">
+                        <h4>🗄️ Data Queries</h4>
+                        <ul>
+                            <li><strong>Profile:</strong> <code>UserMarketingProfile</code></li>
+                            <li><strong>Partners:</strong> <code>UserPartner WHERE PartnerTypeId=2</code></li>
+                            <li><strong>Logos:</strong> <code>UserMarketingImage</code></li>
+                        </ul>
+                    </div>
+                    <div class="info-box errors">
+                        <h4>⚠️ No Partners?</h4>
+                        <ul>
+                            <li>Show: "You haven't partnered with any agents yet."</li>
+                            <li>Action: "Invite Agent" button → Invitation flow</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 7 -->
+        <div class="page-break"></div>
+        <div class="screen-card">
+            <div class="screen-header">
+                <div class="screen-num">7</div>
+                <div class="screen-title">🗺️ Area Selection</div>
+                <div class="screen-route">/pls/create/area</div>
+            </div>
+            <div class="screen-grid">
+                <div>
+                    <div class="wireframe">
+                        <div class="wireframe-bar">
+                            <div class="dot dot-r"></div>
+                            <div class="dot dot-y"></div>
+                            <div class="dot dot-g"></div>
+                        </div>
+                        <h3 style="margin-bottom: 5px;">Select Marketing Area</h3>
+                        <p style="color: var(--text2); margin-bottom: 15px; font-size: 0.85rem;">For market stats on landing page</p>
+                        <div class="form-field">🔍 Search Areas<br><em>Start typing neighborhood...</em></div>
+                        <div style="background: var(--bg3); border: 2px solid var(--blue); border-radius: 10px; padding: 12px; display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 1.3rem;">📍</span>
+                            <div style="flex: 1;">
+                                <strong>Balcones Creek - All Neighborhoods</strong><br>
+                                <span style="font-size: 0.8rem; color: var(--text2);">Boerne, TX • 1,247 homes</span>
+                            </div>
+                            <span style="color: var(--green);">✓</span>
+                        </div>
+                        <div class="btn-preview">Continue →</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-box inputs">
+                        <h4>🗺️ Area Purpose</h4>
+                        <ul>
+                            <li>📊 Market statistics on landing page</li>
+                            <li>📈 Median price, days on market</li>
+                            <li>📍 Map embed boundaries</li>
+                            <li>📱 SMS campaign targeting</li>
+                        </ul>
+                    </div>
+                    <div class="info-box db">
+                        <h4>🗄️ Database</h4>
+                        <ul>
+                            <li><strong>Table:</strong> <code>FarmGenie.dbo.Area</code></li>
+                            <li><strong>Search by:</strong> Name, City, ZIP</li>
+                            <li><strong>Stats API:</strong> Oculus API (AreaId)</li>
+                        </ul>
+                    </div>
+                    <div class="info-box validation">
+                        <h4>💡 Smart Default</h4>
+                        <ul>
+                            <li>Auto-suggest areas near property address</li>
+                            <li>Show top 3-5 matches based on geocode</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 8 -->
+        <div class="screen-card">
+            <div class="screen-header">
+                <div class="screen-num">8</div>
+                <div class="screen-title">👁️ Review & Confirm</div>
+                <div class="screen-route">/pls/create/review</div>
+            </div>
+            <div class="screen-grid">
+                <div>
+                    <div class="wireframe">
+                        <div class="wireframe-bar">
+                            <div class="dot dot-r"></div>
+                            <div class="dot dot-y"></div>
+                            <div class="dot dot-g"></div>
+                        </div>
+                        <h3 style="margin-bottom: 15px;">Review Your Listing</h3>
+                        <div style="background: var(--bg3); border-radius: 12px; overflow: hidden; margin-bottom: 15px;">
+                            <div style="height: 80px; background: linear-gradient(135deg, var(--bg), var(--bg3)); display: flex; align-items: center; justify-content: center; font-size: 2rem;">🏡</div>
+                            <div style="padding: 12px;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="background: rgba(10,132,255,0.2); color: var(--blue); padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">Coming Soon</span>
+                                    <span style="font-size: 0.75rem; color: var(--text2);">PLS-2025-00001</span>
+                                </div>
+                                <div style="margin-top: 8px; font-weight: 600;">10037 Rebecca Place</div>
+                                <div style="font-size: 0.85rem; color: var(--text2);">Boerne, TX • 4 bd • 3 ba • 3,018 sqft</div>
+                                <div style="font-size: 1.3rem; font-weight: 700; color: var(--green); margin-top: 6px;">$749,000</div>
+                            </div>
+                        </div>
+                        <div style="background: var(--green); color: #000; padding: 12px; border-radius: 10px; text-align: center; font-weight: 600;">✓ Publish Listing</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-box validation">
+                        <h4>✅ Pre-Publish Checks</h4>
+                        <ul>
+                            <li>All required fields present</li>
+                            <li>At least 1 photo uploaded</li>
+                            <li>Description not empty</li>
+                            <li>Agent selected</li>
+                            <li>Area selected</li>
+                        </ul>
+                    </div>
+                    <div class="info-box db">
+                        <h4>🗄️ On Publish - Database Writes</h4>
+                        <ul>
+                            <li>1. <code>usp_GetNextPlsNumber</code> → PLS#</li>
+                            <li>2. INSERT <code>MlsListing.dbo.Listing</code></li>
+                            <li>3. INSERT <code>MlsListing.dbo.Photo</code></li>
+                            <li>4. INSERT <code>PlsListingOwnership</code></li>
+                            <li>5. Trigger GenieCloud render</li>
+                        </ul>
+                    </div>
+                    <div class="info-box errors">
+                        <h4>❌ If Publish Fails</h4>
+                        <ul>
+                            <li>Roll back entire transaction</li>
+                            <li>Show error message</li>
+                            <li>Keep data intact for retry</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 9 -->
+        <div class="page-break"></div>
+        <div class="screen-card">
+            <div class="screen-header">
+                <div class="screen-num">9</div>
+                <div class="screen-title">🎉 Success!</div>
+                <div class="screen-route">/pls/success/{id}</div>
+            </div>
+            <div class="screen-grid">
+                <div>
+                    <div class="wireframe" style="text-align: center;">
+                        <div class="wireframe-bar">
+                            <div class="dot dot-r"></div>
+                            <div class="dot dot-y"></div>
+                            <div class="dot dot-g"></div>
+                        </div>
+                        <div style="font-size: 4rem; margin: 20px 0;">🎉</div>
+                        <h3 style="margin-bottom: 5px;">Listing Created!</h3>
+                        <p style="color: var(--text2); margin-bottom: 20px; font-size: 0.9rem;">Your private listing is now live</p>
+                        <div style="background: var(--bg3); border-radius: 10px; padding: 12px; text-align: left; margin-bottom: 15px;">
+                            <div style="font-size: 0.75rem; color: var(--text2); margin-bottom: 4px;">Landing Page URL</div>
+                            <div style="font-family: monospace; font-size: 0.8rem; color: var(--blue); word-break: break-all;">cloud.thegenie.ai/genie-pages/pls-10037-rebecca-place/pls-hollywood/</div>
+                        </div>
+                        <div class="btn-preview">View Landing Page →</div>
+                        <div style="background: var(--bg3); padding: 10px; border-radius: 8px; margin-top: 10px; font-size: 0.9rem;">Start Marketing Campaign</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-box validation">
+                        <h4>✅ What Was Created</h4>
+                        <ul>
+                            <li>Listing record (MlsId=999)</li>
+                            <li>Photo records</li>
+                            <li>Ownership link</li>
+                            <li>Render job queued</li>
+                        </ul>
+                    </div>
+                    <div class="info-box inputs">
+                        <h4>🚀 Next Actions</h4>
+                        <ul>
+                            <li><strong>View Page:</strong> Opens in new tab</li>
+                            <li><strong>Start Campaign:</strong> → ListingCommand flow</li>
+                            <li><strong>Manage:</strong> → /pls/my-listings</li>
+                        </ul>
+                    </div>
+                    <div class="info-box db">
+                        <h4>⏳ Asset Generation</h4>
+                        <ul>
+                            <li>GenieCloud rendering in background</li>
+                            <li>Landing page: 30-60 seconds</li>
+                            <li>Social graphics: 1-2 minutes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DATABASE SCHEMA -->
+        <div class="page-break"></div>
+        <div class="section-header">
+            <h2>🗄️ Database Schema Summary</h2>
+            <p>All tables and fields touched by the PLS creation flow</p>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Database</th>
+                    <th>Table</th>
+                    <th>Key Fields</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>MlsListing</strong></td>
+                    <td><code>Listing</code></td>
+                    <td>MlsNumber, Address, Price, Beds, Baths, Sqft, Remarks</td>
+                    <td>MlsId=999 for all PLS listings</td>
+                </tr>
+                <tr>
+                    <td><strong>MlsListing</strong></td>
+                    <td><code>Photo</code></td>
+                    <td>ListingId, PhotoUrl, SortOrder</td>
+                    <td>S3 URLs stored here</td>
+                </tr>
+                <tr>
+                    <td><strong>MlsListing</strong></td>
+                    <td><code>StatusType</code></td>
+                    <td>StatusTypeId, Name</td>
+                    <td>6=Private, 14=Coming Soon</td>
+                </tr>
+                <tr>
+                    <td><strong>FarmGenie</strong></td>
+                    <td><code>PlsListingOwnership</code></td>
+                    <td>PlsNumber, UserId, AgentUserId, CreatedDate</td>
+                    <td><strong>NEW TABLE</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>FarmGenie</strong></td>
+                    <td><code>PlsNumberSequence</code></td>
+                    <td>Year, CurrentNumber</td>
+                    <td><strong>NEW TABLE</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>FarmGenie</strong></td>
+                    <td><code>Area</code></td>
+                    <td>AreaId, Name, City, State</td>
+                    <td>For market stats</td>
+                </tr>
+                <tr>
+                    <td><strong>FarmGenie</strong></td>
+                    <td><code>UserMarketingProfile</code></td>
+                    <td>UserId, DisplayName, Email, Phone</td>
+                    <td>Agent info</td>
+                </tr>
+                <tr>
+                    <td><strong>TitleData</strong></td>
+                    <td><code>ViewAssessor_v3</code></td>
+                    <td>Address, Beds, Baths, Sqft, YearBuilt</td>
+                    <td>READ ONLY - Attom data</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="info-box db" style="margin-top: 20px;">
+            <h4>🔢 Stored Procedure: usp_GetNextPlsNumber</h4>
+            <ul>
+                <li>Generates unique PLS numbers in format: <code>PLS-2025-00001</code></li>
+                <li>Thread-safe with transaction locking</li>
+                <li>Resets counter each year</li>
+            </ul>
+        </div>
+
+        <!-- FOOTER -->
+        <div style="text-align: center; padding: 40px; color: var(--text2); font-size: 0.85rem; margin-top: 40px; border-top: 1px solid var(--border);">
+            <p><strong>PLS Complete Design Blueprint v1.0</strong></p>
+            <p>Created December 29, 2025 | Steve Hundley / Cursor AI</p>
+            <p style="margin-top: 10px;">To save as PDF: Press <strong>Ctrl+P</strong> → Destination: <strong>Save as PDF</strong></p>
+        </div>
+    </div>
+</body>
+</html>
+
+

@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheGenie.ai - Lead Intelligence Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0e17;
+            --bg-card: #111827;
+            --bg-hover: #1f2937;
+            --accent-gold: #f59e0b;
+            --accent-cyan: #06b6d4;
+            --accent-emerald: #10b981;
+            --accent-rose: #f43f5e;
+            --accent-violet: #8b5cf6;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-color: #1e293b;
+            --gradient-gold: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --gradient-danger: linear-gradient(135deg, #f43f5e 0%, #dc2626 100%);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Sora', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(at 20% 20%, rgba(245, 158, 11, 0.08) 0, transparent 50%),
+                radial-gradient(at 80% 80%, rgba(6, 182, 212, 0.08) 0, transparent 50%);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-gold);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .agent-info {
+            text-align: right;
+        }
+        
+        .agent-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .agent-territory {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 8px 32px rgba(245, 158, 11, 0.15);
+        }
+        
+        .stat-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .stat-value.gold { color: var(--accent-gold); }
+        .stat-value.emerald { color: var(--accent-emerald); }
+        .stat-value.cyan { color: var(--accent-cyan); }
+        .stat-value.rose { color: var(--accent-rose); }
+        .stat-value.violet { color: var(--accent-violet); }
+        
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Lead Table */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section-title span {
+            font-size: 24px;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: var(--bg-hover);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--accent-gold);
+            color: var(--bg-dark);
+            border-color: var(--accent-gold);
+        }
+        
+        .leads-table {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        
+        .table-header {
+            display: grid;
+            grid-template-columns: 60px 200px 1fr 120px 120px 100px 100px;
+            padding: 16px 20px;
+            background: var(--bg-hover);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+        }
+        
+        .lead-row {
+            display: grid;
+            grid-template-columns: 60px 200px 1fr 120px 120px 100px 100px;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .lead-row:hover {
+            background: var(--bg-hover);
+        }
+        
+        .lead-row:last-child {
+            border-bottom: none;
+        }
+        
+        /* Score Badge */
+        .score-badge {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        
+        .score-hot {
+            background: linear-gradient(135deg, #f43f5e20 0%, #dc262620 100%);
+            color: var(--accent-rose);
+            border: 2px solid var(--accent-rose);
+        }
+        
+        .score-warm {
+            background: linear-gradient(135deg, #f59e0b20 0%, #d9770620 100%);
+            color: var(--accent-gold);
+            border: 2px solid var(--accent-gold);
+        }
+        
+        .score-cool {
+            background: linear-gradient(135deg, #06b6d420 0%, #0891b220 100%);
+            color: var(--accent-cyan);
+            border: 2px solid var(--accent-cyan);
+        }
+        
+        /* Lead Info */
+        .lead-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .lead-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .lead-address {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        /* Enrichment Data */
+        .enrichment-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .enrichment-label {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+        
+        .enrichment-value {
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+        
+        /* Status Badges */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status-active {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-emerald);
+        }
+        
+        .status-lost {
+            background: rgba(244, 63, 94, 0.15);
+            color: var(--accent-rose);
+        }
+        
+        .status-listed {
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--accent-violet);
+        }
+        
+        .status-incubating {
+            background: rgba(6, 182, 212, 0.15);
+            color: var(--accent-cyan);
+        }
+        
+        /* CTAs count */
+        .cta-count {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .cta-bar {
+            flex: 1;
+            height: 8px;
+            background: var(--bg-hover);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .cta-fill {
+            height: 100%;
+            background: var(--gradient-gold);
+            border-radius: 4px;
+        }
+        
+        .cta-num {
+            font-weight: 600;
+            font-size: 14px;
+            min-width: 24px;
+        }
+        
+        /* Lead Detail Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 24px;
+        }
+        
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 24px 32px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .modal-lead-info h2 {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+        
+        .modal-lead-info p {
+            color: var(--text-secondary);
+        }
+        
+        .close-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-hover);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .close-btn:hover {
+            background: var(--accent-rose);
+            color: white;
+            border-color: var(--accent-rose);
+        }
+        
+        .modal-body {
+            padding: 24px 32px;
+        }
+        
+        /* Data Sections */
+        .data-section {
+            margin-bottom: 24px;
+        }
+        
+        .data-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        
+        .data-item {
+            background: var(--bg-hover);
+            border-radius: 12px;
+            padding: 16px;
+        }
+        
+        .data-item-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        
+        .data-item-value {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        
+        .data-item-value.highlight-gold { color: var(--accent-gold); }
+        .data-item-value.highlight-emerald { color: var(--accent-emerald); }
+        .data-item-value.highlight-rose { color: var(--accent-rose); }
+        
+        /* MLS Activity Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 24px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding: 16px;
+            background: var(--bg-hover);
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 20px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-cyan);
+            border: 2px solid var(--bg-card);
+        }
+        
+        .timeline-item.sold::before {
+            background: var(--accent-rose);
+        }
+        
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .timeline-date {
+            font-weight: 600;
+        }
+        
+        .timeline-status {
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 12px;
+        }
+        
+        .timeline-details {
+            display: flex;
+            gap: 24px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        /* Score Breakdown */
+        .score-breakdown {
+            background: var(--bg-hover);
+            border-radius: 16px;
+            padding: 20px;
+        }
+        
+        .score-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .score-total {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+        
+        .score-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .score-factors {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .score-factor {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .factor-label {
+            flex: 1;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .factor-bar {
+            width: 120px;
+            height: 6px;
+            background: var(--border-color);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .factor-fill {
+            height: 100%;
+            background: var(--accent-gold);
+            border-radius: 3px;
+        }
+        
+        .factor-value {
+            font-weight: 600;
+            min-width: 40px;
+            text-align: right;
+        }
+        
+        /* Alert Banner */
+        .alert-banner {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            background: rgba(244, 63, 94, 0.15);
+            border: 1px solid var(--accent-rose);
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .alert-icon {
+            font-size: 24px;
+        }
+        
+        .alert-content {
+            flex: 1;
+        }
+        
+        .alert-title {
+            font-weight: 600;
+            color: var(--accent-rose);
+            margin-bottom: 4px;
+        }
+        
+        .alert-text {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .alert-action {
+            padding: 10px 20px;
+            background: var(--accent-rose);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .alert-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(244, 63, 94, 0.3);
+        }
+        
+        /* Action Buttons */
+        .action-bar {
+            display: flex;
+            gap: 12px;
+            padding: 20px 32px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .action-btn {
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .action-btn.primary {
+            background: var(--gradient-gold);
+            color: var(--bg-dark);
+            border: none;
+        }
+        
+        .action-btn.secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .action-btn.primary:hover {
+            box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">🧞</div>
+                <div class="logo-text">TheGenie.ai</div>
+            </div>
+            <div class="header-right">
+                <div class="agent-info">
+                    <div class="agent-name">Mike Chiesl</div>
+                    <div class="agent-territory">Fallbrook & North County • Competition Command</div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Stats Row -->
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-value gold">141</div>
+                <div class="stat-label">Total Leads</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value emerald">8</div>
+                <div class="stat-label">Hot Leads</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value cyan">21</div>
+                <div class="stat-label">Warm Leads</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value rose">3</div>
+                <div class="stat-label">Lost to Others</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value violet">$2.4M</div>
+                <div class="stat-label">Pipeline Value</div>
+            </div>
+        </div>
+        
+        <!-- Lead Table Section -->
+        <div class="section-header">
+            <h2 class="section-title"><span>🎯</span> Lead Intelligence</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active">All Leads</button>
+                <button class="filter-btn">🔥 Hot</button>
+                <button class="filter-btn">⚠️ At Risk</button>
+                <button class="filter-btn">📋 Listed</button>
+            </div>
+        </div>
+        
+        <div class="leads-table">
+            <div class="table-header">
+                <div>Score</div>
+                <div>Lead</div>
+                <div>Enrichment Data</div>
+                <div>Home Value</div>
+                <div>Tenure</div>
+                <div>CTAs</div>
+                <div>Status</div>
+            </div>
+            
+            <!-- Row 1 - Krystyna (HOT - 35 CTAs, recently sold) -->
+            <div class="lead-row">
+                <div class="score-badge score-hot">92</div>
+                <div class="lead-info">
+                    <div class="lead-name">Krystyna Dobrowolski</div>
+                    <div class="lead-address">432 Edgehill Ln #94, Oceanside</div>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Income / Wealth</span>
+                    <span class="enrichment-value">$20-50K / Moderate</span>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Estimated</span>
+                    <span class="enrichment-value">$300-350K</span>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Purchased</span>
+                    <span class="enrichment-value">2020 (4 yrs)</span>
+                </div>
+                <div class="cta-count">
+                    <div class="cta-bar"><div class="cta-fill" style="width: 100%"></div></div>
+                    <span class="cta-num">35</span>
+                </div>
+                <span class="status-badge status-lost">⚠️ SOLD</span>
+            </div>
+            
+            <!-- Row 2 - Bradley Betts (HOT - 19 CTAs, high value) -->
+            <div class="lead-row">
+                <div class="score-badge score-hot">88</div>
+                <div class="lead-info">
+                    <div class="lead-name">Bradley Betts</div>
+                    <div class="lead-address">1394 Tierra Roja Dr, Fallbrook</div>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Income / Wealth</span>
+                    <span class="enrichment-value">$100-150K / $500K+</span>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Estimated</span>
+                    <span class="enrichment-value highlight-gold">> $1M</span>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Purchased</span>
+                    <span class="enrichment-value highlight-emerald">1999 (25 yrs!)</span>
+                </div>
+                <div class="cta-count">
+                    <div class="cta-bar"><div class="cta-fill" style="width: 54%"></div></div>
+                    <span class="cta-num">19</span>
+                </div>
+                <span class="status-badge status-active">✓ Active</span>
+            </div>
+            
+            <!-- Row 3 - Daniel Deville (WARM - 18 CTAs) -->
+            <div class="lead-row">
+                <div class="score-badge score-warm">76</div>
+                <div class="lead-info">
+                    <div class="lead-name">Daniel Deville</div>
+                    <div class="lead-address">2165 Opal Rdg, Vista</div>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Income / Wealth</span>
+                    <span class="enrichment-value">$75-100K / Moderate</span>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Estimated</span>
+                    <span class="enrichment-value">$750K-1M</span>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Purchased</span>
+                    <span class="enrichment-value">2018 (7 yrs)</span>
+                </div>
+                <div class="cta-count">
+                    <div class="cta-bar"><div class="cta-fill" style="width: 51%"></div></div>
+                    <span class="cta-num">18</span>
+                </div>
+                <span class="status-badge status-incubating">🔄 Incubating</span>
+            </div>
+            
+            <!-- Row 4 - Nancy Julius (WARM - 14 CTAs, high value) -->
+            <div class="lead-row">
+                <div class="score-badge score-warm">82</div>
+                <div class="lead-info">
+                    <div class="lead-name">Nancy Julius</div>
+                    <div class="lead-address">31377 Lake Vista Ter, Bonsall</div>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Income / Wealth</span>
+                    <span class="enrichment-value highlight-gold">$200-250K / $500K+</span>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Estimated</span>
+                    <span class="enrichment-value highlight-gold">> $1M</span>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Purchased</span>
+                    <span class="enrichment-value">2013 (11 yrs)</span>
+                </div>
+                <div class="cta-count">
+                    <div class="cta-bar"><div class="cta-fill" style="width: 40%"></div></div>
+                    <span class="cta-num">14</span>
+                </div>
+                <span class="status-badge status-active">✓ Active</span>
+            </div>
+            
+            <!-- Row 5 - Larry Tulio (WARM) -->
+            <div class="lead-row">
+                <div class="score-badge score-warm">71</div>
+                <div class="lead-info">
+                    <div class="lead-name">Larry Tulio</div>
+                    <div class="lead-address">1355 Reche Rd, Fallbrook</div>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Income / Wealth</span>
+                    <span class="enrichment-value">$100-150K / $250K+</span>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Estimated</span>
+                    <span class="enrichment-value">$750K-1M</span>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Purchased</span>
+                    <span class="enrichment-value">2015 (9 yrs)</span>
+                </div>
+                <div class="cta-count">
+                    <div class="cta-bar"><div class="cta-fill" style="width: 37%"></div></div>
+                    <span class="cta-num">13</span>
+                </div>
+                <span class="status-badge status-listed">📋 Listed</span>
+            </div>
+            
+            <!-- Row 6 - Frank Grady (WARM) -->
+            <div class="lead-row">
+                <div class="score-badge score-warm">74</div>
+                <div class="lead-info">
+                    <div class="lead-name">Frank Grady</div>
+                    <div class="lead-address">4140 Kari Ln, Bonsall</div>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Income / Wealth</span>
+                    <span class="enrichment-value">$150-200K / $350K+</span>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Estimated</span>
+                    <span class="enrichment-value">$600-750K</span>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Purchased</span>
+                    <span class="enrichment-value">2012 (12 yrs)</span>
+                </div>
+                <div class="cta-count">
+                    <div class="cta-bar"><div class="cta-fill" style="width: 37%"></div></div>
+                    <span class="cta-num">13</span>
+                </div>
+                <span class="status-badge status-active">✓ Active</span>
+            </div>
+            
+            <!-- Row 7 - Ladislav Zajicek (COOL) -->
+            <div class="lead-row">
+                <div class="score-badge score-cool">65</div>
+                <div class="lead-info">
+                    <div class="lead-name">Ladislav Zajicek</div>
+                    <div class="lead-address">4321 Vista Del Pacifico, Fallbrook</div>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Income / Wealth</span>
+                    <span class="enrichment-value">$75-100K / Moderate</span>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Estimated</span>
+                    <span class="enrichment-value">$500-600K</span>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Purchased</span>
+                    <span class="enrichment-value">2019 (5 yrs)</span>
+                </div>
+                <div class="cta-count">
+                    <div class="cta-bar"><div class="cta-fill" style="width: 34%"></div></div>
+                    <span class="cta-num">12</span>
+                </div>
+                <span class="status-badge status-incubating">🔄 Incubating</span>
+            </div>
+            
+            <!-- Row 8 - Shelley Searle (COOL) -->
+            <div class="lead-row">
+                <div class="score-badge score-cool">62</div>
+                <div class="lead-info">
+                    <div class="lead-name">Shelley Searle</div>
+                    <div class="lead-address">4310 Los Padres Dr, Fallbrook</div>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Income / Wealth</span>
+                    <span class="enrichment-value">$50-75K / Moderate</span>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Estimated</span>
+                    <span class="enrichment-value">$450-550K</span>
+                </div>
+                <div class="enrichment-cell">
+                    <span class="enrichment-label">Purchased</span>
+                    <span class="enrichment-value">2020 (4 yrs)</span>
+                </div>
+                <div class="cta-count">
+                    <div class="cta-bar"><div class="cta-fill" style="width: 31%"></div></div>
+                    <span class="cta-num">11</span>
+                </div>
+                <span class="status-badge status-active">✓ Active</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Example (Click to open) -->
+    <div class="modal-overlay" id="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-lead-info">
+                    <h2>Bradley Betts</h2>
+                    <p>1394 Tierra Roja Dr, Fallbrook, CA 92028</p>
+                </div>
+                <button class="close-btn" onclick="document.getElementById('modal').style.display='none'">×</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Alert for lost deals -->
+                <div class="alert-banner" style="display: none;">
+                    <span class="alert-icon">⚠️</span>
+                    <div class="alert-content">
+                        <div class="alert-title">Property Listed by Another Agent</div>
+                        <div class="alert-text">This property was listed by Jason Nagy on 11/15/2025 for $825,000</div>
+                    </div>
+                    <button class="alert-action">View Details</button>
+                </div>
+                
+                <!-- Score Breakdown -->
+                <div class="data-section">
+                    <div class="data-section-title">🎯 Lead Score Breakdown</div>
+                    <div class="score-breakdown">
+                        <div class="score-header">
+                            <div>
+                                <div class="score-total">88</div>
+                                <div class="score-label">HOT LEAD</div>
+                            </div>
+                            <div class="score-badge score-hot" style="width: 80px; height: 80px; font-size: 28px;">88</div>
+                        </div>
+                        <div class="score-factors">
+                            <div class="score-factor">
+                                <span class="factor-label">CTA Engagement (19 actions)</span>
+                                <div class="factor-bar"><div class="factor-fill" style="width: 95%"></div></div>
+                                <span class="factor-value">+25</span>
+                            </div>
+                            <div class="score-factor">
+                                <span class="factor-label">Long Tenure (25 years)</span>
+                                <div class="factor-bar"><div class="factor-fill" style="width: 100%"></div></div>
+                                <span class="factor-value">+20</span>
+                            </div>
+                            <div class="score-factor">
+                                <span class="factor-label">High Equity (>$500K)</span>
+                                <div class="factor-bar"><div class="factor-fill" style="width: 90%"></div></div>
+                                <span class="factor-value">+18</span>
+                            </div>
+                            <div class="score-factor">
+                                <span class="factor-label">High Net Worth ($500K+)</span>
+                                <div class="factor-bar"><div class="factor-fill" style="width: 80%"></div></div>
+                                <span class="factor-value">+15</span>
+                            </div>
+                            <div class="score-factor">
+                                <span class="factor-label">Data Quality (Complete)</span>
+                                <div class="factor-bar"><div class="factor-fill" style="width: 70%"></div></div>
+                                <span class="factor-value">+10</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property & Financial Data -->
+                <div class="data-section">
+                    <div class="data-section-title">🏠 Property Intelligence</div>
+                    <div class="data-grid">
+                        <div class="data-item">
+                            <div class="data-item-label">Current Value</div>
+                            <div class="data-item-value highlight-gold">> $1,000,000</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="data-item-label">Purchase Price (1999)</div>
+                            <div class="data-item-value">$350,000 - $399,999</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="data-item-label">Est. Equity</div>
+                            <div class="data-item-value highlight-emerald">$600,000+</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="data-item-label">Length of Residence</div>
+                            <div class="data-item-value">15+ Years</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="data-item-label">Household Income</div>
+                            <div class="data-item-value">$100,000 - $149,999</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="data-item-label">Est. Wealth</div>
+                            <div class="data-item-value highlight-gold">> $499,999</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Demographic Data -->
+                <div class="data-section">
+                    <div class="data-section-title">👤 Household Profile</div>
+                    <div class="data-grid">
+                        <div class="data-item">
+                            <div class="data-item-label">Marital Status</div>
+                            <div class="data-item-value">Married</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="data-item-label">Children</div>
+                            <div class="data-item-value">No</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="data-item-label">Vehicle</div>
+                            <div class="data-item-value">2007 Mercedes</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- MLS History -->
+                <div class="data-section">
+                    <div class="data-section-title">📋 MLS Activity</div>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-header">
+                                <span class="timeline-date">No Recent Listings</span>
+                                <span class="status-badge status-active">✓ Not Listed</span>
+                            </div>
+                            <div class="timeline-details">
+                                <span>Property has not been listed in the last 24 months</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Engagement History -->
+                <div class="data-section">
+                    <div class="data-section-title">🔔 Engagement History</div>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-header">
+                                <span class="timeline-date">Dec 14, 2025</span>
+                                <span class="status-badge status-active">CTA Click</span>
+                            </div>
+                            <div class="timeline-details">
+                                <span>Clicked "Get Free Home Value Report"</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-header">
+                                <span class="timeline-date">Dec 12, 2025</span>
+                                <span class="status-badge status-incubating">SMS Open</span>
+                            </div>
+                            <div class="timeline-details">
+                                <span>Opened market update SMS</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-header">
+                                <span class="timeline-date">Dec 8, 2025</span>
+                                <span class="status-badge status-active">CTA Click</span>
+                            </div>
+                            <div class="timeline-details">
+                                <span>Downloaded "Seller's Guide to 2025"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="action-bar">
+                <button class="action-btn primary">📞 Call Lead</button>
+                <button class="action-btn primary">💬 Send SMS</button>
+                <button class="action-btn secondary">📧 Email</button>
+                <button class="action-btn secondary">📝 Add Note</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Click on lead rows to show modal
+        document.querySelectorAll('.lead-row').forEach(row => {
+            row.addEventListener('click', () => {
+                document.getElementById('modal').style.display = 'flex';
+            });
+        });
+        
+        // Click outside modal to close
+        document.getElementById('modal').addEventListener('click', (e) => {
+            if (e.target.id === 'modal') {
+                document.getElementById('modal').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<!--
+    PLS Address Lookup Prototype
+    ============================
+    
+    PURPOSE: Standalone HTML prototype for UI/UX validation and testing
+    
+    ANGULAR INTEGRATION:
+    - This prototype will be converted to Angular component: PlsCreateComponent
+    - See PLS_ANGULAR_INTEGRATION_GUIDE_v1.md for conversion steps
+    - In Angular: Use relative paths (/api/Data), HTTP Interceptor handles auth
+    - In Angular: Use Paisley services (FgAutoCompleteAddressService, FgAreaService)
+    
+    SANDBOX vs PRODUCTION:
+    - Sandbox = Production clone for testing (same domain, different databases)
+    - Both use: https://app.thegenie.ai
+    - Sandbox DBs: FarmGenie_Sandbox, MlsListing_Sandbox
+    - Production DBs: FarmGenie, MlsListing
+    - Backend routes to correct DB based on connection string/environment config
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLS Address Lookup Prototype (Paisley Style)</title>
+    <!-- Using existing Paisley backend API for Google Places (no client-side Google API needed) -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #212529;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 56px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.25);
+            animation: slideUp 0.4s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            color: #6c757d;
+            margin-bottom: 40px;
+            font-size: 15px;
+        }
+        
+        .form-section {
+            margin-bottom: 40px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 32px;
+            background: #fafafa;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .form-section.hidden {
+            display: none;
+        }
+        
+        #step1Section {
+            background: white;
+        }
+        
+        #step3Section {
+            background: white;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid;
+            border-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%) 1;
+            color: #2d3748;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #4a5568;
+            letter-spacing: 0.3px;
+        }
+        
+        label.required::after {
+            content: " *";
+            color: #e53e3e;
+            font-weight: 700;
+        }
+        
+        input, select {
+            height: 48px;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #fff;
+            color: #2d3748;
+        }
+        
+        input:hover, select:hover {
+            border-color: #cbd5e0;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            border-width: 2px;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-1px);
+        }
+        
+        input[readonly] {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            color: #4a5568;
+            cursor: not-allowed;
+            border-color: #e2e8f0;
+        }
+        
+        /* Address Autocomplete Styles */
+        .address-autocomplete-container {
+            position: relative;
+            margin-bottom: 24px;
+        }
+        
+        .address-autocomplete-input {
+            width: 100%;
+            font-size: 16px;
+            padding: 14px 18px;
+            height: 56px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .address-autocomplete-input:focus {
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15), 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .autocomplete-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            max-height: 320px;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: none;
+            animation: fadeInDown 0.2s ease-out;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .autocomplete-dropdown.visible {
+            display: block;
+        }
+        
+        .autocomplete-item {
+            padding: 16px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid #f1f5f9;
+            transition: all 0.2s ease;
+        }
+        
+        .autocomplete-item:hover {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            transform: translateX(4px);
+        }
+        
+        .autocomplete-item:last-child {
+            border-bottom: none;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .autocomplete-item:last-child {
+            border-bottom: none;
+        }
+        
+        .autocomplete-item .address-main {
+            font-size: 15px;
+            color: #2d3748;
+            font-weight: 600;
+        }
+        
+        .autocomplete-item .address-details {
+            font-size: 13px;
+            color: #718096;
+            margin-top: 4px;
+        }
+        
+        .address-components {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 24px;
+            padding: 24px;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            display: none;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .address-components.visible {
+            display: grid;
+        }
+        
+        .address-components .form-group label {
+            font-size: 12px;
+            color: #718096;
+        }
+        
+        .address-components input {
+            background: white;
+            font-size: 14px;
+        }
+        
+        /* Area Selection Styles */
+        .area-search-container {
+            position: relative;
+        }
+        
+        .area-search-input {
+            width: 100%;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .area-search-input:focus {
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15), 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        #areaLookupSection {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 24px;
+        }
+        
+        .area-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            max-height: 320px;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: none;
+            animation: fadeInDown 0.2s ease-out;
+        }
+        
+        .area-dropdown.visible {
+            display: block;
+        }
+        
+        .area-item {
+            padding: 16px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid #f1f5f9;
+            transition: all 0.2s ease;
+        }
+        
+        .area-item:hover {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            transform: translateX(4px);
+        }
+        
+        .area-item:last-child {
+            border-bottom: none;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .area-item.selected {
+            background: linear-gradient(135deg, #e6f3ff 0%, #d6ebff 100%);
+            font-weight: 600;
+            border-left: 4px solid #667eea;
+        }
+        
+        .area-name {
+            font-size: 15px;
+            color: #2d3748;
+            font-weight: 500;
+        }
+        
+        .area-id {
+            font-size: 13px;
+            color: #718096;
+            margin-top: 4px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        
+        button {
+            height: 48px;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        button.primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        button.primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        button.primary:active:not(:disabled) {
+            transform: translateY(0);
+        }
+        
+        button.secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        button.secondary:hover:not(:disabled) {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+        
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
+        }
+        
+        .conflict-warning {
+            background: linear-gradient(135deg, #fffaf0 0%, #fff5e6 100%);
+            border: 2px solid #f6ad55;
+            padding: 16px 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            animation: fadeIn 0.3s ease-out;
+            box-shadow: 0 2px 8px rgba(246, 173, 85, 0.2);
+        }
+        
+        .conflict-warning.visible {
+            display: block;
+        }
+        
+        .conflict-warning strong {
+            color: #c05621;
+            font-size: 15px;
+        }
+        
+        .pre-populated-field {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6ffed 100%);
+            border-color: #68d391;
+            border-width: 2px;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 8px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .step-indicator {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 40px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .step {
+            flex: 1;
+            text-align: center;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .step.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            transform: scale(1.02);
+        }
+        
+        .step.completed {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+        }
+        
+        .step.pending {
+            background: #f7fafc;
+            color: #a0aec0;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .selected-area-display {
+            padding: 16px 20px;
+            background: linear-gradient(135deg, #f0fff4 0%, #e6ffed 100%);
+            border: 2px solid #68d391;
+            border-radius: 10px;
+            margin-top: 12px;
+            display: none;
+            animation: fadeIn 0.3s ease-out;
+            box-shadow: 0 2px 8px rgba(104, 211, 145, 0.2);
+        }
+        
+        .selected-area-display.visible {
+            display: block;
+        }
+        
+        .selected-area-display strong {
+            color: #22543d;
+        }
+        
+        .selected-area-display span {
+            color: #2f855a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Create New PLS Listing</h1>
+        <p class="subtitle">Paisley-style flow: Address Autocomplete → Area Selection → Property Details</p>
+        <div id="environmentBadge" style="display: inline-block; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-bottom: 16px; background: #e2e8f0; color: #2d3748;">
+            Environment: <span id="envName">Loading...</span> | API: <span id="envUrl">Loading...</span>
+        </div>
+        
+        <!-- STEP INDICATOR -->
+        <div class="step-indicator">
+            <div class="step active" id="step1Indicator">1. Address & Area</div>
+            <div class="step pending" id="step2Indicator">2. Property Details</div>
+        </div>
+        
+        <!-- STEP 1: ADDRESS AUTOCOMPLETE -->
+        <div class="form-section" id="step1Section">
+            <div class="section-title">Step 1: Property Address</div>
+            
+            <div class="address-autocomplete-container">
+                <label for="addressInput" class="required">Search Address</label>
+                <input type="text" 
+                       id="addressInput" 
+                       class="address-autocomplete-input" 
+                       placeholder="Start typing an address (e.g., 10037 Rebecca Place, Boerne, TX)"
+                       autocomplete="off">
+                <div class="autocomplete-dropdown" id="autocompleteDropdown"></div>
+                <small id="apiKeyStatus" style="display: block; margin-top: 8px; color: #718096; font-size: 12px;">
+                    ✅ Using existing Paisley address lookup (Google Places via backend)
+                </small>
+                <small id="authStatus" style="display: block; margin-top: 4px; font-size: 12px; font-weight: 500;">
+                    Checking authentication...
+                </small>
+            </div>
+            
+            <!-- Address Components (Auto-populated, Read-only) -->
+            <div class="address-components" id="addressComponents">
+                <div class="form-group">
+                    <label>Street Number</label>
+                    <input type="text" id="streetNumber" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Street Name</label>
+                    <input type="text" id="streetName" readonly>
+                </div>
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" id="city" readonly>
+                </div>
+                <div class="form-group">
+                    <label>State</label>
+                    <input type="text" id="state" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Zip Code</label>
+                    <input type="text" id="zip" readonly>
+                </div>
+            </div>
+            
+            <!-- Area Lookup (Auto-fetched as address is typed) -->
+            <div class="form-section" id="areaLookupSection" style="display: none; margin-top: 24px;">
+                <div class="section-title">Select Area</div>
+                <p style="margin-bottom: 16px; color: #6c757d; font-size: 14px;">
+                    Areas for this location (auto-fetched):
+                </p>
+                <div class="form-group">
+                    <label for="areaSearch" class="required">Search Areas</label>
+                    <div class="area-search-container">
+                        <input type="text" 
+                               id="areaSearch" 
+                               class="area-search-input" 
+                               placeholder="Type to search areas..."
+                               oninput="filterAreas()"
+                               onfocus="showAreaDropdown()">
+                        <div class="area-dropdown" id="areaDropdown"></div>
+                    </div>
+                    <div class="selected-area-display" id="selectedAreaDisplay">
+                        <strong>Selected:</strong> <span id="selectedAreaName"></span> (ID: <span id="selectedAreaId"></span>)
+                    </div>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button class="primary" id="btnContinue" onclick="continueToPropertyDetails()" disabled>Continue to Property Details</button>
+                <button class="secondary" onclick="clearForm()">Clear</button>
+            </div>
+        </div>
+        
+        <!-- STEP 2: AREA SELECTION (Now integrated into Step 1) -->
+        <!-- Removed - areas now show automatically in Step 1 -->
+        
+        <!-- STEP 3: PROPERTY DETAILS (Pre-populated) -->
+        <div class="form-section hidden" id="step3Section">
+            <div class="section-title">Step 3: Property Details</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="listPrice" class="required">List Price</label>
+                    <input type="number" id="listPrice" placeholder="$749,000">
+                </div>
+                <div class="form-group">
+                    <label for="bedrooms" class="required">Bedrooms</label>
+                    <input type="number" id="bedrooms" placeholder="4">
+                </div>
+                <div class="form-group">
+                    <label for="bathroomsFull" class="required">Bathrooms (Full)</label>
+                    <input type="number" id="bathroomsFull" placeholder="3">
+                </div>
+                <div class="form-group">
+                    <label for="bathroomsHalf">Bathrooms (Half)</label>
+                    <input type="number" id="bathroomsHalf" placeholder="0">
+                </div>
+                <div class="form-group">
+                    <label for="sqft" class="required">Square Feet</label>
+                    <input type="number" id="sqft" placeholder="3,018">
+                </div>
+                <div class="form-group">
+                    <label for="lotSize" class="required">Lot Size (sq ft)</label>
+                    <input type="number" id="lotSize" placeholder="9,101">
+                </div>
+                <div class="form-group">
+                    <label for="yearBuilt" class="required">Year Built</label>
+                    <input type="number" id="yearBuilt" placeholder="2022">
+                </div>
+                <div class="form-group">
+                    <label for="propertyType" class="required">Property Type</label>
+                    <select id="propertyType">
+                        <option value="">Select...</option>
+                        <option value="Single Family">Single Family</option>
+                        <option value="Condo">Condo</option>
+                        <option value="Townhouse">Townhouse</option>
+                        <option value="Multi-Family">Multi-Family</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="garageSpaces">Garage Spaces</label>
+                    <input type="number" id="garageSpaces" placeholder="3">
+                </div>
+                <div class="form-group">
+                    <label for="parkingSpaces">Parking Spaces</label>
+                    <input type="number" id="parkingSpaces" placeholder="3">
+                </div>
+            </div>
+            
+            <!-- Conflict Warning -->
+            <div class="conflict-warning" id="conflictWarning">
+                <strong>⚠️ Data Conflict Detected</strong>
+                <div id="conflictDetails"></div>
+            </div>
+            
+            <div class="button-group">
+                <button class="secondary" onclick="goBackToStep1()">← Back</button>
+                <button class="primary" onclick="saveListing()">Save Listing</button>
+                <button class="primary" onclick="saveAndGenerate()">Save & Generate Content Kit</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // ============================================
+        // ENVIRONMENT CONFIGURATION
+        // ============================================
+        // Auto-detect or manually configure environment
+        
+        // Auto-detect environment from URL or localStorage
+        function detectEnvironment() {
+            // Check URL parameter first
+            const urlParams = new URLSearchParams(window.location.search);
+            const envParam = urlParams.get('env');
+            if (envParam && (envParam === 'sandbox' || envParam === 'production')) {
+                return envParam;
+            }
+            
+            // Check localStorage for saved preference
+            const savedEnv = localStorage.getItem('pls_environment');
+            if (savedEnv && (savedEnv === 'sandbox' || savedEnv === 'production')) {
+                return savedEnv;
+            }
+            
+            // Default to sandbox for development
+            return 'sandbox';
+        }
+        
+        const ENVIRONMENT_CONFIG = {
+            // SANDBOX CONFIGURATION
+            // IMPORTANT: Sandbox is a CLONE of production for testing
+            // - Same domain/API: app.thegenie.ai (same as production)
+            // - Different databases: FarmGenie_Sandbox, MlsListing_Sandbox (vs FarmGenie, MlsListing)
+            // - Purpose: Build and test features before moving to production
+            // - Backend automatically routes to sandbox DBs based on connection string/environment
+            sandbox: {
+                baseUrl: 'https://app.thegenie.ai',  // Same domain as production
+                apiData: '/api/Data',                 // Backend routes to sandbox DBs
+                apiPls: '/api/pls',
+                description: 'Sandbox Environment (FarmGenie_Sandbox, MlsListing_Sandbox) - Production Clone for Testing'
+            },
+            // PRODUCTION CONFIGURATION
+            production: {
+                baseUrl: 'https://app.thegenie.ai',
+                apiData: '/api/Data',
+                apiPls: '/api/pls',
+                description: 'Production Environment (FarmGenie, MlsListing)'
+            }
+        };
+        
+        // Auto-detect or set environment
+        // Override: Add ?env=sandbox or ?env=production to URL
+        // Or set manually: const CURRENT_ENV = 'sandbox';
+        const CURRENT_ENV = detectEnvironment();
+        
+        // Save environment preference
+        localStorage.setItem('pls_environment', CURRENT_ENV);
+        
+        // Get current environment config
+        let env = ENVIRONMENT_CONFIG[CURRENT_ENV];
+        if (!env) {
+            console.error(`Invalid environment: ${CURRENT_ENV}. Using sandbox.`);
+            env = ENVIRONMENT_CONFIG.sandbox;
+        }
+        
+        // Set API base URLs based on selected environment
+        const API_BASE = `${env.baseUrl}${env.apiData}`;
+        const PLS_API_BASE = `${env.baseUrl}${env.apiPls}`;
+        
+        // Log current configuration
+        console.log(`🔧 PLS Prototype Configuration:`);
+        console.log(`   Environment: ${CURRENT_ENV} (${env.description})`);
+        console.log(`   Base URL: ${env.baseUrl}`);
+        console.log(`   Data API: ${API_BASE}`);
+        console.log(`   PLS API: ${PLS_API_BASE}`);
+        console.log(`   💡 Tip: Add ?env=sandbox or ?env=production to URL to switch environments`);
+        
+        // JWT Token Management
+        // Try to get token from localStorage/sessionStorage (Angular apps store it there)
+        function getAuthToken() {
+            // Common token storage keys in Angular apps
+            const tokenKeys = [
+                'token',
+                'jwt',
+                'authToken',
+                'accessToken',
+                'id_token',
+                'thegenie_token',
+                'thegenie_auth'
+            ];
+            
+            // Check localStorage first
+            for (const key of tokenKeys) {
+                const token = localStorage.getItem(key) || sessionStorage.getItem(key);
+                if (token) {
+                    return token.startsWith('Bearer ') ? token : `Bearer ${token}`;
+                }
+            }
+            
+            // Check for token in URL (if redirected from login)
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlToken = urlParams.get('token') || urlParams.get('access_token');
+            if (urlToken) {
+                return urlToken.startsWith('Bearer ') ? urlToken : `Bearer ${urlToken}`;
+            }
+            
+            return null;
+        }
+        
+        // Get auth token on load
+        let authToken = getAuthToken();
+        
+        // Function to make authenticated API calls
+        function makeAuthenticatedRequest(url, options = {}) {
+            const headers = {
+                'Content-Type': 'application/json',
+                ...options.headers
+            };
+            
+            // Add auth token if available
+            if (authToken) {
+                headers['Authorization'] = authToken;
+            }
+            
+            return fetch(url, {
+                ...options,
+                headers,
+                credentials: 'include' // Include cookies for CORS
+            });
+        }
+        
+        // Show auth status in UI
+        function updateAuthStatus() {
+            const statusEl = document.getElementById('authStatus');
+            if (statusEl) {
+                if (authToken) {
+                    statusEl.textContent = '✅ Authenticated';
+                    statusEl.style.color = '#28a745';
+                } else {
+                    statusEl.textContent = '⚠️ No auth token - API calls will fail. Open TheGenie.ai in another tab, login, then refresh this page.';
+                    statusEl.style.color = '#ffc107';
+                }
+            }
+        }
+        
+        // State
+        let currentStep = 1;
+        let selectedAddress = null;
+        let selectedArea = null;
+        let allAreas = [];
+        let filteredAreas = [];
+        let areaLookupTimeout = null;
+        
+        // Mock areas data
+        const mockAreas = [
+            { id: 1, name: "Balcones Creek", city: "Boerne", state: "TX" },
+            { id: 2, name: "Hollywood Park", city: "Boerne", state: "TX" },
+            { id: 3, name: "Fair Oaks Ranch", city: "Boerne", state: "TX" },
+            { id: 4, name: "Cibolo Creek", city: "Boerne", state: "TX" },
+            { id: 5, name: "The Dominion", city: "San Antonio", state: "TX" },
+            { id: 6, name: "Stone Oak", city: "San Antonio", state: "TX" },
+            { id: 7, name: "Alamo Heights", city: "San Antonio", state: "TX" }
+        ];
+        
+        // Initialize address autocomplete using existing Paisley backend API
+        // This uses Google Places on the backend (same as Paisley)
+        function initAddressAutocomplete() {
+            const addressInput = document.getElementById('addressInput');
+            let autocompleteTimeout = null;
+            const minAutocompleteInput = 4; // Same as Paisley
+            
+            // Listen for input changes - call Paisley's AutoCompleteAddress API
+            addressInput.addEventListener('input', function() {
+                const query = addressInput.value.trim();
+                
+                // Clear previous timeout
+                clearTimeout(autocompleteTimeout);
+                
+                // Hide dropdown if query is too short
+                if (query.length < minAutocompleteInput) {
+                    document.getElementById('autocompleteDropdown').classList.remove('visible');
+                    document.getElementById('autocompleteDropdown').innerHTML = '';
+                    return;
+                }
+                
+                // Debounce API call (600ms like Paisley)
+                autocompleteTimeout = setTimeout(async () => {
+                    try {
+                        // Call existing Paisley AutoCompleteAddress API (uses Google Places on backend)
+                        const response = await makeAuthenticatedRequest(`${API_BASE}/AutoCompleteAddress`, {
+                            method: 'POST',
+                            body: JSON.stringify({
+                                AspNetUserId: '', // Will be set by backend from auth token
+                                AddressKey: query,
+                                BiasLatitude: null, // Optional: can get from map settings
+                                BiasLongitude: null, // Optional: can get from map settings
+                                SessionToken: null // Optional: for session management
+                            })
+                        });
+                        
+                        // Check for auth errors
+                        if (response.status === 401 || response.status === 403) {
+                            authToken = null; // Clear invalid token
+                            updateAuthStatus();
+                            document.getElementById('autocompleteDropdown').innerHTML = 
+                                '<div class="autocomplete-item" style="color: #dc3545; padding: 16px;">⚠️ Authentication required. Please login to TheGenie.ai first.</div>';
+                            document.getElementById('autocompleteDropdown').classList.add('visible');
+                            return;
+                        }
+                        
+                        if (!response.ok) {
+                            throw new Error(`API error: ${response.status} ${response.statusText}`);
+                        }
+                        
+                        const result = await response.json();
+                        
+                        if (result.Success && result.Addresses && result.Addresses.length > 0) {
+                            // Show autocomplete dropdown with results
+                            renderAutocompleteDropdown(result.Addresses);
+                        } else {
+                            // No results found
+                            document.getElementById('autocompleteDropdown').innerHTML = 
+                                '<div class="autocomplete-item" style="color: #6c757d; padding: 16px;">No address matches found.</div>';
+                            document.getElementById('autocompleteDropdown').classList.add('visible');
+                        }
+                    } catch (error) {
+                        console.error('Address autocomplete error:', error);
+                        document.getElementById('autocompleteDropdown').innerHTML = 
+                            `<div class="autocomplete-item" style="color: #dc3545; padding: 16px;">⚠️ Error: ${error.message}</div>`;
+                        document.getElementById('autocompleteDropdown').classList.add('visible');
+                    }
+                }, 600); // 600ms debounce like Paisley
+            });
+            
+            // Hide dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.address-autocomplete-container')) {
+                    document.getElementById('autocompleteDropdown').classList.remove('visible');
+                }
+            });
+        }
+        
+        function renderAutocompleteDropdown(addresses) {
+            const dropdown = document.getElementById('autocompleteDropdown');
+            dropdown.innerHTML = '';
+            
+            addresses.forEach(address => {
+                const item = document.createElement('div');
+                item.className = 'autocomplete-item';
+                item.innerHTML = `
+                    <div class="address-main">${address.FullAddress || address.Address}</div>
+                `;
+                item.onclick = () => selectAddressFromAutocomplete(address);
+                dropdown.appendChild(item);
+            });
+            
+            dropdown.classList.add('visible');
+        }
+        
+        async function selectAddressFromAutocomplete(addressPrediction) {
+            selectedAddress = addressPrediction;
+            document.getElementById('autocompleteDropdown').classList.remove('visible');
+            
+            // Set the input value
+            document.getElementById('addressInput').value = addressPrediction.FullAddress || addressPrediction.Address;
+            
+            // If we have a PlaceKey, get full property details
+            if (addressPrediction.PlaceKey || addressPrediction.Key) {
+                try {
+                    const response = await makeAuthenticatedRequest(`${API_BASE}/GetPropertiesFromPlaceKey`, {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            AspNetUserId: '',
+                            PlaceKey: addressPrediction.PlaceKey || addressPrediction.Key
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.Success && result.Properties && result.Properties.length > 0) {
+                        const property = result.Properties[0];
+                        // Populate address components from property data
+                        populateAddressComponents(property);
+                    } else {
+                        // Fallback: parse from FullAddress
+                        parseAddressFromString(addressPrediction.FullAddress || addressPrediction.Address);
+                    }
+                } catch (error) {
+                    console.error('GetPropertiesFromPlaceKey error:', error);
+                    parseAddressFromString(addressPrediction.FullAddress || addressPrediction.Address);
+                }
+            } else {
+                // Parse from FullAddress string
+                parseAddressFromString(addressPrediction.FullAddress || addressPrediction.Address);
+            }
+            
+            // Show address components
+            document.getElementById('addressComponents').classList.add('visible');
+            
+            // Fetch areas for selected address
+            await fetchAreasForSelectedAddress(selectedAddress);
+        }
+        
+        function populateAddressComponents(property) {
+            // Populate from property object (if available)
+            document.getElementById('streetNumber').value = property.StreetNumber || '';
+            document.getElementById('streetName').value = property.StreetName || '';
+            document.getElementById('city').value = property.City || '';
+            document.getElementById('state').value = property.State || '';
+            document.getElementById('zip').value = property.Zip || '';
+        }
+        
+        function parseAddressFromString(addressString) {
+            // Parse address string into components
+            const parts = addressString.split(',').map(p => p.trim());
+            
+            if (parts.length >= 2) {
+                const streetParts = parts[0].split(' ');
+                const streetNumber = streetParts[0];
+                const streetName = streetParts.slice(1).join(' ');
+                const city = parts[1] || '';
+                const stateZip = parts[2] || '';
+                const stateZipParts = stateZip.split(' ');
+                const state = stateZipParts[0] || '';
+                const zip = stateZipParts[1] || '';
+                
+                document.getElementById('streetNumber').value = streetNumber;
+                document.getElementById('streetName').value = streetName;
+                document.getElementById('city').value = city;
+                document.getElementById('state').value = state;
+                document.getElementById('zip').value = zip;
+            }
+        }
+        
+        async function fetchAreasForAddress(addressQuery) {
+            // Use existing Paisley GetAreaList API
+            try {
+                // Extract city/state from address query for area search
+                const cityMatch = addressQuery.toLowerCase().includes('boerne') ? 'Boerne' : 
+                                addressQuery.toLowerCase().includes('san antonio') ? 'San Antonio' : null;
+                
+                // Call Paisley's GetAreaList API (same as area autocomplete component)
+                const response = await makeAuthenticatedRequest(`${API_BASE}/GetAreaList`, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        AspNetUserId: '', // Will be set by backend from auth
+                        AreaTypes: [], // Empty = all area types (or specify types if needed)
+                        SearchKey: cityMatch || addressQuery // Search by city or full query
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result && Array.isArray(result)) {
+                    // Convert Paisley area format to our format
+                    allAreas = result.map(area => ({
+                        id: area.AreaId,
+                        name: area.AreaName,
+                        city: area.City || cityMatch || '',
+                        state: area.State || 'TX'
+                    }));
+                } else {
+                    // Fallback to mock data if API fails
+                    console.warn('Area API returned unexpected format, using mock data');
+                    allAreas = mockAreas;
+                }
+                
+                if (allAreas.length === 0) {
+                    allAreas = mockAreas; // Final fallback
+                }
+                
+                filteredAreas = [...allAreas];
+                
+                // Show area lookup section
+                document.getElementById('areaLookupSection').style.display = 'block';
+                renderAreaDropdown();
+                
+            } catch (error) {
+                console.error('Area fetch error:', error);
+                // Fallback to mock data on error
+                allAreas = mockAreas;
+                filteredAreas = [...allAreas];
+                document.getElementById('areaLookupSection').style.display = 'block';
+                renderAreaDropdown();
+            }
+        }
+        
+        async function fetchAreasForSelectedAddress(address) {
+            try {
+                // Use existing Paisley GetAreaList API
+                // Extract city/state from address for area search
+                const city = address.City || address.city || '';
+                const state = address.State || address.state || '';
+                const searchKey = city || state || '';
+                
+                // Call Paisley's GetAreaList API (same as area autocomplete component)
+                const response = await makeAuthenticatedRequest(`${API_BASE}/GetAreaList`, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        AspNetUserId: '', // Will be set by backend from auth
+                        AreaTypes: [], // Empty = all area types (or specify types if needed)
+                        SearchKey: searchKey // Search by city/state
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result && Array.isArray(result)) {
+                    // Convert Paisley area format to our format
+                    allAreas = result.map(area => ({
+                        id: area.AreaId,
+                        name: area.AreaName,
+                        city: area.City || city,
+                        state: area.State || state
+                    }));
+                } else {
+                    // Fallback to mock data if API fails
+                    console.warn('Area API returned unexpected format, using mock data');
+                    allAreas = mockAreas;
+                }
+                
+                if (allAreas.length === 0) {
+                    allAreas = mockAreas; // Final fallback
+                }
+                
+                filteredAreas = [...allAreas];
+                
+                // Show area lookup section
+                document.getElementById('areaLookupSection').style.display = 'block';
+                renderAreaDropdown();
+                
+                // Pre-populate area search with city name to help user
+                if (city) {
+                    document.getElementById('areaSearch').value = '';
+                    document.getElementById('areaSearch').placeholder = `Search areas in ${city}, ${state}...`;
+                }
+                
+                console.log(`✅ Area lookup triggered for ${city}, ${state} - Found ${allAreas.length} areas`);
+                
+            } catch (error) {
+                console.error('Area lookup error:', error);
+                // Fallback to mock data on error
+                allAreas = mockAreas;
+                filteredAreas = [...allAreas];
+                document.getElementById('areaLookupSection').style.display = 'block';
+                renderAreaDropdown();
+            }
+        }
+        
+        function showAreaDropdown() {
+            if (filteredAreas.length > 0) {
+                renderAreaDropdown();
+                document.getElementById('areaDropdown').classList.add('visible');
+            }
+        }
+        
+        function filterAreas() {
+            const searchTerm = document.getElementById('areaSearch').value.toLowerCase();
+            filteredAreas = allAreas.filter(area => 
+                area.name.toLowerCase().includes(searchTerm) ||
+                area.city.toLowerCase().includes(searchTerm)
+            );
+            renderAreaDropdown();
+            document.getElementById('areaDropdown').classList.add('visible');
+        }
+        
+        function renderAreaDropdown() {
+            const dropdown = document.getElementById('areaDropdown');
+            dropdown.innerHTML = '';
+            
+            if (filteredAreas.length === 0) {
+                dropdown.innerHTML = '<div class="area-item" style="color: #6c757d;">No areas found</div>';
+                return;
+            }
+            
+            filteredAreas.forEach(area => {
+                const item = document.createElement('div');
+                item.className = 'area-item' + (selectedArea && selectedArea.id === area.id ? ' selected' : '');
+                item.innerHTML = `
+                    <div class="area-name">${area.name}</div>
+                    <div class="area-id">${area.city}, ${area.state} (ID: ${area.id})</div>
+                `;
+                item.onclick = () => selectArea(area);
+                dropdown.appendChild(item);
+            });
+        }
+        
+        function selectArea(area) {
+            selectedArea = area;
+            document.getElementById('areaSearch').value = area.name;
+            document.getElementById('selectedAreaName').textContent = `${area.name}, ${area.city}, ${area.state}`;
+            document.getElementById('selectedAreaId').textContent = area.id;
+            document.getElementById('selectedAreaDisplay').classList.add('visible');
+            document.getElementById('areaDropdown').classList.remove('visible');
+            
+            // IMPORTANT: Enable continue button when both address AND area are selected (this is the binding)
+            if (selectedAddress && selectedArea) {
+                document.getElementById('btnContinue').disabled = false;
+                console.log('✅ Address and Area bound:', {
+                    address: selectedAddress.full,
+                    area: selectedArea.name,
+                    areaId: selectedArea.id
+                });
+            } else {
+                console.warn('⚠️ Cannot continue - missing:', {
+                    hasAddress: !!selectedAddress,
+                    hasArea: !!selectedArea
+                });
+            }
+            
+            renderAreaDropdown();
+        }
+        
+        function continueToPropertyDetails() {
+            if (!selectedAddress || !selectedArea) {
+                alert('Please select both an address and an area');
+                console.error('Cannot continue - missing:', {
+                    address: selectedAddress ? selectedAddress.full : 'NOT SELECTED',
+                    area: selectedArea ? selectedArea.name : 'NOT SELECTED'
+                });
+                return;
+            }
+            
+            console.log('🚀 Continuing to property details with:', {
+                address: selectedAddress.full,
+                area: selectedArea.name,
+                areaId: selectedArea.id
+            });
+            
+            // Move directly to property details (skip Step 2)
+            fetchPropertyData();
+        }
+        
+        async function fetchPropertyData() {
+            if (!selectedArea || !selectedAddress) {
+                alert('Please select an address and area first');
+                return;
+            }
+            
+            const btnFetch = document.getElementById('btnFetchPropertyData');
+            btnFetch.disabled = true;
+            btnFetch.innerHTML = 'Fetching property data... <span class="loading"></span>';
+            
+            try {
+                // TODO: Replace with actual API call
+                // const address = selectedAddress.full;
+                // const response = await fetch(`${API_BASE}/pre-populate`, {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify({ address, areaId: selectedArea.id })
+                // });
+                // const data = await response.json();
+                
+                // MOCK DATA for testing
+                const data = {
+                    titleData: {
+                        streetNumber: selectedAddress.streetNumber,
+                        streetName: selectedAddress.streetName,
+                        city: selectedAddress.city,
+                        state: selectedAddress.state,
+                        zip: selectedAddress.zip,
+                        sqft: 2500,
+                        bedrooms: 4,
+                        bathroomsFull: 3,
+                        lotSize: 9101,
+                        yearBuilt: 2022,
+                        propertyType: "Single Family",
+                        garageSpaces: 3,
+                        parkingSpaces: 3,
+                        latitude: 29.72229,
+                        longitude: -98.68958
+                    },
+                    historicalMls: {
+                        sqft: 3018,
+                        bedrooms: 4,
+                        bathroomsFull: 3,
+                        lotSize: 9101,
+                        yearBuilt: 2022
+                    },
+                    conflicts: [
+                        {
+                            field: "sqft",
+                            titleDataValue: 2500,
+                            mlsValue: 3018,
+                            recommended: 3018,
+                            reason: "MLS value includes permitted expansion"
+                        }
+                    ]
+                };
+                
+                // Simulate API delay
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                populateForm(data);
+                goToStep(2); // Now Step 2 (Property Details)
+                
+            } catch (error) {
+                console.error('Property data fetch error:', error);
+                alert('Error fetching property data. Check console for details.');
+            } finally {
+                btnFetch.disabled = false;
+                btnFetch.innerHTML = 'Continue to Property Details';
+            }
+        }
+        
+        function populateForm(data) {
+            const { titleData, historicalMls, conflicts } = data;
+            
+            // Use historical MLS if available, otherwise TitleData
+            const source = historicalMls && Object.keys(historicalMls).length > 0 ? historicalMls : titleData;
+            
+            // Populate fields
+            if (titleData.listPrice) document.getElementById('listPrice').value = titleData.listPrice;
+            if (source.bedrooms) document.getElementById('bedrooms').value = source.bedrooms;
+            if (source.bathroomsFull) document.getElementById('bathroomsFull').value = source.bathroomsFull;
+            if (source.bathroomsHalf) document.getElementById('bathroomsHalf').value = source.bathroomsHalf || 0;
+            if (source.sqft) document.getElementById('sqft').value = source.sqft;
+            if (source.lotSize) document.getElementById('lotSize').value = source.lotSize;
+            if (source.yearBuilt) document.getElementById('yearBuilt').value = source.yearBuilt;
+            if (titleData.propertyType) document.getElementById('propertyType').value = titleData.propertyType;
+            if (titleData.garageSpaces) document.getElementById('garageSpaces').value = titleData.garageSpaces;
+            if (titleData.parkingSpaces) document.getElementById('parkingSpaces').value = titleData.parkingSpaces;
+            
+            // Highlight pre-populated fields
+            const fields = ['bedrooms', 'bathroomsFull', 'sqft', 'lotSize', 'yearBuilt'];
+            fields.forEach(field => {
+                const input = document.getElementById(field);
+                if (input.value) {
+                    input.classList.add('pre-populated-field');
+                }
+            });
+            
+            // Show conflicts
+            if (conflicts && conflicts.length > 0) {
+                const conflictWarning = document.getElementById('conflictWarning');
+                const conflictDetails = document.getElementById('conflictDetails');
+                
+                let conflictHtml = '<ul style="margin-top: 8px; margin-left: 20px;">';
+                conflicts.forEach(conflict => {
+                    conflictHtml += `<li>
+                        <strong>${conflict.field.toUpperCase()}:</strong> 
+                        TitleData: ${conflict.titleDataValue} | 
+                        Historical MLS: ${conflict.mlsValue} (recommended) 
+                        <span style="color: #856404;">- ${conflict.reason}</span>
+                    </li>`;
+                });
+                conflictHtml += '</ul>';
+                
+                conflictDetails.innerHTML = conflictHtml;
+                conflictWarning.classList.add('visible');
+            }
+        }
+        
+        function goToStep(step) {
+            currentStep = step;
+            
+            // Hide all sections
+            document.getElementById('step1Section').classList.add('hidden');
+            document.getElementById('step3Section').classList.add('hidden');
+            
+            // Show current section
+            document.getElementById(`step${step}Section`).classList.remove('hidden');
+            
+            // Update step indicators (now only 2 steps)
+            for (let i = 1; i <= 2; i++) {
+                const indicator = document.getElementById(`step${i}Indicator`);
+                if (i < step) {
+                    indicator.className = 'step completed';
+                } else if (i === step) {
+                    indicator.className = 'step active';
+                } else {
+                    indicator.className = 'step pending';
+                }
+            }
+        }
+        
+        function goBackToStep1() {
+            goToStep(1);
+        }
+        
+        function clearForm() {
+            document.querySelectorAll('input, select').forEach(el => {
+                el.value = '';
+                el.classList.remove('pre-populated-field');
+                el.removeAttribute('readonly');
+            });
+            document.getElementById('conflictWarning').classList.remove('visible');
+            document.getElementById('addressComponents').classList.remove('visible');
+            document.getElementById('areaLookupSection').style.display = 'none';
+            document.getElementById('selectedAreaDisplay').classList.remove('visible');
+            selectedAddress = null;
+            selectedArea = null;
+            document.getElementById('btnContinue').disabled = true;
+            goToStep(1);
+        }
+        
+        function saveListing() {
+            alert('Save Listing functionality - to be implemented');
+        }
+        
+        function saveAndGenerate() {
+            alert('Save & Generate Content Kit functionality - to be implemented');
+        }
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.address-autocomplete-container')) {
+                document.getElementById('autocompleteDropdown').classList.remove('visible');
+            }
+            if (!e.target.closest('.area-search-container')) {
+                document.getElementById('areaDropdown').classList.remove('visible');
+            }
+        });
+        
+        // Initialize Google Places Autocomplete on page load
+        window.addEventListener('load', () => {
+            const addressInput = document.getElementById('addressInput');
+            const apiKeyStatus = document.getElementById('apiKeyStatus');
+            
+            // CRITICAL: Ensure input is always enabled from the start
+            addressInput.disabled = false;
+            addressInput.removeAttribute('disabled');
+            addressInput.readOnly = false;
+            addressInput.removeAttribute('readonly');
+            
+            // Initialize address autocomplete using Paisley's backend API
+            // Display environment configuration
+            const envBadge = document.getElementById('environmentBadge');
+            const envName = document.getElementById('envName');
+            const envUrl = document.getElementById('envUrl');
+            
+            if (envBadge && envName && envUrl) {
+                envName.textContent = CURRENT_ENV.toUpperCase();
+                envUrl.textContent = env.baseUrl;
+                envUrl.title = env.description; // Tooltip with description
+                
+                // Color code by environment
+                if (CURRENT_ENV === 'sandbox') {
+                    envBadge.style.background = '#fef3c7';
+                    envBadge.style.color = '#92400e';
+                    envBadge.title = 'Sandbox uses FarmGenie_Sandbox and MlsListing_Sandbox databases';
+                } else {
+                    envBadge.style.background = '#dbeafe';
+                    envBadge.style.color = '#1e40af';
+                    envBadge.title = 'Production uses FarmGenie and MlsListing databases';
+                }
+            }
+            
+            // Initialize authentication status
+            updateAuthStatus();
+            
+            // Initialize address autocomplete
+            initAddressAutocomplete();
+            
+            apiKeyStatus.innerHTML = '✅ Using existing Paisley address lookup';
+            apiKeyStatus.style.color = '#48bb78';
+        });
+    </script>
+</body>
+</html>
+

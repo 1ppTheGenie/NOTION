@@ -83,17 +83,19 @@ This is the **SINGLE SOURCE OF TRUTH** for all TheGenie.ai development documenta
 | **Property Profile Gap Analysis** | `PROPERTY_PROFILE_GAP_ANALYSIS_v1.md` | 1.0 |
 | **Data Catalog v2** | `PAISLEY_PRELISTING_DATA_CATALOG_v2.md` | 2.0 |
 
-### Pre-Listing Command (DRA-2026 Compliant)
-| Document | Location | Version | Status |
-|----------|----------|---------|--------|
-| **PLS Master Specification** | `Pre.Listing.Command/Docs/PLS_MASTER_SPECIFICATION_v3.md` | 3.0 | ✅ Canonical |
-| **Contract PLS↔GenieCloud** | `Pre.Listing.Command/Docs/CONTRACT_PLS_to_GenieCloud_v6.1.md` | 6.1 | ✅ Canonical |
-| **PLS Wireframes** | `Pre.Listing.Command/Docs/PLS_WIREFRAMES_AND_SCHEMA_v1.html` | 1.0 | ✅ Active |
-| **Collection Editor Integration** | `Pre.Listing.Command/Docs/COLLECTION_EDITOR_ADMIN_INTEGRATION_v1.md` | 1.0 | ✅ Active |
-| **Collection Manager Analysis** | `Pre.Listing.Command/Docs/COLLECTION_MANAGER_ANALYSIS_v1.md` | 1.0 | ✅ Active |
-| **Role Permission Framework** | `Pre.Listing.Command/Docs/GENIE_ROLE_PERMISSION_FRAMEWORK_v1.md` | 1.0 | ✅ Active |
-| **Production Reference Index** | `Pre.Listing.Command/Docs/MASTER_PRODUCTION_REFERENCE_INDEX_v1.md` | 1.0 | ✅ Active |
-| **Hollywood MVP SOP** | `Pre.Listing.Command/Docs/SOP_PLS_Hollywood_MVP_Creation_v1.md` | 1.0 | ✅ Active |
+### Pre-Listing Command (DRA-2026 Compliant) ⭐ **GENIECLOUD XML KNOWLEDGE**
+| Document | GitHub Link | Version | Status |
+|----------|-------------|---------|--------|
+| **Contract PLS↔GenieCloud** ⭐⭐⭐ | [CONTRACT_PLS_to_GenieCloud_v6.1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/CONTRACT_PLS_to_GenieCloud_v6.1.md) | 6.1 | ✅ **CRITICAL - XML Contract** |
+| **PLS Master Specification** | [PLS_MASTER_SPECIFICATION_v3.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/PLS_MASTER_SPECIFICATION_v3.md) | 3.0 | ✅ Canonical |
+| **PLS Wireframes** | [PLS_WIREFRAMES_AND_SCHEMA_v1.html](https://htmlpreview.github.io/?https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/PLS_WIREFRAMES_AND_SCHEMA_v1.html) | 1.0 | ✅ Active |
+| **Collection Editor Integration** | [COLLECTION_EDITOR_ADMIN_INTEGRATION_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/COLLECTION_EDITOR_ADMIN_INTEGRATION_v1.md) | 1.0 | ✅ Active |
+| **Collection Manager Analysis** | [COLLECTION_MANAGER_ANALYSIS_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/COLLECTION_MANAGER_ANALYSIS_v1.md) | 1.0 | ✅ Active |
+| **Role Permission Framework** | [GENIE_ROLE_PERMISSION_FRAMEWORK_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/GENIE_ROLE_PERMISSION_FRAMEWORK_v1.md) | 1.0 | ✅ Active |
+| **Production Reference Index** | [MASTER_PRODUCTION_REFERENCE_INDEX_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/MASTER_PRODUCTION_REFERENCE_INDEX_v1.md) | 1.0 | ✅ Active |
+| **Hollywood MVP SOP** | [SOP_PLS_Hollywood_MVP_Creation_v1.md](https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/SOP_PLS_Hollywood_MVP_Creation_v1.md) | 1.0 | ✅ Active |
+| **Complete Design Blueprint v2** | [PLS_COMPLETE_DESIGN_BLUEPRINT_v2.html](https://htmlpreview.github.io/?https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/PLS_COMPLETE_DESIGN_BLUEPRINT_v2.html) | 2.0 | ✅ Active |
+| **Customer Asset Configurator** | [CUSTOMER_ASSET_CONFIGURATOR_SPEC_v1.html](https://htmlpreview.github.io/?https://github.com/1ppTheGenie/NOTION/blob/main/TheGenie.ai/Development/Paisley/Pre.Listing.Command/Docs/CUSTOMER_ASSET_CONFIGURATOR_SPEC_v1.html) | 1.0 | ✅ Active |
 
 ### Prototypes
 | File | Location | Version |

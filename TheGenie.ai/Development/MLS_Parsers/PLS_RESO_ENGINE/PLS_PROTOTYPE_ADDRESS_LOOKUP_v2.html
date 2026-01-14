@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLS Address Lookup Prototype (Paisley Flow)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            padding: 24px;
+            color: #212529;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            padding: 32px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            color: #6c757d;
+            margin-bottom: 32px;
+        }
+        
+        .form-section {
+            margin-bottom: 32px;
+            transition: opacity 0.3s;
+        }
+        
+        .form-section.hidden {
+            display: none;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #495057;
+        }
+        
+        label.required::after {
+            content: " *";
+            color: #e74c3c;
+        }
+        
+        input, select {
+            height: 40px;
+            padding: 8px 12px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #3498db;
+            border-width: 2px;
+        }
+        
+        .area-search-container {
+            position: relative;
+        }
+        
+        .area-search-input {
+            width: 100%;
+        }
+        
+        .area-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            margin-top: 4px;
+            max-height: 300px;
+            overflow-y: auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: none;
+        }
+        
+        .area-dropdown.visible {
+            display: block;
+        }
+        
+        .area-item {
+            padding: 12px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+        
+        .area-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .area-item:last-child {
+            border-bottom: none;
+        }
+        
+        .area-item.selected {
+            background: #e3f2fd;
+            font-weight: 600;
+        }
+        
+        .area-name {
+            font-size: 14px;
+            color: #212529;
+        }
+        
+        .area-id {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 4px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        
+        button {
+            height: 40px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        button.primary {
+            background: #3498db;
+            color: white;
+        }
+        
+        button.primary:hover {
+            background: #2980b9;
+        }
+        
+        button.secondary {
+            background: transparent;
+            color: #3498db;
+            border: 1px solid #3498db;
+        }
+        
+        button.secondary:hover {
+            background: #f8f9fa;
+        }
+        
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .results-section {
+            margin-top: 32px;
+            padding: 24px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .results-section.visible {
+            display: block;
+        }
+        
+        .conflict-warning {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 12px 16px;
+            border-radius: 4px;
+            margin-top: 16px;
+            display: none;
+        }
+        
+        .conflict-warning.visible {
+            display: block;
+        }
+        
+        .conflict-warning strong {
+            color: #856404;
+        }
+        
+        .pre-populated-field {
+            background: #e8f5e9;
+            border-color: #4caf50;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 8px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .geo-coords {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 8px;
+        }
+        
+        .step-indicator {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        .step {
+            flex: 1;
+            text-align: center;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .step.active {
+            background: #3498db;
+            color: white;
+        }
+        
+        .step.completed {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .step.pending {
+            background: #e9ecef;
+            color: #6c757d;
+        }
+        
+        .selected-area-display {
+            padding: 12px 16px;
+            background: #e8f5e9;
+            border: 1px solid #4caf50;
+            border-radius: 4px;
+            margin-top: 8px;
+            display: none;
+        }
+        
+        .selected-area-display.visible {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Create New PLS Listing</h1>
+        <p class="subtitle">Paisley-style flow: Address → Area Selection → Property Details</p>
+        
+        <!-- STEP INDICATOR -->
+        <div class="step-indicator">
+            <div class="step active" id="step1Indicator">1. Address</div>
+            <div class="step pending" id="step2Indicator">2. Area</div>
+            <div class="step pending" id="step3Indicator">3. Property Details</div>
+        </div>
+        
+        <!-- STEP 1: ADDRESS INPUT -->
+        <div class="form-section" id="step1Section">
+            <div class="section-title">Step 1: Property Address</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="streetNumber" class="required">Street Number</label>
+                    <input type="text" id="streetNumber" placeholder="10037">
+                </div>
+                <div class="form-group">
+                    <label for="streetName" class="required">Street Name</label>
+                    <input type="text" id="streetName" placeholder="Rebecca Place">
+                </div>
+                <div class="form-group">
+                    <label for="city" class="required">City</label>
+                    <input type="text" id="city" placeholder="Boerne">
+                </div>
+                <div class="form-group">
+                    <label for="state" class="required">State</label>
+                    <select id="state">
+                        <option value="TX" selected>TX</option>
+                        <option value="CA">CA</option>
+                        <option value="FL">FL</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="zip" class="required">Zip Code</label>
+                    <input type="text" id="zip" placeholder="78006" maxlength="5">
+                </div>
+            </div>
+            <div class="button-group">
+                <button class="primary" id="btnLookupAreas" onclick="lookupAreas()">Lookup Areas</button>
+                <button class="secondary" onclick="clearForm()">Clear</button>
+            </div>
+            <div class="geo-coords" id="geoCoords" style="display: none;"></div>
+        </div>
+        
+        <!-- STEP 2: AREA SELECTION -->
+        <div class="form-section hidden" id="step2Section">
+            <div class="section-title">Step 2: Select Area</div>
+            <p style="margin-bottom: 16px; color: #6c757d; font-size: 14px;">
+                Select the area/neighborhood for this property. This will be used for market stats widgets on the landing page.
+            </p>
+            <div class="form-group">
+                <label for="areaSearch" class="required">Search Areas</label>
+                <div class="area-search-container">
+                    <input type="text" 
+                           id="areaSearch" 
+                           class="area-search-input" 
+                           placeholder="Type to search areas..."
+                           oninput="filterAreas()"
+                           onfocus="showAreaDropdown()">
+                    <div class="area-dropdown" id="areaDropdown"></div>
+                </div>
+                <div class="selected-area-display" id="selectedAreaDisplay">
+                    <strong>Selected:</strong> <span id="selectedAreaName"></span> (ID: <span id="selectedAreaId"></span>)
+                </div>
+            </div>
+            <div class="button-group">
+                <button class="secondary" onclick="goBackToStep1()">← Back</button>
+                <button class="primary" id="btnFetchPropertyData" onclick="fetchPropertyData()" disabled>Continue to Property Details</button>
+            </div>
+        </div>
+        
+        <!-- STEP 3: PROPERTY DETAILS (Pre-populated) -->
+        <div class="form-section hidden" id="step3Section">
+            <div class="section-title">Step 3: Property Details</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="listPrice" class="required">List Price</label>
+                    <input type="number" id="listPrice" placeholder="$749,000">
+                </div>
+                <div class="form-group">
+                    <label for="bedrooms" class="required">Bedrooms</label>
+                    <input type="number" id="bedrooms" placeholder="4">
+                </div>
+                <div class="form-group">
+                    <label for="bathroomsFull" class="required">Bathrooms (Full)</label>
+                    <input type="number" id="bathroomsFull" placeholder="3">
+                </div>
+                <div class="form-group">
+                    <label for="bathroomsHalf">Bathrooms (Half)</label>
+                    <input type="number" id="bathroomsHalf" placeholder="0">
+                </div>
+                <div class="form-group">
+                    <label for="sqft" class="required">Square Feet</label>
+                    <input type="number" id="sqft" placeholder="3,018">
+                </div>
+                <div class="form-group">
+                    <label for="lotSize" class="required">Lot Size (sq ft)</label>
+                    <input type="number" id="lotSize" placeholder="9,101">
+                </div>
+                <div class="form-group">
+                    <label for="yearBuilt" class="required">Year Built</label>
+                    <input type="number" id="yearBuilt" placeholder="2022">
+                </div>
+                <div class="form-group">
+                    <label for="propertyType" class="required">Property Type</label>
+                    <select id="propertyType">
+                        <option value="">Select...</option>
+                        <option value="Single Family">Single Family</option>
+                        <option value="Condo">Condo</option>
+                        <option value="Townhouse">Townhouse</option>
+                        <option value="Multi-Family">Multi-Family</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="garageSpaces">Garage Spaces</label>
+                    <input type="number" id="garageSpaces" placeholder="3">
+                </div>
+                <div class="form-group">
+                    <label for="parkingSpaces">Parking Spaces</label>
+                    <input type="number" id="parkingSpaces" placeholder="3">
+                </div>
+            </div>
+            
+            <!-- Conflict Warning -->
+            <div class="conflict-warning" id="conflictWarning">
+                <strong>⚠️ Data Conflict Detected</strong>
+                <div id="conflictDetails"></div>
+            </div>
+            
+            <div class="button-group">
+                <button class="secondary" onclick="goBackToStep2()">← Back</button>
+                <button class="primary" onclick="saveListing()">Save Listing</button>
+                <button class="primary" onclick="saveAndGenerate()">Save & Generate Content Kit</button>
+            </div>
+        </div>
+        
+        <!-- RESULTS SECTION (Debug/API Response) -->
+        <div class="results-section" id="resultsSection">
+            <div class="section-title">API Response (Debug)</div>
+            <pre id="apiResponse"></pre>
+        </div>
+    </div>
+    
+    <script>
+        // Mock API endpoint (replace with actual endpoint when backend is ready)
+        const API_BASE = '/api/pls';
+        
+        // State
+        let currentStep = 1;
+        let selectedArea = null;
+        let allAreas = [];
+        let filteredAreas = [];
+        
+        // Mock areas data (replace with actual API call)
+        const mockAreas = [
+            { id: 1, name: "Balcones Creek", city: "Boerne", state: "TX" },
+            { id: 2, name: "Hollywood Park", city: "Boerne", state: "TX" },
+            { id: 3, name: "Fair Oaks Ranch", city: "Boerne", state: "TX" },
+            { id: 4, name: "Cibolo Creek", city: "Boerne", state: "TX" },
+            { id: 5, name: "The Dominion", city: "San Antonio", state: "TX" },
+            { id: 6, name: "Stone Oak", city: "San Antonio", state: "TX" },
+            { id: 7, name: "Alamo Heights", city: "San Antonio", state: "TX" }
+        ];
+        
+        async function lookupAreas() {
+            const streetNumber = document.getElementById('streetNumber').value;
+            const streetName = document.getElementById('streetName').value;
+            const city = document.getElementById('city').value;
+            const state = document.getElementById('state').value;
+            const zip = document.getElementById('zip').value;
+            
+            if (!streetNumber || !streetName || !city || !state || !zip) {
+                alert('Please fill in all required address fields');
+                return;
+            }
+            
+            const btnLookup = document.getElementById('btnLookupAreas');
+            btnLookup.disabled = true;
+            btnLookup.innerHTML = 'Looking up areas... <span class="loading"></span>';
+            
+            try {
+                // TODO: Replace with actual API call
+                // const response = await fetch(`${API_BASE}/areas?city=${city}&state=${state}&zip=${zip}`, {
+                //     method: 'GET'
+                // });
+                // const data = await response.json();
+                
+                // Simulate API delay
+                await new Promise(resolve => setTimeout(resolve, 800));
+                
+                // Mock: Filter areas by city/state
+                allAreas = mockAreas.filter(a => 
+                    a.city.toLowerCase() === city.toLowerCase() || 
+                    a.state === state
+                );
+                
+                if (allAreas.length === 0) {
+                    allAreas = mockAreas; // Fallback to all areas
+                }
+                
+                filteredAreas = [...allAreas];
+                
+                // Move to Step 2
+                goToStep(2);
+                
+            } catch (error) {
+                console.error('Area lookup error:', error);
+                alert('Error looking up areas. Check console for details.');
+            } finally {
+                btnLookup.disabled = false;
+                btnLookup.innerHTML = 'Lookup Areas';
+            }
+        }
+        
+        function showAreaDropdown() {
+            if (filteredAreas.length > 0) {
+                renderAreaDropdown();
+                document.getElementById('areaDropdown').classList.add('visible');
+            }
+        }
+        
+        function filterAreas() {
+            const searchTerm = document.getElementById('areaSearch').value.toLowerCase();
+            filteredAreas = allAreas.filter(area => 
+                area.name.toLowerCase().includes(searchTerm) ||
+                area.city.toLowerCase().includes(searchTerm)
+            );
+            renderAreaDropdown();
+            document.getElementById('areaDropdown').classList.add('visible');
+        }
+        
+        function renderAreaDropdown() {
+            const dropdown = document.getElementById('areaDropdown');
+            dropdown.innerHTML = '';
+            
+            if (filteredAreas.length === 0) {
+                dropdown.innerHTML = '<div class="area-item" style="color: #6c757d;">No areas found</div>';
+                return;
+            }
+            
+            filteredAreas.forEach(area => {
+                const item = document.createElement('div');
+                item.className = 'area-item' + (selectedArea && selectedArea.id === area.id ? ' selected' : '');
+                item.innerHTML = `
+                    <div class="area-name">${area.name}</div>
+                    <div class="area-id">${area.city}, ${area.state} (ID: ${area.id})</div>
+                `;
+                item.onclick = () => selectArea(area);
+                dropdown.appendChild(item);
+            });
+        }
+        
+        function selectArea(area) {
+            selectedArea = area;
+            document.getElementById('areaSearch').value = area.name;
+            document.getElementById('selectedAreaName').textContent = `${area.name}, ${area.city}, ${area.state}`;
+            document.getElementById('selectedAreaId').textContent = area.id;
+            document.getElementById('selectedAreaDisplay').classList.add('visible');
+            document.getElementById('areaDropdown').classList.remove('visible');
+            document.getElementById('btnFetchPropertyData').disabled = false;
+            renderAreaDropdown();
+        }
+        
+        async function fetchPropertyData() {
+            if (!selectedArea) {
+                alert('Please select an area first');
+                return;
+            }
+            
+            const btnFetch = document.getElementById('btnFetchPropertyData');
+            btnFetch.disabled = true;
+            btnFetch.innerHTML = 'Fetching property data... <span class="loading"></span>';
+            
+            try {
+                // TODO: Replace with actual API call
+                // const address = `${streetNumber} ${streetName}, ${city}, ${state} ${zip}`;
+                // const response = await fetch(`${API_BASE}/pre-populate`, {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify({ address, areaId: selectedArea.id })
+                // });
+                // const data = await response.json();
+                
+                // MOCK DATA for testing
+                const data = {
+                    titleData: {
+                        streetNumber: "10037",
+                        streetName: "Rebecca Place",
+                        city: "Boerne",
+                        state: "TX",
+                        zip: "78006",
+                        sqft: 2500,
+                        bedrooms: 4,
+                        bathroomsFull: 3,
+                        lotSize: 9101,
+                        yearBuilt: 2022,
+                        propertyType: "Single Family",
+                        garageSpaces: 3,
+                        parkingSpaces: 3,
+                        latitude: 29.72229,
+                        longitude: -98.68958
+                    },
+                    historicalMls: {
+                        sqft: 3018,
+                        bedrooms: 4,
+                        bathroomsFull: 3,
+                        lotSize: 9101,
+                        yearBuilt: 2022
+                    },
+                    conflicts: [
+                        {
+                            field: "sqft",
+                            titleDataValue: 2500,
+                            mlsValue: 3018,
+                            recommended: 3018,
+                            reason: "MLS value includes permitted expansion"
+                        }
+                    ]
+                };
+                
+                // Simulate API delay
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                populateForm(data);
+                goToStep(3);
+                showResults(data);
+                
+            } catch (error) {
+                console.error('Property data fetch error:', error);
+                alert('Error fetching property data. Check console for details.');
+            } finally {
+                btnFetch.disabled = false;
+                btnFetch.innerHTML = 'Continue to Property Details';
+            }
+        }
+        
+        function populateForm(data) {
+            const { titleData, historicalMls, conflicts } = data;
+            
+            // Use historical MLS if available, otherwise TitleData
+            const source = historicalMls && Object.keys(historicalMls).length > 0 ? historicalMls : titleData;
+            
+            // Populate fields
+            if (titleData.listPrice) document.getElementById('listPrice').value = titleData.listPrice;
+            if (source.bedrooms) document.getElementById('bedrooms').value = source.bedrooms;
+            if (source.bathroomsFull) document.getElementById('bathroomsFull').value = source.bathroomsFull;
+            if (source.bathroomsHalf) document.getElementById('bathroomsHalf').value = source.bathroomsHalf || 0;
+            if (source.sqft) document.getElementById('sqft').value = source.sqft;
+            if (source.lotSize) document.getElementById('lotSize').value = source.lotSize;
+            if (source.yearBuilt) document.getElementById('yearBuilt').value = source.yearBuilt;
+            if (titleData.propertyType) document.getElementById('propertyType').value = titleData.propertyType;
+            if (titleData.garageSpaces) document.getElementById('garageSpaces').value = titleData.garageSpaces;
+            if (titleData.parkingSpaces) document.getElementById('parkingSpaces').value = titleData.parkingSpaces;
+            
+            // Show geo coordinates
+            if (titleData.latitude && titleData.longitude) {
+                document.getElementById('geoCoords').style.display = 'block';
+                document.getElementById('geoCoords').textContent = 
+                    `📍 Coordinates: ${titleData.latitude}, ${titleData.longitude}`;
+            }
+            
+            // Highlight pre-populated fields
+            const fields = ['bedrooms', 'bathroomsFull', 'sqft', 'lotSize', 'yearBuilt'];
+            fields.forEach(field => {
+                const input = document.getElementById(field);
+                if (input.value) {
+                    input.classList.add('pre-populated-field');
+                }
+            });
+            
+            // Show conflicts
+            if (conflicts && conflicts.length > 0) {
+                const conflictWarning = document.getElementById('conflictWarning');
+                const conflictDetails = document.getElementById('conflictDetails');
+                
+                let conflictHtml = '<ul style="margin-top: 8px; margin-left: 20px;">';
+                conflicts.forEach(conflict => {
+                    conflictHtml += `<li>
+                        <strong>${conflict.field.toUpperCase()}:</strong> 
+                        TitleData: ${conflict.titleDataValue} | 
+                        Historical MLS: ${conflict.mlsValue} (recommended) 
+                        <span style="color: #856404;">- ${conflict.reason}</span>
+                    </li>`;
+                });
+                conflictHtml += '</ul>';
+                
+                conflictDetails.innerHTML = conflictHtml;
+                conflictWarning.classList.add('visible');
+            }
+        }
+        
+        function goToStep(step) {
+            currentStep = step;
+            
+            // Hide all sections
+            document.getElementById('step1Section').classList.add('hidden');
+            document.getElementById('step2Section').classList.add('hidden');
+            document.getElementById('step3Section').classList.add('hidden');
+            
+            // Show current section
+            document.getElementById(`step${step}Section`).classList.remove('hidden');
+            
+            // Update step indicators
+            for (let i = 1; i <= 3; i++) {
+                const indicator = document.getElementById(`step${i}Indicator`);
+                if (i < step) {
+                    indicator.className = 'step completed';
+                } else if (i === step) {
+                    indicator.className = 'step active';
+                } else {
+                    indicator.className = 'step pending';
+                }
+            }
+        }
+        
+        function goBackToStep1() {
+            goToStep(1);
+        }
+        
+        function goBackToStep2() {
+            goToStep(2);
+        }
+        
+        function showResults(data) {
+            document.getElementById('apiResponse').textContent = JSON.stringify(data, null, 2);
+            document.getElementById('resultsSection').classList.add('visible');
+        }
+        
+        function clearForm() {
+            document.querySelectorAll('input, select').forEach(el => {
+                el.value = '';
+                el.classList.remove('pre-populated-field');
+            });
+            document.getElementById('conflictWarning').classList.remove('visible');
+            document.getElementById('resultsSection').classList.remove('visible');
+            document.getElementById('geoCoords').style.display = 'none';
+            document.getElementById('selectedAreaDisplay').classList.remove('visible');
+            selectedArea = null;
+            goToStep(1);
+        }
+        
+        function saveListing() {
+            alert('Save Listing functionality - to be implemented');
+        }
+        
+        function saveAndGenerate() {
+            alert('Save & Generate Content Kit functionality - to be implemented');
+        }
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.area-search-container')) {
+                document.getElementById('areaDropdown').classList.remove('visible');
+            }
+        });
+        
+        // Auto-populate test data on load (for quick testing)
+        window.addEventListener('load', () => {
+            document.getElementById('streetNumber').value = '10037';
+            document.getElementById('streetName').value = 'Rebecca Place';
+            document.getElementById('city').value = 'Boerne';
+            document.getElementById('state').value = 'TX';
+            document.getElementById('zip').value = '78006';
+        });
+    </script>
+</body>
+</html>
+

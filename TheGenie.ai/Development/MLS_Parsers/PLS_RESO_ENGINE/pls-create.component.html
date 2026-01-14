@@ -1,0 +1,382 @@
+<!-- PLS Create Component - Mobile-First Design -->
+<div class="pls-create-container" [class.mobile]="isMobile">
+    
+    <!-- Header (Sticky on Mobile) -->
+    <div class="header" [class.sticky]="isMobile">
+        <h1>Create New PLS Listing</h1>
+        <p class="subtitle">Paisley-style flow: Address → Area → Property Details</p>
+    </div>
+    
+    <!-- Step Indicator -->
+    <div class="step-indicator">
+        <div class="step" 
+             [class.active]="currentStep === 1" 
+             [class.completed]="currentStep > 1">
+            <span class="step-number">1</span>
+            <span class="step-label">Address & Area</span>
+        </div>
+        <div class="step" 
+             [class.active]="currentStep === 2" 
+             [class.pending]="currentStep < 2">
+            <span class="step-number">2</span>
+            <span class="step-label">Property Details</span>
+        </div>
+    </div>
+    
+    <!-- STEP 1: ADDRESS & AREA -->
+    <div class="form-section" *ngIf="currentStep === 1">
+        <div class="section-title">Step 1: Property Address</div>
+        
+        <!-- Address Autocomplete -->
+        <div class="form-group address-autocomplete-container">
+            <label for="addressInput" class="required">Search Address</label>
+            <div class="input-wrapper">
+                <input 
+                    type="text"
+                    id="addressInput"
+                    class="address-input"
+                    [formControl]="addressForm.get('addressInput')"
+                    placeholder="Start typing an address (e.g., 10037 Rebecca Place, Boerne, TX)"
+                    autocomplete="off"
+                    aria-describedby="address-help">
+                <div class="input-loading" *ngIf="isSearchingAddress">
+                    <span class="spinner"></span>
+                </div>
+            </div>
+            <small id="address-help" class="help-text">
+                Using Paisley address lookup (Google Places via backend)
+            </small>
+            
+            <!-- Autocomplete Dropdown -->
+            <div class="autocomplete-dropdown" 
+                 *ngIf="showAutocomplete && autocompleteResults.length > 0"
+                 [class.mobile]="isMobile">
+                <div 
+                    *ngFor="let address of autocompleteResults"
+                    class="autocomplete-item"
+                    (click)="selectAddress(address)"
+                    role="button"
+                    tabindex="0"
+                    (keydown.enter)="selectAddress(address)">
+                    <div class="address-main">{{ address.FullAddress || address.Address }}</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Address Components (Read-only after selection) -->
+        <div class="address-components" *ngIf="selectedAddress">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Street Number</label>
+                    <input type="text" [formControl]="addressForm.get('streetNumber')" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Street Name</label>
+                    <input type="text" [formControl]="addressForm.get('streetName')" readonly>
+                </div>
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" [formControl]="addressForm.get('city')" readonly>
+                </div>
+                <div class="form-group">
+                    <label>State</label>
+                    <input type="text" [formControl]="addressForm.get('state')" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Zip Code</label>
+                    <input type="text" [formControl]="addressForm.get('zip')" readonly>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Area Selection -->
+        <div class="area-section" *ngIf="areas.length > 0">
+            <div class="section-title">Select Area/Neighborhood</div>
+            
+            <!-- Mobile: Drawer Pattern -->
+            <div class="area-drawer" *ngIf="isMobile" [class.open]="showAreaDrawer">
+                <button class="area-trigger" (click)="showAreaDrawer = !showAreaDrawer">
+                    <span *ngIf="selectedArea">{{ selectedArea.AreaName }}</span>
+                    <span *ngIf="!selectedArea">Select Area</span>
+                    <span class="chevron">▼</span>
+                </button>
+                
+                <div class="drawer-content" *ngIf="showAreaDrawer">
+                    <input 
+                        type="text"
+                        class="area-search"
+                        placeholder="Search areas..."
+                        (input)="filterAreas($event.target.value)">
+                    <div class="area-list">
+                        <div 
+                            *ngFor="let area of filteredAreas"
+                            class="area-item"
+                            [class.selected]="selectedArea?.AreaId === area.AreaId"
+                            (click)="selectArea(area)">
+                            <div class="area-name">{{ area.AreaName }}</div>
+                            <div class="area-location" *ngIf="area.City">
+                                {{ area.City }}, {{ area.State }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Desktop: Dropdown Pattern -->
+            <div class="area-dropdown" *ngIf="!isMobile">
+                <input 
+                    type="text"
+                    class="area-search"
+                    placeholder="Search areas..."
+                    (input)="filterAreas($event.target.value)">
+                <div class="area-list">
+                    <div 
+                        *ngFor="let area of filteredAreas"
+                        class="area-item"
+                        [class.selected]="selectedArea?.AreaId === area.AreaId"
+                        (click)="selectArea(area)">
+                        <div class="area-name">{{ area.AreaName }}</div>
+                        <div class="area-location" *ngIf="area.City">
+                            {{ area.City }}, {{ area.State }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Continue Button -->
+        <div class="button-group">
+            <button 
+                class="btn btn-secondary" 
+                (click)="goBack()">
+                Cancel
+            </button>
+            <button 
+                class="btn btn-primary" 
+                [disabled]="!canProceedToStep2()"
+                (click)="goToStep(2)">
+                Continue to Property Details →
+            </button>
+        </div>
+    </div>
+    
+    <!-- STEP 2: PROPERTY DETAILS -->
+    <div class="form-section" *ngIf="currentStep === 2">
+        <div class="section-title">Step 2: Property Details</div>
+        
+        <form [formGroup]="propertyForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="originalListPrice" class="required">List Price</label>
+                    <input 
+                        type="number"
+                        id="originalListPrice"
+                        formControlName="originalListPrice"
+                        placeholder="749,000">
+                </div>
+                
+                <div class="form-group">
+                    <label for="bedrooms" class="required">Bedrooms</label>
+                    <input 
+                        type="number"
+                        id="bedrooms"
+                        formControlName="bedrooms"
+                        placeholder="4">
+                </div>
+                
+                <div class="form-group">
+                    <label for="bathroomsFull" class="required">Bathrooms (Full)</label>
+                    <input 
+                        type="number"
+                        id="bathroomsFull"
+                        formControlName="bathroomsFull"
+                        placeholder="3">
+                </div>
+                
+                <div class="form-group">
+                    <label for="bathroomsHalf">Bathrooms (Half)</label>
+                    <input 
+                        type="number"
+                        id="bathroomsHalf"
+                        formControlName="bathroomsHalf"
+                        placeholder="0">
+                </div>
+                
+                <div class="form-group">
+                    <label for="sqft" class="required">Square Feet</label>
+                    <input 
+                        type="number"
+                        id="sqft"
+                        formControlName="sqft"
+                        placeholder="3,018">
+                </div>
+                
+                <div class="form-group">
+                    <label for="lotSize" class="required">Lot Size (sq ft)</label>
+                    <input 
+                        type="number"
+                        id="lotSize"
+                        formControlName="lotSize"
+                        placeholder="9,101">
+                </div>
+                
+                <div class="form-group">
+                    <label for="yearBuilt" class="required">Year Built</label>
+                    <input 
+                        type="number"
+                        id="yearBuilt"
+                        formControlName="yearBuilt"
+                        placeholder="2022">
+                </div>
+                
+                <div class="form-group">
+                    <label for="propertyType" class="required">Property Type</label>
+                    <select id="propertyType" formControlName="propertyType">
+                        <option value="">Select...</option>
+                        <option value="Single Family">Single Family</option>
+                        <option value="Condo">Condo</option>
+                        <option value="Townhouse">Townhouse</option>
+                        <option value="Multi-Family">Multi-Family</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="garageSpaces">Garage Spaces</label>
+                    <input 
+                        type="number"
+                        id="garageSpaces"
+                        formControlName="garageSpaces"
+                        placeholder="3">
+                </div>
+                
+                <div class="form-group">
+                    <label for="parkingSpaces">Parking Spaces</label>
+                    <input 
+                        type="number"
+                        id="parkingSpaces"
+                        formControlName="parkingSpaces"
+                        placeholder="3">
+                </div>
+            </div>
+            
+            <!-- Status Selection -->
+            <div class="form-group status-selection">
+                <label class="required">Listing Status</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input 
+                            type="radio"
+                            formControlName="statusTypeID"
+                            [value]="6">
+                        <span>Private Listing</span>
+                    </label>
+                    <label class="radio-option">
+                        <input 
+                            type="radio"
+                            formControlName="statusTypeID"
+                            [value]="14">
+                        <span>Coming Soon</span>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Step 10: Auto-Generated Photo & Description (Combined UI) -->
+            <div class="auto-generated-section" *ngIf="hasPropertyData()">
+                <div class="section-title">Auto-Generated Content</div>
+                
+                <!-- Mapbox Satellite Photo (Auto-Generated) -->
+                <div class="form-group photo-section">
+                    <label>Property Photo</label>
+                    <div class="photo-display">
+                        <img 
+                            *ngIf="mapboxPhotoUrl" 
+                            [src]="mapboxPhotoUrl" 
+                            alt="Property satellite view"
+                            class="mapbox-photo">
+                        <div *ngIf="!mapboxPhotoUrl && isGeneratingPhoto" class="loading-state">
+                            <span class="spinner"></span>
+                            <span>Generating satellite photo...</span>
+                        </div>
+                        <div *ngIf="!mapboxPhotoUrl && !isGeneratingPhoto" class="photo-placeholder">
+                            Photo will be auto-generated from Mapbox
+                        </div>
+                    </div>
+                    <small class="help-text">
+                        System-generated satellite photo with property boundary overlay
+                    </small>
+                </div>
+                
+                <!-- Paisley AI Description (Auto-Generated) -->
+                <div class="form-group description-section">
+                    <label for="description">Property Description</label>
+                    <div class="description-wrapper">
+                        <textarea 
+                            id="description"
+                            formControlName="description"
+                            rows="6"
+                            [placeholder]="descriptionPlaceholder()"
+                            [readonly]="isGeneratingDescription"></textarea>
+                        <div class="description-actions">
+                            <button 
+                                *ngIf="!isGeneratingDescription && propertyForm.get('description')?.value"
+                                type="button"
+                                class="btn btn-secondary btn-sm edit-btn"
+                                (click)="editDescription()">
+                                ✏️ Edit Description
+                            </button>
+                            <div *ngIf="isGeneratingDescription" class="generating-indicator">
+                                <span class="spinner"></span>
+                                <span>Paisley is generating description...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="help-text">
+                        Auto-generated by Paisley AI (Pre-Listing Focus) using property and area data
+                    </small>
+                </div>
+                
+                <!-- Optional Photo Upload -->
+                <div class="form-group photo-upload-section">
+                    <label>Additional Photos (Optional)</label>
+                    <button 
+                        type="button"
+                        class="btn btn-secondary load-photos-btn"
+                        (click)="openPhotoUpload()">
+                        📷 Load Photos
+                    </button>
+                    <small class="help-text">
+                        Upload additional photos (up to RESO DB limit). Mapbox photo is automatically included.
+                    </small>
+                    
+                    <!-- Photo Upload Component (shown when opened) -->
+                    <div class="photo-upload-component" *ngIf="showPhotoUpload">
+                        <!-- TODO: Integrate PlsPhotoUploadComponent -->
+                        <p>Photo upload component will be integrated here</p>
+                    </div>
+                </div>
+            </div>
+        </form>
+        
+        <!-- Action Buttons -->
+        <div class="button-group">
+            <button 
+                class="btn btn-secondary" 
+                (click)="goBackToStep1()">
+                ← Back
+            </button>
+            <button 
+                class="btn btn-primary" 
+                [disabled]="!propertyForm.valid"
+                (click)="saveListing()">
+                Save Listing
+            </button>
+            <button 
+                class="btn btn-primary" 
+                [disabled]="!propertyForm.valid"
+                (click)="saveAndGenerate()">
+                Save & Generate Content Kit
+            </button>
+        </div>
+    </div>
+</div>
+
